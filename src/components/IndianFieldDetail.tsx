@@ -107,23 +107,42 @@ const IndianFieldDetail = () => {
     }
   };
 
-  const taskColumns: Column<TaskData>[] = [
-    { id: 'task', header: 'Task', accessorKey: 'task', isEditable: true },
-    { id: 'dueDate', header: 'Due Date', accessorKey: 'dueDate', type: 'date', isEditable: true },
-    { id: 'assignedTo', header: 'Assigned To', accessorKey: 'assignedTo', isEditable: true },
-    { id: 'priority', header: 'Priority', accessorKey: 'priority', isEditable: true },
-    { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true }
-  ];
+const taskColumns: Column[] = [
+  { id: 'task', header: 'Task', accessorKey: 'task', isEditable: true },
+  { id: 'dueDate', header: 'Due Date', accessorKey: 'dueDate', type: 'date', isEditable: true },
+  { id: 'assignedTo', header: 'Assigned To', accessorKey: 'assignedTo', isEditable: true },
+  { id: 'priority', header: 'Priority', accessorKey: 'priority', isEditable: true },
+  { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true }
+];
 
-  const handleTaskUpdate = (updatedTask: TaskData) => {
-    setTasks(tasks.map(task => task.id === updatedTask.id ? updatedTask : task));
-    toast.success('Task updated successfully');
-  };
+const handleTaskUpdate = (rowIndex: number, columnId: string, value: string | number) => {
+  const newTasks = [...tasks];
+  const updatedTask = { ...newTasks[rowIndex] };
 
-  const handleTaskDelete = (deletedTask: TaskData) => {
-    setTasks(tasks.filter(task => task.id !== deletedTask.id));
-    toast.success('Task deleted successfully');
-  };
+  if (columnId === 'dueDate') {
+    updatedTask.dueDate = String(value);
+  } else if (columnId === 'task') {
+    updatedTask.task = String(value);
+  } else if (columnId === 'assignedTo') {
+    updatedTask.assignedTo = String(value);
+  } else if (columnId === 'priority') {
+    updatedTask.priority = value as TaskData['priority'];
+  } else if (columnId === 'status') {
+    updatedTask.status = value as TaskData['status'];
+  }
+
+  newTasks[rowIndex] = updatedTask;
+  setTasks(newTasks);
+  toast.success('Task updated successfully');
+};
+
+const handleTaskDelete = (rowIndex: number) => {
+  const deletedTask = tasks[rowIndex];
+  const newTasks = [...tasks];
+  newTasks.splice(rowIndex, 1);
+  setTasks(newTasks);
+  toast.success('Task deleted successfully');
+};
 
   return (
     <div className="space-y-6">
@@ -304,12 +323,11 @@ const IndianFieldDetail = () => {
       {/* Field Notes */}
       <div className="bg-white rounded-xl border p-6">
         <h2 className="text-xl font-semibold mb-4">Field Notes</h2>
-        <EditableField
-          value={field.notes}
-          onSave={(value) => handleFieldUpdate('notes', String(value))}
-          className="w-full min-h-[100px] p-3 border rounded-lg"
-          multiline
-        />
+<EditableField
+  value={field.notes}
+  onSave={(value) => handleFieldUpdate('notes', String(value))}
+  className="w-full min-h-[100px] p-3 border rounded-lg"
+/>
       </div>
     </div>
   );

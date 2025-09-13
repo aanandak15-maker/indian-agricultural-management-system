@@ -6,7 +6,7 @@ export interface Column {
   id: string;
   header: string;
   accessorKey: string;
-  type?: 'text' | 'number' | 'boolean' | 'select';
+  type?: 'text' | 'number' | 'boolean' | 'select' | 'date';
   options?: string[];
   isEditable?: boolean;
   width?: string;
