@@ -2,7 +2,7 @@
 import React from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import PageHeader from '../components/layout/PageHeader';
-import GuadeloupeParcelDetail from '../components/GuadeloupeParcelDetail';
+import IndianFieldDetail from '../components/IndianFieldDetail';
 import usePageMetadata from '../hooks/use-page-metadata';
 
 const ParcelsDetailsPage = () => {
@@ -12,8 +12,8 @@ const ParcelsDetailsPage = () => {
     handleTitleChange, 
     handleDescriptionChange 
   } = usePageMetadata({
-    defaultTitle: 'Gestion des Parcelles en Guadeloupe',
-    defaultDescription: 'Gérez, surveillez et optimisez vos parcelles agricoles à travers tout l\'archipel'
+    defaultTitle: 'Field Management in India',
+    defaultDescription: 'Manage, monitor and optimize your agricultural fields across all regions'
   });
 
   return (
@@ -26,7 +26,7 @@ const ParcelsDetailsPage = () => {
           onDescriptionChange={handleDescriptionChange}
         />
 
-        <GuadeloupeParcelDetail />
+        <IndianFieldDetail />
       </div>
     </PageLayout>
   );

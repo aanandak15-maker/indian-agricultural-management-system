@@ -62,8 +62,8 @@ const formSchema = z.object({
 
 const GuadeloupeRainfallTracking = () => {
   const { toast } = useToast();
-  const [title, setTitle] = useState('Suivi des Précipitations en Guadeloupe');
-  const [description, setDescription] = useState('Visualisation des données pluviométriques pour optimiser la gestion des cultures');
+  const [title, setTitle] = useState('Rainfall Tracking in India');
+  const [description, setDescription] = useState('Visualization of rainfall data to optimize crop management');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterYear, setFilterYear] = useState('all');
   const [filterLocation, setFilterLocation] = useState('all');

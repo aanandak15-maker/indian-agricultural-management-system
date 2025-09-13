@@ -1,6 +1,8 @@
-# Welcome to your Lovable project
+# Indian Agricultural Management System
 
-## Project info
+## Project Overview
+
+A comprehensive agricultural management platform designed specifically for Indian farmers to manage their farming operations efficiently.
 
 **URL**: https://lovable.dev/projects/721b7097-37cd-4dc4-8946-0910b3ea8bc7
 
@@ -52,13 +54,23 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with modern web technologies:
 
 - Vite
 - TypeScript
 - React
 - shadcn-ui
 - Tailwind CSS
+
+## Features
+
+- **Farm Management**: Manage multiple plots and fields across different regions
+- **Crop Planning**: Plan and track various Indian crops (Rice, Wheat, Cotton, Sugarcane, etc.)
+- **Financial Tracking**: Monitor income, expenses, and profitability
+- **Weather Monitoring**: Track monsoon patterns and weather alerts
+- **Inventory Management**: Manage seeds, fertilizers, and equipment
+- **Harvest Tracking**: Record and analyze harvest data
+- **Statistics & Analytics**: Comprehensive reporting and insights
 
 ## How can I deploy this project?
 

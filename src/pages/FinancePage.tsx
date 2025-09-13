@@ -32,31 +32,31 @@ const FinancePage = () => {
     handleTitleChange, 
     handleDescriptionChange 
   } = usePageMetadata({
-    defaultTitle: 'Gestion Financière',
-    defaultDescription: 'Suivez vos revenus, dépenses et la rentabilité de votre exploitation agricole'
+    defaultTitle: 'Financial Management',
+    defaultDescription: 'Track your income, expenses and profitability of your agricultural operations'
   });
 
   const [timeFrame, setTimeFrame] = useState('year');
   const [filterCategory, setFilterCategory] = useState('all');
   const [activeTab, setActiveTab] = useState('overview');
-  const [incomeTitle, setIncomeTitle] = useState('Gestion des Revenus');
-  const [incomeDescription, setIncomeDescription] = useState('Suivez, catégorisez et analysez toutes vos sources de revenus agricoles');
-  const [expensesTitle, setExpensesTitle] = useState('Gestion des Dépenses');
-  const [expensesDescription, setExpensesDescription] = useState('Catégorisez et optimisez toutes vos dépenses liées à l\'exploitation');
-  const [reportsTitle, setReportsTitle] = useState('Rapports Financiers');
-  const [reportsDescription, setReportsDescription] = useState('Générez des rapports détaillés pour analyser la performance financière de votre exploitation');
-  const [forecastTitle, setForecastTitle] = useState('Prévisions Financières');
-  const [forecastDescription, setForecastDescription] = useState('Simulez différents scénarios pour anticiper l\'évolution de votre situation financière');
-  const [budgetTitle, setBudgetTitle] = useState('Gestion Budgétaire');
-  const [budgetDescription, setBudgetDescription] = useState('Planifiez et suivez votre budget pour optimiser vos dépenses');
+  const [incomeTitle, setIncomeTitle] = useState('Income Management');
+  const [incomeDescription, setIncomeDescription] = useState('Track, categorize and analyze all your agricultural income sources');
+  const [expensesTitle, setExpensesTitle] = useState('Expense Management');
+  const [expensesDescription, setExpensesDescription] = useState('Categorize and optimize all your farm-related expenses');
+  const [reportsTitle, setReportsTitle] = useState('Financial Reports');
+  const [reportsDescription, setReportsDescription] = useState('Generate detailed reports to analyze your farm\'s financial performance');
+  const [forecastTitle, setForecastTitle] = useState('Financial Forecasting');
+  const [forecastDescription, setForecastDescription] = useState('Simulate different scenarios to anticipate your financial situation evolution');
+  const [budgetTitle, setBudgetTitle] = useState('Budget Management');
+  const [budgetDescription, setBudgetDescription] = useState('Plan and track your budget to optimize your expenses');
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [showAddIncomeForm, setShowAddIncomeForm] = useState(false);
   const [showAddExpenseForm, setShowAddExpenseForm] = useState(false);
   const [reportGenerating, setReportGenerating] = useState(false);
 
   const handleExportData = () => {
-    toast.success("Export des données financières", {
-      description: "Vos données ont été exportées au format Excel"
+    toast.success("Financial data export", {
+      description: "Your data has been exported to Excel format"
     });
   };
 
@@ -66,8 +66,8 @@ const FinancePage = () => {
 
   const handleImportConfirm = (importType: string) => {
     setImportDialogOpen(false);
-    toast.success("Import de données réussi", {
-      description: `Les données ${importType} ont été importées avec succès`
+    toast.success("Data import successful", {
+      description: `${importType} data has been imported successfully`
     });
   };
 
@@ -76,8 +76,8 @@ const FinancePage = () => {
     
     setTimeout(() => {
       setReportGenerating(false);
-      toast.success("Génération de rapport", {
-        description: `Rapport financier ${timeFrame} généré et prêt à télécharger`
+      toast.success("Report generation", {
+        description: `Financial report for ${timeFrame} generated and ready to download`
       });
     }, 1500);
   };
@@ -87,8 +87,8 @@ const FinancePage = () => {
     
     setTimeout(() => {
       setShowAddIncomeForm(false);
-      toast.success("Revenu ajouté", {
-        description: "Le nouveau revenu a été ajouté avec succès"
+      toast.success("Income added", {
+        description: "New income has been added successfully"
       });
     }, 1000);
   };
@@ -98,15 +98,15 @@ const FinancePage = () => {
     
     setTimeout(() => {
       setShowAddExpenseForm(false);
-      toast.success("Dépense ajoutée", {
-        description: "La nouvelle dépense a été ajoutée avec succès"
+      toast.success("Expense added", {
+        description: "New expense has been added successfully"
       });
     }, 1000);
   };
   
   const handleActivateModule = (moduleName: string) => {
-    toast.success(`Module ${moduleName} activé`, {
-      description: `Le module de ${moduleName.toLowerCase()} a été activé avec succès`
+    toast.success(`${moduleName} module activated`, {
+      description: `The ${moduleName.toLowerCase()} module has been activated successfully`
     });
   };
   
@@ -197,18 +197,18 @@ const FinancePage = () => {
         <Dialog open={importDialogOpen} onOpenChange={setImportDialogOpen}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Importer des données financières</DialogTitle>
+              <DialogTitle>Import Financial Data</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
-              <p className="text-muted-foreground">Choisissez le type de données à importer:</p>
+              <p className="text-muted-foreground">Choose the type of data to import:</p>
               <div className="grid grid-cols-1 gap-2">
                 <Button variant="outline" className="justify-start" onClick={() => handleImportConfirm('bancaires')}>
                   <CreditCard className="h-4 w-4 mr-2" />
-                  Données bancaires (CSV)
+                  Bank Data (CSV)
                 </Button>
                 <Button variant="outline" className="justify-start" onClick={() => handleImportConfirm('comptables')}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Données comptables (Excel)
+                  Accounting Data (Excel)
                 </Button>
                 <Button variant="outline" className="justify-start" onClick={() => handleImportConfirm('factures')}>
                   <DollarSign className="h-4 w-4 mr-2" />
@@ -230,7 +230,7 @@ const FinancePage = () => {
   const tabs: TabItem[] = [
     {
       value: 'overview',
-      label: 'Aperçu général',
+      label: 'General Overview',
       content: (
         <StatisticsProvider>
           <div className="space-y-6">
@@ -251,8 +251,8 @@ const FinancePage = () => {
               value={incomeTitle}
               onSave={(value) => {
                 setIncomeTitle(String(value));
-                toast.success("Titre mis à jour", {
-                  description: "Le titre de la section revenus a été modifié"
+                toast.success("Title updated", {
+                  description: "The income section title has been modified"
                 });
               }}
             />
@@ -262,21 +262,21 @@ const FinancePage = () => {
               value={incomeDescription}
               onSave={(value) => {
                 setIncomeDescription(String(value));
-                toast.success("Description mise à jour", {
-                  description: "La description de la section revenus a été modifiée"
+                toast.success("Description updated", {
+                  description: "The income section description has been modified"
                 });
               }}
             />
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Récoltes')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Harvests')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
-                  <Badge className="mr-2 bg-green-100 text-green-800 hover:bg-green-200">Ventes</Badge> 
-                  Récoltes
+                  <Badge className="mr-2 bg-green-100 text-green-800 hover:bg-green-200">Sales</Badge> 
+                  Harvests
                 </CardTitle>
-                <CardDescription>Ventes de produits agricoles</CardDescription>
+                <CardDescription>Agricultural product sales</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">45 860 €</div>
@@ -290,7 +290,7 @@ const FinancePage = () => {
               <CardFooter className="pt-0">
                 <Button variant="outline" size="sm" className="w-full" onClick={(e) => {
                   e.stopPropagation();
-                  handleCardDetailClick('Récoltes');
+                  handleCardDetailClick('Harvests');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
                   Détails
@@ -298,13 +298,13 @@ const FinancePage = () => {
               </CardFooter>
             </Card>
             
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('PAC')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Government Aid')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
-                  <Badge className="mr-2 bg-blue-100 text-blue-800 hover:bg-blue-200">Subventions</Badge> 
-                  PAC
+                  <Badge className="mr-2 bg-blue-100 text-blue-800 hover:bg-blue-200">Subsidies</Badge> 
+                  Government Aid
                 </CardTitle>
-                <CardDescription>Aides agricoles et subventions</CardDescription>
+                <CardDescription>Agricultural aid and subsidies</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">18 500 €</div>
@@ -318,7 +318,7 @@ const FinancePage = () => {
               <CardFooter className="pt-0">
                 <Button variant="outline" size="sm" className="w-full" onClick={(e) => {
                   e.stopPropagation();
-                  handleCardDetailClick('PAC');
+                  handleCardDetailClick('Government Aid');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
                   Détails
@@ -388,7 +388,7 @@ const FinancePage = () => {
     },
     {
       value: 'expenses',
-      label: 'Dépenses',
+      label: 'Expenses',
       content: (
         <div className="p-6 bg-white rounded-xl border">
           <h2 className="text-xl font-bold mb-4 flex items-center">
@@ -397,8 +397,8 @@ const FinancePage = () => {
               value={expensesTitle}
               onSave={(value) => {
                 setExpensesTitle(String(value));
-                toast.success("Titre mis à jour", {
-                  description: "Le titre de la section dépenses a été modifié"
+                toast.success("Title updated", {
+                  description: "The expenses section title has been modified"
                 });
               }}
             />
@@ -408,21 +408,21 @@ const FinancePage = () => {
               value={expensesDescription}
               onSave={(value) => {
                 setExpensesDescription(String(value));
-                toast.success("Description mise à jour", {
-                  description: "La description de la section dépenses a été modifiée"
+                toast.success("Description updated", {
+                  description: "The expenses section description has been modified"
                 });
               }}
             />
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Semences & Fertilisants')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Seeds & Fertilizers')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
                   <Badge className="mr-2 bg-amber-100 text-amber-800 hover:bg-amber-200">Intrants</Badge> 
-                  Semences & Fertilisants
+                  Seeds & Fertilizers
                 </CardTitle>
-                <CardDescription>Achats pour la production</CardDescription>
+                <CardDescription>Production purchases</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">12 750 €</div>
@@ -436,7 +436,7 @@ const FinancePage = () => {
               <CardFooter className="pt-0">
                 <Button variant="outline" size="sm" className="w-full" onClick={(e) => {
                   e.stopPropagation();
-                  handleCardDetailClick('Semences & Fertilisants');
+                  handleCardDetailClick('Seeds & Fertilizers');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
                   Détails
@@ -478,7 +478,7 @@ const FinancePage = () => {
                   <Badge className="mr-2 bg-teal-100 text-teal-800 hover:bg-teal-200">Services</Badge> 
                   Main d'oeuvre
                 </CardTitle>
-                <CardDescription>Salaires, prestataires</CardDescription>
+                <CardDescription>Wages, contractors</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">15 320 €</div>
@@ -532,8 +532,8 @@ const FinancePage = () => {
               <CreditCard className="h-12 w-12 mx-auto text-muted-foreground mb-2" />
               <h3 className="text-lg font-semibold mb-2">Module de gestion des dépenses</h3>
               <p className="text-muted-foreground mb-4">
-                Activez ce module pour catégoriser, suivre et optimiser 
-                toutes vos dépenses en détail.
+                Activate this module to categorize, track and optimize 
+                all your expenses in detail.
               </p>
               <Button onClick={() => handleActivateModule('gestion des dépenses')}>Activer ce module</Button>
             </div>
@@ -543,7 +543,7 @@ const FinancePage = () => {
     },
     {
       value: 'forecast',
-      label: 'Prévisions',
+      label: 'Forecasts',
       content: (
         <StatisticsProvider>
           <div className="p-6 bg-white rounded-xl border">
@@ -553,8 +553,8 @@ const FinancePage = () => {
                 value={forecastTitle}
                 onSave={(value) => {
                   setForecastTitle(String(value));
-                  toast.success("Titre mis à jour", {
-                    description: "Le titre de la section prévisions a été modifié"
+                  toast.success("Title updated", {
+                    description: "The forecasting section title has been modified"
                   });
                 }}
               />
@@ -564,8 +564,8 @@ const FinancePage = () => {
                 value={forecastDescription}
                 onSave={(value) => {
                   setForecastDescription(String(value));
-                  toast.success("Description mise à jour", {
-                    description: "La description de la section prévisions a été modifiée"
+                  toast.success("Description updated", {
+                    description: "The forecasting section description has been modified"
                   });
                 }}
               />
@@ -587,8 +587,8 @@ const FinancePage = () => {
               value={budgetTitle}
               onSave={(value) => {
                 setBudgetTitle(String(value));
-                toast.success("Titre mis à jour", {
-                  description: "Le titre de la section budget a été modifié"
+                toast.success("Title updated", {
+                  description: "The budget section title has been modified"
                 });
               }}
             />
@@ -598,8 +598,8 @@ const FinancePage = () => {
               value={budgetDescription}
               onSave={(value) => {
                 setBudgetDescription(String(value));
-                toast.success("Description mise à jour", {
-                  description: "La description de la section budget a été modifiée"
+                toast.success("Description updated", {
+                  description: "The budget section description has been modified"
                 });
               }}
             />
@@ -620,8 +620,8 @@ const FinancePage = () => {
               value={reportsTitle}
               onSave={(value) => {
                 setReportsTitle(String(value));
-                toast.success("Titre mis à jour", {
-                  description: "Le titre de la section rapports a été modifié"
+                toast.success("Title updated", {
+                  description: "The reports section title has been modified"
                 });
               }}
             />
@@ -631,8 +631,8 @@ const FinancePage = () => {
               value={reportsDescription}
               onSave={(value) => {
                 setReportsDescription(String(value));
-                toast.success("Description mise à jour", {
-                  description: "La description de la section rapports a été modifiée"
+                toast.success("Description updated", {
+                  description: "The reports section description has been modified"
                 });
               }}
             />
@@ -707,7 +707,7 @@ const FinancePage = () => {
                 {reportGenerating ? (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span>Génération du rapport {timeFrame}...</span>
+                      <span>Generating {timeFrame} report...</span>
                       <span className="text-sm text-muted-foreground">75%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">

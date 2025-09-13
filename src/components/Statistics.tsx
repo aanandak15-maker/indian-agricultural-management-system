@@ -31,19 +31,19 @@ const Statistics = () => {
   
   const getChartTitle = () => {
     switch (currentChart) {
-      case 'yields': return 'Évolution des rendements';
-      case 'financial': return 'Analyse financière';
-      case 'environmental': return 'Indicateurs environnementaux';
-      default: return 'Statistiques';
+      case 'yields': return 'Yield Evolution';
+      case 'financial': return 'Financial Analysis';
+      case 'environmental': return 'Environmental Indicators';
+      default: return 'Statistics';
     }
   };
   
   const getChartDescription = () => {
     switch (currentChart) {
-      case 'yields': return 'Évolution des rendements par culture au fil des années';
-      case 'financial': return 'Analyse détaillée des performances financières';
-      case 'environmental': return 'Suivi des indicateurs de performance environnementale';
-      default: return 'Données statistiques de votre exploitation';
+      case 'yields': return 'Evolution of yields by crop over the years';
+      case 'financial': return 'Detailed analysis of financial performance';
+      case 'environmental': return 'Tracking environmental performance indicators';
+      default: return 'Statistical data from your farm';
     }
   };
 
@@ -72,17 +72,17 @@ const Statistics = () => {
     switch (currentChart) {
       case 'yields':
         return [
-          { key: "name", header: "Culture" },
-          { key: "current", header: "Rendement actuel" },
-          { key: "previous", header: "Rendement précédent" },
-          { key: "unit", header: "Unité" }
+          { key: "name", header: "Crop" },
+          { key: "current", header: "Current Yield" },
+          { key: "previous", header: "Previous Yield" },
+          { key: "unit", header: "Unit" }
         ];
       case 'financial':
         return [
-          { key: "name", header: "Parcelle" },
-          { key: "profitability", header: "Rentabilité (€)" },
-          { key: "size", header: "Surface (ha)" },
-          { key: "crop", header: "Culture" }
+          { key: "name", header: "Field" },
+          { key: "profitability", header: "Profitability (€)" },
+          { key: "size", header: "Area (ha)" },
+          { key: "crop", header: "Crop" }
         ];
       case 'environmental':
         return [
@@ -99,7 +99,7 @@ const Statistics = () => {
   
   // Handle export for the chart filters
   const handleExportData = async () => {
-    console.log(`Exportation des données ${currentChart} en cours...`);
+    console.log(`Exporting ${currentChart} data in progress...`);
   };
   
   return (
@@ -116,7 +116,7 @@ const Statistics = () => {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/statistiques">Statistiques</Link>
+              <Link to="/statistics">Statistics</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

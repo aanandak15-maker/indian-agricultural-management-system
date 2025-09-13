@@ -29,67 +29,67 @@ import { Label } from './ui/label';
 import { Select } from './ui/select';
 import PageHeader from './layout/PageHeader';
 
-// Sample data for charts - Adapté pour la Guadeloupe
+// Sample data for charts - Adapted for Indian agriculture
 const revenueData = [
   { month: 'Jan', revenue: 1500 },
-  { month: 'Fév', revenue: 2200 },
+  { month: 'Feb', revenue: 2200 },
   { month: 'Mar', revenue: 2500 },
-  { month: 'Avr', revenue: 2800 },
-  { month: 'Mai', revenue: 3200 },
-  { month: 'Juin', revenue: 3500 },
-  { month: 'Juil', revenue: 4000 },
+  { month: 'Apr', revenue: 2800 },
+  { month: 'May', revenue: 3200 },
+  { month: 'Jun', revenue: 3500 },
+  { month: 'Jul', revenue: 4000 },
 ];
 
 const productionData = [
-  { name: 'Canne à Sucre', value: 40 },
-  { name: 'Banane', value: 25 },
-  { name: 'Ananas', value: 15 },
-  { name: 'Igname', value: 10 },
-  { name: 'Autre', value: 10 },
+  { name: 'Rice', value: 35 },
+  { name: 'Wheat', value: 25 },
+  { name: 'Cotton', value: 15 },
+  { name: 'Sugarcane', value: 15 },
+  { name: 'Others', value: 10 },
 ];
 
-// Task list adapté au contexte guadeloupéen
+// Task list adapted for Indian farming context
 const initialUpcomingTasks = [
-  { id: 1, title: 'Récolter la canne à sucre', due: 'Aujourd\'hui', priority: 'high' },
-  { id: 2, title: 'Commander des plants de bananier', due: 'Demain', priority: 'medium' },
-  { id: 3, title: 'Maintenance du tracteur', due: '28/08', priority: 'low' },
-  { id: 4, title: 'Irrigation des plantations d\'ananas', due: '30/08', priority: 'medium' },
+  { id: 1, title: 'Harvest rice crop', due: 'Today', priority: 'high' },
+  { id: 2, title: 'Order wheat seeds', due: 'Tomorrow', priority: 'medium' },
+  { id: 3, title: 'Tractor maintenance', due: '28/08', priority: 'low' },
+  { id: 4, title: 'Irrigate cotton fields', due: '30/08', priority: 'medium' },
 ];
 
-// Alerts pour les agriculteurs en Guadeloupe
+// Alerts for Indian farmers
 const initialAlerts = [
-  { id: 1, message: 'Niveau bas de plants de bananier', type: 'warning' },
-  { id: 2, message: 'Risque cyclonique pour la semaine prochaine', type: 'danger' },
-  { id: 3, message: 'Échéance de subvention régionale approche', type: 'info' },
+  { id: 1, message: 'Low stock of wheat seeds', type: 'warning' },
+  { id: 2, message: 'Heavy rainfall expected next week', type: 'danger' },
+  { id: 3, message: 'Government subsidy deadline approaching', type: 'info' },
 ];
 
 // Weather alerts data
 const initialWeatherAlerts = [
   { 
     id: 1, 
-    type: 'Cyclone', 
-    region: 'Toute la Guadeloupe', 
+    type: 'Monsoon', 
+    region: 'All India', 
     startDate: '2023-09-10', 
     endDate: '2023-09-12', 
-    severity: 'critique', 
-    description: 'Cyclone tropical de catégorie 2 en approche' 
+    severity: 'critical', 
+    description: 'Heavy monsoon rains expected across regions' 
   },
   { 
     id: 2, 
-    type: 'Pluie', 
-    region: 'Basse-Terre', 
+    type: 'Drought', 
+    region: 'Maharashtra', 
     startDate: '2023-09-20', 
     endDate: '2023-09-23', 
-    severity: 'modérée', 
-    description: 'Fortes précipitations attendues' 
+    severity: 'moderate', 
+    description: 'Water scarcity conditions expected' 
   }
 ];
 
 const Dashboard = () => {
   // State for editable content
-  const [title, setTitle] = useState('Bonjour, Agriculteur Guadeloupéen');
-  const [description, setDescription] = useState('Voici un aperçu de votre exploitation agricole en Guadeloupe');
-  const [currentMonth, setCurrentMonth] = useState('Août 2023');
+  const [title, setTitle] = useState('Welcome, Indian Farmer');
+  const [description, setDescription] = useState('Here\'s an overview of your agricultural operations in India');
+  const [currentMonth, setCurrentMonth] = useState('August 2023');
   
   // Stats cards
   const [monthlyRevenue, setMonthlyRevenue] = useState(15450);

@@ -19,14 +19,14 @@ import { trackPageView } from "./utils/analytics";
 // Define routes configuration with redirects
 const routes = [
   { path: "/", element: <Index /> },
-  { path: "/parcelles", element: <ParcelsPage /> },
-  { path: "/parcelles/:id", element: <ParcelsDetailsPage /> },
-  { path: "/cultures", element: <CropsPage /> },
-  { path: "/inventaire", element: <InventoryPage /> },
-  { path: "/finances", element: <FinancePage /> },
-  { path: "/statistiques", element: <StatisticsProvider><StatsPage /></StatisticsProvider> },
-  { path: "/rapports", element: <Navigate to="/statistiques" replace /> },
-  { path: "/parametres", element: <Navigate to="/" replace /> },
+  { path: "/fields", element: <ParcelsPage /> },
+  { path: "/fields/:id", element: <ParcelsDetailsPage /> },
+  { path: "/crops", element: <CropsPage /> },
+  { path: "/inventory", element: <InventoryPage /> },
+  { path: "/finance", element: <FinancePage /> },
+  { path: "/statistics", element: <StatisticsProvider><StatsPage /></StatisticsProvider> },
+  { path: "/reports", element: <Navigate to="/statistics" replace /> },
+  { path: "/settings", element: <Navigate to="/" replace /> },
   { path: "/dashboard", element: <Navigate to="/" replace /> },
   { path: "*", element: <NotFound /> }
 ];

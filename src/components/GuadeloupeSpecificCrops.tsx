@@ -74,14 +74,14 @@ const GuadeloupeSpecificCrops = () => {
     >
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-xl font-bold">Cultures Spécifiques de Guadeloupe</h2>
-          <p className="text-muted-foreground">Gérez les informations sur vos cultures locales</p>
+          <h2 className="text-xl font-bold">Specific Crops of India</h2>
+          <p className="text-muted-foreground">Manage information about your local crops</p>
         </div>
         <div className="flex space-x-2">
           <PreviewPrintButton 
             data={culturesData}
             moduleName="cultures"
-            title="Cultures Spécifiques de Guadeloupe"
+            title="Specific Crops of India"
             columns={[
               { key: "nom", header: "Nom" },
               { key: "variete", header: "Variété" },

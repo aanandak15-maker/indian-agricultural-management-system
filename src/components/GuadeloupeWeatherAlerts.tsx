@@ -51,8 +51,8 @@ const alertFormSchema = z.object({
 
 const GuadeloupeWeatherAlerts = () => {
   const { toast } = useToast();
-  const [title, setTitle] = useState('Alertes Météorologiques en Guadeloupe');
-  const [description, setDescription] = useState('Suivez les alertes météo impactant les cultures et préparez vos actions préventives');
+  const [title, setTitle] = useState('Weather Alerts in India');
+  const [description, setDescription] = useState('Track weather alerts impacting crops and prepare your preventive actions');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterSeverity, setFilterSeverity] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
