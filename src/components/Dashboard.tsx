@@ -256,14 +256,14 @@ const Dashboard = () => {
               showEditIcon={true}
             />
           </h1>
-          <p className="text-muted-foreground">
+          <div className="text-muted-foreground">
             <EditableField
               value={description}
               onSave={handleDescriptionChange}
               className="inline-block"
               showEditIcon={true}
             />
-          </p>
+          </div>
         </div>
         <div className="flex items-center space-x-4">
           <button className="px-4 py-2 text-sm text-agri-primary font-medium bg-agri-primary/10 rounded-lg hover:bg-agri-primary/20 transition-colors">
@@ -289,14 +289,14 @@ const Dashboard = () => {
         <div className="stat-card card-hover">
           <p className="stat-label">Revenue mensuel</p>
           <div className="flex items-baseline justify-between mt-2">
-            <p className="stat-value">
+            <div className="stat-value">
               <EditableField
                 value={monthlyRevenue}
                 type="number"
                 onSave={handleRevenueChange}
                 className="inline-block font-bold"
               /> €
-            </p>
+            </div>
             <span className="text-agri-success text-sm font-medium flex items-center">
               <TrendingUp className="h-4 w-4 mr-1" /> +
               <EditableField
@@ -312,14 +312,14 @@ const Dashboard = () => {
         <div className="stat-card card-hover">
           <p className="stat-label">Superficie cultivée</p>
           <div className="flex items-baseline justify-between mt-2">
-            <p className="stat-value">
+            <div className="stat-value">
               <EditableField
                 value={cultivatedArea}
                 type="number"
                 onSave={handleAreaChange}
                 className="inline-block font-bold"
               /> ha
-            </p>
+            </div>
             <span className="text-agri-primary text-sm font-medium">
               <EditableField
                 value={parcelsCount}
@@ -334,14 +334,14 @@ const Dashboard = () => {
         <div className="stat-card card-hover">
           <p className="stat-label">Rendement moyen</p>
           <div className="flex items-baseline justify-between mt-2">
-            <p className="stat-value">
+            <div className="stat-value">
               <EditableField
                 value={averageYield}
                 type="number"
                 onSave={handleYieldChange}
                 className="inline-block font-bold"
               /> t/ha
-            </p>
+            </div>
             <span className="text-agri-success text-sm font-medium flex items-center">
               <TrendingUp className="h-4 w-4 mr-1" /> +
               <EditableField

@@ -25,6 +25,13 @@ const routes = [
   { path: "/inventory", element: <InventoryPage /> },
   { path: "/finance", element: <FinancePage /> },
   { path: "/statistics", element: <StatisticsProvider><StatsPage /></StatisticsProvider> },
+  // Redirect old French routes to new English routes
+  { path: "/parcelles", element: <Navigate to="/fields" replace /> },
+  { path: "/parcelles/:id", element: <Navigate to="/fields/:id" replace /> },
+  { path: "/cultures", element: <Navigate to="/crops" replace /> },
+  { path: "/inventaire", element: <Navigate to="/inventory" replace /> },
+  { path: "/finances", element: <Navigate to="/finance" replace /> },
+  { path: "/statistiques", element: <Navigate to="/statistics" replace /> },
   { path: "/reports", element: <Navigate to="/statistics" replace /> },
   { path: "/settings", element: <Navigate to="/" replace /> },
   { path: "/dashboard", element: <Navigate to="/" replace /> },
