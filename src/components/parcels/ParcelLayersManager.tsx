@@ -36,7 +36,7 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
     { 
       id: 'satellite', 
       name: 'Image satellite', 
-      description: 'Vue aérienne satellite de haute résolution',
+      description: 'Vue aérienne satellite of haute résolution',
       enabled: false, 
       type: 'base',
       source: 'remote'
@@ -44,7 +44,7 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
     { 
       id: 'terrain', 
       name: 'Carte topographique', 
-      description: 'Courbes de niveau et relief du terrain',
+      description: 'Courbes of niveau et relief du terrain',
       enabled: true, 
       type: 'base',
       source: 'remote'
@@ -59,15 +59,15 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
     },
     { 
       id: 'crops', 
-      name: 'Cultures actuelles', 
-      description: 'Types de cultures par parcelle',
+      name: 'Crops actuelles', 
+      description: 'Types of cultures par parcelle',
       enabled: true, 
       type: 'overlay',
       source: 'local'
     },
     { 
       id: 'soil', 
-      name: 'Types de sol', 
+      name: 'Types of sol', 
       description: 'Classification des sols par type',
       enabled: false, 
       type: 'overlay',
@@ -84,7 +84,7 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
     { 
       id: 'ndvi', 
       name: 'NDVI', 
-      description: 'Indice de végétation par différence normalisée',
+      description: 'Indice of végétation par différence normalisée',
       enabled: false, 
       type: 'overlay',
       source: 'remote'
@@ -92,7 +92,7 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
     { 
       id: 'rainfall', 
       name: 'Pluviométrie', 
-      description: 'Données de précipitations sur 30 jours',
+      description: 'Data of précipitations of 30 jours',
       enabled: false, 
       type: 'overlay',
       source: 'remote'
@@ -104,7 +104,7 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
       layer.id === layerId ? { ...layer, enabled } : layer
     ));
     
-    // Si c'est une couche de base qui est activée, désactiver les autres couches de base
+    // Si c'est une couche of base qui est activée, désactiver les autres couches of base
     if (enabled) {
       const layer = layers.find(l => l.id === layerId);
       if (layer?.type === 'base') {
@@ -143,17 +143,17 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
         <DialogHeader>
           <DialogTitle className="flex items-center">
             <Layers className="h-5 w-5 mr-2" />
-            Gestionnaire de couches
+            Gestionnaire of couches
           </DialogTitle>
         </DialogHeader>
         
         <div className="space-y-6">
           <p className="text-sm text-muted-foreground">
-            Configurez les couches visibles sur la carte pour personnaliser votre vue des parcelles.
+            Configurez les couches visibles of la carte pour personnaliser votre vue des parcelles.
           </p>
           
           <div className="space-y-4">
-            <h3 className="text-sm font-medium">Couches de base</h3>
+            <h3 className="text-sm font-medium">Couches of base</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {layers.filter(l => l.type === 'base').map(layer => (
                 <div 
@@ -248,10 +248,10 @@ const ParcelLayersManager = ({ isOpen, onOpenChange }: ParcelLayersManagerProps)
             </Button>
             <div className="space-x-2">
               <Button variant="outline" onClick={() => onOpenChange(false)}>
-                Annuler
+                Cancel
               </Button>
               <Button onClick={handleSaveLayers}>
-                Enregistrer la configuration
+                Save la configuration
               </Button>
             </div>
           </div>

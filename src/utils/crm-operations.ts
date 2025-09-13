@@ -172,11 +172,11 @@ export const enhancedExport = async (
   options = {}
 ): Promise<boolean> => {
   if (!data || data.length === 0) {
-    toast.error("Aucune donnée à exporter");
+    toast.error("No data à exporter");
     return false;
   }
   
-  toast.info(`Préparation de l'export au format ${format.toUpperCase()}...`);
+  toast.info(`Préparation of l'export au format ${format.toUpperCase()}...`);
   
   try {
     let success = false;
@@ -200,7 +200,7 @@ export const enhancedExport = async (
     return success;
   } catch (error) {
     console.error(`Error exporting data:`, error);
-    toast.error(`Erreur lors de l'export au format ${format.toUpperCase()}`);
+    toast.error(`Error lors of l'export au format ${format.toUpperCase()}`);
     return false;
   }
 };
@@ -225,7 +225,7 @@ export const enhancedImport = async (
     const data = await importFromCSV(file);
     
     if (!data || data.length === 0) {
-      toast.error("Aucune donnée valide trouvée dans le fichier");
+      toast.error("No data valide trouvée dans le fichier");
       return false;
     }
     
@@ -250,7 +250,7 @@ export const enhancedImport = async (
     }
     
     if (validData.length === 0) {
-      toast.error("Aucune donnée valide après validation");
+      toast.error("No data valide après validation");
       return false;
     }
     
@@ -259,7 +259,7 @@ export const enhancedImport = async (
     return true;
   } catch (error) {
     console.error("Import error:", error);
-    toast.error("Erreur lors de l'importation des données");
+    toast.error("Error lors of l'importation des données");
     return false;
   }
 };

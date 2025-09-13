@@ -31,11 +31,11 @@ export interface EnvironmentalData {
 }
 
 interface StatisticsContextType {
-  // Données de rendement
+  // Data of yield
   yieldData: YieldData[];
   setYieldData: React.Dispatch<React.SetStateAction<YieldData[]>>;
   
-  // Données financières
+  // Data financières
   financialData: {
     profitabilityByParcel: FinancialData[];
     costAnalysis: CostData[];
@@ -47,7 +47,7 @@ interface StatisticsContextType {
     revenueByMonth: any[];
   }>>;
   
-  // Données environnementales
+  // Data environnementales
   environmentalData: {
     indicators: EnvironmentalData[];
     carbonFootprint: number;
@@ -61,7 +61,7 @@ interface StatisticsContextType {
     biodiversity: number;
   }>>;
   
-  // Données de prévision
+  // Data of prévision
   forecastData: any[];
   setForecastData: React.Dispatch<React.SetStateAction<any[]>>;
   
@@ -85,21 +85,21 @@ export const useStatistics = () => {
   return context;
 };
 
-// Données initiales
+// Data initiales
 const initialYieldData: YieldData[] = [
-  { name: 'Canne à Sucre', current: 85, previous: 75, unit: 't/ha' },
-  { name: 'Banane', current: 32, previous: 30, unit: 't/ha' },
-  { name: 'Ananas', current: 45, previous: 48, unit: 't/ha' },
-  { name: 'Igname', current: 18, previous: 15, unit: 't/ha' },
+  { name: 'Sugarcane', current: 85, previous: 75, unit: 't/ha' },
+  { name: 'Cotton', current: 32, previous: 30, unit: 't/ha' },
+  { name: 'Rice', current: 45, previous: 48, unit: 't/ha' },
+  { name: 'Wheat', current: 18, previous: 15, unit: 't/ha' },
   { name: 'Madère', current: 22, previous: 20, unit: 't/ha' }
 ];
 
 const initialProfitabilityData: FinancialData[] = [
-  { name: 'Parcelle Nord', profitability: 1250, size: 12.5, crop: 'Canne à Sucre' },
-  { name: 'Parcelle Est', profitability: 980, size: 8.3, crop: 'Banane' },
-  { name: 'Parcelle Sud', profitability: 1580, size: 15.7, crop: 'Ananas' },
-  { name: 'Parcelle Ouest', profitability: 850, size: 10.2, crop: 'Igname' },
-  { name: 'Parcelle Centrale', profitability: 920, size: 6.8, crop: 'Madère' }
+  { name: 'Field Nord', profitability: 1250, size: 12.5, crop: 'Sugarcane' },
+  { name: 'Field Est', profitability: 980, size: 8.3, crop: 'Cotton' },
+  { name: 'Field Sud', profitability: 1580, size: 15.7, crop: 'Rice' },
+  { name: 'Field Ouest', profitability: 850, size: 10.2, crop: 'Wheat' },
+  { name: 'Field Centrale', profitability: 920, size: 6.8, crop: 'Madère' }
 ];
 
 const initialCostData: CostData[] = [
@@ -114,13 +114,13 @@ const initialCostData: CostData[] = [
 
 const initialRevenueData = [
   { month: 'Jan', revenue: 28500, expenses: 20100, profit: 8400 },
-  { month: 'Fév', revenue: 30200, expenses: 21800, profit: 8400 },
+  { month: 'Feb', revenue: 30200, expenses: 21800, profit: 8400 },
   { month: 'Mar', revenue: 32800, expenses: 22400, profit: 10400 },
-  { month: 'Avr', revenue: 35500, expenses: 23100, profit: 12400 },
-  { month: 'Mai', revenue: 38200, expenses: 23500, profit: 14700 },
-  { month: 'Juin', revenue: 37800, expenses: 22900, profit: 14900 },
-  { month: 'Juil', revenue: 42500, expenses: 24200, profit: 18300 },
-  { month: 'Août', revenue: 44800, expenses: 25300, profit: 19500 },
+  { month: 'Apr', revenue: 35500, expenses: 23100, profit: 12400 },
+  { month: 'May', revenue: 38200, expenses: 23500, profit: 14700 },
+  { month: 'June', revenue: 37800, expenses: 22900, profit: 14900 },
+  { month: 'Jul', revenue: 42500, expenses: 24200, profit: 18300 },
+  { month: 'August', revenue: 44800, expenses: 25300, profit: 19500 },
   { month: 'Sep', revenue: 40200, expenses: 24800, profit: 15400 },
   { month: 'Oct', revenue: 38200, expenses: 23100, profit: 15100 },
   { month: 'Nov', revenue: 36500, expenses: 22500, profit: 14000 },
@@ -154,12 +154,12 @@ export const StatisticsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   
   // Fonction pour mettre à jour les données en fonction des filtres
   const updateDataWithFilters = (period: string, crop: string) => {
-    // Filtrer les données de rendement par culture si nécessaire
+    // Filter les données of yield par culture si nécessaire
     if (crop !== 'all') {
       const filteredYieldData = initialYieldData.filter(item => item.name === crop);
       setYieldData(filteredYieldData);
       
-      // Filtrer également les données financières par culture
+      // Filter également les données financières par culture
       const filteredProfitabilityData = initialProfitabilityData.filter(item => item.crop === crop);
       setFinancialData(prev => ({
         ...prev,
@@ -173,7 +173,7 @@ export const StatisticsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       }));
     }
     
-    // Vous pourriez également ajuster les autres données en fonction de la période
+    // Vous pourriez également ajuster les autres données en fonction of la période
   };
   
   // Mettre à jour les données lorsque les filtres changent

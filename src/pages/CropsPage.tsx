@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
-import GuadeloupeHarvestTracking from '../components/GuadeloupeHarvestTracking';
-import GuadeloupeSpecificCrops from '../components/GuadeloupeSpecificCrops';
+import IndianHarvestTracking from '../components/IndianHarvestTracking';
+import IndianSpecificCrops from '../components/IndianSpecificCrops';
 import CropPlanning from '../components/CropPlanning';
 import TabContainer, { TabItem } from '../components/layout/TabContainer';
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,7 @@ const CropsPage = () => {
   const printColumns = {
     harvest: [
       { key: "nom", header: "Crop" },
-      { key: "rendement", header: "Yield (t/ha)" },
+      { key: "yield", header: "Yield (t/ha)" },
       { key: "surface", header: "Area (ha)" },
       { key: "date", header: "Harvest Date" }
     ],
@@ -110,7 +110,7 @@ const CropsPage = () => {
               }}
             >
               <Filter className="h-4 w-4" />
-              Filtrer
+              Filter
             </Button>
           </div>
         );
@@ -200,12 +200,12 @@ const CropsPage = () => {
     {
       value: 'harvest',
       label: 'Harvest Tracking',
-      content: <GuadeloupeHarvestTracking />
+      content: <IndianHarvestTracking />
     },
     {
       value: 'specific',
       label: 'Specific Crops',
-      content: <GuadeloupeSpecificCrops />
+      content: <IndianSpecificCrops />
     },
     {
       value: 'planning',

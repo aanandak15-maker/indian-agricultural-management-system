@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Statistics from '../components/Statistics';
-import GuadeloupeHarvestTracking from '../components/GuadeloupeHarvestTracking';
+import IndianHarvestTracking from '../components/IndianHarvestTracking';
 import { ChartConfig } from '../components/ui/chart-config';
 import { EditableTable, Column } from '../components/ui/editable-table';
 import { EditableField } from '../components/ui/editable-field';
@@ -55,7 +55,7 @@ const StatsPage = () => {
   };
   
   const columns: Column[] = [
-    { id: 'name', header: 'Indicateur', accessorKey: 'name', isEditable: true },
+    { id: 'name', header: 'Indicator', accessorKey: 'name', isEditable: true },
     { id: 'current', header: 'Current Value', accessorKey: 'current', type: 'number', isEditable: true },
     { id: 'target', header: 'Target', accessorKey: 'target', type: 'number', isEditable: true },
     { id: 'unit', header: 'Unit', accessorKey: 'unit', isEditable: true },
@@ -186,7 +186,7 @@ const StatsPage = () => {
                   }`}
                 >
                   <BarChart className="h-4 w-4 mr-1.5" />
-                  Récoltes
+                  Harvests
                 </button>
                 
                 <button 
@@ -204,9 +204,9 @@ const StatsPage = () => {
                 <PreviewPrintButton
                   data={performanceData}
                   moduleName="performance-indicators"
-                  title="Indicateurs de Performance Agricole"
+                  title="Indicateurs of Performance Agricole"
                   columns={[
-                    { key: "name", header: "Indicateur" },
+                    { key: "name", header: "Indicator" },
                     { key: "current", header: "Current Value" },
                     { key: "target", header: "Target" },
                     { key: "unit", header: "Unit" }
@@ -220,7 +220,7 @@ const StatsPage = () => {
                   className="px-3 py-1.5 rounded-md flex items-center text-sm bg-muted hover:bg-muted/80 transition-colors"
                 >
                   <Download className="h-4 w-4 mr-1.5" />
-                  Exporter
+                  Export
                 </button>
                 
                 <button 
@@ -229,7 +229,7 @@ const StatsPage = () => {
                   disabled={isSyncing}
                 >
                   <RefreshCw className={`h-4 w-4 mr-1.5 ${isSyncing ? 'animate-spin' : ''}`} />
-                  {isSyncing ? 'Synchronisation...' : 'Synchroniser'}
+                  {isSyncing ? 'Synchronisation...' : 'Sync'}
                 </button>
                 
                 <button 
@@ -239,7 +239,7 @@ const StatsPage = () => {
                   className="px-3 py-1.5 rounded-md flex items-center text-sm bg-muted hover:bg-muted/80 transition-colors"
                 >
                   <Bell className="h-4 w-4 mr-1.5" />
-                  Alertes
+                  Alerts
                 </button>
               </div>
             </motion.header>
@@ -285,7 +285,7 @@ const StatsPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <GuadeloupeHarvestTracking />
+                <IndianHarvestTracking />
               </motion.div>
             )}
             

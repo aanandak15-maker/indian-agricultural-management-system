@@ -68,7 +68,7 @@ const FinancialDataFilter: React.FC<FinancialDataFilterProps> = ({
               className="text-xs h-7 md:h-8"
             >
               <RefreshCw className="h-3 w-3 mr-1" />
-              {!isMobile && "Actualiser"}
+              {!isMobile && "Refresh"}
             </Button>
           )}
           
@@ -105,10 +105,10 @@ const FinancialDataFilter: React.FC<FinancialDataFilterProps> = ({
         
         {categories.length > 0 && setCategoryFilter && (
           <div className="space-y-1">
-            <label className="text-xs font-medium">Catégorie</label>
+            <label className="text-xs font-medium">Category</label>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger className="h-8 md:h-10 text-xs md:text-sm">
-                <SelectValue placeholder="Catégorie" />
+                <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((cat) => (

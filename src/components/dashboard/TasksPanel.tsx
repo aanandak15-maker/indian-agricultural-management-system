@@ -89,7 +89,7 @@ const TasksPanel: React.FC<TasksPanelProps> = ({ tasks, setTasks }) => {
             className="text-xs text-agri-primary hover:bg-agri-primary/10"
           >
             <Plus className="h-3.5 w-3.5 mr-1" />
-            Ajouter
+            Add
           </Button>
         </div>
       </div>
@@ -167,7 +167,7 @@ const TasksPanel: React.FC<TasksPanelProps> = ({ tasks, setTasks }) => {
       <Dialog open={showAddTaskDialog} onOpenChange={setShowAddTaskDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Ajouter une tâche</DialogTitle>
+            <DialogTitle>Add une tâche</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
@@ -178,7 +178,7 @@ const TasksPanel: React.FC<TasksPanelProps> = ({ tasks, setTasks }) => {
                 id="taskTitle"
                 value={newTask.title}
                 onChange={(e) => setNewTask({...newTask, title: e.target.value})}
-                placeholder="Titre de la tâche"
+                placeholder="Titre of la tâche"
                 className="col-span-3"
               />
             </div>
@@ -204,18 +204,18 @@ const TasksPanel: React.FC<TasksPanelProps> = ({ tasks, setTasks }) => {
                 onChange={(e) => setNewTask({...newTask, priority: e.target.value})}
                 className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
-                <option value="low">Faible</option>
-                <option value="medium">Moyenne</option>
-                <option value="high">Haute</option>
+                <option value="low">Low</option>
+                <option value="medium">Average</option>
+                <option value="high">High</option>
               </select>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowAddTaskDialog(false)}>
-              Annuler
+              Cancel
             </Button>
             <Button onClick={handleAddTask}>
-              Ajouter
+              Add
             </Button>
           </DialogFooter>
         </DialogContent>

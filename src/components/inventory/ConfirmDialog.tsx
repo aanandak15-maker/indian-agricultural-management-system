@@ -33,7 +33,7 @@ const ConfirmDialog = ({
   description,
   onConfirm,
   confirmText = 'Confirmer',
-  cancelText = 'Annuler',
+  cancelText = 'Cancel',
   variant = 'default',
   icon = true,
   size = 'default'

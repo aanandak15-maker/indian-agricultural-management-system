@@ -35,8 +35,8 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     { id: 'satellite', name: 'Vue satellite', enabled: false, type: 'base' },
     { id: 'terrain', name: 'Terrain', enabled: true, type: 'base' },
     { id: 'parcels', name: 'Limites parcellaires', enabled: true, type: 'overlay' },
-    { id: 'crops', name: 'Cultures actuelles', enabled: true, type: 'overlay' },
-    { id: 'soil', name: 'Types de sol', enabled: false, type: 'overlay' },
+    { id: 'crops', name: 'Crops actuelles', enabled: true, type: 'overlay' },
+    { id: 'soil', name: 'Types of sol', enabled: false, type: 'overlay' },
     { id: 'irrigation', name: 'Irrigation', enabled: false, type: 'overlay' },
   ]);
   
@@ -58,7 +58,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
   };
   
   const handleExportMap = () => {
-    toast.success("Export de la carte", {
+    toast.success("Export of la carte", {
       description: "La carte des parcelles a été exportée au format PDF"
     });
   };
@@ -69,7 +69,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     
     if (newMode) {
       toast.info("Mode mesure activé", {
-        description: "Cliquez sur la carte pour placer des points et mesurer la distance"
+        description: "Cliquez of la carte pour placer des points et mesurer la distance"
       });
     } else {
       setMeasureResult(null);
@@ -81,7 +81,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
       layer.id === layerId ? { ...layer, enabled } : layer
     ));
     
-    // Si c'est une couche de base qui est activée, désactiver les autres couches de base
+    // Si c'est une couche of base qui est activée, désactiver les autres couches of base
     if (enabled) {
       const layer = mapLayers.find(l => l.id === layerId);
       if (layer?.type === 'base') {
@@ -96,28 +96,28 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
-    // Simuler une recherche de parcelle sur la carte
+    // Simuler une recherche of parcelle of la carte
     toast.info("Recherche en cours", {
-      description: `Recherche de la parcelle: ${searchQuery}`
+      description: `Recherche of la parcelle: ${searchQuery}`
     });
 
     // Simuler un résultat trouvé
     setTimeout(() => {
       setCoordinates({ lat: 45.4831, lng: 4.3973 });
       setZoomLevel(2);
-      toast.success("Parcelle trouvée", {
-        description: "La carte a été centrée sur la parcelle recherchée"
+      toast.success("Field trouvée", {
+        description: "La carte a été centrée of la parcelle recherchée"
       });
     }, 1000);
   };
 
   const simulateMeasurement = () => {
     if (measureMode) {
-      setMeasureResult("Distance: 245.3 mètres");
+      setMeasureResult("Distance: 245.3 meters");
     }
   };
 
-  // Activer la mesure sur la carte
+  // Activer la mesure of la carte
   useEffect(() => {
     if (isOpen && measureMode) {
       const timer = setTimeout(simulateMeasurement, 3000);
@@ -138,7 +138,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input 
                   type="text"
-                  placeholder="Rechercher une parcelle..."
+                  placeholder="Search une parcelle..."
                   className="pl-9 pr-4 py-2 w-full border rounded-md"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -163,7 +163,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                 </PopoverTrigger>
                 <PopoverContent className="w-56">
                   <div className="space-y-4">
-                    <h4 className="font-medium text-sm">Couches de base</h4>
+                    <h4 className="font-medium text-sm">Couches of base</h4>
                     <div className="space-y-2">
                       {mapLayers.filter(l => l.type === 'base').map(layer => (
                         <div key={layer.id} className="flex items-center space-x-2">
@@ -225,7 +225,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
               onCoordinatesChange={setCoordinates}
             />
             
-            {/* Mode de mesure - indicateurs */}
+            {/* Mode of mesure - indicateurs */}
             {measureMode && (
               <div className="absolute top-2 left-2 bg-white/90 p-2 rounded-md shadow-md">
                 <div className="flex items-center text-sm">
@@ -255,8 +255,8 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
           </div>
           
           <p className="text-sm text-muted-foreground text-center">
-            Cette vue d'ensemble montre l'emplacement de toutes vos parcelles. 
-            Cliquez sur une parcelle spécifique pour voir plus de détails.
+            Cette vue d'ensemble montre l'emplacement of toutes vos parcelles. 
+            Cliquez of une parcelle spécifique pour voir plus of détails.
           </p>
           <div className="flex justify-between">
             <Button 
@@ -267,7 +267,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                   setCoordinates({ lat: latitude, lng: longitude });
                   setZoomLevel(2.5);
                   toast.success("Localisation", {
-                    description: "Carte centrée sur votre position"
+                    description: "Carte centrée of votre position"
                   });
                 }, () => {
                   toast.error("Localisation", {
@@ -281,7 +281,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
               Ma position
             </Button>
             <Button onClick={() => onOpenChange(false)}>
-              Fermer
+              Close
             </Button>
           </div>
         </div>

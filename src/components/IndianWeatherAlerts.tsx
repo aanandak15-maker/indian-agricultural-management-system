@@ -29,27 +29,27 @@ import * as z from "zod";
 interface WeatherAlert {
   id: number;
   date: string;
-  type: 'Pluie intense' | 'Tempête tropicale' | 'Sécheresse' | 'Chaleur excessive' | 'Inondation';
+  type: 'Heavy rainfall' | 'Tempête tropicale' | 'Drought' | 'Chaleur excessive' | 'Inondation';
   region: string;
-  severity: 'Basse' | 'Moyenne' | 'Haute' | 'Extrême';
-  impactCrops: 'Faible' | 'Modéré' | 'Sévère';
+  severity: 'Basse' | 'Average' | 'High' | 'Extrême';
+  impactCrops: 'Low' | 'Modéré' | 'Sévère';
   description: string;
   recommendation: string;
-  status: 'Active' | 'Terminée' | 'Prévue';
+  status: 'Active' | 'Completede' | 'Prévue';
 }
 
 const alertFormSchema = z.object({
   date: z.string().min(1, { message: "La date est requise" }),
-  type: z.enum(['Pluie intense', 'Tempête tropicale', 'Sécheresse', 'Chaleur excessive', 'Inondation']),
+  type: z.enum(['Heavy rainfall', 'Tempête tropicale', 'Drought', 'Chaleur excessive', 'Inondation']),
   region: z.string().min(1, { message: "La région est requise" }),
-  severity: z.enum(['Basse', 'Moyenne', 'Haute', 'Extrême']),
-  impactCrops: z.enum(['Faible', 'Modéré', 'Sévère']),
+  severity: z.enum(['Basse', 'Average', 'High', 'Extrême']),
+  impactCrops: z.enum(['Low', 'Modéré', 'Sévère']),
   description: z.string().min(5, { message: "Description trop courte" }),
   recommendation: z.string().min(5, { message: "Recommandation trop courte" }),
-  status: z.enum(['Active', 'Terminée', 'Prévue']),
+  status: z.enum(['Active', 'Completede', 'Prévue']),
 });
 
-const GuadeloupeWeatherAlerts = () => {
+const IndianWeatherAlerts = () => {
   const { toast } = useToast();
   const [title, setTitle] = useState('Weather Alerts in India');
   const [description, setDescription] = useState('Track weather alerts impacting crops and prepare your preventive actions');
@@ -63,9 +63,9 @@ const GuadeloupeWeatherAlerts = () => {
     resolver: zodResolver(alertFormSchema),
     defaultValues: {
       date: new Date().toISOString().slice(0, 10),
-      type: 'Pluie intense',
-      region: 'Basse-Terre',
-      severity: 'Moyenne',
+      type: 'Heavy rainfall',
+      region: 'Maharashtra',
+      severity: 'Average',
       impactCrops: 'Modéré',
       description: '',
       recommendation: '',
@@ -77,12 +77,12 @@ const GuadeloupeWeatherAlerts = () => {
     {
       id: 1,
       date: '2024-06-15',
-      type: 'Pluie intense',
-      region: 'Basse-Terre',
-      severity: 'Haute',
+      type: 'Heavy rainfall',
+      region: 'Maharashtra',
+      severity: 'High',
       impactCrops: 'Modéré',
-      description: 'Fortes précipitations attendues durant 48 heures avec risque d\'inondation dans les zones de basse altitude.',
-      recommendation: 'Vérifier le drainage des parcelles et protéger les jeunes plants. Suspendre temporairement l\'irrigation.',
+      description: 'Heavy precipitation attendues durant 48 heures avec risque d\'inondation dans les zones of basse altitude.',
+      recommendation: 'Vérifier le drainage des parcelles et protéger les jeunes seedlings. Suspendre temporairement l\'irrigation.',
       status: 'Active'
     },
     {
@@ -93,41 +93,41 @@ const GuadeloupeWeatherAlerts = () => {
       severity: 'Extrême',
       impactCrops: 'Sévère',
       description: 'Tempête tropicale Emily approchant avec des vents pouvant dépasser 120 km/h et fortes précipitations.',
-      recommendation: 'Récolter préventivement les cultures matures. Renforcer les tuteurs des bananiers. Sécuriser les équipements agricoles.',
+      recommendation: 'Harvest mature crops preventively. Strengthen banana plant supports. Secure agricultural equipment.',
       status: 'Prévue'
     },
     {
       id: 3,
       date: '2024-05-25',
-      type: 'Sécheresse',
+      type: 'Drought',
       region: 'Grande-Terre',
-      severity: 'Moyenne',
+      severity: 'Average',
       impactCrops: 'Modéré',
       description: 'Période prolongée sans précipitations significatives causant un stress hydrique pour certaines cultures.',
       recommendation: 'Prioriser l\'irrigation des cultures sensibles. Utiliser du paillage pour conserver l\'humidité du sol.',
-      status: 'Terminée'
+      status: 'Completede'
     },
     {
       id: 4,
       date: '2024-07-05',
       type: 'Chaleur excessive',
       region: 'Les Saintes',
-      severity: 'Moyenne',
+      severity: 'Average',
       impactCrops: 'Modéré',
-      description: 'Vague de chaleur avec températures dépassant 35°C pendant plusieurs jours consécutifs.',
-      recommendation: 'Ombrager les cultures sensibles. Augmenter la fréquence d\'irrigation, de préférence tôt le matin ou tard le soir.',
+      description: 'Vague of chaleur avec températures dépassant 35°C pendant plusieurs jours consécutifs.',
+      recommendation: 'Ombrager les cultures sensibles. Augmenter la fréquence d\'irrigation, of préférence tôt le matin ou tard le soir.',
       status: 'Prévue'
     },
     {
       id: 5,
       date: '2024-06-10',
       type: 'Inondation',
-      region: 'Basse-Terre',
-      severity: 'Haute',
+      region: 'Maharashtra',
+      severity: 'High',
       impactCrops: 'Sévère',
       description: 'Débordement des rivières suite aux pluies intenses des derniers jours affectant les parcelles en zone basse.',
       recommendation: 'Évacuer les cultures pouvant être récoltées. Préparer les demandes d\'indemnisation. Surveiller les maladies fongiques.',
-      status: 'Terminée'
+      status: 'Completede'
     }
   ]);
   
@@ -136,7 +136,7 @@ const GuadeloupeWeatherAlerts = () => {
     { id: 'type', header: 'Type d\'alerte', accessorKey: 'type', isEditable: true },
     { id: 'region', header: 'Région', accessorKey: 'region', isEditable: true },
     { id: 'severity', header: 'Sévérité', accessorKey: 'severity', isEditable: true },
-    { id: 'status', header: 'Statut', accessorKey: 'status', isEditable: true },
+    { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true },
   ];
   
   const handleTitleChange = (value: string | number) => {
@@ -179,8 +179,8 @@ const GuadeloupeWeatherAlerts = () => {
       setWeatherAlerts(newData);
       
       toast({
-        title: "Alerte mise à jour",
-        description: `Les informations de l'alerte ont été mises à jour`
+        title: "Alert mise à jour",
+        description: `Les informations of l'alerte ont été mises à jour`
       });
     }
   };
@@ -191,7 +191,7 @@ const GuadeloupeWeatherAlerts = () => {
     setWeatherAlerts(newData);
     
     toast({
-      title: "Alerte supprimée",
+      title: "Alert supprimée",
       description: "L'alerte a été supprimée avec succès"
     });
   };
@@ -216,7 +216,7 @@ const GuadeloupeWeatherAlerts = () => {
     form.reset();
     
     toast({
-      title: "Alerte ajoutée",
+      title: "Alert ajoutée",
       description: `Nouvelle alerte météo ajoutée pour ${data.region}`
     });
   };
@@ -227,11 +227,11 @@ const GuadeloupeWeatherAlerts = () => {
   
   const getAlertIcon = (type: string) => {
     switch (type) {
-      case 'Pluie intense':
+      case 'Heavy rainfall':
         return <CloudRain className="h-6 w-6 text-blue-500" />;
       case 'Tempête tropicale':
         return <Wind className="h-6 w-6 text-purple-500" />;
-      case 'Sécheresse':
+      case 'Drought':
         return <Sun className="h-6 w-6 text-orange-500" />;
       case 'Chaleur excessive':
         return <Thermometer className="h-6 w-6 text-red-500" />;
@@ -246,9 +246,9 @@ const GuadeloupeWeatherAlerts = () => {
     switch (severity) {
       case 'Basse':
         return 'bg-green-100 text-green-800';
-      case 'Moyenne':
+      case 'Average':
         return 'bg-yellow-100 text-yellow-800';
-      case 'Haute':
+      case 'High':
         return 'bg-orange-100 text-orange-800';
       case 'Extrême':
         return 'bg-red-100 text-red-800';
@@ -261,7 +261,7 @@ const GuadeloupeWeatherAlerts = () => {
     switch (status) {
       case 'Active':
         return 'bg-blue-100 text-blue-800';
-      case 'Terminée':
+      case 'Completede':
         return 'bg-gray-100 text-gray-800';
       case 'Prévue':
         return 'bg-purple-100 text-purple-800';
@@ -296,7 +296,7 @@ const GuadeloupeWeatherAlerts = () => {
             <Input
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Rechercher une alerte..."
+              placeholder="Search une alerte..."
               className="pl-10"
             />
             <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -310,8 +310,8 @@ const GuadeloupeWeatherAlerts = () => {
             <SelectContent>
               <SelectItem value="all">Toutes</SelectItem>
               <SelectItem value="Basse">Basse</SelectItem>
-              <SelectItem value="Moyenne">Moyenne</SelectItem>
-              <SelectItem value="Haute">Haute</SelectItem>
+              <SelectItem value="Average">Average</SelectItem>
+              <SelectItem value="High">High</SelectItem>
               <SelectItem value="Extrême">Extrême</SelectItem>
             </SelectContent>
           </Select>
@@ -319,12 +319,12 @@ const GuadeloupeWeatherAlerts = () => {
           <Select value={filterStatus} onValueChange={setFilterStatus}>
             <SelectTrigger className="w-[150px]">
               <Calendar className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Statut" />
+              <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tous</SelectItem>
               <SelectItem value="Active">Active</SelectItem>
-              <SelectItem value="Terminée">Terminée</SelectItem>
+              <SelectItem value="Completede">Completede</SelectItem>
               <SelectItem value="Prévue">Prévue</SelectItem>
             </SelectContent>
           </Select>
@@ -339,7 +339,7 @@ const GuadeloupeWeatherAlerts = () => {
               </DialogTrigger>
               <DialogContent className="max-w-lg">
                 <DialogHeader>
-                  <DialogTitle>Ajouter une nouvelle alerte météo</DialogTitle>
+                  <DialogTitle>Add une nouvelle alerte météo</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -371,9 +371,9 @@ const GuadeloupeWeatherAlerts = () => {
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                <SelectItem value="Pluie intense">Pluie intense</SelectItem>
+                                <SelectItem value="Heavy rainfall">Heavy rainfall</SelectItem>
                                 <SelectItem value="Tempête tropicale">Tempête tropicale</SelectItem>
-                                <SelectItem value="Sécheresse">Sécheresse</SelectItem>
+                                <SelectItem value="Drought">Drought</SelectItem>
                                 <SelectItem value="Chaleur excessive">Chaleur excessive</SelectItem>
                                 <SelectItem value="Inondation">Inondation</SelectItem>
                               </SelectContent>
@@ -398,7 +398,7 @@ const GuadeloupeWeatherAlerts = () => {
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                <SelectItem value="Basse-Terre">Basse-Terre</SelectItem>
+                                <SelectItem value="Maharashtra">Maharashtra</SelectItem>
                                 <SelectItem value="Grande-Terre">Grande-Terre</SelectItem>
                                 <SelectItem value="Marie-Galante">Marie-Galante</SelectItem>
                                 <SelectItem value="Les Saintes">Les Saintes</SelectItem>
@@ -424,8 +424,8 @@ const GuadeloupeWeatherAlerts = () => {
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Basse">Basse</SelectItem>
-                                <SelectItem value="Moyenne">Moyenne</SelectItem>
-                                <SelectItem value="Haute">Haute</SelectItem>
+                                <SelectItem value="Average">Average</SelectItem>
+                                <SelectItem value="High">High</SelectItem>
                                 <SelectItem value="Extrême">Extrême</SelectItem>
                               </SelectContent>
                             </Select>
@@ -441,7 +441,7 @@ const GuadeloupeWeatherAlerts = () => {
                         name="impactCrops"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Impact sur les cultures</FormLabel>
+                            <FormLabel>Impact of les cultures</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
@@ -449,7 +449,7 @@ const GuadeloupeWeatherAlerts = () => {
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                <SelectItem value="Faible">Faible</SelectItem>
+                                <SelectItem value="Low">Low</SelectItem>
                                 <SelectItem value="Modéré">Modéré</SelectItem>
                                 <SelectItem value="Sévère">Sévère</SelectItem>
                               </SelectContent>
@@ -464,7 +464,7 @@ const GuadeloupeWeatherAlerts = () => {
                         name="status"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Statut</FormLabel>
+                            <FormLabel>Status</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
@@ -473,7 +473,7 @@ const GuadeloupeWeatherAlerts = () => {
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Active">Active</SelectItem>
-                                <SelectItem value="Terminée">Terminée</SelectItem>
+                                <SelectItem value="Completede">Completede</SelectItem>
                                 <SelectItem value="Prévue">Prévue</SelectItem>
                               </SelectContent>
                             </Select>
@@ -513,9 +513,9 @@ const GuadeloupeWeatherAlerts = () => {
                     
                     <div className="flex justify-end space-x-2">
                       <Button variant="outline" type="button" onClick={() => setDialogOpen(false)}>
-                        Annuler
+                        Cancel
                       </Button>
-                      <Button type="submit">Enregistrer</Button>
+                      <Button type="submit">Save</Button>
                     </div>
                   </form>
                 </Form>
@@ -528,7 +528,7 @@ const GuadeloupeWeatherAlerts = () => {
           {filteredAlerts.length === 0 ? (
             <div className="text-center py-8 border rounded-lg bg-muted/30">
               <AlertTriangle className="h-10 w-10 mx-auto text-muted-foreground mb-2" />
-              <p className="text-muted-foreground">Aucune alerte ne correspond aux critères de recherche</p>
+              <p className="text-muted-foreground">Aucune alerte ne correspond aux critères of recherche</p>
             </div>
           ) : (
             filteredAlerts.map(alert => (
@@ -575,7 +575,7 @@ const GuadeloupeWeatherAlerts = () => {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <h4 className="text-sm font-semibold mb-1">Impact sur les cultures</h4>
+                      <h4 className="text-sm font-semibold mb-1">Impact of les cultures</h4>
                       <Badge className={alert.impactCrops === 'Sévère' ? 'bg-red-100 text-red-800' : 
                                       alert.impactCrops === 'Modéré' ? 'bg-yellow-100 text-yellow-800' : 
                                       'bg-green-100 text-green-800'}>
@@ -590,7 +590,7 @@ const GuadeloupeWeatherAlerts = () => {
         </div>
         
         <div className="border rounded-lg overflow-hidden">
-          <h3 className="text-lg font-semibold p-4 bg-muted/20 border-b">Gérer les alertes</h3>
+          <h3 className="text-lg font-semibold p-4 bg-muted/20 border-b">Manage les alertes</h3>
           <EditableTable
             data={filteredAlerts}
             columns={columns}
@@ -605,4 +605,4 @@ const GuadeloupeWeatherAlerts = () => {
   );
 };
 
-export default GuadeloupeWeatherAlerts;
+export default IndianWeatherAlerts;

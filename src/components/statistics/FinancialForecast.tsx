@@ -30,13 +30,13 @@ import { Calculator, RefreshCw, TrendingUp, Share2 } from "lucide-react";
 // Forecast data for the next 12 months
 const forecastData = [
   { month: 'Jan', revenue: 28500, expenses: 20100, forecast: 8400, previous: 7200 },
-  { month: 'Fév', revenue: 30200, expenses: 21800, forecast: 8400, previous: 7500 },
+  { month: 'Feb', revenue: 30200, expenses: 21800, forecast: 8400, previous: 7500 },
   { month: 'Mar', revenue: 32800, expenses: 22400, forecast: 10400, previous: 8200 },
-  { month: 'Avr', revenue: 35500, expenses: 23100, forecast: 12400, previous: 9200 },
-  { month: 'Mai', revenue: 38200, expenses: 23500, forecast: 14700, previous: 10700 },
-  { month: 'Juin', revenue: 37800, expenses: 22900, forecast: 14900, previous: 11200 },
-  { month: 'Juil', revenue: 42500, expenses: 24200, forecast: 18300, previous: 12400 },
-  { month: 'Août', revenue: 44800, expenses: 25300, forecast: 19500, previous: 13100 },
+  { month: 'Apr', revenue: 35500, expenses: 23100, forecast: 12400, previous: 9200 },
+  { month: 'May', revenue: 38200, expenses: 23500, forecast: 14700, previous: 10700 },
+  { month: 'June', revenue: 37800, expenses: 22900, forecast: 14900, previous: 11200 },
+  { month: 'Jul', revenue: 42500, expenses: 24200, forecast: 18300, previous: 12400 },
+  { month: 'August', revenue: 44800, expenses: 25300, forecast: 19500, previous: 13100 },
   { month: 'Sep', revenue: 40200, expenses: 24800, forecast: 15400, previous: 12400 },
   { month: 'Oct', revenue: 38200, expenses: 23100, forecast: 15100, previous: 11800 },
   { month: 'Nov', revenue: 36500, expenses: 22500, forecast: 14000, previous: 10900 },
@@ -46,13 +46,13 @@ const forecastData = [
 // Cash flow projection data
 const cashFlowProjection = [
   { month: 'Jan', inflow: 28500, outflow: 20100, balance: 8400 },
-  { month: 'Fév', inflow: 30200, outflow: 21800, balance: 16800 },
+  { month: 'Feb', inflow: 30200, outflow: 21800, balance: 16800 },
   { month: 'Mar', inflow: 32800, outflow: 22400, balance: 27200 },
-  { month: 'Avr', inflow: 35500, outflow: 23100, balance: 39600 },
-  { month: 'Mai', inflow: 38200, outflow: 23500, balance: 54300 },
-  { month: 'Juin', inflow: 37800, outflow: 22900, balance: 69200 },
-  { month: 'Juil', inflow: 42500, outflow: 24200, balance: 87500 },
-  { month: 'Août', inflow: 44800, outflow: 25300, balance: 107000 },
+  { month: 'Apr', inflow: 35500, outflow: 23100, balance: 39600 },
+  { month: 'May', inflow: 38200, outflow: 23500, balance: 54300 },
+  { month: 'June', inflow: 37800, outflow: 22900, balance: 69200 },
+  { month: 'Jul', inflow: 42500, outflow: 24200, balance: 87500 },
+  { month: 'August', inflow: 44800, outflow: 25300, balance: 107000 },
   { month: 'Sep', inflow: 40200, outflow: 24800, balance: 122400 },
   { month: 'Oct', inflow: 38200, outflow: 23100, balance: 137500 },
   { month: 'Nov', inflow: 36500, outflow: 22500, balance: 151500 },
@@ -85,7 +85,7 @@ const FinancialForecast = () => {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
         <div>
           <h2 className="text-xl font-bold">Prévisions Financières</h2>
-          <p className="text-muted-foreground">Projections à {forecastDuration} mois basées sur les données historiques</p>
+          <p className="text-muted-foreground">Projections à {forecastDuration} month basées of les données historiques</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Select value={forecastDuration} onValueChange={setForecastDuration}>
@@ -93,10 +93,10 @@ const FinancialForecast = () => {
               <SelectValue placeholder="Durée" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="3">3 mois</SelectItem>
-              <SelectItem value="6">6 mois</SelectItem>
-              <SelectItem value="12">12 mois</SelectItem>
-              <SelectItem value="24">24 mois</SelectItem>
+              <SelectItem value="3">3 month</SelectItem>
+              <SelectItem value="6">6 month</SelectItem>
+              <SelectItem value="12">12 month</SelectItem>
+              <SelectItem value="24">24 month</SelectItem>
             </SelectContent>
           </Select>
           
@@ -113,7 +113,7 @@ const FinancialForecast = () => {
           
           <Button onClick={handleRefreshForecast} variant="outline">
             <RefreshCw className="h-4 w-4 mr-2" />
-            Actualiser
+            Refresh
           </Button>
           
           <Button onClick={handleShareForecast} variant="outline">
@@ -127,7 +127,7 @@ const FinancialForecast = () => {
         <Card>
           <CardHeader>
             <CardTitle>Marge nette prévisionnelle</CardTitle>
-            <CardDescription>Comparaison avec l'année précédente</CardDescription>
+            <CardDescription>Comparaison avec l'year précédente</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -170,8 +170,8 @@ const FinancialForecast = () => {
         
         <Card>
           <CardHeader>
-            <CardTitle>Prévision de flux de trésorerie</CardTitle>
-            <CardDescription>Évolution du solde de trésorerie</CardDescription>
+            <CardTitle>Prévision of flux of trésorerie</CardTitle>
+            <CardDescription>Évolution du solde of trésorerie</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -194,7 +194,7 @@ const FinancialForecast = () => {
                     stroke="#8884d8" 
                     fill="#8884d8" 
                     fillOpacity={0.3}
-                    name="Solde de trésorerie"
+                    name="Solde of trésorerie"
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -205,8 +205,8 @@ const FinancialForecast = () => {
       
       <Card>
         <CardHeader>
-          <CardTitle>Paramètres de simulation</CardTitle>
-          <CardDescription>Ajustez les facteurs pour observer leur impact sur les prévisions</CardDescription>
+          <CardTitle>Settings of simulation</CardTitle>
+          <CardDescription>Ajustez les facteurs pour observer leur impact of les prévisions</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
@@ -253,7 +253,7 @@ const FinancialForecast = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label>Scénario de revenus</Label>
+                  <Label>Scénario of revenus</Label>
                   <Select value={revenueScenario} onValueChange={setRevenueScenario}>
                     <SelectTrigger>
                       <SelectValue placeholder="Scénario" />
@@ -278,20 +278,20 @@ const FinancialForecast = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               <div className="p-4 border rounded-lg">
-                <p className="text-muted-foreground text-sm font-medium mb-1">Résultat d'exploitation prévisionnel</p>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Result d'farm prévisionnel</p>
                 <p className="text-xl font-bold">98,600 €</p>
                 <div className="flex items-center space-x-1 text-green-600 text-xs">
                   <TrendingUp className="h-3 w-3" />
-                  <span>+12% vs année précédente</span>
+                  <span>+12% vs year précédente</span>
                 </div>
               </div>
               
               <div className="p-4 border rounded-lg">
-                <p className="text-muted-foreground text-sm font-medium mb-1">Trésorerie prévisionnelle fin d'année</p>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Trésorerie prévisionnelle fin d'year</p>
                 <p className="text-xl font-bold">166,900 €</p>
                 <div className="flex items-center space-x-1 text-green-600 text-xs">
                   <TrendingUp className="h-3 w-3" />
-                  <span>+32% vs année précédente</span>
+                  <span>+32% vs year précédente</span>
                 </div>
               </div>
               
@@ -300,7 +300,7 @@ const FinancialForecast = () => {
                 <p className="text-xl font-bold">21.3%</p>
                 <div className="flex items-center space-x-1 text-green-600 text-xs">
                   <TrendingUp className="h-3 w-3" />
-                  <span>+3.2pts vs année précédente</span>
+                  <span>+3.2pts vs year précédente</span>
                 </div>
               </div>
             </div>

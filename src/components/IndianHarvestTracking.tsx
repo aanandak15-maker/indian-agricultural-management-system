@@ -13,33 +13,33 @@ interface HarvestData {
   previousYield: number;
   unit: string;
   harvestArea: number;
-  quality: 'Excellente' | 'Bonne' | 'Moyenne' | 'Faible';
+  quality: 'Excellente' | 'Bonne' | 'Average' | 'Low';
 }
 
-const GuadeloupeHarvestTracking = () => {
+const IndianHarvestTracking = () => {
   const { yieldData } = useStatistics();
-  const [title, setTitle] = useState('Suivi des Récoltes en Guadeloupe');
+  const [title, setTitle] = useState('Tracking des Harvests en India');
   const [description, setDescription] = useState('Suivez les rendements et la qualité des récoltes pour les principales cultures guadeloupéennes');
   
-  // Convertir les données de rendement pour les adapter au format attendu
+  // Convertir les données of yield pour les adapter au format attendu
   const [harvestData, setHarvestData] = useState<HarvestData[]>(
     yieldData.map(item => ({
       crop: item.name,
       currentYield: item.current,
       previousYield: item.previous,
       unit: item.unit,
-      harvestArea: item.name === 'Canne à Sucre' ? 12500 :
-                   item.name === 'Banane' ? 2300 :
-                   item.name === 'Ananas' ? 350 :
-                   item.name === 'Igname' ? 420 : 180,
-      quality: item.name === 'Banane' ? 'Excellente' :
-               item.name === 'Ananas' || item.name === 'Canne à Sucre' || item.name === 'Madère' ? 'Bonne' : 'Moyenne'
+      harvestArea: item.name === 'Sugarcane' ? 12500 :
+                   item.name === 'Cotton' ? 2300 :
+                   item.name === 'Rice' ? 350 :
+                   item.name === 'Wheat' ? 420 : 180,
+      quality: item.name === 'Cotton' ? 'Excellente' :
+               item.name === 'Rice' || item.name === 'Sugarcane' || item.name === 'Madère' ? 'Bonne' : 'Average'
     }))
   );
   
   // Colonnes pour le tableau éditable
   const columns: Column[] = [
-    { id: 'crop', header: 'Culture', accessorKey: 'crop', isEditable: true },
+    { id: 'crop', header: 'Crop', accessorKey: 'crop', isEditable: true },
     { id: 'currentYield', header: 'Rendement actuel', accessorKey: 'currentYield', type: 'number', isEditable: true },
     { id: 'previousYield', header: 'Rendement précédent', accessorKey: 'previousYield', type: 'number', isEditable: true },
     { id: 'unit', header: 'Unité', accessorKey: 'unit', isEditable: true },
@@ -68,14 +68,14 @@ const GuadeloupeHarvestTracking = () => {
     
     newData[rowIndex] = updatedRow as HarvestData;
     setHarvestData(newData);
-    console.log('Données de récolte mises à jour');
+    console.log('Data of récolte mises à jour');
   };
   
   const handleDeleteRow = (rowIndex: number) => {
     const newData = [...harvestData];
     newData.splice(rowIndex, 1);
     setHarvestData(newData);
-    console.log('Culture supprimée du suivi');
+    console.log('Crop supprimée du suivi');
   };
   
   const handleAddRow = (newRow: Record<string, any>) => {
@@ -85,13 +85,13 @@ const GuadeloupeHarvestTracking = () => {
       previousYield: Number(newRow.previousYield || 0),
       unit: String(newRow.unit || 't/ha'),
       harvestArea: Number(newRow.harvestArea || 0),
-      quality: (newRow.quality as HarvestData['quality']) || 'Moyenne'
+      quality: (newRow.quality as HarvestData['quality']) || 'Average'
     };
     setHarvestData([...harvestData, typedRow]);
     console.log('Nouvelle culture ajoutée au suivi');
   };
   
-  // Données pour le graphique comparatif
+  // Data pour le graphique comparatif
   const chartData = harvestData.map(item => ({
     name: item.crop,
     actuel: item.currentYield,
@@ -112,7 +112,7 @@ const GuadeloupeHarvestTracking = () => {
   
   // Columns for preview/print
   const printColumns = [
-    { key: "culture", header: "Culture" },
+    { key: "culture", header: "Crop" },
     { key: "rendement_actuel", header: "Rendement actuel" },
     { key: "rendement_precedent", header: "Rendement précédent" },
     { key: "surface", header: "Surface (ha)" },
@@ -217,4 +217,4 @@ const GuadeloupeHarvestTracking = () => {
   );
 };
 
-export default GuadeloupeHarvestTracking;
+export default IndianHarvestTracking;

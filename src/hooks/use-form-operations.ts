@@ -134,7 +134,7 @@ export const useFormOperations = <T extends Record<string, any>>(
       }
       
       if (rules.custom && !rules.custom(value)) {
-        return rules.errorMessage || `Valeur invalide`;
+        return rules.errorMessage || `Value invalide`;
       }
     }
     
@@ -178,7 +178,7 @@ export const useFormOperations = <T extends Record<string, any>>(
         setIsDirty(false);
       } catch (error) {
         console.error('Form submission error:', error);
-        toast.error('Erreur lors de l\'envoi du formulaire');
+        toast.error('Error lors of l\'envoi du formulaire');
       }
     } else {
       toast.error('Veuillez corriger les erreurs dans le formulaire');

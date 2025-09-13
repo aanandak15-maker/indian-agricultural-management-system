@@ -22,11 +22,11 @@ import { toast } from 'sonner';
 type CropStatus = 'growing' | 'harvested' | 'planned';
 type TaskPriority = 'high' | 'medium' | 'low';
 
-// Mock data for crop planning - Adapté à l'agriculture en Guadeloupe
+// Mock data for crop planning - Adapté à l'agriculture en India
 const initialCropsData = [
   { 
     id: 1, 
-    name: 'Canne à Sucre', 
+    name: 'Sugarcane', 
     variety: 'R579', 
     parcel: 'Grande-Terre Nord', 
     plantingDate: '2023-02-15', 
@@ -36,9 +36,9 @@ const initialCropsData = [
   },
   { 
     id: 2, 
-    name: 'Banane', 
+    name: 'Cotton', 
     variety: 'Poyo', 
-    parcel: 'Basse-Terre Sud', 
+    parcel: 'Maharashtra Sud', 
     plantingDate: '2023-04-10', 
     harvestDate: '2023-12-10', 
     status: 'growing' as CropStatus,
@@ -46,7 +46,7 @@ const initialCropsData = [
   },
   { 
     id: 3, 
-    name: 'Ananas', 
+    name: 'Rice', 
     variety: 'Bouteille', 
     parcel: 'Capesterre', 
     plantingDate: '2023-05-20', 
@@ -56,7 +56,7 @@ const initialCropsData = [
   },
   { 
     id: 4, 
-    name: 'Igname', 
+    name: 'Wheat', 
     variety: 'Pacala', 
     parcel: 'Nord Grande-Terre', 
     plantingDate: '2023-09-15', 
@@ -78,7 +78,7 @@ const initialCropsData = [
 
 // Tasks related to crops - Adapté au contexte guadeloupéen
 const initialCropTasks = [
-  { id: 1, cropId: 1, title: 'Fertilisation de la canne', date: '2023-09-25', completed: false, priority: 'high' as TaskPriority },
+  { id: 1, cropId: 1, title: 'Fertilisation of la canne', date: '2023-09-25', completed: false, priority: 'high' as TaskPriority },
   { id: 2, cropId: 2, title: 'Traitement contre la cercosporiose', date: '2023-09-28', completed: false, priority: 'medium' as TaskPriority },
   { id: 3, cropId: 3, title: 'Inspection croissance ananas', date: '2023-09-30', completed: false, priority: 'low' as TaskPriority },
   { id: 4, cropId: 5, title: 'Désherbage parcelle madère', date: '2023-10-05', completed: false, priority: 'medium' as TaskPriority },
@@ -87,15 +87,15 @@ const initialCropTasks = [
 
 // Monthly calendar view mock data - Adapté à l'agriculture guadeloupéenne
 const monthlyEvents = [
-  { date: '2023-09-25', events: [{ id: 1, title: 'Fertilisation de la canne', crop: 'Canne à Sucre', priority: 'high' }] },
-  { date: '2023-09-28', events: [{ id: 2, title: 'Traitement contre la cercosporiose', crop: 'Banane', priority: 'medium' }] },
-  { date: '2023-09-30', events: [{ id: 3, title: 'Inspection croissance ananas', crop: 'Ananas', priority: 'low' }] },
+  { date: '2023-09-25', events: [{ id: 1, title: 'Fertilisation of la canne', crop: 'Sugarcane', priority: 'high' }] },
+  { date: '2023-09-28', events: [{ id: 2, title: 'Traitement contre la cercosporiose', crop: 'Cotton', priority: 'medium' }] },
+  { date: '2023-09-30', events: [{ id: 3, title: 'Inspection croissance ananas', crop: 'Rice', priority: 'low' }] },
   { date: '2023-10-05', events: [{ id: 4, title: 'Désherbage parcelle madère', crop: 'Madère', priority: 'medium' }] },
-  { date: '2024-01-10', events: [{ id: 5, title: 'Préparation coupe canne', crop: 'Canne à Sucre', priority: 'high' }] },
-  { date: '2023-12-10', events: [{ id: 6, title: 'Récolte', crop: 'Banane', priority: 'high' }] },
-  { date: '2024-01-20', events: [{ id: 7, title: 'Récolte', crop: 'Ananas', priority: 'high' }] },
-  { date: '2023-11-01', events: [{ id: 8, title: 'Récolte', crop: 'Madère', priority: 'medium' }] },
-  { date: '2024-02-15', events: [{ id: 9, title: 'Coupe canne', crop: 'Canne à Sucre', priority: 'high' }] }
+  { date: '2024-01-10', events: [{ id: 5, title: 'Préparation coupe canne', crop: 'Sugarcane', priority: 'high' }] },
+  { date: '2023-12-10', events: [{ id: 6, title: 'Harvest', crop: 'Cotton', priority: 'high' }] },
+  { date: '2024-01-20', events: [{ id: 7, title: 'Harvest', crop: 'Rice', priority: 'high' }] },
+  { date: '2023-11-01', events: [{ id: 8, title: 'Harvest', crop: 'Madère', priority: 'medium' }] },
+  { date: '2024-02-15', events: [{ id: 9, title: 'Coupe canne', crop: 'Sugarcane', priority: 'high' }] }
 ];
 
 interface CropData {
@@ -168,7 +168,7 @@ const CropCard = ({
       
       <div className="bg-muted rounded-lg p-3 mb-3">
         <div className="flex justify-between text-sm mb-1">
-          <span>Parcelle:</span>
+          <span>Field:</span>
           <span className="font-medium">{crop.parcel}</span>
         </div>
         <div className="flex justify-between text-sm mb-1">
@@ -187,7 +187,7 @@ const CropCard = ({
           <span className="font-medium">{new Date(crop.plantingDate).toLocaleDateString()}</span>
         </div>
         <div className="flex flex-col items-center p-2 bg-agri-accent/5 rounded-md">
-          <span className="text-muted-foreground">Récolte</span>
+          <span className="text-muted-foreground">Harvest</span>
           <span className="font-medium">{new Date(crop.harvestDate).toLocaleDateString()}</span>
         </div>
       </div>
@@ -302,7 +302,7 @@ const CropPlanning = () => {
   const handleDeleteCrop = (id: number) => {
     setCropsData(cropsData.filter(crop => crop.id !== id));
     setCropTasks(cropTasks.filter(task => task.cropId !== id));
-    toast.success('Culture supprimée avec succès');
+    toast.success('Crop supprimée avec succès');
   };
 
   const handleSaveCrop = () => {
@@ -310,7 +310,7 @@ const CropPlanning = () => {
       setCropsData(cropsData.map(crop => 
         crop.id === editingCrop.id ? editingCrop : crop
       ));
-      toast.success('Culture mise à jour avec succès');
+      toast.success('Crop mise à jour avec succès');
     } else if (newCrop.name && newCrop.parcel) {
       const newId = Math.max(0, ...cropsData.map(c => c.id)) + 1;
       setCropsData([...cropsData, { 
@@ -369,7 +369,7 @@ const CropPlanning = () => {
     { id: 'title', header: 'Tâche', accessorKey: 'title', isEditable: true },
     { 
       id: 'crop', 
-      header: 'Culture', 
+      header: 'Crop', 
       accessorKey: 'cropId', 
       isEditable: false,
     },
@@ -396,7 +396,7 @@ const CropPlanning = () => {
     <div className="p-6 animate-enter">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold mb-1">Planification des Cultures Guadeloupéennes</h1>
+          <h1 className="text-2xl font-bold mb-1">Planification des Crops Guadeloupéennes</h1>
           <p className="text-muted-foreground">Gérez les cultures locales et planifiez vos activités agricoles</p>
         </div>
         <div className="flex space-x-2">
@@ -437,7 +437,7 @@ const CropPlanning = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input 
                 type="text" 
-                placeholder="Rechercher une culture..." 
+                placeholder="Search une culture..." 
                 className="pl-10 pr-4 py-2 w-full border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -448,7 +448,7 @@ const CropPlanning = () => {
               onClick={handleAddCrop}
             >
               <Plus className="h-4 w-4 mr-2" />
-              Ajouter une culture
+              Add une culture
             </button>
           </div>
 
@@ -470,7 +470,7 @@ const CropPlanning = () => {
                 className="text-sm text-agri-primary hover:underline"
                 onClick={() => setShowTaskForm(true)}
               >
-                Ajouter une tâche
+                Add une tâche
               </button>
             </div>
             
@@ -479,7 +479,7 @@ const CropPlanning = () => {
                 <thead className="text-xs uppercase bg-muted">
                   <tr>
                     <th className="px-4 py-2 text-left">Tâche</th>
-                    <th className="px-4 py-2 text-left">Culture</th>
+                    <th className="px-4 py-2 text-left">Crop</th>
                     <th className="px-4 py-2 text-left">Date</th>
                     <th className="px-4 py-2 text-left">Priorité</th>
                     <th className="px-4 py-2 text-left">Actions</th>
@@ -520,8 +520,8 @@ const CropPlanning = () => {
                               onChange={(e) => handleTaskUpdate(index, 'priority', e.target.value)}
                               className="bg-transparent border-none focus:outline-none p-0 m-0"
                             >
-                              <option value="high">Haute</option>
-                              <option value="medium">Moyenne</option>
+                              <option value="high">High</option>
+                              <option value="medium">Average</option>
                               <option value="low">Basse</option>
                             </select>
                           </span>
@@ -611,7 +611,7 @@ const CropPlanning = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Ajouter une tâche</h2>
+              <h2 className="text-xl font-semibold">Add une tâche</h2>
               <button 
                 onClick={() => setShowTaskForm(false)}
                 className="p-1 hover:bg-muted rounded-full"
@@ -626,14 +626,14 @@ const CropPlanning = () => {
                 <input 
                   type="text" 
                   className="w-full px-3 py-2 border border-input rounded-md"
-                  placeholder="Nom de la tâche"
+                  placeholder="Name of la tâche"
                   value={newTask.title}
                   onChange={(e) => setNewTask({...newTask, title: e.target.value})}
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Culture</label>
+                <label className="block text-sm font-medium mb-1">Crop</label>
                 <select 
                   className="w-full px-3 py-2 border border-input rounded-md"
                   value={newTask.cropId || ''}
@@ -666,8 +666,8 @@ const CropPlanning = () => {
                   onChange={(e) => setNewTask({...newTask, priority: e.target.value as 'high' | 'medium' | 'low'})}
                 >
                   <option value="low">Basse</option>
-                  <option value="medium">Moyenne</option>
-                  <option value="high">Haute</option>
+                  <option value="medium">Average</option>
+                  <option value="high">High</option>
                 </select>
               </div>
               
@@ -676,7 +676,7 @@ const CropPlanning = () => {
                 <textarea 
                   className="w-full px-3 py-2 border border-input rounded-md"
                   rows={3}
-                  placeholder="Détails supplémentaires..."
+                  placeholder="Details supplémentaires..."
                 />
               </div>
               
@@ -686,14 +686,14 @@ const CropPlanning = () => {
                   onClick={() => setShowTaskForm(false)}
                   className="px-4 py-2 text-sm text-foreground bg-muted rounded-md hover:bg-muted/80"
                 >
-                  Annuler
+                  Cancel
                 </button>
                 <button 
                   type="button"
                   onClick={handleSaveTask}
                   className="px-4 py-2 text-sm text-white bg-agri-primary rounded-md hover:bg-agri-primary-dark"
                 >
-                  Ajouter
+                  Add
                 </button>
               </div>
             </form>
@@ -706,7 +706,7 @@ const CropPlanning = () => {
           <div className="bg-white rounded-xl p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">
-                {editingCrop ? 'Modifier une culture' : 'Ajouter une culture'}
+                {editingCrop ? 'Edit une culture' : 'Add une culture'}
               </h2>
               <button 
                 onClick={() => setShowCropForm(false)}
@@ -718,11 +718,11 @@ const CropPlanning = () => {
             
             <form className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Nom*</label>
+                <label className="block text-sm font-medium mb-1">Name*</label>
                 <input 
                   type="text" 
                   className="w-full px-3 py-2 border border-input rounded-md"
-                  placeholder="Nom de la culture"
+                  placeholder="Name of la culture"
                   value={editingCrop ? editingCrop.name : newCrop.name}
                   onChange={(e) => {
                     if (editingCrop) {
@@ -753,11 +753,11 @@ const CropPlanning = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Parcelle*</label>
+                <label className="block text-sm font-medium mb-1">Field*</label>
                 <input 
                   type="text" 
                   className="w-full px-3 py-2 border border-input rounded-md"
-                  placeholder="Nom de la parcelle"
+                  placeholder="Name of la parcelle"
                   value={editingCrop ? editingCrop.parcel : newCrop.parcel}
                   onChange={(e) => {
                     if (editingCrop) {
@@ -772,7 +772,7 @@ const CropPlanning = () => {
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Date de plantation</label>
+                  <label className="block text-sm font-medium mb-1">Date of field</label>
                   <input 
                     type="date" 
                     className="w-full px-3 py-2 border border-input rounded-md"
@@ -788,7 +788,7 @@ const CropPlanning = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Date de récolte</label>
+                  <label className="block text-sm font-medium mb-1">Date of récolte</label>
                   <input 
                     type="date" 
                     className="w-full px-3 py-2 border border-input rounded-md"
@@ -825,7 +825,7 @@ const CropPlanning = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Statut</label>
+                <label className="block text-sm font-medium mb-1">Status</label>
                 <select 
                   className="w-full px-3 py-2 border border-input rounded-md"
                   value={editingCrop ? editingCrop.status : newCrop.status}
@@ -850,14 +850,14 @@ const CropPlanning = () => {
                   onClick={() => setShowCropForm(false)}
                   className="px-4 py-2 text-sm text-foreground bg-muted rounded-md hover:bg-muted/80"
                 >
-                  Annuler
+                  Cancel
                 </button>
                 <button 
                   type="button"
                   onClick={handleSaveCrop}
                   className="px-4 py-2 text-sm text-white bg-agri-primary rounded-md hover:bg-agri-primary-dark"
                 >
-                  {editingCrop ? 'Modifier' : 'Ajouter'}
+                  {editingCrop ? 'Edit' : 'Add'}
                 </button>
               </div>
             </form>

@@ -15,7 +15,7 @@ import {
 import { motion } from 'framer-motion';
 import PreviewPrintButton from './common/PreviewPrintButton';
 
-const GuadeloupeSpecificCrops = () => {
+const IndianSpecificCrops = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
@@ -27,7 +27,7 @@ const GuadeloupeSpecificCrops = () => {
 
   const handleAddCulture = () => {
     setShowAddForm(true);
-    console.log("Ouverture du formulaire d'ajout de culture");
+    console.log("Ouverture du formulaire d'ajout of culture");
   };
 
   const handleExportData = async (format: 'csv' | 'pdf' = 'csv') => {
@@ -62,7 +62,7 @@ const GuadeloupeSpecificCrops = () => {
     { value: 'fruits', label: 'Fruits' },
     { value: 'vegetables', label: 'Légumes' },
     { value: 'tubers', label: 'Tubercules' },
-    { value: 'cash', label: 'Cultures de rente' }
+    { value: 'cash', label: 'Crops of rente' }
   ];
 
   return (
@@ -83,10 +83,10 @@ const GuadeloupeSpecificCrops = () => {
             moduleName="cultures"
             title="Specific Crops of India"
             columns={[
-              { key: "nom", header: "Nom" },
+              { key: "nom", header: "Name" },
               { key: "variete", header: "Variété" },
-              { key: "dateDebut", header: "Date de début" },
-              { key: "dateFin", header: "Date de fin" }
+              { key: "dateDebut", header: "Date of début" },
+              { key: "dateFin", header: "Date of fin" }
             ]}
           />
           
@@ -94,7 +94,7 @@ const GuadeloupeSpecificCrops = () => {
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="transition-colors hover:bg-gray-100">
                 <Download className="mr-2 h-4 w-4" />
-                Exporter
+                Export
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white border shadow-lg">
@@ -111,7 +111,7 @@ const GuadeloupeSpecificCrops = () => {
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="transition-colors hover:bg-gray-100">
                 <Upload className="mr-2 h-4 w-4" />
-                Importer
+                Import
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white border shadow-lg">
@@ -135,7 +135,7 @@ const GuadeloupeSpecificCrops = () => {
             className="transition-colors hover:bg-green-700"
           >
             <Plus className="mr-2 h-4 w-4" />
-            Ajouter une culture
+            Add une culture
           </Button>
         </div>
       </div>
@@ -145,7 +145,7 @@ const GuadeloupeSpecificCrops = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input 
             type="text" 
-            placeholder="Rechercher une culture..." 
+            placeholder="Search une culture..." 
             className="pl-10 transition-all focus:border-green-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -186,4 +186,4 @@ const GuadeloupeSpecificCrops = () => {
   );
 };
 
-export default GuadeloupeSpecificCrops;
+export default IndianSpecificCrops;

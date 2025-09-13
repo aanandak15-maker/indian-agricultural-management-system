@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import Dashboard from '../components/Dashboard';
 import TabContainer, { TabItem } from '../components/layout/TabContainer';
-import GuadeloupeHarvestTracking from '../components/GuadeloupeHarvestTracking';
-import GuadeloupeWeatherAlerts from '../components/GuadeloupeWeatherAlerts';
+import IndianHarvestTracking from '../components/IndianHarvestTracking';
+import IndianWeatherAlerts from '../components/IndianWeatherAlerts';
 import TaskList from '../components/cultures/TaskList';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, Download, Filter, RefreshCw, Upload, Printer } from 'lucide-react';
@@ -65,7 +65,7 @@ const Index = () => {
               onClick={() => handlePrintData('dashboard')}
             >
               <Printer className="h-4 w-4 text-gray-600" />
-              Imprimer
+              Print
             </Button>
           </div>
         );
@@ -86,7 +86,7 @@ const Index = () => {
               onClick={() => handlePrintData('harvest')}
             >
               <Printer className="h-4 w-4 text-gray-600" />
-              Imprimer
+              Print
             </Button>
           </div>
         );
@@ -133,7 +133,7 @@ const Index = () => {
               onClick={() => handlePrintData('tasks')}
             >
               <Printer className="h-4 w-4 text-gray-600" />
-              Imprimer
+              Print
             </Button>
           </div>
         );
@@ -144,7 +144,7 @@ const Index = () => {
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    console.log(`Changement d'onglet vers: ${value}`);
+    console.log(`Tab changed to: ${value}`);
   };
 
   // Data manipulations
@@ -218,18 +218,18 @@ const Index = () => {
   const tabs: TabItem[] = [
     {
       value: 'dashboard',
-      label: 'Tableau de Bord',
+      label: 'Dashboard',
       content: <Dashboard />
     },
     {
       value: 'harvest',
       label: 'Harvest Tracking',
-      content: <GuadeloupeHarvestTracking />
+      content: <IndianHarvestTracking />
     },
     {
       value: 'weather',
       label: 'Weather Alerts',
-      content: <GuadeloupeWeatherAlerts />
+      content: <IndianWeatherAlerts />
     },
     {
       value: 'tasks',

@@ -86,11 +86,11 @@ const Statistics = () => {
         ];
       case 'environmental':
         return [
-          { key: "indicator", header: "Indicateur" },
-          { key: "current", header: "Valeur actuelle" },
-          { key: "target", header: "Objectif" },
-          { key: "trend", header: "Tendance" },
-          { key: "status", header: "Statut" }
+          { key: "indicator", header: "Indicator" },
+          { key: "current", header: "Value actuelle" },
+          { key: "target", header: "Target" },
+          { key: "trend", header: "Trend" },
+          { key: "status", header: "Status" }
         ];
       default:
         return [];
@@ -110,7 +110,7 @@ const Statistics = () => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/">Tableau de bord</Link>
+              <Link to="/">Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -173,7 +173,7 @@ const Statistics = () => {
           >
             <Link to="/">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Retour au tableau de bord
+              Back au tableau of bord
             </Link>
           </Button>
           
@@ -183,7 +183,7 @@ const Statistics = () => {
             asChild
           >
             <Link to="/rapports">
-              Voir tous les rapports
+              View tous les rapports
               <ChevronRight className="h-4 w-4 ml-2" />
             </Link>
           </Button>

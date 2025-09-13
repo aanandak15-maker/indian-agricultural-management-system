@@ -10,7 +10,7 @@ import ParcelFilters from '../components/parcels/ParcelFilters';
 import ParcelActionButtons from '../components/parcels/ParcelActionButtons';
 import ParcelMapDialog from '../components/parcels/ParcelMapDialog';
 import ParcelImportDialog from '../components/parcels/ParcelImportDialog';
-import GuadeloupeParcelManagement from '../components/GuadeloupeParcelManagement';
+import IndianFieldManagement from '../components/IndianFieldManagement';
 import { useCRM } from '../contexts/CRMContext';
 import { FileSpreadsheet, FileBarChart2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -34,7 +34,7 @@ const ParcelsPage = () => {
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [layersDialogOpen, setLayersDialogOpen] = useState(false);
   const [weatherAlertsOpen, setWeatherAlertsOpen] = useState(false);
-  const [showGuadeloupeView, setShowGuadeloupeView] = useState(true);
+  const [showIndianView, setShowIndianView] = useState(true);
   const [lastSyncDate, setLastSyncDate] = useState<Date>(new Date());
   const { syncDataAcrossCRM } = useCRM();
   const [areaRange, setAreaRange] = useState<[number, number]>([0, 50]);
@@ -104,8 +104,8 @@ const ParcelsPage = () => {
   };
 
   const toggleView = () => {
-    setShowGuadeloupeView(!showGuadeloupeView);
-    console.log(`${showGuadeloupeView ? 'Standard' : 'Indian'} view activated`);
+    setShowIndianView(!showIndianView);
+    console.log(`${showIndianView ? 'Standard' : 'Indian'} view activated`);
     console.log(`Data displayed in Crops and Finance modules has been adapted`);
   };
 
@@ -188,7 +188,7 @@ const ParcelsPage = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-3 bg-muted/20 rounded-lg hover:bg-muted/30 transition-colors">
-              <p className="text-sm text-muted-foreground">Surface totale</p>
+              <p className="text-sm text-muted-foreground">Total Area</p>
               <p className="text-2xl font-semibold">128.5 ha</p>
             </div>
             <div className="p-3 bg-muted/20 rounded-lg hover:bg-muted/30 transition-colors">
@@ -196,7 +196,7 @@ const ParcelsPage = () => {
               <p className="text-2xl font-semibold">42</p>
             </div>
             <div className="p-3 bg-muted/20 rounded-lg hover:bg-muted/30 transition-colors">
-              <p className="text-sm text-muted-foreground">Rendement moyen</p>
+              <p className="text-sm text-muted-foreground">Average Yield</p>
               <p className="text-2xl font-semibold">7.2 t/ha</p>
             </div>
             <div className="p-3 bg-muted/20 rounded-lg hover:bg-muted/30 transition-colors">
@@ -206,8 +206,8 @@ const ParcelsPage = () => {
           </div>
         </motion.div>
 
-        {showGuadeloupeView ? (
-          <GuadeloupeParcelManagement />
+        {showIndianView ? (
+          <IndianFieldManagement />
         ) : (
           <ParcelManagement />
         )}

@@ -22,57 +22,57 @@ export const useCRMContext = (): CRMContextState => {
   const [moduleData, setModuleData] = useState<Record<string, any>>({
     parcelles: {
       items: [
-        { id: 1, nom: "Parcelle Nord", surface: 12.5, culture: "Canne à Sucre", statut: "En culture" },
-        { id: 2, nom: "Parcelle Sud", surface: 8.3, culture: "Banane", statut: "En récolte" },
-        { id: 3, nom: "Parcelle Est", surface: 5.2, culture: "Ananas", statut: "En préparation" }
+        { id: 1, nom: "Field Nord", surface: 12.5, culture: "Sugarcane", statut: "En culture" },
+        { id: 2, nom: "Field Sud", surface: 8.3, culture: "Cotton", statut: "En récolte" },
+        { id: 3, nom: "Field Est", surface: 5.2, culture: "Rice", statut: "En préparation" }
       ],
       columns: [
         { key: "id", header: "ID" },
-        { key: "nom", header: "Nom" },
+        { key: "nom", header: "Name" },
         { key: "surface", header: "Surface (ha)" },
-        { key: "culture", header: "Culture" },
-        { key: "statut", header: "Statut" }
+        { key: "culture", header: "Crop" },
+        { key: "statut", header: "Status" }
       ]
     },
     cultures: {
       items: [
-        { id: 1, nom: "Canne à Sucre", variete: "R579", dateDebut: "2023-03-15", dateFin: "2024-03-15" },
-        { id: 2, nom: "Banane", variete: "Grande Naine", dateDebut: "2023-02-10", dateFin: "2023-12-10" },
-        { id: 3, nom: "Ananas", variete: "MD-2", dateDebut: "2023-05-05", dateFin: "2024-06-01" }
+        { id: 1, nom: "Sugarcane", variete: "R579", dateDebut: "2023-03-15", dateFin: "2024-03-15" },
+        { id: 2, nom: "Cotton", variete: "Grande Naine", dateDebut: "2023-02-10", dateFin: "2023-12-10" },
+        { id: 3, nom: "Rice", variete: "MD-2", dateDebut: "2023-05-05", dateFin: "2024-06-01" }
       ],
       columns: [
         { key: "id", header: "ID" },
-        { key: "nom", header: "Culture" },
+        { key: "nom", header: "Crop" },
         { key: "variete", header: "Variété" },
-        { key: "dateDebut", header: "Date de début" },
-        { key: "dateFin", header: "Date de fin" }
+        { key: "dateDebut", header: "Date of début" },
+        { key: "dateFin", header: "Date of fin" }
       ]
     },
     finances: {
       items: [
-        { id: 1, type: "revenu", montant: 15000, description: "Vente récolte canne", date: "2023-06-15" },
-        { id: 2, type: "depense", montant: 5000, description: "Achat fertilisants", date: "2023-05-10" },
-        { id: 3, type: "revenu", montant: 8500, description: "Vente bananes", date: "2023-07-20" }
+        { id: 1, type: "revenu", montant: 15000, description: "Sale récolte canne", date: "2023-06-15" },
+        { id: 2, type: "depense", montant: 5000, description: "Purchase fertilisants", date: "2023-05-10" },
+        { id: 3, type: "revenu", montant: 8500, description: "Sale bananes", date: "2023-07-20" }
       ],
       columns: [
         { key: "id", header: "ID" },
         { key: "date", header: "Date" },
         { key: "type", header: "Type" },
         { key: "description", header: "Description" },
-        { key: "montant", header: "Montant (€)" }
+        { key: "montant", header: "Amount (€)" }
       ]
     },
     statistiques: {
       items: [
-        { periode: "2023-T1", cultureId: 1, rendement: 8.2, revenus: 12500, couts: 4200 },
-        { periode: "2023-T2", cultureId: 1, rendement: 8.5, revenus: 13000, couts: 4100 },
-        { periode: "2023-T1", cultureId: 2, rendement: 15.3, revenus: 7800, couts: 2100 }
+        { periode: "2023-T1", cultureId: 1, yield: 8.2, revenus: 12500, couts: 4200 },
+        { periode: "2023-T2", cultureId: 1, yield: 8.5, revenus: 13000, couts: 4100 },
+        { periode: "2023-T1", cultureId: 2, yield: 15.3, revenus: 7800, couts: 2100 }
       ],
       columns: [
         { key: "periode", header: "Période" },
-        { key: "cultureId", header: "Culture ID" },
-        { key: "rendement", header: "Rendement (t/ha)" },
-        { key: "revenus", header: "Revenus (€)" },
+        { key: "cultureId", header: "Crop ID" },
+        { key: "yield", header: "Rendement (t/ha)" },
+        { key: "revenus", header: "Revenue (€)" },
         { key: "couts", header: "Coûts (€)" }
       ]
     },
@@ -84,11 +84,11 @@ export const useCRMContext = (): CRMContextState => {
       ],
       columns: [
         { key: "id", header: "ID" },
-        { key: "nom", header: "Nom" },
-        { key: "categorie", header: "Catégorie" },
+        { key: "nom", header: "Name" },
+        { key: "categorie", header: "Category" },
         { key: "quantite", header: "Quantité" },
         { key: "unite", header: "Unité" },
-        { key: "prix", header: "Prix unitaire (€)" }
+        { key: "prix", header: "Price unitaire (€)" }
       ]
     }
   });
@@ -100,14 +100,14 @@ export const useCRMContext = (): CRMContextState => {
     'inventaire'
   ]);
   
-  // Nom de l'entreprise
+  // Name of l'entreprise
   const companyName = 'Agri Dom';
 
   // Synchronisation des données à travers tous les modules du CRM
   const syncDataAcrossCRM = useCallback(() => {
     setIsRefreshing(true);
     
-    // Simuler un temps de synchronisation
+    // Simuler un temps of synchronisation
     setTimeout(() => {
       setLastSync(new Date());
       setIsRefreshing(false);
@@ -124,7 +124,7 @@ export const useCRMContext = (): CRMContextState => {
       }
     }));
     
-    // Mettre à jour la date de dernière synchronisation
+    // Mettre à jour la date of dernière synchronisation
     setLastSync(new Date());
   }, []);
 
@@ -211,11 +211,11 @@ export const useCRMContext = (): CRMContextState => {
     }
     
     const moduleNames: Record<string, string> = {
-      parcelles: "Parcelles",
-      cultures: "Cultures",
-      finances: "Finances",
-      statistiques: "Statistiques",
-      inventaire: "Inventaire",
+      parcelles: "Fields",
+      cultures: "Crops",
+      finances: "Finance",
+      statistiques: "Statistics",
+      inventaire: "Inventory",
       fiche_technique: "Fiche Technique"
     };
     

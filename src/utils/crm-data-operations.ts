@@ -20,11 +20,11 @@ export const exportToCSV = (data: any[], fileName: string): boolean => {
     link.click();
     document.body.removeChild(link);
     
-    toast.success("Données exportées avec succès au format CSV");
+    toast.success("Data exportées avec succès au format CSV");
     return true;
   } catch (error) {
     console.error("Export error:", error);
-    toast.error("Erreur lors de l'exportation des données");
+    toast.error("Error lors of l'exportation des données");
     return false;
   }
 };
@@ -39,7 +39,7 @@ export const exportToExcel = (data: any[], fileName: string): boolean => {
     return exportToCSV(data, fileName);
   } catch (error) {
     console.error("Export error:", error);
-    toast.error("Erreur lors de l'exportation des données");
+    toast.error("Error lors of l'exportation des données");
     return false;
   }
 };
@@ -88,14 +88,14 @@ export const exportToPDF = async (data: any[], fileName: string, options: any = 
         toast.success("PDF généré avec succès");
       } catch (printError) {
         console.error("Print error:", printError);
-        toast.error("Erreur lors de l'impression du PDF");
+        toast.error("Error lors of l'impression du PDF");
       }
     }, 1000);
     
     return true;
   } catch (error) {
     console.error("PDF export error:", error);
-    toast.error("Erreur lors de la génération du PDF");
+    toast.error("Error lors of la génération du PDF");
     return false;
   }
 };
@@ -128,12 +128,12 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
       <body>
         <div class="technical-sheet">
           <div class="technical-sheet-header">
-            <h1>${item.nom || 'Culture'}</h1>
+            <h1>${item.nom || 'Crop'}</h1>
             <p><em>${item.nomScientifique || ''}</em></p>
           </div>
           
           <div class="section">
-            <h2>Informations générales</h2>
+            <h2>Information générales</h2>
             <div class="property-grid">
               <div class="property">
                 <span class="property-label">Famille:</span>
@@ -148,17 +148,17 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
                 ${item.type || ''}
               </div>
               <div class="property">
-                <span class="property-label">Saison de culture:</span>
+                <span class="property-label">Saison of culture:</span>
                 ${item.saisonCulture || ''}
               </div>
             </div>
           </div>
           
           <div class="section">
-            <h2>Conditions de culture</h2>
+            <h2>Conditions of culture</h2>
             <div class="property-grid">
               <div class="property">
-                <span class="property-label">Type de sol:</span>
+                <span class="property-label">Type of sol:</span>
                 ${item.typeSol || ''}
               </div>
               <div class="property">
@@ -170,7 +170,7 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
                 ${item.fertilisation || ''}
               </div>
               <div class="property">
-                <span class="property-label">Période de récolte:</span>
+                <span class="property-label">Période of récolte:</span>
                 ${item.periodeRecolte || ''}
               </div>
               <div class="property">
@@ -348,7 +348,7 @@ export const importFromCSV = (file: File): Promise<any[]> => {
         const parsedData = results.data as any[];
         
         if (parsedData.length === 0) {
-          toast.error("Aucune donnée valide n'a été trouvée dans le fichier");
+          toast.error("No data valide n'a été trouvée dans le fichier");
           reject("No valid data found");
           return;
         }
@@ -358,7 +358,7 @@ export const importFromCSV = (file: File): Promise<any[]> => {
       },
       error: (error) => {
         console.error("Import error:", error);
-        toast.error("Erreur lors de l'importation des données");
+        toast.error("Error lors of l'importation des données");
         reject(error);
       }
     });
@@ -413,14 +413,14 @@ export const printData = (
           resolve(true);
         } catch (printError) {
           console.error("Print error:", printError);
-          toast.error("Erreur lors de l'impression");
+          toast.error("Error lors of l'impression");
           resolve(false);
         }
       }, 1000);
       
     } catch (error) {
       console.error("Print error:", error);
-      toast.error("Erreur lors de la préparation de l'impression");
+      toast.error("Error lors of la préparation of l'impression");
       resolve(false);
     }
   });

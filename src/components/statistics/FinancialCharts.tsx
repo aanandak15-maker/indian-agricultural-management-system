@@ -52,7 +52,7 @@ const FinancialCharts = () => {
                 <ZAxis 
                   type="category" 
                   dataKey="crop" 
-                  name="Culture" 
+                  name="Crop" 
                   range={[100, 1000]} 
                 />
                 <Tooltip 
@@ -67,7 +67,7 @@ const FinancialCharts = () => {
                       return (
                         <div className="bg-white p-2 border rounded shadow-sm">
                           <p className="font-medium">{payload[2]?.payload.name}</p>
-                          <p>Culture: {payload[2]?.value}</p>
+                          <p>Crop: {payload[2]?.value}</p>
                           <p>Taille: {payload[0]?.value} ha</p>
                           <p>Rentabilité: {payload[1]?.value} €/ha</p>
                         </div>
@@ -77,7 +77,7 @@ const FinancialCharts = () => {
                   }}
                 />
                 <Scatter 
-                  name="Parcelles" 
+                  name="Fields" 
                   data={profitabilityByParcel} 
                   fill="#4CAF50" 
                 />
@@ -90,7 +90,7 @@ const FinancialCharts = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Analyse des coûts</CardTitle>
+            <CardTitle>Analysis des coûts</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -108,7 +108,7 @@ const FinancialCharts = () => {
                     tick={{ fontSize: 12 }} 
                     width={80} 
                   />
-                  <Tooltip formatter={(value) => [`${value.toLocaleString()} €`, 'Montant']} />
+                  <Tooltip formatter={(value) => [`${value.toLocaleString()} €`, 'Amount']} />
                   <Bar 
                     dataKey="value" 
                     fill="#8D6E63" 
@@ -123,7 +123,7 @@ const FinancialCharts = () => {
         
         <Card>
           <CardHeader>
-            <CardTitle>Revenus et dépenses mensuels</CardTitle>
+            <CardTitle>Revenue et dépenses mensuels</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -137,8 +137,8 @@ const FinancialCharts = () => {
                   <YAxis />
                   <Tooltip formatter={(value) => [`${value.toLocaleString()} €`, '']} />
                   <Legend />
-                  <Line type="monotone" dataKey="revenue" name="Revenus" stroke="#4CAF50" activeDot={{ r: 8 }} />
-                  <Line type="monotone" dataKey="expenses" name="Dépenses" stroke="#F44336" />
+                  <Line type="monotone" dataKey="revenue" name="Revenue" stroke="#4CAF50" activeDot={{ r: 8 }} />
+                  <Line type="monotone" dataKey="expenses" name="Expenses" stroke="#F44336" />
                   <Line type="monotone" dataKey="profit" name="Profit" stroke="#2196F3" strokeDasharray="3 3" />
                 </LineChart>
               </ResponsiveContainer>
@@ -161,7 +161,7 @@ const FinancialCharts = () => {
             <div className="border rounded-lg p-4">
               <p className="text-sm text-muted-foreground mb-1">Rentabilité</p>
               <p className="text-2xl font-semibold">18%</p>
-              <p className="text-xs text-green-600">+2.5% vs année précédente</p>
+              <p className="text-xs text-green-600">+2.5% vs year précédente</p>
             </div>
             <div className="border rounded-lg p-4">
               <p className="text-sm text-muted-foreground mb-1">ROI</p>

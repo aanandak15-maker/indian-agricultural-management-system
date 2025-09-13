@@ -111,19 +111,19 @@ const FinancePage = () => {
   };
   
   const handleCardDetailClick = (cardType: string) => {
-    toast.info(`Détails ${cardType}`, {
-      description: `Affichage des détails de ${cardType.toLowerCase()}`
+    toast.info(`Details ${cardType}`, {
+      description: `Affichage des détails of ${cardType.toLowerCase()}`
     });
   };
   
   const handleTabChange = (value: string) => {
     setActiveTab(value);
     toast.info("Changement d'onglet", {
-      description: `Vous consultez maintenant l'onglet ${value === 'overview' ? 'Aperçu' : 
-                                                        value === 'income' ? 'Revenus' : 
-                                                        value === 'expenses' ? 'Dépenses' :
+      description: `Vous consultez maintenant l'onglet ${value === 'overview' ? 'Overview' : 
+                                                        value === 'income' ? 'Revenue' : 
+                                                        value === 'expenses' ? 'Expenses' :
                                                         value === 'forecast' ? 'Prévisions' :
-                                                        value === 'budget' ? 'Budget' : 'Rapports'}`
+                                                        value === 'budget' ? 'Budget' : 'Reports'}`
     });
   };
 
@@ -132,12 +132,12 @@ const FinancePage = () => {
       <div className="flex flex-wrap space-x-2">
         <Button variant="outline" onClick={handleExportData}>
           <Download className="mr-2 h-4 w-4" />
-          Exporter
+          Export
         </Button>
         
         <Button variant="outline" onClick={handleImportData}>
           <Upload className="mr-2 h-4 w-4" />
-          Importer
+          Import
         </Button>
         
         <Button 
@@ -169,12 +169,12 @@ const FinancePage = () => {
           ) : activeTab === 'income' ? (
             <>
               <Plus className="mr-2 h-4 w-4" />
-              Ajouter un revenu
+              Add un revenu
             </>
           ) : activeTab === 'expenses' ? (
             <>
               <Plus className="mr-2 h-4 w-4" />
-              Ajouter une dépense
+              Add une dépense
             </>
           ) : activeTab === 'forecast' ? (
             <>
@@ -184,7 +184,7 @@ const FinancePage = () => {
           ) : activeTab === 'budget' ? (
             <>
               <Plus className="mr-2 h-4 w-4" />
-              Ajouter une catégorie
+              Add une catégorie
             </>
           ) : (
             <>
@@ -217,7 +217,7 @@ const FinancePage = () => {
               </div>
               <div className="flex justify-end">
                 <Button variant="ghost" onClick={() => setImportDialogOpen(false)}>
-                  Annuler
+                  Cancel
                 </Button>
               </div>
             </div>
@@ -242,7 +242,7 @@ const FinancePage = () => {
     },
     {
       value: 'income',
-      label: 'Revenus',
+      label: 'Revenue',
       content: (
         <div className="p-6 bg-white rounded-xl border">
           <h2 className="text-xl font-bold mb-4 flex items-center">
@@ -293,7 +293,7 @@ const FinancePage = () => {
                   handleCardDetailClick('Harvests');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Détails
+                  Details
                 </Button>
               </CardFooter>
             </Card>
@@ -321,7 +321,7 @@ const FinancePage = () => {
                   handleCardDetailClick('Government Aid');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Détails
+                  Details
                 </Button>
               </CardFooter>
             </Card>
@@ -349,17 +349,17 @@ const FinancePage = () => {
                   handleCardDetailClick('Autres revenues');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Détails
+                  Details
                 </Button>
               </CardFooter>
             </Card>
           </div>
           
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Sources de revenus récentes</h3>
+            <h3 className="text-lg font-semibold">Sources of revenus récentes</h3>
             <Button onClick={handleAddIncome}>
               <Plus className="h-4 w-4 mr-2" />
-              Ajouter un revenu
+              Add un revenu
             </Button>
           </div>
           
@@ -375,9 +375,9 @@ const FinancePage = () => {
           ) : (
             <div className="bg-muted/20 rounded-lg p-6 text-center">
               <DollarSign className="h-12 w-12 mx-auto text-muted-foreground mb-2" />
-              <h3 className="text-lg font-semibold mb-2">Module de gestion des revenus</h3>
+              <h3 className="text-lg font-semibold mb-2">Module of gestion des revenus</h3>
               <p className="text-muted-foreground mb-4">
-                Activez ce module pour suivre en détail toutes vos sources de revenus
+                Activez ce module pour suivre en détail toutes vos sources of revenus
                 et générer des rapports personnalisés.
               </p>
               <Button onClick={() => handleActivateModule('gestion des revenus')}>Activer ce module</Button>
@@ -439,7 +439,7 @@ const FinancePage = () => {
                   handleCardDetailClick('Seeds & Fertilizers');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Détails
+                  Details
                 </Button>
               </CardFooter>
             </Card>
@@ -467,7 +467,7 @@ const FinancePage = () => {
                   handleCardDetailClick('Matériel');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Détails
+                  Details
                 </Button>
               </CardFooter>
             </Card>
@@ -495,18 +495,18 @@ const FinancePage = () => {
                   handleCardDetailClick('Main d\'oeuvre');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
-                  Détails
+                  Details
                 </Button>
               </CardFooter>
             </Card>
           </div>
           
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Dépenses récentes</h3>
+            <h3 className="text-lg font-semibold">Expenses récentes</h3>
             <Select value={filterCategory} onValueChange={setFilterCategory}>
               <SelectTrigger className="w-[180px]">
                 <Filter className="h-4 w-4 mr-2" />
-                <SelectValue placeholder="Catégorie" />
+                <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Toutes les catégories</SelectItem>
@@ -530,7 +530,7 @@ const FinancePage = () => {
           ) : (
             <div className="bg-muted/20 rounded-lg p-6 text-center">
               <CreditCard className="h-12 w-12 mx-auto text-muted-foreground mb-2" />
-              <h3 className="text-lg font-semibold mb-2">Module de gestion des dépenses</h3>
+              <h3 className="text-lg font-semibold mb-2">Module of gestion des dépenses</h3>
               <p className="text-muted-foreground mb-4">
                 Activate this module to categorize, track and optimize 
                 all your expenses in detail.
@@ -611,7 +611,7 @@ const FinancePage = () => {
     },
     {
       value: 'reports',
-      label: 'Rapports',
+      label: 'Reports',
       content: (
         <div className="p-6 bg-white rounded-xl border">
           <h2 className="text-xl font-bold mb-4 flex items-center">
@@ -675,7 +675,7 @@ const FinancePage = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <PieChart className="h-4 w-4 mr-2 text-muted-foreground" />
-                  Rapports disponibles
+                  Reports disponibles
                 </CardTitle>
                 <CardDescription>
                   Sélectionnez un rapport à générer
@@ -684,11 +684,11 @@ const FinancePage = () => {
               <CardContent className="space-y-2">
                 <Button variant="outline" className="w-full justify-start" onClick={handleGenerateReport}>
                   <BarChart className="h-4 w-4 mr-2" />
-                  Rapport de rentabilité
+                  Rapport of rentabilité
                 </Button>
                 <Button variant="outline" className="w-full justify-start" onClick={handleGenerateReport}>
                   <CreditCard className="h-4 w-4 mr-2" />
-                  Analyse des dépenses
+                  Analysis des dépenses
                 </Button>
               </CardContent>
             </Card>
@@ -697,10 +697,10 @@ const FinancePage = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <FileText className="h-4 w-4 mr-2 text-muted-foreground" />
-                  Génération de rapports
+                  Génération of rapports
                 </CardTitle>
                 <CardDescription>
-                  État de la génération
+                  État of la génération
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -714,7 +714,7 @@ const FinancePage = () => {
                       <div className="bg-primary h-2 rounded-full animate-pulse" style={{width: '75%'}}></div>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Veuillez patienter pendant la compilation des données financières...
+                      Please wait pendant la compilation des données financières...
                     </p>
                   </div>
                 ) : (
@@ -722,7 +722,7 @@ const FinancePage = () => {
                     <FileText className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                     <h4 className="text-lg font-medium mb-2">Aucun rapport en cours</h4>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Choisissez un type de rapport à gauche pour lancer la génération
+                      Choisissez un type of rapport à gauche pour lancer la génération
                     </p>
                     <Button variant="outline" onClick={handleGenerateReport}>
                       Générer un rapport

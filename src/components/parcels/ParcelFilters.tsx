@@ -69,7 +69,7 @@ const ParcelFilters = ({
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground pointer-events-none" />
           <Input
             type="search"
-            placeholder="Rechercher une parcelle..."
+            placeholder="Search une parcelle..."
             className="pl-9 w-full md:w-48"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -80,13 +80,13 @@ const ParcelFilters = ({
       <Select value={filterStatus} onValueChange={setFilterStatus}>
         <SelectTrigger className="w-[180px]">
           <Filter className="h-4 w-4 mr-2" />
-          <SelectValue placeholder="Statut" />
+          <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">Tous les statuts</SelectItem>
-          <SelectItem value="active">Parcelles actives</SelectItem>
+          <SelectItem value="active">Fields actives</SelectItem>
           <SelectItem value="fallow">En jachère</SelectItem>
-          <SelectItem value="planned">Planifiées</SelectItem>
+          <SelectItem value="planned">Plannedes</SelectItem>
           <SelectItem value="rented">Louées</SelectItem>
         </SelectContent>
       </Select>

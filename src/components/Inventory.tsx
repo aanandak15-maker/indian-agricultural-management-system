@@ -47,7 +47,7 @@ import {
 const initialInventoryData = [
   { 
     id: 1, 
-    name: 'Semences de blé', 
+    name: 'Semences of blé', 
     category: 'Semences', 
     quantity: 500, 
     unit: 'kg', 
@@ -91,7 +91,7 @@ const initialInventoryData = [
   },
   { 
     id: 5, 
-    name: 'Semences de maïs', 
+    name: 'Semences of maïs', 
     category: 'Semences', 
     quantity: 80, 
     unit: 'kg', 
@@ -129,8 +129,8 @@ const initialTransactionHistory = [
   { id: 2, itemId: 2, type: 'out', quantity: 200, date: '2023-08-18', user: 'Jean Dupont', notes: 'Application parcelle est' },
   { id: 3, itemId: 4, type: 'in', quantity: 500, date: '2023-08-18', user: 'Marie Martin', notes: 'Livraison mensuelle' },
   { id: 4, itemId: 3, type: 'out', quantity: 5, date: '2023-08-15', user: 'Jean Dupont', notes: 'Application parcelle sud' },
-  { id: 5, itemId: 1, type: 'in', quantity: 200, date: '2023-08-10', user: 'Marie Martin', notes: 'Achat supplémentaire' },
-  { id: 6, itemId: 6, type: 'out', quantity: 5, date: '2023-08-05', user: 'Pierre Leroy', notes: 'Vidange tracteur' },
+  { id: 5, itemId: 1, type: 'in', quantity: 200, date: '2023-08-10', user: 'Marie Martin', notes: 'Purchase supplémentaire' },
+  { id: 6, itemId: 6, type: 'out', quantity: 5, date: '2023-08-05', user: 'Pierre Leroy', notes: 'Vidange tractor' },
 ];
 
 const initialCategoryStats = [
@@ -328,7 +328,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       setSelectedItem(null);
     }
     
-    toast.success(`${itemToDeleteObj.name} a été supprimé de l'inventaire`);
+    toast.success(`${itemToDeleteObj.name} a été supprimé of l'inventaire`);
     setItemToDelete(null);
     setDeleteConfirmOpen(false);
   };
@@ -484,7 +484,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       date: new Date().toISOString().split('T')[0]
     });
     
-    toast.success(`${newTransaction.quantity} ${selectedItem.unit} ${showTransactionForm === 'in' ? 'ajoutés' : 'retirés'} de l'inventaire`);
+    toast.success(`${newTransaction.quantity} ${selectedItem.unit} ${showTransactionForm === 'in' ? 'ajoutés' : 'retirés'} of l'inventaire`);
   };
   
   const itemTransactions = selectedItem 
@@ -495,11 +495,11 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
 
   const inventoryColumns: Column[] = [
     { id: 'name', header: 'Article', accessorKey: 'name', isEditable: true },
-    { id: 'category', header: 'Catégorie', accessorKey: 'category', isEditable: true },
+    { id: 'category', header: 'Category', accessorKey: 'category', isEditable: true },
     { id: 'quantity', header: 'Quantité', accessorKey: 'quantity', type: 'number', isEditable: true },
-    { id: 'price', header: 'Prix unitaire', accessorKey: 'price', type: 'number', isEditable: true },
-    { id: 'value', header: 'Valeur totale', accessorKey: 'value', type: 'text', isEditable: false },
-    { id: 'status', header: 'Statut', accessorKey: 'status', type: 'text', isEditable: false },
+    { id: 'price', header: 'Price unitaire', accessorKey: 'price', type: 'number', isEditable: true },
+    { id: 'value', header: 'Value totale', accessorKey: 'value', type: 'text', isEditable: false },
+    { id: 'status', header: 'Status', accessorKey: 'status', type: 'text', isEditable: false },
   ];
 
   const tableData = filteredItems.map(item => ({
@@ -528,8 +528,8 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
     <div className="animate-enter">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold mb-1">Gestion des Stocks</h1>
-          <p className="text-muted-foreground">Gérez votre inventaire et suivez les niveaux de stock</p>
+          <h1 className="text-2xl font-bold mb-1">Management des Stocks</h1>
+          <p className="text-muted-foreground">Manage your inventory et suivez les niveaux of stock</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button 
@@ -545,7 +545,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             className="px-4 py-2"
           >
             <BarChart2 className="mr-2 h-4 w-4" />
-            Statistiques
+            Statistics
           </Button>
           <Button 
             variant="outline"
@@ -553,7 +553,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             className="px-4 py-2"
           >
             <FileDown className="mr-2 h-4 w-4" />
-            Exporter
+            Export
           </Button>
           <div className="relative">
             <Button 
@@ -562,7 +562,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
               className="px-4 py-2"
             >
               <FileUp className="mr-2 h-4 w-4" />
-              Importer
+              Import
             </Button>
             <input 
               type="file" 
@@ -577,7 +577,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             className="ml-2"
           >
             <Plus className="mr-2 h-4 w-4" />
-            Ajouter un article
+            Add un article
           </Button>
         </div>
       </header>
@@ -595,7 +595,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                 <button 
                   onClick={() => setSelectedItem(null)}
                   className="mr-3 hover:bg-white/10 p-1 rounded"
-                  aria-label="Retour à la liste"
+                  aria-label="Back à la liste"
                 >
                   <ChevronRight className="h-5 w-5 transform rotate-180" />
                 </button>
@@ -628,7 +628,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                   className="bg-white/10 hover:bg-white/20 text-white border-none"
                 >
                   <Trash2 className="mr-1.5 h-4 w-4" />
-                  <span className="hidden sm:inline">Supprimer</span>
+                  <span className="hidden sm:inline">Delete</span>
                 </Button>
               </div>
             </div>
@@ -636,10 +636,10 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div className="bg-white rounded-lg border p-4">
-                  <h3 className="font-medium mb-3">Détails de l'article</h3>
+                  <h3 className="font-medium mb-3">Details of l'article</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Catégorie:</span>
+                      <span className="text-muted-foreground">Category:</span>
                       <EditableField
                         value={selectedItem.category}
                         onSave={(value) => handleUpdateItem(selectedItem.id, 'category', value)}
@@ -673,7 +673,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Prix unitaire:</span>
+                      <span className="text-muted-foreground">Price unitaire:</span>
                       <div className="flex items-center">
                         <EditableField
                           value={selectedItem.price}
@@ -684,7 +684,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Valeur totale:</span>
+                      <span className="text-muted-foreground">Value totale:</span>
                       <span className="font-medium">{(selectedItem.quantity * selectedItem.price).toFixed(2)} €</span>
                     </div>
                     <div className="flex justify-between items-center">
@@ -702,7 +702,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                 </div>
                 
                 <div className="bg-white rounded-lg border p-4">
-                  <h3 className="font-medium mb-3">Statistiques</h3>
+                  <h3 className="font-medium mb-3">Statistics</h3>
                   <div className="h-[200px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart
@@ -781,7 +781,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                           ...newTransaction,
                           notes: e.target.value
                         })}
-                        placeholder="Commentaire..."
+                        placeholder="Comment..."
                         className="mt-1"
                       />
                     </div>
@@ -792,11 +792,11 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       onClick={() => setShowTransactionForm(null)}
                       className="mr-2"
                     >
-                      Annuler
+                      Cancel
                     </Button>
                     <Button onClick={handleSubmitTransaction}>
                       <Save className="mr-2 h-4 w-4" />
-                      Enregistrer
+                      Save
                     </Button>
                   </div>
                 </div>
@@ -863,7 +863,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                             <button
                               onClick={() => confirmDeleteTransaction(transaction.id)}
                               className="p-1.5 hover:bg-agri-danger/10 text-agri-danger rounded"
-                              title="Supprimer la transaction"
+                              title="Delete la transaction"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
@@ -907,7 +907,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
               actions={[
                 { 
                   icon: <ChevronRight className="h-4 w-4" />,
-                  label: "Voir détails",
+                  label: "View détails",
                   onClick: (rowIndex) => setSelectedItem(filteredItems[rowIndex])
                 }
               ]}
@@ -918,7 +918,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             {showAddForm && (
               <div className="border rounded-xl p-6 bg-muted/5 animate-enter">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-medium">Ajouter un nouvel article</h3>
+                  <h3 className="text-lg font-medium">Add un nouvel article</h3>
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -929,17 +929,17 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
-                    <Label htmlFor="name">Nom de l'article*</Label>
+                    <Label htmlFor="name">Name of l'article*</Label>
                     <Input
                       id="name"
                       value={newItem.name}
                       onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
                       className="mt-1"
-                      placeholder="Ex: Semences de blé"
+                      placeholder="Ex: Semences of blé"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="category">Catégorie*</Label>
+                    <Label htmlFor="category">Category*</Label>
                     <Input
                       id="category"
                       value={newItem.category}
@@ -986,7 +986,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     />
                   </div>
                   <div>
-                    <Label htmlFor="price">Prix unitaire (€)</Label>
+                    <Label htmlFor="price">Price unitaire (€)</Label>
                     <Input
                       id="price"
                       type="number"
@@ -1014,7 +1014,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       value={newItem.notes || ''}
                       onChange={(e) => setNewItem({ ...newItem, notes: e.target.value })}
                       className="mt-1"
-                      placeholder="Informations complémentaires sur l'article..."
+                      placeholder="Information complémentaires of l'article..."
                     />
                   </div>
                 </div>
@@ -1024,11 +1024,11 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     onClick={() => setShowAddForm(false)} 
                     className="mr-2"
                   >
-                    Annuler
+                    Cancel
                   </Button>
                   <Button onClick={handleAddItem}>
                     <Plus className="mr-2 h-4 w-4" />
-                    Ajouter l'article
+                    Add l'article
                   </Button>
                 </div>
               </div>
@@ -1044,20 +1044,20 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
 
       <ConfirmDialog 
         open={deleteConfirmOpen} 
-        title="Supprimer l'article" 
-        description="Êtes-vous sûr de vouloir supprimer cet article ? Cette action est irréversible."
-        confirmText="Supprimer"
-        cancelText="Annuler"
+        title="Delete l'article" 
+        description="Êtes-vous sûr of vouloir supprimer cet article ? Cette action est irréversible."
+        confirmText="Delete"
+        cancelText="Cancel"
         onConfirm={handleDeleteItem}
         onOpenChange={() => setDeleteConfirmOpen(false)}
       />
 
       <ConfirmDialog 
         open={transactionDeleteConfirmOpen} 
-        title="Supprimer la transaction" 
-        description="Êtes-vous sûr de vouloir supprimer cette transaction ? Le stock sera ajusté en conséquence."
-        confirmText="Supprimer"
-        cancelText="Annuler"
+        title="Delete la transaction" 
+        description="Êtes-vous sûr of vouloir supprimer cette transaction ? Le stock sera ajusté en conséquence."
+        confirmText="Delete"
+        cancelText="Cancel"
         onConfirm={handleDeleteTransaction}
         onOpenChange={() => setTransactionDeleteConfirmOpen(false)}
       />

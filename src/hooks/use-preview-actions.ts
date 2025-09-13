@@ -26,7 +26,7 @@ export const usePreviewActions = ({
 
   const handlePrint = async () => {
     if (!data || data.length === 0) {
-      toast.error("Aucune donnée à imprimer", {
+      toast.error("No data à imprimer", {
         description: "Veuillez vérifier vos filtres ou sélectionner une autre période."
       });
       return;
@@ -37,15 +37,15 @@ export const usePreviewActions = ({
     try {
       await printModuleData(moduleName, {
         columns: columns,
-        title: title || `Aperçu - ${moduleName}`
+        title: title || `Overview - ${moduleName}`
       });
       toast.success("Document envoyé à l'impression", {
         description: "Votre document a été envoyé à l'imprimante."
       });
     } catch (error) {
-      console.error("Erreur lors de l'impression:", error);
-      toast.error("Erreur d'impression", {
-        description: "Une erreur s'est produite lors de l'impression du document."
+      console.error("Error lors of l'impression:", error);
+      toast.error("Error d'impression", {
+        description: "Une erreur s'est produite lors of l'impression du document."
       });
     } finally {
       setIsActionInProgress(false);
@@ -54,7 +54,7 @@ export const usePreviewActions = ({
 
   const handleShowPreview = () => {
     if (!data || data.length === 0) {
-      toast.error("Aucune donnée à afficher", {
+      toast.error("No data à afficher", {
         description: "Veuillez vérifier vos filtres ou sélectionner une autre période."
       });
       return;
@@ -67,7 +67,7 @@ export const usePreviewActions = ({
 
   const handleExportPDF = async () => {
     if (!data || data.length === 0) {
-      toast.error("Aucune donnée à exporter", {
+      toast.error("No data à exporter", {
         description: "Veuillez vérifier vos filtres ou sélectionner une autre période."
       });
       return;
@@ -84,9 +84,9 @@ export const usePreviewActions = ({
         description: "Le document a été téléchargé."
       });
     } catch (error) {
-      console.error("Erreur lors de la génération du PDF:", error);
-      toast.error("Erreur d'exportation", {
-        description: "Une erreur s'est produite lors de la génération du PDF."
+      console.error("Error lors of la génération du PDF:", error);
+      toast.error("Error d'exportation", {
+        description: "Une erreur s'est produite lors of la génération du PDF."
       });
     } finally {
       setIsActionInProgress(false);

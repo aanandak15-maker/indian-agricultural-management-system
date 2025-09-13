@@ -19,7 +19,7 @@ import {
   Edit
 } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import GuadeloupeWeatherAlerts from './GuadeloupeWeatherAlerts';
+import IndianWeatherAlerts from './IndianWeatherAlerts';
 import { EditableField } from './ui/editable-field';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
@@ -108,7 +108,7 @@ const Dashboard = () => {
   // New alert dialog
   const [showAddAlertDialog, setShowAddAlertDialog] = useState(false);
   const [newAlert, setNewAlert] = useState({
-    type: 'Cyclone',
+    type: 'Monsoon',
     region: '',
     startDate: '',
     endDate: '',
@@ -139,12 +139,12 @@ const Dashboard = () => {
   // Stat card updates
   const handleRevenueChange = (value: string | number) => {
     setMonthlyRevenue(Number(value));
-    toast.success('Revenu mensuel mis à jour');
+    toast.success('Revenue mensuel mis à jour');
   };
   
   const handleRevenueGrowthChange = (value: string | number) => {
     setRevenueGrowth(Number(value));
-    toast.success('Croissance du revenu mise à jour');
+    toast.success('Growth du revenu mise à jour');
   };
   
   const handleAreaChange = (value: string | number) => {
@@ -154,7 +154,7 @@ const Dashboard = () => {
   
   const handleParcelsCountChange = (value: string | number) => {
     setParcelsCount(Number(value));
-    toast.success('Nombre de parcelles mis à jour');
+    toast.success('Nombre of parcelles mis à jour');
   };
   
   const handleYieldChange = (value: string | number) => {
@@ -164,7 +164,7 @@ const Dashboard = () => {
   
   const handleYieldGrowthChange = (value: string | number) => {
     setYieldGrowth(Number(value));
-    toast.success('Croissance du rendement mise à jour');
+    toast.success('Growth du yield mise à jour');
   };
   
   // Task management
@@ -196,19 +196,19 @@ const Dashboard = () => {
     setAlerts(alerts.map(alert => 
       alert.id === id ? { ...alert, message } : alert
     ));
-    toast.success('Alerte mise à jour');
+    toast.success('Alert mise à jour');
   };
   
   const handleDeleteAlert = (id: number) => {
     setAlerts(alerts.filter(alert => alert.id !== id));
     setAlertsCount(prev => prev - 1);
-    toast.success('Alerte supprimée');
+    toast.success('Alert supprimée');
   };
   
   // Weather alert management
   const handleDeleteWeatherAlert = (id: number) => {
     setWeatherAlerts(weatherAlerts.filter(alert => alert.id !== id));
-    toast.success('Alerte météorologique supprimée');
+    toast.success('Alert météorologique supprimée');
   };
   
   const handleAddWeatherAlert = () => {
@@ -227,7 +227,7 @@ const Dashboard = () => {
     setWeatherAlerts([...weatherAlerts, alertToAdd]);
     setShowAddAlertDialog(false);
     setNewAlert({
-      type: 'Cyclone',
+      type: 'Monsoon',
       region: '',
       startDate: '',
       endDate: '',
@@ -240,7 +240,7 @@ const Dashboard = () => {
   
   // Add transaction handler (placeholder for future implementation)
   const handleAddTransaction = () => {
-    toast.info('Redirection vers la page de finances');
+    toast.info('Redirection vers la page of finances');
     // In a real app, this would navigate to the finance page
   };
   
@@ -279,7 +279,7 @@ const Dashboard = () => {
             onClick={handleAddTransaction}
           >
             <Wallet className="h-4 w-4 inline mr-2" />
-            Ajouter une transaction
+            Add une transaction
           </button>
         </div>
       </header>
@@ -287,7 +287,7 @@ const Dashboard = () => {
       {/* Quick Stats Row - Adapté à l'agriculture guadeloupéenne */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="stat-card card-hover">
-          <p className="stat-label">Revenu mensuel</p>
+          <p className="stat-label">Revenue mensuel</p>
           <div className="flex items-baseline justify-between mt-2">
             <p className="stat-value">
               <EditableField
@@ -355,7 +355,7 @@ const Dashboard = () => {
         </div>
         
         <div className="stat-card card-hover">
-          <p className="stat-label">Alertes</p>
+          <p className="stat-label">Alerts</p>
           <div className="flex items-baseline justify-between mt-2">
             <p className="stat-value">{alertsCount}</p>
             <span className="text-agri-warning text-sm font-medium flex items-center">
@@ -368,16 +368,16 @@ const Dashboard = () => {
       {/* Weather alerts section */}
       <div className="bg-white rounded-xl border p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Alertes Météorologiques</h2>
+          <h2 className="text-xl font-semibold">Weather Alerts</h2>
           <Button 
             onClick={() => setShowAddAlertDialog(true)}
             className="bg-agri-primary hover:bg-agri-primary-dark"
           >
-            <Plus size={16} className="mr-2" /> Ajouter une alerte
+            <Plus size={16} className="mr-2" /> Add une alerte
           </Button>
         </div>
         <p className="text-muted-foreground mb-6">
-          Suivez les alertes météorologiques impactant l'agriculture en Guadeloupe
+          Suivez les alertes météorologiques impactant l'agriculture en India
         </p>
         
         <div className="overflow-x-auto">
@@ -396,11 +396,11 @@ const Dashboard = () => {
               {weatherAlerts.map(alert => (
                 <tr key={alert.id} className="border-t hover:bg-muted/30">
                   <td className="px-4 py-3 flex items-center">
-                    {alert.type === 'Cyclone' ? (
+                    {alert.type === 'Monsoon' ? (
                       <span className="flex items-center text-red-500">
                         <AlertTriangle size={16} className="mr-1" /> {alert.type}
                       </span>
-                    ) : alert.type === 'Pluie' ? (
+                    ) : alert.type === 'Rainfall' ? (
                       <span className="flex items-center text-blue-500">
                         <CloudRain size={16} className="mr-1" /> {alert.type}
                       </span>
@@ -432,7 +432,7 @@ const Dashboard = () => {
                             setWeatherAlerts(weatherAlerts.map(a => 
                               a.id === alert.id ? { ...a, startDate: String(value) } : a
                             ));
-                            toast.success('Date de début mise à jour');
+                            toast.success('Date of début mise à jour');
                           }}
                         />
                       </div>
@@ -445,7 +445,7 @@ const Dashboard = () => {
                             setWeatherAlerts(weatherAlerts.map(a => 
                               a.id === alert.id ? { ...a, endDate: String(value) } : a
                             ));
-                            toast.success('Date de fin mise à jour');
+                            toast.success('Date of fin mise à jour');
                           }}
                         />
                       </div>
@@ -510,7 +510,7 @@ const Dashboard = () => {
         {/* Revenue Chart */}
         <div className="dashboard-card col-span-full lg:col-span-2 card-hover">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold">Revenu Mensuel</h3>
+            <h3 className="font-semibold">Revenue Mensuel</h3>
             <div className="flex space-x-2">
               <button className="text-xs px-3 py-1.5 bg-muted rounded-md text-foreground">2023</button>
               <button className="text-xs px-3 py-1.5 text-muted-foreground hover:bg-muted rounded-md">2022</button>
@@ -531,7 +531,7 @@ const Dashboard = () => {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f5f5f5" />
                 <XAxis dataKey="month" axisLine={false} tickLine={false} />
                 <YAxis axisLine={false} tickLine={false} tickFormatter={(value) => `${value} €`} />
-                <Tooltip formatter={(value) => [`${value} €`, 'Revenu']} />
+                <Tooltip formatter={(value) => [`${value} €`, 'Revenue']} />
                 <Area 
                   type="monotone" 
                   dataKey="revenue" 
@@ -547,7 +547,7 @@ const Dashboard = () => {
 
         {/* Production Distribution - Adapté aux cultures guadeloupéennes */}
         <div className="dashboard-card card-hover">
-          <h3 className="font-semibold mb-4">Répartition des Cultures</h3>
+          <h3 className="font-semibold mb-4">Répartition des Crops</h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -579,11 +579,11 @@ const Dashboard = () => {
 
       {/* Bottom Cards Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Upcoming Tasks - Adapté au contexte agricole guadeloupéen */}
+        {/* Upcoming Tasks - Adapté au contexte agricultural guadeloupéen */}
         <div className="dashboard-card card-hover">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold">Tâches à venir</h3>
-            <button className="text-xs text-agri-primary hover:underline">Voir tout</button>
+            <button className="text-xs text-agri-primary hover:underline">View tout</button>
           </div>
           
           <div className="space-y-3">
@@ -657,11 +657,11 @@ const Dashboard = () => {
           </div>
         </div>
         
-        {/* Alerts - Adapté à l'agriculture en Guadeloupe */}
+        {/* Alerts - Adapté à l'agriculture en India */}
         <div className="dashboard-card card-hover">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold">Alertes</h3>
-            <button className="text-xs text-agri-primary hover:underline">Gérer les alertes</button>
+            <h3 className="font-semibold">Alerts</h3>
+            <button className="text-xs text-agri-primary hover:underline">Manage les alertes</button>
           </div>
           
           <div className="space-y-3">
@@ -711,7 +711,7 @@ const Dashboard = () => {
       <Dialog open={showAddAlertDialog} onOpenChange={setShowAddAlertDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Ajouter une alerte météorologique</DialogTitle>
+            <DialogTitle>Add une alerte météorologique</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
@@ -724,9 +724,9 @@ const Dashboard = () => {
                 onChange={(e) => setNewAlert({...newAlert, type: e.target.value})}
                 className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
-                <option value="Cyclone">Cyclone</option>
-                <option value="Pluie">Pluie</option>
-                <option value="Sécheresse">Sécheresse</option>
+                <option value="Monsoon">Monsoon</option>
+                <option value="Rainfall">Rainfall</option>
+                <option value="Drought">Drought</option>
                 <option value="Vent">Vent</option>
               </select>
             </div>
@@ -743,7 +743,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="startDate" className="text-right">
-                Date de début
+                Date of début
               </Label>
               <Input
                 id="startDate"
@@ -755,7 +755,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="endDate" className="text-right">
-                Date de fin
+                Date of fin
               </Label>
               <Input
                 id="endDate"
@@ -775,9 +775,9 @@ const Dashboard = () => {
                 onChange={(e) => setNewAlert({...newAlert, severity: e.target.value})}
                 className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
-                <option value="faible">Faible</option>
+                <option value="faible">Low</option>
                 <option value="modérée">Modérée</option>
-                <option value="critique">Critique</option>
+                <option value="critique">Critical</option>
               </select>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -793,8 +793,8 @@ const Dashboard = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowAddAlertDialog(false)}>Annuler</Button>
-            <Button onClick={handleAddWeatherAlert}>Ajouter</Button>
+            <Button variant="outline" onClick={() => setShowAddAlertDialog(false)}>Cancel</Button>
+            <Button onClick={handleAddWeatherAlert}>Add</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

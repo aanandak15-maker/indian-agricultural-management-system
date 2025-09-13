@@ -76,13 +76,13 @@ export const exportInventoryToCSV = (
     link.click();
     document.body.removeChild(link);
     
-    toast.success("Données exportées avec succès", {
+    toast.success("Data exportées avec succès", {
       description: `Le fichier ${fileName} a été téléchargé`
     });
     return true;
   } catch (error) {
     console.error("Export error:", error);
-    toast.error("Erreur lors de l'exportation des données");
+    toast.error("Error lors of l'exportation des données");
     return false;
   }
 };
@@ -159,7 +159,7 @@ export const importInventoryFromCSV = (
           });
         
         if (validData.length === 0) {
-          toast.error("Aucune donnée valide n'a été trouvée dans le fichier");
+          toast.error("No data valide n'a été trouvée dans le fichier");
           return;
         }
         
@@ -170,13 +170,13 @@ export const importInventoryFromCSV = (
       },
       error: (error) => {
         console.error("Import error:", error);
-        toast.error("Erreur lors de l'importation des données");
+        toast.error("Error lors of l'importation des données");
       }
     });
     return true;
   } catch (error) {
     console.error("Import error:", error);
-    toast.error("Erreur lors de l'importation des données");
+    toast.error("Error lors of l'importation des données");
     return false;
   }
 };
@@ -197,8 +197,8 @@ export const downloadInventoryTemplate = () => {
   const templateData = [
     {
       id: "1",
-      name: "Nom de l'article",
-      category: "Catégorie",
+      name: "Name of l'article",
+      category: "Category",
       quantity: "100",
       unit: "unité",
       minQuantity: "10",

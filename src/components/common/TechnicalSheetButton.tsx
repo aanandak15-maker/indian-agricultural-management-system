@@ -49,7 +49,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
   // Format data for the technical sheet
   const formatTechSheetData = () => {
     if (!data || Object.keys(data).length === 0) {
-      console.error("Données insuffisantes pour générer la fiche technique");
+      console.error("Data insuffisantes pour générer la fiche technique");
       return null;
     }
     
@@ -102,7 +102,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
         </div>
         
         <div class="section mb-6">
-          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Informations générales</h2>
+          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Information générales</h2>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <span class="font-medium">Famille:</span>
@@ -117,17 +117,17 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               ${item.type}
             </div>
             <div>
-              <span class="font-medium">Saison de culture:</span>
+              <span class="font-medium">Saison of culture:</span>
               ${item.saisonCulture}
             </div>
           </div>
         </div>
         
         <div class="section mb-6">
-          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Conditions de culture</h2>
+          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Conditions of culture</h2>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <span class="font-medium">Type de sol:</span>
+              <span class="font-medium">Type of sol:</span>
               ${item.typeSol}
             </div>
             <div>
@@ -139,7 +139,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               ${item.fertilisation}
             </div>
             <div>
-              <span class="font-medium">Période de récolte:</span>
+              <span class="font-medium">Période of récolte:</span>
               ${item.periodeRecolte}
             </div>
             <div>
@@ -187,7 +187,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
         <!DOCTYPE html>
         <html>
           <head>
-            <title>Fiche Technique - ${data.name || data.nom || 'Culture'}</title>
+            <title>Fiche Technique - ${data.name || data.nom || 'Crop'}</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
@@ -286,7 +286,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
                   ) : children || (
                     <>
                       <Download className="mr-2 h-4 w-4" />
-                      Télécharger fiche technique
+                      Download fiche technique
                     </>
                   )}
                 </Button>
@@ -294,7 +294,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               <DropdownMenuContent className="bg-white border shadow-lg">
                 <DropdownMenuItem onClick={handleShowPreview} className="cursor-pointer">
                   <Eye className="mr-2 h-4 w-4" />
-                  <span>Aperçu</span>
+                  <span>Overview</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handlePrint} className="cursor-pointer">
                   <Printer className="mr-2 h-4 w-4" />
@@ -302,7 +302,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={downloadTechnicalSheet} className="cursor-pointer">
                   <Download className="mr-2 h-4 w-4" />
-                  <span>Télécharger PDF</span>
+                  <span>Download PDF</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -316,9 +316,9 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
       <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
         <DialogContent className="max-w-4xl h-[80vh]">
           <DialogHeader>
-            <DialogTitle>Fiche Technique - {data?.name || data?.nom || 'Culture'}</DialogTitle>
+            <DialogTitle>Fiche Technique - {data?.name || data?.nom || 'Crop'}</DialogTitle>
             <DialogDescription>
-              Aperçu de la fiche technique
+              Overview of la fiche technique
             </DialogDescription>
           </DialogHeader>
           <div className="flex-grow overflow-auto border rounded-md mt-4 bg-white">
@@ -428,7 +428,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
           </div>
           <div className="flex justify-end gap-2 mt-4">
             <Button variant="outline" onClick={() => setPreviewOpen(false)}>
-              Fermer
+              Close
             </Button>
             <Button onClick={handlePrint}>
               <Printer className="mr-2 h-4 w-4" />

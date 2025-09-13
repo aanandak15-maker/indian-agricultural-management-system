@@ -134,7 +134,7 @@ export const ChartConfig = ({
                       onChange={(e) => handleOptionChange('showLegend', e.target.checked)}
                       className="mr-2"
                     />
-                    Afficher la légende
+                    Show la légende
                   </label>
                 </div>
                 
@@ -146,7 +146,7 @@ export const ChartConfig = ({
                       onChange={(e) => handleOptionChange('showGrid', e.target.checked)}
                       className="mr-2"
                     />
-                    Afficher la grille
+                    Show la grille
                   </label>
                 </div>
                 
@@ -158,7 +158,7 @@ export const ChartConfig = ({
                       onChange={(e) => handleOptionChange('showTooltip', e.target.checked)}
                       className="mr-2"
                     />
-                    Afficher les infobulles
+                    Show les infobulles
                   </label>
                 </div>
               </div>

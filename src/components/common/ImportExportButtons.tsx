@@ -100,7 +100,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
         onClick={handleExportClick}
       >
         <Download className="h-4 w-4 mr-2" />
-        Exporter
+        Export
       </Button>
       
       <Button
@@ -109,7 +109,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
         onClick={handleImportClick}
       >
         <Upload className="h-4 w-4 mr-2" />
-        Importer
+        Import
       </Button>
       
       {showPrint && (
@@ -138,7 +138,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
       <Dialog open={importDialogOpen} onOpenChange={setImportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Importer des données</DialogTitle>
+            <DialogTitle>Import des données</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
@@ -157,8 +157,8 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
             </p>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setImportDialogOpen(false)}>Annuler</Button>
-            <Button onClick={handleImportConfirm}>Importer</Button>
+            <Button variant="outline" onClick={() => setImportDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleImportConfirm}>Import</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -167,7 +167,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
       <Dialog open={exportDialogOpen} onOpenChange={setExportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Exporter des données</DialogTitle>
+            <DialogTitle>Export des données</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
@@ -198,8 +198,8 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setExportDialogOpen(false)}>Annuler</Button>
-            <Button onClick={handleExportConfirm}>Exporter</Button>
+            <Button variant="outline" onClick={() => setExportDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleExportConfirm}>Export</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

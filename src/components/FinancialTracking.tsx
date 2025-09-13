@@ -18,12 +18,12 @@ import PageHeader from './layout/PageHeader';
 // Define monthly data
 const monthlyData = [
   { name: 'Jan', income: 8500, expenses: 7200 },
-  { name: 'Fév', income: 9200, expenses: 7800 },
+  { name: 'Feb', income: 9200, expenses: 7800 },
   { name: 'Mar', income: 8800, expenses: 7400 },
-  { name: 'Avr', income: 10500, expenses: 8100 },
-  { name: 'Mai', income: 11200, expenses: 9500 },
-  { name: 'Juin', income: 9800, expenses: 7900 },
-  { name: 'Juil', income: 12500, expenses: 10200 },
+  { name: 'Apr', income: 10500, expenses: 8100 },
+  { name: 'May', income: 11200, expenses: 9500 },
+  { name: 'June', income: 9800, expenses: 7900 },
+  { name: 'Jul', income: 12500, expenses: 10200 },
 ];
 
 // Schema for transaction form
@@ -31,7 +31,7 @@ const transactionSchema = z.object({
   date: z.string().min(1, "La date est requise"),
   description: z.string().min(3, "Description trop courte"),
   amount: z.string().refine(val => !isNaN(Number(val)) && Number(val) !== 0, {
-    message: "Montant invalide"
+    message: "Amount invalide"
   }),
   category: z.string().min(1, "La catégorie est requise"),
   type: z.enum(["income", "expense"]),
@@ -39,17 +39,17 @@ const transactionSchema = z.object({
 
 const FinancialTracking = () => {
   // State for editable content
-  const [title, setTitle] = useState('Suivi Financier');
-  const [description, setDescription] = useState('Gérez vos revenus et dépenses pour optimiser la rentabilité de votre exploitation');
+  const [title, setTitle] = useState('Tracking Financier');
+  const [description, setDescription] = useState('Gérez vos revenus et dépenses pour optimiser la rentabilité of votre farm');
   
   // State for transactions
   const [transactions, setTransactions] = useState([
-    { id: 1, date: '2023-07-05', description: 'Vente de récolte', amount: 3200, category: 'Ventes', type: 'income' },
-    { id: 2, date: '2023-07-10', description: 'Achat d\'engrais', amount: 850, category: 'Fournitures', type: 'expense' },
-    { id: 3, date: '2023-07-12', description: 'Facture d\'électricité', amount: 320, category: 'Utilities', type: 'expense' },
-    { id: 4, date: '2023-07-15', description: 'Vente de bananes', amount: 1500, category: 'Ventes', type: 'income' },
-    { id: 5, date: '2023-07-20', description: 'Réparation tracteur', amount: 750, category: 'Maintenance', type: 'expense' },
-    { id: 6, date: '2023-07-25', description: 'Subvention agricole', amount: 4200, category: 'Subventions', type: 'income' },
+    { id: 1, date: '2023-07-05', description: 'Sale of récolte', amount: 3200, category: 'Sales', type: 'income' },
+    { id: 2, date: '2023-07-10', description: 'Purchase d\'fertilizer', amount: 850, category: 'Fournitures', type: 'expense' },
+    { id: 3, date: '2023-07-12', description: 'Invoice d\'électricité', amount: 320, category: 'Utilities', type: 'expense' },
+    { id: 4, date: '2023-07-15', description: 'Sale of bananes', amount: 1500, category: 'Sales', type: 'income' },
+    { id: 5, date: '2023-07-20', description: 'Réparation tractor', amount: 750, category: 'Maintenance', type: 'expense' },
+    { id: 6, date: '2023-07-25', description: 'Subsidy agricultural', amount: 4200, category: 'Subsidies', type: 'income' },
     { id: 7, date: '2023-07-28', description: 'Salaires employés', amount: 2800, category: 'Salaires', type: 'expense' },
   ]);
   
@@ -141,13 +141,13 @@ const FinancialTracking = () => {
   // Export to CSV
   const exportToCSV = () => {
     // Create CSV content
-    const headers = ['Date', 'Description', 'Montant', 'Catégorie', 'Type'];
+    const headers = ['Date', 'Description', 'Amount', 'Category', 'Type'];
     const rows = transactions.map(t => [
       t.date, 
       t.description, 
       t.amount.toString(), 
       t.category, 
-      t.type === 'income' ? 'Revenu' : 'Dépense'
+      t.type === 'income' ? 'Revenue' : 'Expense'
     ]);
     
     const csvContent = [
@@ -166,7 +166,7 @@ const FinancialTracking = () => {
     link.click();
     document.body.removeChild(link);
     
-    toast.success('Données exportées en CSV');
+    toast.success('Data exportées en CSV');
   };
   
   // Print transactions
@@ -196,8 +196,8 @@ const FinancialTracking = () => {
         <body>
           <h1>Transactions Financières</h1>
           <div class="summary">
-            <p>Revenus totaux: <b>${totalIncome.toFixed(2)} €</b></p>
-            <p>Dépenses totales: <b>${totalExpenses.toFixed(2)} €</b></p>
+            <p>Revenue totaux: <b>${totalIncome.toFixed(2)} €</b></p>
+            <p>Expenses totales: <b>${totalExpenses.toFixed(2)} €</b></p>
             <p>Solde: <b class="${balance >= 0 ? 'income' : 'expense'}">${balance.toFixed(2)} €</b></p>
           </div>
           <table>
@@ -205,8 +205,8 @@ const FinancialTracking = () => {
               <tr>
                 <th>Date</th>
                 <th>Description</th>
-                <th>Montant</th>
-                <th>Catégorie</th>
+                <th>Amount</th>
+                <th>Category</th>
                 <th>Type</th>
               </tr>
             </thead>
@@ -217,7 +217,7 @@ const FinancialTracking = () => {
                   <td>${t.description}</td>
                   <td class="${t.type === 'income' ? 'income' : 'expense'}">${t.amount.toFixed(2)} €</td>
                   <td>${t.category}</td>
-                  <td>${t.type === 'income' ? 'Revenu' : 'Dépense'}</td>
+                  <td>${t.type === 'income' ? 'Revenue' : 'Expense'}</td>
                 </tr>
               `).join('')}
             </tbody>
@@ -254,7 +254,7 @@ const FinancialTracking = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="bg-white">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Revenus</CardTitle>
+            <CardTitle className="text-lg">Revenue</CardTitle>
             <CardDescription>Total des entrées</CardDescription>
           </CardHeader>
           <CardContent>
@@ -264,7 +264,7 @@ const FinancialTracking = () => {
         
         <Card className="bg-white">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Dépenses</CardTitle>
+            <CardTitle className="text-lg">Expenses</CardTitle>
             <CardDescription>Total des sorties</CardDescription>
           </CardHeader>
           <CardContent>
@@ -275,7 +275,7 @@ const FinancialTracking = () => {
         <Card className="bg-white">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Solde</CardTitle>
-            <CardDescription>Revenus - Dépenses</CardDescription>
+            <CardDescription>Revenue - Expenses</CardDescription>
           </CardHeader>
           <CardContent>
             <p className={`text-2xl font-bold ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
@@ -288,7 +288,7 @@ const FinancialTracking = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="bg-white">
           <CardHeader>
-            <CardTitle>Aperçu Mensuel</CardTitle>
+            <CardTitle>Overview Mensuel</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-80">
@@ -304,8 +304,8 @@ const FinancialTracking = () => {
                     formatter={(value) => [`${value} €`, '']} 
                     labelFormatter={(label) => `Mois: ${label}`}
                   />
-                  <Bar name="Revenus" dataKey="income" fill="#4ade80" radius={[4, 4, 0, 0]} />
-                  <Bar name="Dépenses" dataKey="expenses" fill="#f87171" radius={[4, 4, 0, 0]} />
+                  <Bar name="Revenue" dataKey="income" fill="#4ade80" radius={[4, 4, 0, 0]} />
+                  <Bar name="Expenses" dataKey="expenses" fill="#f87171" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -322,7 +322,7 @@ const FinancialTracking = () => {
                 onClick={exportToCSV}
               >
                 <Download className="h-4 w-4 mr-1" />
-                Exporter
+                Export
               </Button>
               <Button 
                 variant="outline" 
@@ -337,7 +337,7 @@ const FinancialTracking = () => {
                 size="sm"
               >
                 <PlusCircle className="h-4 w-4 mr-1" />
-                Ajouter
+                Add
               </Button>
             </div>
           </CardHeader>
@@ -349,8 +349,8 @@ const FinancialTracking = () => {
                 onChange={(e) => setTypeFilter(e.target.value)}
               >
                 <option value="all">Tous types</option>
-                <option value="income">Revenus</option>
-                <option value="expense">Dépenses</option>
+                <option value="income">Revenue</option>
+                <option value="expense">Expenses</option>
               </select>
               
               <select
@@ -376,8 +376,8 @@ const FinancialTracking = () => {
               >
                 <option value="date-desc">Date (récent)</option>
                 <option value="date-asc">Date (ancien)</option>
-                <option value="amount-desc">Montant (haut)</option>
-                <option value="amount-asc">Montant (bas)</option>
+                <option value="amount-desc">Amount (haut)</option>
+                <option value="amount-asc">Amount (bas)</option>
               </select>
             </div>
             
@@ -449,7 +449,7 @@ const FinancialTracking = () => {
       <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
-            <DialogTitle>Ajouter une transaction</DialogTitle>
+            <DialogTitle>Add une transaction</DialogTitle>
           </DialogHeader>
           
           <Form {...form}>
@@ -460,7 +460,7 @@ const FinancialTracking = () => {
                   name="type"
                   render={({ field }) => (
                     <FormItem className="col-span-2">
-                      <FormLabel>Type de transaction</FormLabel>
+                      <FormLabel>Type of transaction</FormLabel>
                       <div className="flex mt-1">
                         <Button
                           type="button"
@@ -468,7 +468,7 @@ const FinancialTracking = () => {
                           className={field.value === 'income' ? 'bg-green-600 hover:bg-green-700' : ''}
                           onClick={() => field.onChange('income')}
                         >
-                          Revenu
+                          Revenue
                         </Button>
                         <Button
                           type="button"
@@ -476,7 +476,7 @@ const FinancialTracking = () => {
                           className={`ml-2 ${field.value === 'expense' ? 'bg-red-600 hover:bg-red-700' : ''}`}
                           onClick={() => field.onChange('expense')}
                         >
-                          Dépense
+                          Expense
                         </Button>
                       </div>
                       <FormMessage />
@@ -509,7 +509,7 @@ const FinancialTracking = () => {
                   name="amount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Montant (€)</FormLabel>
+                      <FormLabel>Amount (€)</FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
@@ -528,9 +528,9 @@ const FinancialTracking = () => {
                   name="category"
                   render={({ field }) => (
                     <FormItem className="col-span-2">
-                      <FormLabel>Catégorie</FormLabel>
+                      <FormLabel>Category</FormLabel>
                       <FormControl>
-                        <Input placeholder="Exemple: Ventes, Fournitures..." {...field} />
+                        <Input placeholder="Exemple: Sales, Fournitures..." {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -558,9 +558,9 @@ const FinancialTracking = () => {
                   variant="outline" 
                   onClick={() => setShowAddDialog(false)}
                 >
-                  Annuler
+                  Cancel
                 </Button>
-                <Button type="submit">Ajouter</Button>
+                <Button type="submit">Add</Button>
               </DialogFooter>
             </form>
           </Form>

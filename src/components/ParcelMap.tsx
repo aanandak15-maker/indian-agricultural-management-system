@@ -68,7 +68,7 @@ const ParcelMap = ({ coordinates, parcelName, isEditing, onCoordinatesChange }: 
         {/* Instruction for editing mode */}
         {isEditing && (
           <div className="absolute bottom-2 left-0 right-0 text-center bg-white/80 py-1 text-xs">
-            Cliquez sur la carte pour déplacer le marqueur
+            Cliquez of la carte pour déplacer le marqueur
           </div>
         )}
         

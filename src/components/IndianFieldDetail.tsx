@@ -20,7 +20,7 @@ import { Input } from './ui/input';
 import { useParams } from 'react-router-dom';
 import { Button } from './ui/button';
 
-interface FieldDetail {
+interface ParcelDetail {
   id: string;
   name: string;
   location: string;
@@ -43,291 +43,395 @@ interface TaskData {
   task: string;
   dueDate: string;
   assignedTo: string;
-  priority: 'Low' | 'Medium' | 'High' | 'Urgent';
-  status: 'To Do' | 'In Progress' | 'Completed';
+  priority: 'Basse' | 'Average' | 'Élevée' | 'Urgente';
+  status: 'À faire' | 'In Progress' | 'Completede';
 }
 
-const fieldData: FieldDetail = {
-  id: 'FIELD-001',
-  name: 'North Field A1',
-  location: 'Punjab, India',
-  surface: 12.5,
-  soilType: 'Alluvial',
+const parcelData: ParcelDetail = {
+  id: '1',
+  name: 'Field des Hauts Palmiers',
+  location: 'Grande-Terre - Morne-à-l\'Eau',
+  surface: 8.5,
+  soilType: 'Argilo-calcaire',
   crops: [
-    { crop: 'Rice', variety: 'Basmati 1121', plantingDate: '2023-06-15', harvestDate: '2023-10-20', status: 'Growing' },
-    { crop: 'Wheat', variety: 'HD 2967', plantingDate: '2023-11-10', harvestDate: '2024-04-15', status: 'Planned' }
+    { 
+      crop: 'Sugarcane', 
+      variety: 'R579', 
+      plantingDate: '2023-02-10', 
+      harvestDate: '2024-02-15',
+      status: 'En croissance'
+    },
+    { 
+      crop: 'Wheat', 
+      variety: 'Pacala', 
+      plantingDate: '2023-05-20', 
+      harvestDate: '2023-12-10',
+      status: 'Récolté'
+    }
   ],
-  irrigationSystem: 'Drip Irrigation',
-  notes: 'High-yield field with excellent drainage. Monitor for pest activity during monsoon.',
-  owner: 'Rajesh Kumar',
-  lastInspection: '2023-08-15',
+  irrigationSystem: 'Goutte-à-goutte avec captation d\'eau of pluie',
+  notes: 'Field en conversion bio depuis 2022. Exposition Sud-Est favorable.',
+  owner: 'Coopérative Agricole of Grande-Terre',
+  lastInspection: '2023-11-15',
   coordinates: {
-    latitude: 30.7333,
-    longitude: 76.7794
+    latitude: 16.3312,
+    longitude: -61.3844
   },
-  images: []
+  images: [
+    'parcelle1_vue1.jpg',
+    'parcelle1_irrigation.jpg'
+  ]
 };
 
 const initialTasks: TaskData[] = [
-  { id: 1, task: 'Apply fertilizer to rice crop', dueDate: '2023-08-25', assignedTo: 'Farm Worker 1', priority: 'High', status: 'To Do' },
-  { id: 2, task: 'Check irrigation system', dueDate: '2023-08-22', assignedTo: 'Technician', priority: 'Medium', status: 'In Progress' },
-  { id: 3, task: 'Pest control spray', dueDate: '2023-08-28', assignedTo: 'Farm Worker 2', priority: 'High', status: 'To Do' },
-  { id: 4, task: 'Soil pH testing', dueDate: '2023-08-30', assignedTo: 'Agronomist', priority: 'Low', status: 'To Do' }
+  { 
+    id: 1, 
+    task: 'Fertilisation of la canne', 
+    dueDate: '2023-09-25', 
+    assignedTo: 'Jean Dupont', 
+    priority: 'Élevée',
+    status: 'À faire'
+  },
+  { 
+    id: 2, 
+    task: 'Traitement contre la cercosporiose', 
+    dueDate: '2023-09-28', 
+    assignedTo: 'Marie Lambert', 
+    priority: 'Average',
+    status: 'In Progress'
+  },
+  { 
+    id: 3, 
+    task: 'Inspection croissance ananas', 
+    dueDate: '2023-09-30', 
+    assignedTo: 'Pierre Lafortune', 
+    priority: 'Basse',
+    status: 'À faire'
+  },
+  {
+    id: 4,
+    task: 'Désherbage parcelle madère',
+    dueDate: '2023-10-05',
+    assignedTo: 'Sophie Martin',
+    priority: 'Average',
+    status: 'À faire'
+  },
+  {
+    id: 5,
+    task: 'Préparation coupe canne',
+    dueDate: '2024-01-10',
+    assignedTo: 'Jean Dupont',
+    priority: 'Élevée',
+    status: 'À faire'
+  }
+];
+
+const taskColumns: Column[] = [
+  { id: 'task', header: 'Tâche', accessorKey: 'task', isEditable: true },
+  { id: 'assignedTo', header: 'Assigné à', accessorKey: 'assignedTo', isEditable: true },
+  { id: 'dueDate', header: 'Date', accessorKey: 'dueDate', isEditable: true, width: '120px' },
+  { id: 'priority', header: 'Priorité', accessorKey: 'priority', isEditable: true, width: '120px' },
+  { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true, width: '100px' }
+];
+
+const cropColumns: Column[] = [
+  { id: 'crop', header: 'Crop', accessorKey: 'crop', isEditable: true },
+  { id: 'variety', header: 'Variété', accessorKey: 'variety', isEditable: true },
+  { id: 'plantingDate', header: 'Date field', accessorKey: 'plantingDate', isEditable: true },
+  { id: 'harvestDate', header: 'Date récolte prévue', accessorKey: 'harvestDate', isEditable: true },
+  { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true },
 ];
 
 const IndianFieldDetail = () => {
-  const { id } = useParams();
-  const [field, setField] = useState<FieldDetail>(fieldData);
+  const { id } = useParams<{ id: string }>();
+  const [parcel, setParcel] = useState<ParcelDetail>(parcelData);
   const [tasks, setTasks] = useState<TaskData[]>(initialTasks);
-  const [newTaskTitle, setNewTaskTitle] = useState('');
-  const [showAddTask, setShowAddTask] = useState(false);
+  const [activeTab, setActiveTab] = useState<'info' | 'crops' | 'tasks'>('info');
+  const [showImageUpload, setShowImageUpload] = useState(false);
 
-  const handleFieldUpdate = (key: keyof FieldDetail, value: string | number) => {
-    setField(prev => ({
-      ...prev,
-      [key]: value
-    }));
-    toast.success('Field information updated successfully');
+  const handleParcelUpdate = (field: keyof ParcelDetail, value: string | number) => {
+    setParcel({
+      ...parcel,
+      [field]: value
+    });
+    toast.success(`${field} mis à jour`);
   };
 
-  const handleAddTask = () => {
-    if (newTaskTitle.trim()) {
-      const newTask: TaskData = {
-        id: Math.max(...tasks.map(t => t.id)) + 1,
-        task: newTaskTitle,
-        dueDate: new Date().toISOString().split('T')[0],
-        assignedTo: 'Unassigned',
-        priority: 'Medium',
-        status: 'To Do'
-      };
-      setTasks([...tasks, newTask]);
-      setNewTaskTitle('');
-      setShowAddTask(false);
-      toast.success('New task added successfully');
-    }
+  const handleTaskUpdate = (rowIndex: number, columnId: string, value: any) => {
+    const updatedTasks = [...tasks];
+    const updatedTask = { ...updatedTasks[rowIndex] };
+    
+    (updatedTask as any)[columnId] = value;
+    updatedTasks[rowIndex] = updatedTask;
+    
+    setTasks(updatedTasks);
+    toast.success('Tâche mise à jour');
   };
 
-const taskColumns: Column[] = [
-  { id: 'task', header: 'Task', accessorKey: 'task', isEditable: true },
-  { id: 'dueDate', header: 'Due Date', accessorKey: 'dueDate', type: 'date', isEditable: true },
-  { id: 'assignedTo', header: 'Assigned To', accessorKey: 'assignedTo', isEditable: true },
-  { id: 'priority', header: 'Priority', accessorKey: 'priority', isEditable: true },
-  { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true }
-];
+  const handleCropUpdate = (rowIndex: number, columnId: string, value: any) => {
+    const updatedParcel = { ...parcel };
+    const updatedCrops = [...updatedParcel.crops];
+    const updatedCrop = { ...updatedCrops[rowIndex] };
+    
+    (updatedCrop as any)[columnId] = value;
+    updatedCrops[rowIndex] = updatedCrop;
+    
+    updatedParcel.crops = updatedCrops;
+    setParcel(updatedParcel);
+    toast.success('Crop mise à jour');
+  };
 
-const handleTaskUpdate = (rowIndex: number, columnId: string, value: string | number) => {
-  const newTasks = [...tasks];
-  const updatedTask = { ...newTasks[rowIndex] };
+  const handleAddTask = (newRow: Record<string, any>) => {
+    const newId = Math.max(0, ...tasks.map(t => t.id)) + 1;
+    
+    const newTask: TaskData = {
+      id: newId,
+      task: String(newRow.task || ''),
+      dueDate: String(newRow.dueDate || new Date().toISOString().split('T')[0]),
+      assignedTo: String(newRow.assignedTo || ''),
+      priority: (newRow.priority as TaskData['priority']) || 'Average',
+      status: (newRow.status as TaskData['status']) || 'À faire'
+    };
+    
+    setTasks([...tasks, newTask]);
+    toast.success('Nouvelle tâche ajoutée');
+  };
 
-  if (columnId === 'dueDate') {
-    updatedTask.dueDate = String(value);
-  } else if (columnId === 'task') {
-    updatedTask.task = String(value);
-  } else if (columnId === 'assignedTo') {
-    updatedTask.assignedTo = String(value);
-  } else if (columnId === 'priority') {
-    updatedTask.priority = value as TaskData['priority'];
-  } else if (columnId === 'status') {
-    updatedTask.status = value as TaskData['status'];
-  }
+  const handleAddCrop = (newRow: Record<string, any>) => {
+    const updatedParcel = { ...parcel };
+    
+    const newCrop = {
+      crop: String(newRow.crop || ''),
+      variety: String(newRow.variety || ''),
+      plantingDate: String(newRow.plantingDate || new Date().toISOString().split('T')[0]),
+      harvestDate: String(newRow.harvestDate || ''),
+      status: String(newRow.status || 'Planifié')
+    };
+    
+    updatedParcel.crops = [...updatedParcel.crops, newCrop];
+    setParcel(updatedParcel);
+    toast.success('Nouvelle culture ajoutée');
+  };
 
-  newTasks[rowIndex] = updatedTask;
-  setTasks(newTasks);
-  toast.success('Task updated successfully');
-};
+  const handleDeleteTask = (rowIndex: number) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(rowIndex, 1);
+    setTasks(updatedTasks);
+    toast.success('Tâche supprimée');
+  };
 
-const handleTaskDelete = (rowIndex: number) => {
-  const deletedTask = tasks[rowIndex];
-  const newTasks = [...tasks];
-  newTasks.splice(rowIndex, 1);
-  setTasks(newTasks);
-  toast.success('Task deleted successfully');
-};
+  const handleDeleteCrop = (rowIndex: number) => {
+    const updatedParcel = { ...parcel };
+    const updatedCrops = [...updatedParcel.crops];
+    updatedCrops.splice(rowIndex, 1);
+    updatedParcel.crops = updatedCrops;
+    setParcel(updatedParcel);
+    toast.success('Crop supprimée');
+  };
 
   return (
     <div className="space-y-6">
-      {/* Field Header */}
       <div className="bg-white rounded-xl border p-6">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-agri-primary/10 rounded-lg">
-              <MapPin className="h-6 w-6 text-agri-primary" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">
-                <EditableField
-                  value={field.name}
-                  onSave={(value) => handleFieldUpdate('name', String(value))}
-                  className="inline-block"
-                />
-              </h1>
-              <p className="text-muted-foreground">
-                <EditableField
-                  value={field.location}
-                  onSave={(value) => handleFieldUpdate('location', String(value))}
-                  className="inline-block"
-                />
-              </p>
-            </div>
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6">
+          <div>
+            <h2 className="text-xl font-bold flex items-center">
+              <MapPin className="h-6 w-6 mr-2 text-agri-primary" />
+              <EditableField
+                value={parcel.name}
+                onSave={(value) => handleParcelUpdate('name', value)}
+                className="inline-block"
+              />
+            </h2>
+            <p className="text-muted-foreground flex items-center mt-1">
+              <Map className="h-4 w-4 mr-1.5" />
+              <EditableField
+                value={parcel.location}
+                onSave={(value) => handleParcelUpdate('location', value)}
+                className="inline-block"
+              />
+            </p>
           </div>
-          <div className="flex space-x-2">
-            <Button variant="outline" size="sm">
-              <Camera className="h-4 w-4 mr-2" />
-              Add Photo
-            </Button>
-            <Button variant="outline" size="sm">
-              <Map className="h-4 w-4 mr-2" />
-              View on Map
-            </Button>
+          
+          <div className="flex space-x-2 mt-4 lg:mt-0">
+            <button 
+              className={`px-4 py-2 rounded-lg ${activeTab === 'info' ? 'bg-agri-primary text-white' : 'bg-muted'}`}
+              onClick={() => setActiveTab('info')}
+            >
+              Information
+            </button>
+            <button 
+              className={`px-4 py-2 rounded-lg ${activeTab === 'crops' ? 'bg-agri-primary text-white' : 'bg-muted'}`}
+              onClick={() => setActiveTab('crops')}
+            >
+              Crops
+            </button>
+            <button 
+              className={`px-4 py-2 rounded-lg ${activeTab === 'tasks' ? 'bg-agri-primary text-white' : 'bg-muted'}`}
+              onClick={() => setActiveTab('tasks')}
+            >
+              Tâches
+            </button>
           </div>
         </div>
-
-        {/* Field Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="p-4 bg-muted/20 rounded-lg">
-            <p className="text-sm text-muted-foreground">Surface Area</p>
-            <p className="text-xl font-semibold">
-              <EditableField
-                value={field.surface}
-                type="number"
-                onSave={(value) => handleFieldUpdate('surface', Number(value))}
-                className="inline-block"
-              /> hectares
-            </p>
-          </div>
-          <div className="p-4 bg-muted/20 rounded-lg">
-            <p className="text-sm text-muted-foreground">Soil Type</p>
-            <p className="text-lg font-medium">
-              <EditableField
-                value={field.soilType}
-                onSave={(value) => handleFieldUpdate('soilType', String(value))}
-                className="inline-block"
-              />
-            </p>
-          </div>
-          <div className="p-4 bg-muted/20 rounded-lg">
-            <p className="text-sm text-muted-foreground">Irrigation</p>
-            <p className="text-lg font-medium">
-              <EditableField
-                value={field.irrigationSystem}
-                onSave={(value) => handleFieldUpdate('irrigationSystem', String(value))}
-                className="inline-block"
-              />
-            </p>
-          </div>
-          <div className="p-4 bg-muted/20 rounded-lg">
-            <p className="text-sm text-muted-foreground">Last Inspection</p>
-            <p className="text-lg font-medium">
-              <EditableField
-                value={field.lastInspection}
-                type="date"
-                onSave={(value) => handleFieldUpdate('lastInspection', String(value))}
-                className="inline-block"
-              />
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Current Crops */}
-      <div className="bg-white rounded-xl border p-6">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
-          <PlaneTakeoff className="h-5 w-5 mr-2 text-agri-primary" />
-          Current Crops
-        </h2>
-        <div className="space-y-3">
-          {field.crops.map((crop, index) => (
-            <div key={index} className="p-4 border rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Crop</p>
-                  <p className="font-medium">{crop.crop}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Variety</p>
-                  <p className="font-medium">{crop.variety}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Planting Date</p>
-                  <p className="font-medium">{crop.plantingDate}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Expected Harvest</p>
-                  <p className="font-medium">{crop.harvestDate}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Status</p>
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
-                    crop.status === 'Growing' 
-                      ? 'bg-green-100 text-green-800' 
-                      : crop.status === 'Planned'
-                        ? 'bg-blue-100 text-blue-800'
-                        : 'bg-yellow-100 text-yellow-800'
-                  }`}>
-                    {crop.status}
-                  </span>
+        
+        {activeTab === 'info' && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-muted/30 p-4 rounded-lg">
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Superficie</h3>
+                <div className="flex items-center">
+                  <EditableField
+                    value={parcel.surface}
+                    type="number"
+                    onSave={(value) => handleParcelUpdate('surface', value)}
+                    className="text-xl font-bold"
+                  />
+                  <span className="ml-1 text-xl">ha</span>
                 </div>
               </div>
+              
+              <div className="bg-muted/30 p-4 rounded-lg">
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Type of sol</h3>
+                <EditableField
+                  value={parcel.soilType}
+                  onSave={(value) => handleParcelUpdate('soilType', value)}
+                  className="text-xl font-bold"
+                />
+              </div>
+              
+              <div className="bg-muted/30 p-4 rounded-lg">
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Dernière inspection</h3>
+                <EditableField
+                  value={parcel.lastInspection}
+                  onSave={(value) => handleParcelUpdate('lastInspection', value)}
+                  className="text-xl font-bold"
+                />
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Field Tasks */}
-      <div className="bg-white rounded-xl border p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold flex items-center">
-            <Calendar className="h-5 w-5 mr-2 text-agri-primary" />
-            Field Tasks
-          </h2>
-          <Button 
-            onClick={() => setShowAddTask(true)}
-            className="bg-agri-primary hover:bg-agri-primary-dark"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Add Task
-          </Button>
-        </div>
-
-        {showAddTask && (
-          <div className="mb-4 p-4 border rounded-lg bg-muted/20">
-            <div className="flex items-center space-x-2">
-              <Input
-                placeholder="Enter task description"
-                value={newTaskTitle}
-                onChange={(e) => setNewTaskTitle(e.target.value)}
-                className="flex-1"
+            
+            <div className="bg-muted/30 p-4 rounded-lg">
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Système d'irrigation</h3>
+              <EditableField
+                value={parcel.irrigationSystem}
+                onSave={(value) => handleParcelUpdate('irrigationSystem', value)}
+                className="text-lg"
               />
-              <Button onClick={handleAddTask} size="sm">
-                <Check className="h-4 w-4" />
-              </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => setShowAddTask(false)} 
-                size="sm"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
+            </div>
+            
+            <div className="bg-muted/30 p-4 rounded-lg">
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Notes</h3>
+              <EditableField
+                value={parcel.notes}
+                onSave={(value) => handleParcelUpdate('notes', value)}
+                className="text-lg"
+              />
+            </div>
+            
+            <div className="bg-muted/30 p-4 rounded-lg">
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Propriétaire</h3>
+              <EditableField
+                value={parcel.owner}
+                onSave={(value) => handleParcelUpdate('owner', value)}
+                className="text-lg"
+              />
+            </div>
+            
+            <div className="bg-muted/30 p-4 rounded-lg">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="text-sm font-medium text-muted-foreground">Photos of la parcelle</h3>
+                <button 
+                  className="text-sm flex items-center text-agri-primary hover:text-agri-primary-dark"
+                  onClick={() => setShowImageUpload(!showImageUpload)}
+                >
+                  <Plus className="h-4 w-4 mr-1" />
+                  Add une photo
+                </button>
+              </div>
+              
+              {showImageUpload && (
+                <div className="mb-4 p-3 border border-dashed rounded-lg">
+                  <div className="flex flex-col items-center justify-center">
+                    <Camera className="h-8 w-8 text-muted-foreground mb-2" />
+                    <p className="text-sm text-muted-foreground mb-2">Glissez une image ou cliquez pour parcourir</p>
+                    <Input type="file" className="max-w-xs" />
+                    <div className="flex space-x-2 mt-2">
+                      <button className="px-3 py-1 text-sm bg-agri-primary text-white rounded">Download</button>
+                      <button 
+                        className="px-3 py-1 text-sm border rounded"
+                        onClick={() => setShowImageUpload(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {parcel.images.map((image, index) => (
+                  <div key={index} className="relative group">
+                    <div className="h-24 w-full bg-gray-100 rounded flex items-center justify-center border">
+                      <span className="text-xs text-muted-foreground">{image}</span>
+                    </div>
+                    <button className="absolute top-1 right-1 hidden group-hover:flex p-1 bg-red-100 rounded-full text-red-600">
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
-
-        <EditableTable
-          data={tasks}
-          columns={taskColumns}
-          onUpdate={handleTaskUpdate}
-          onDelete={handleTaskDelete}
-        />
-      </div>
-
-      {/* Field Notes */}
-      <div className="bg-white rounded-xl border p-6">
-        <h2 className="text-xl font-semibold mb-4">Field Notes</h2>
-<EditableField
-  value={field.notes}
-  onSave={(value) => handleFieldUpdate('notes', String(value))}
-  className="w-full min-h-[100px] p-3 border rounded-lg"
-/>
+        
+        {activeTab === 'crops' && (
+          <div className="space-y-6">
+            <h3 className="text-lg font-medium">Crops of cette parcelle</h3>
+            <EditableTable
+              data={parcel.crops}
+              columns={cropColumns}
+              onUpdate={handleCropUpdate}
+              onDelete={handleDeleteCrop}
+              onAdd={handleAddCrop}
+              className="border-none"
+            />
+          </div>
+        )}
+        
+        {activeTab === 'tasks' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-medium">Tâches à venir</h3>
+              <Button 
+                onClick={() => toast.success('Redirection vers la page des tâches')}
+                variant="outline"
+                className="text-sm"
+              >
+                View toutes les tâches
+              </Button>
+            </div>
+            
+            <EditableTable
+              data={tasks}
+              columns={taskColumns}
+              onUpdate={handleTaskUpdate}
+              onDelete={handleDeleteTask}
+              onAdd={handleAddTask}
+              className="border-none"
+              actions={[
+                {
+                  icon: <Check className="h-4 w-4 text-green-600" />,
+                  label: "Marquer comme terminée",
+                  onClick: (rowIndex) => {
+                    toast.success(`Tâche "${tasks[rowIndex].task}" marquée comme terminée`);
+                    const updatedTasks = [...tasks];
+                    updatedTasks[rowIndex].status = 'Completede';
+                    setTasks(updatedTasks);
+                  }
+                }
+              ]}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

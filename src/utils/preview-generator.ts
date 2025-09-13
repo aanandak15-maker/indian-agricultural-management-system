@@ -12,7 +12,7 @@ export const generatePreviewHTML = (
   locale?: string
 ): string => {
   if (!data || data.length === 0) {
-    return '<div class="p-4 text-center">Aucune donnée disponible pour l\'aperçu</div>';
+    return '<div class="p-4 text-center">No data disponible pour l\'aperçu</div>';
   }
 
   const tableHeaders = (columns || Object.keys(data[0]).map(key => ({ key, header: key }))).map(
@@ -34,7 +34,7 @@ export const generatePreviewHTML = (
           if (value.includes('@')) {
             return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="mailto:${value}" class="text-blue-600 dark:text-blue-400 hover:underline">${value}</a></td>`;
           } else if (value.startsWith('/')) {
-            return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" class="text-blue-600 dark:text-blue-400 hover:underline">Voir détails</a></td>`;
+            return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" class="text-blue-600 dark:text-blue-400 hover:underline">View détails</a></td>`;
           } else {
             return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Lien externe</a></td>`;
           }
@@ -51,7 +51,7 @@ export const generatePreviewHTML = (
   const navigationButtons = `
     <div class="mt-6 flex justify-between">
       <button onclick="window.history.back()" class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded">
-        ← Retour
+        ← Back
       </button>
       <button onclick="window.print()" class="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded">
         Imprimer
@@ -61,7 +61,7 @@ export const generatePreviewHTML = (
 
   return `
     <div class="p-6 dark:bg-gray-800 dark:text-gray-100">
-      <h2 class="text-xl font-bold mb-4">${title || `Aperçu - ${moduleName}`}</h2>
+      <h2 class="text-xl font-bold mb-4">${title || `Overview - ${moduleName}`}</h2>
       <div class="overflow-x-auto">
         <table class="min-w-full border-collapse">
           <thead>

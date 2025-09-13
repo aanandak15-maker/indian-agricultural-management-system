@@ -85,7 +85,7 @@ const BudgetPlanning = () => {
     };
     
     setBudgetItems([...budgetItems, newItem]);
-    toast.success("Catégorie de budget ajoutée avec succès");
+    toast.success("Category of budget ajoutée avec succès");
     setShowAddDialog(false);
     setNewCategory('');
     setNewPlanned('');
@@ -105,7 +105,7 @@ const BudgetPlanning = () => {
   // Handle removing a budget item
   const handleRemoveItem = (id: number) => {
     setBudgetItems(budgetItems.filter(item => item.id !== id));
-    toast.success("Catégorie de budget supprimée");
+    toast.success("Category of budget supprimée");
   };
   
   // Handle saving budget
@@ -170,7 +170,7 @@ const BudgetPlanning = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle>Statut du budget</CardTitle>
+            <CardTitle>Status du budget</CardTitle>
             <CardDescription>
               {budgetStatus === 'under' ? 
                 'Vous êtes en dessous du budget prévu' : 
@@ -227,7 +227,7 @@ const BudgetPlanning = () => {
           <CardHeader className="pb-2">
             <CardTitle>Répartition des dépenses</CardTitle>
             <CardDescription>
-              Visualisation de la distribution budgétaire
+              Visualisation of la distribution budgétaire
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -265,12 +265,12 @@ const BudgetPlanning = () => {
           <div>
             <CardTitle>Catégories budgétaires</CardTitle>
             <CardDescription>
-              Suivi détaillé par catégorie de dépense
+              Tracking détaillé par catégorie of dépense
             </CardDescription>
           </div>
           <Button size="sm" onClick={() => setShowAddDialog(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Ajouter
+            Add
           </Button>
         </CardHeader>
         <CardContent>
@@ -278,12 +278,12 @@ const BudgetPlanning = () => {
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3 px-4 font-medium">Catégorie</th>
+                  <th className="text-left py-3 px-4 font-medium">Category</th>
                   <th className="text-right py-3 px-4 font-medium">Budget prévu</th>
                   <th className="text-right py-3 px-4 font-medium">Dépensé</th>
                   <th className="text-right py-3 px-4 font-medium">Progression</th>
                   <th className="text-right py-3 px-4 font-medium">Solde</th>
-                  <th className="text-right py-3 px-4 font-medium">Statut</th>
+                  <th className="text-right py-3 px-4 font-medium">Status</th>
                   <th className="py-3 px-4"></th>
                 </tr>
               </thead>
@@ -349,11 +349,11 @@ const BudgetPlanning = () => {
         <CardFooter className="flex justify-between">
           <Button variant="outline" onClick={handleExportBudget}>
             <Download className="h-4 w-4 mr-2" />
-            Exporter
+            Export
           </Button>
           <Button onClick={handleSaveBudget}>
             <Save className="h-4 w-4 mr-2" />
-            Enregistrer
+            Save
           </Button>
         </CardFooter>
       </Card>
@@ -362,11 +362,11 @@ const BudgetPlanning = () => {
       <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Ajouter une catégorie budgétaire</DialogTitle>
+            <DialogTitle>Add une catégorie budgétaire</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="category">Nom de la catégorie</Label>
+              <Label htmlFor="category">Name of la catégorie</Label>
               <Input 
                 id="category" 
                 value={newCategory} 
@@ -398,8 +398,8 @@ const BudgetPlanning = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="ghost" onClick={() => setShowAddDialog(false)}>Annuler</Button>
-            <Button onClick={handleAddBudgetItem}>Ajouter</Button>
+            <Button variant="ghost" onClick={() => setShowAddDialog(false)}>Cancel</Button>
+            <Button onClick={handleAddBudgetItem}>Add</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

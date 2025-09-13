@@ -25,7 +25,7 @@ const EnvironmentalCharts = () => {
                 </div>
               </div>
               <p className="mt-4 text-sm">
-                Réduction des émissions de carbone grâce aux pratiques agricoles durables.
+                Réduction des émissions of carbone grâce aux pratiques agricoles durables.
               </p>
             </div>
           </CardContent>
@@ -45,7 +45,7 @@ const EnvironmentalCharts = () => {
                 </div>
               </div>
               <p className="mt-4 text-sm">
-                Réduction de la consommation d'eau par optimisation de l'irrigation.
+                Réduction of la consommation d'eau par optimisation of l'irrigation.
               </p>
             </div>
           </CardContent>
@@ -65,7 +65,7 @@ const EnvironmentalCharts = () => {
                 </div>
               </div>
               <p className="mt-4 text-sm">
-                Augmentation de la biodiversité sur l'exploitation.
+                Augmentation of la biodiversité of l'farm.
               </p>
             </div>
           </CardContent>
@@ -81,11 +81,11 @@ const EnvironmentalCharts = () => {
             <table className="w-full text-sm">
               <thead className="bg-muted text-xs uppercase">
                 <tr>
-                  <th className="px-4 py-2 text-left">Indicateur</th>
-                  <th className="px-4 py-2 text-left">Valeur actuelle</th>
-                  <th className="px-4 py-2 text-left">Objectif</th>
-                  <th className="px-4 py-2 text-left">Tendance</th>
-                  <th className="px-4 py-2 text-left">Statut</th>
+                  <th className="px-4 py-2 text-left">Indicator</th>
+                  <th className="px-4 py-2 text-left">Value actuelle</th>
+                  <th className="px-4 py-2 text-left">Target</th>
+                  <th className="px-4 py-2 text-left">Trend</th>
+                  <th className="px-4 py-2 text-left">Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -133,7 +133,7 @@ const EnvironmentalCharts = () => {
               </div>
               <h4 className="font-medium mb-1">HVE Niveau 2</h4>
               <p className="text-sm text-center text-muted-foreground">
-                Haute Valeur Environnementale
+                High Value Environnementale
               </p>
             </div>
             <div className="border rounded-lg p-4 flex flex-col items-center">
@@ -142,7 +142,7 @@ const EnvironmentalCharts = () => {
               </div>
               <h4 className="font-medium mb-1">En conversion Bio</h4>
               <p className="text-sm text-center text-muted-foreground">
-                15% de la surface totale
+                15% of la surface totale
               </p>
             </div>
           </div>

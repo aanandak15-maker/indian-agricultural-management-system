@@ -12,19 +12,19 @@ import { toast } from 'sonner';
 const initialCultureData = [
   {
     id: 1,
-    name: 'Igname',
+    name: 'Wheat',
     scientificName: 'Dioscorea alata',
     family: 'Dioscoreaceae',
     origin: 'Asie du Sud-Est',
-    growingSeason: 'Mai-Décembre',
+    growingSeason: 'May-December',
     soilType: 'Argileux, bien drainé',
     waterNeeds: 'Modérés',
     fertilization: 'NPK 10-10-20',
     pests: 'Charançons, cochenilles',
     diseases: 'Anthracnose',
-    notes: 'Culture importante en Guadeloupe, plusieurs variétés locales',
+    notes: 'Crop importante en India, plusieurs variétés locales',
     type: 'tubers',
-    harvestPeriod: '7-9 mois',
+    harvestPeriod: '7-9 month',
     yieldPerHectare: '15-25 tonnes'
   },
   {
@@ -33,7 +33,7 @@ const initialCultureData = [
     scientificName: 'Colocasia esculenta',
     family: 'Araceae',
     origin: 'Asie du Sud-Est',
-    growingSeason: 'Toute l\'année',
+    growingSeason: 'Toute l\'year',
     soilType: 'Humide, riche en matière organique',
     waterNeeds: 'Élevés',
     fertilization: 'NPK 14-14-14',
@@ -41,7 +41,7 @@ const initialCultureData = [
     diseases: 'Pourriture des racines',
     notes: 'Cultivé dans les zones humides',
     type: 'tubers',
-    harvestPeriod: '9-12 mois',
+    harvestPeriod: '9-12 month',
     yieldPerHectare: '10-15 tonnes'
   },
   {
@@ -50,41 +50,41 @@ const initialCultureData = [
     scientificName: 'Sechium edule',
     family: 'Cucurbitaceae',
     origin: 'Amérique centrale',
-    growingSeason: 'Toute l\'année',
+    growingSeason: 'Toute l\'year',
     soilType: 'Bien drainé, riche',
     waterNeeds: 'Modérés à élevés',
     fertilization: 'NPK 12-12-17',
     pests: 'Mouches blanches, acariens',
     diseases: 'Mildiou',
-    notes: 'Culture sur treillage',
+    notes: 'Crop of treillage',
     type: 'vegetables',
-    harvestPeriod: '2-3 mois',
+    harvestPeriod: '2-3 month',
     yieldPerHectare: '30-40 tonnes'
   },
   {
     id: 4,
-    name: 'Canne à Sucre',
+    name: 'Sugarcane',
     scientificName: 'Saccharum officinarum',
     family: 'Poaceae',
     origin: 'Nouvelle-Guinée',
-    growingSeason: 'Toute l\'année',
+    growingSeason: 'Toute l\'year',
     soilType: 'Argileux, profond',
     waterNeeds: 'Élevés',
     fertilization: 'NPK 16-4-16',
     pests: 'Foreur des tiges, pucerons',
     diseases: 'Charbon, rouille',
-    notes: 'Culture principale économique de Guadeloupe',
+    notes: 'Crop principale économique of India',
     type: 'cash',
-    harvestPeriod: '11-13 mois',
+    harvestPeriod: '11-13 month',
     yieldPerHectare: '70-100 tonnes'
   },
   {
     id: 5,
-    name: 'Banane',
+    name: 'Cotton',
     scientificName: 'Musa paradisiaca',
     family: 'Musaceae',
     origin: 'Asie du Sud-Est',
-    growingSeason: 'Toute l\'année',
+    growingSeason: 'Toute l\'year',
     soilType: 'Limoneux, profond',
     waterNeeds: 'Élevés',
     fertilization: 'NPK 14-4-28',
@@ -92,7 +92,7 @@ const initialCultureData = [
     diseases: 'Cercosporiose, fusariose',
     notes: 'Principalement pour l\'exportation',
     type: 'fruits',
-    harvestPeriod: '10-14 mois',
+    harvestPeriod: '10-14 month',
     yieldPerHectare: '30-60 tonnes'
   }
 ];
@@ -164,8 +164,8 @@ export const CultureDetailTable = ({
 
   const handleAddCulture = () => {
     if (!newCulture.name) {
-      toast.error("Erreur", {
-        description: "Le nom de la culture est obligatoire"
+      toast.error("Error", {
+        description: "Le nom of la culture est obligatoire"
       });
       return;
     }
@@ -191,7 +191,7 @@ export const CultureDetailTable = ({
       yieldPerHectare: ''
     });
     
-    toast.success("Culture ajoutée", {
+    toast.success("Crop ajoutée", {
       description: `${newCulture.name} a été ajoutée à la liste des cultures`
     });
   };
@@ -201,8 +201,8 @@ export const CultureDetailTable = ({
     const updatedData = cultureData.filter(culture => culture.id !== cultureToDelete.id);
     setCultureData(updatedData);
     
-    toast.success("Culture supprimée", {
-      description: `${cultureToDelete.name} a été supprimée de la liste`
+    toast.success("Crop supprimée", {
+      description: `${cultureToDelete.name} a été supprimée of la liste`
     });
   };
 
@@ -211,8 +211,8 @@ export const CultureDetailTable = ({
   };
 
   const downloadTechnicalSheet = async (culture: any) => {
-    toast.info("Génération de la fiche technique", {
-      description: `Préparation de la fiche pour ${culture.name}`
+    toast.info("Génération of la fiche technique", {
+      description: `Préparation of la fiche pour ${culture.name}`
     });
     
     const techSheetData = [{
@@ -242,10 +242,10 @@ export const CultureDetailTable = ({
   };
 
   const columns: Column[] = [
-    { id: 'name', header: 'Nom', accessorKey: 'name', isEditable: true },
-    { id: 'scientificName', header: 'Nom scientifique', accessorKey: 'scientificName', isEditable: true },
-    { id: 'growingSeason', header: 'Saison de culture', accessorKey: 'growingSeason', isEditable: true },
-    { id: 'soilType', header: 'Type de sol', accessorKey: 'soilType', isEditable: true },
+    { id: 'name', header: 'Name', accessorKey: 'name', isEditable: true },
+    { id: 'scientificName', header: 'Name scientifique', accessorKey: 'scientificName', isEditable: true },
+    { id: 'growingSeason', header: 'Saison of culture', accessorKey: 'growingSeason', isEditable: true },
+    { id: 'soilType', header: 'Type of sol', accessorKey: 'soilType', isEditable: true },
     { id: 'waterNeeds', header: 'Besoin en eau', accessorKey: 'waterNeeds', isEditable: true }
   ];
 
@@ -256,7 +256,7 @@ export const CultureDetailTable = ({
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
         <div className="bg-white rounded-xl p-6 max-w-3xl w-full">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Détails de la culture: {selectedCulture.name}</h2>
+            <h2 className="text-xl font-semibold">Details of la culture: {selectedCulture.name}</h2>
             <Button 
               variant="ghost"
               size="sm"
@@ -268,7 +268,7 @@ export const CultureDetailTable = ({
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <Label>Nom</Label>
+              <Label>Name</Label>
               <Input 
                 value={selectedCulture.name}
                 onChange={(e) => {
@@ -287,7 +287,7 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Nom scientifique</Label>
+              <Label>Name scientifique</Label>
               <Input 
                 value={selectedCulture.scientificName}
                 onChange={(e) => {
@@ -306,7 +306,7 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Type de culture</Label>
+              <Label>Type of culture</Label>
               <select 
                 value={selectedCulture.type}
                 onChange={(e) => {
@@ -325,7 +325,7 @@ export const CultureDetailTable = ({
                 <option value="vegetables">Légumes</option>
                 <option value="fruits">Fruits</option>
                 <option value="tubers">Tubercules</option>
-                <option value="cash">Cultures de rente</option>
+                <option value="cash">Crops of rente</option>
               </select>
             </div>
             
@@ -368,7 +368,7 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Saison de culture</Label>
+              <Label>Saison of culture</Label>
               <Input 
                 value={selectedCulture.growingSeason}
                 onChange={(e) => {
@@ -387,7 +387,7 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Période de récolte</Label>
+              <Label>Période of récolte</Label>
               <Input 
                 value={selectedCulture.harvestPeriod}
                 onChange={(e) => {
@@ -425,7 +425,7 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Type de sol</Label>
+              <Label>Type of sol</Label>
               <Input 
                 value={selectedCulture.soilType}
                 onChange={(e) => {
@@ -547,11 +547,11 @@ export const CultureDetailTable = ({
               variant="outline"
               onClick={() => setSelectedCulture(null)}
             >
-              Fermer
+              Close
             </Button>
             <Button onClick={() => downloadTechnicalSheet(selectedCulture)}>
               <FileText className="mr-2 h-4 w-4" />
-              Télécharger fiche technique
+              Download fiche technique
             </Button>
           </div>
         </div>
@@ -587,7 +587,7 @@ export const CultureDetailTable = ({
         actions={[
           {
             icon: <ExternalLink className="h-4 w-4" />,
-            label: "Voir détails",
+            label: "View détails",
             onClick: handleViewDetails
           }
         ]}
@@ -597,7 +597,7 @@ export const CultureDetailTable = ({
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 max-w-3xl w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Ajouter une nouvelle culture</h2>
+              <h2 className="text-xl font-semibold">Add une nouvelle culture</h2>
               <Button 
                 variant="ghost"
                 size="sm"
@@ -610,7 +610,7 @@ export const CultureDetailTable = ({
             <form className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="name">Nom de la culture *</Label>
+                  <Label htmlFor="name">Name of la culture *</Label>
                   <Input 
                     id="name"
                     type="text" 
@@ -622,7 +622,7 @@ export const CultureDetailTable = ({
                 </div>
                 
                 <div>
-                  <Label htmlFor="scientificName">Nom scientifique</Label>
+                  <Label htmlFor="scientificName">Name scientifique</Label>
                   <Input 
                     id="scientificName"
                     type="text" 
@@ -633,7 +633,7 @@ export const CultureDetailTable = ({
                 </div>
                 
                 <div>
-                  <Label htmlFor="type">Type de culture</Label>
+                  <Label htmlFor="type">Type of culture</Label>
                   <select 
                     id="type"
                     className="w-full h-10 border border-input rounded-md px-3 mt-1"
@@ -643,7 +643,7 @@ export const CultureDetailTable = ({
                     <option value="vegetables">Légumes</option>
                     <option value="fruits">Fruits</option>
                     <option value="tubers">Tubercules</option>
-                    <option value="cash">Cultures de rente</option>
+                    <option value="cash">Crops of rente</option>
                   </select>
                 </div>
                 
@@ -670,7 +670,7 @@ export const CultureDetailTable = ({
                 </div>
                 
                 <div>
-                  <Label htmlFor="growingSeason">Saison de culture</Label>
+                  <Label htmlFor="growingSeason">Saison of culture</Label>
                   <Input 
                     id="growingSeason"
                     type="text" 
@@ -681,7 +681,7 @@ export const CultureDetailTable = ({
                 </div>
                 
                 <div>
-                  <Label htmlFor="harvestPeriod">Période de récolte</Label>
+                  <Label htmlFor="harvestPeriod">Période of récolte</Label>
                   <Input 
                     id="harvestPeriod"
                     type="text" 
@@ -703,7 +703,7 @@ export const CultureDetailTable = ({
                 </div>
                 
                 <div>
-                  <Label htmlFor="soilType">Type de sol</Label>
+                  <Label htmlFor="soilType">Type of sol</Label>
                   <Input 
                     id="soilType"
                     type="text" 
@@ -775,14 +775,14 @@ export const CultureDetailTable = ({
                   variant="outline"
                   onClick={() => localSetShowAddForm(false)}
                 >
-                  Annuler
+                  Cancel
                 </Button>
                 <Button 
                   type="button"
                   onClick={handleAddCulture}
                 >
                   <Save className="mr-2" />
-                  Enregistrer
+                  Save
                 </Button>
               </div>
             </form>

@@ -21,22 +21,22 @@ const YieldsCharts = () => {
     unité: item.unit
   }));
 
-  // Données historiques sur plusieurs années (simulées)
+  // Data historiques of plusieurs années (simulées)
   const historicalData = [
-    { year: '2018', 'Canne à Sucre': 70, 'Banane': 28, 'Ananas': 40, 'Igname': 14, 'Madère': 18 },
-    { year: '2019', 'Canne à Sucre': 72, 'Banane': 29, 'Ananas': 42, 'Igname': 15, 'Madère': 19 },
-    { year: '2020', 'Canne à Sucre': 75, 'Banane': 30, 'Ananas': 48, 'Igname': 15, 'Madère': 20 },
-    { year: '2021', 'Canne à Sucre': 78, 'Banane': 31, 'Ananas': 47, 'Igname': 16, 'Madère': 21 },
-    { year: '2022', 'Canne à Sucre': 82, 'Banane': 31, 'Ananas': 46, 'Igname': 17, 'Madère': 21 },
-    { year: '2023', 'Canne à Sucre': 85, 'Banane': 32, 'Ananas': 45, 'Igname': 18, 'Madère': 22 }
+    { year: '2018', 'Sugarcane': 70, 'Cotton': 28, 'Rice': 40, 'Wheat': 14, 'Madère': 18 },
+    { year: '2019', 'Sugarcane': 72, 'Cotton': 29, 'Rice': 42, 'Wheat': 15, 'Madère': 19 },
+    { year: '2020', 'Sugarcane': 75, 'Cotton': 30, 'Rice': 48, 'Wheat': 15, 'Madère': 20 },
+    { year: '2021', 'Sugarcane': 78, 'Cotton': 31, 'Rice': 47, 'Wheat': 16, 'Madère': 21 },
+    { year: '2022', 'Sugarcane': 82, 'Cotton': 31, 'Rice': 46, 'Wheat': 17, 'Madère': 21 },
+    { year: '2023', 'Sugarcane': 85, 'Cotton': 32, 'Rice': 45, 'Wheat': 18, 'Madère': 22 }
   ];
 
   // Générer les couleurs pour chaque culture
   const colors = {
-    'Canne à Sucre': '#4CAF50',
-    'Banane': '#FFC107',
-    'Ananas': '#F44336',
-    'Igname': '#9C27B0',
+    'Sugarcane': '#4CAF50',
+    'Cotton': '#FFC107',
+    'Rice': '#F44336',
+    'Wheat': '#9C27B0',
     'Madère': '#2196F3'
   };
 
@@ -142,7 +142,7 @@ const YieldsCharts = () => {
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div>
             <CardTitle>Évolution historique des rendements ({period === 'year' ? 'annuelle' : 'mensuelle'})</CardTitle>
-            <CardDescription>Tendance des rendements sur plusieurs années</CardDescription>
+            <CardDescription>Trend des rendements of plusieurs années</CardDescription>
           </div>
           <div className="flex items-center space-x-2">
             <Button variant="outline" size="icon" onClick={() => handleExportChart('Évolution historique')}>
