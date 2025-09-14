@@ -16,15 +16,15 @@ interface Task {
   task: string;
   culture: string;
   date: string;
-  priority: 'High' | 'Average' | 'Basse';
+  priority: 'High' | 'Average' | 'Low';
 }
 
 const initialTasks: Task[] = [
-  { id: 1, task: 'Fertilisation of la canne', culture: 'Sugarcane', date: '2023-09-25', priority: 'High' },
-  { id: 2, task: 'Traitement contre la cercosporiose', culture: 'Cotton', date: '2023-09-28', priority: 'Average' },
-  { id: 3, task: 'Inspection croissance ananas', culture: 'Rice', date: '2023-09-30', priority: 'Basse' },
-  { id: 4, task: 'Désherbage parcelle madère', culture: 'Madère', date: '2023-10-05', priority: 'Average' },
-  { id: 5, task: 'Préparation coupe canne', culture: 'Sugarcane', date: '2024-01-10', priority: 'High' },
+  { id: 1, task: 'Sugarcane fertilization', culture: 'Sugarcane', date: '2023-09-25', priority: 'High' },
+  { id: 2, task: 'Cercosporiosis treatment', culture: 'Cotton', date: '2023-09-28', priority: 'Average' },
+  { id: 3, task: 'Rice growth inspection', culture: 'Rice', date: '2023-09-30', priority: 'Low' },
+  { id: 4, task: 'Madère field weeding', culture: 'Madère', date: '2023-10-05', priority: 'Average' },
+  { id: 5, task: 'Sugarcane cutting preparation', culture: 'Sugarcane', date: '2024-01-10', priority: 'High' },
 ];
 
 const TaskList = () => {
@@ -43,7 +43,7 @@ const TaskList = () => {
         return 'bg-red-100 text-red-800 border-red-200';
       case 'Average':
         return 'bg-orange-100 text-orange-800 border-orange-200';
-      case 'Basse':
+      case 'Low':
         return 'bg-green-100 text-green-800 border-green-200';
       default:
         return 'bg-gray-100 text-gray-800 border-gray-200';
@@ -51,12 +51,12 @@ const TaskList = () => {
   };
 
   const handleTaskComplete = (id: number) => {
-    console.log('Tâche marquée comme terminée');
+    console.log('Task marked as completed');
     setTasks(tasks.filter(task => task.id !== id));
   };
 
   const handleTaskDelete = (id: number) => {
-    console.log('Tâche supprimée avec succès');
+    console.log('Task deleted successfully');
     setTasks(tasks.filter(task => task.id !== id));
   };
 
@@ -64,12 +64,12 @@ const TaskList = () => {
     setTasks(tasks.map(task => 
       task.id === id ? { ...task, priority } : task
     ));
-    console.log(`Priorité modifiée en "${priority}"`);
+    console.log(`Priority changed to "${priority}"`);
   };
 
   const handleAddTask = () => {
     if (!newTask.task || !newTask.culture || !newTask.date) {
-      console.error('Veuillez remplir tous les champs obligatoires');
+      console.error('Please fill in all required fields');
       return;
     }
 
@@ -89,7 +89,7 @@ const TaskList = () => {
       priority: 'Average'
     });
     setShowAddTask(false);
-    console.log('Nouvelle tâche ajoutée avec succès');
+    console.log('New task added successfully');
   };
 
   return (
@@ -97,14 +97,14 @@ const TaskList = () => {
       <div className="p-4 flex items-center justify-between border-b">
         <div className="flex items-center gap-2">
           <Calendar className="h-5 w-5 text-agri-primary" />
-          <h2 className="text-xl font-semibold">Tâches à venir</h2>
+          <h2 className="text-xl font-semibold">Upcoming Tasks</h2>
         </div>
         <Button 
           onClick={() => setShowAddTask(!showAddTask)}
           className="bg-green-500 hover:bg-green-600 text-white transition-colors"
         >
           <Plus className="h-4 w-4 mr-2" />
-          Add une tâche
+          Add Task
         </Button>
       </div>
 
@@ -112,13 +112,13 @@ const TaskList = () => {
         <div className="p-4 bg-muted/20 border-b">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label className="text-sm font-medium mb-1 block">Tâche</label>
+              <label className="text-sm font-medium mb-1 block">Task</label>
               <input
                 type="text"
                 value={newTask.task}
                 onChange={(e) => setNewTask({...newTask, task: e.target.value})}
                 className="w-full p-2 border rounded focus:ring-2 focus:ring-agri-primary focus:border-agri-primary"
-                placeholder="Description of la tâche"
+                placeholder="Task description"
               />
             </div>
             <div>
@@ -128,7 +128,7 @@ const TaskList = () => {
                 onChange={(e) => setNewTask({...newTask, culture: e.target.value})}
                 className="w-full p-2 border rounded focus:ring-2 focus:ring-agri-primary focus:border-agri-primary"
               >
-                <option value="">Sélectionner une culture</option>
+                <option value="">Select a crop</option>
                 <option value="Sugarcane">Sugarcane</option>
                 <option value="Cotton">Cotton</option>
                 <option value="Rice">Rice</option>
@@ -146,7 +146,7 @@ const TaskList = () => {
               />
             </div>
             <div>
-              <label className="text-sm font-medium mb-1 block">Priorité</label>
+              <label className="text-sm font-medium mb-1 block">Priority</label>
               <select
                 value={newTask.priority}
                 onChange={(e) => setNewTask({...newTask, priority: e.target.value as Task['priority']})}
@@ -154,7 +154,7 @@ const TaskList = () => {
               >
                 <option value="High">High</option>
                 <option value="Average">Average</option>
-                <option value="Basse">Basse</option>
+                <option value="Low">Low</option>
               </select>
             </div>
           </div>
@@ -173,10 +173,10 @@ const TaskList = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[40%]">TÂCHE</TableHead>
-              <TableHead className="w-[20%]">CULTURE</TableHead>
+              <TableHead className="w-[40%]">TASK</TableHead>
+              <TableHead className="w-[20%]">CROP</TableHead>
               <TableHead className="w-[15%]">DATE</TableHead>
-              <TableHead className="w-[15%]">PRIORITÉ</TableHead>
+              <TableHead className="w-[15%]">PRIORITY</TableHead>
               <TableHead className="w-[10%]">ACTIONS</TableHead>
             </TableRow>
           </TableHeader>
@@ -191,7 +191,7 @@ const TaskList = () => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  {new Date(task.date).toLocaleDateString('fr-FR')}
+                  {new Date(task.date).toLocaleDateString('en-US')}
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
@@ -207,8 +207,8 @@ const TaskList = () => {
                       <DropdownMenuItem onClick={() => handlePriorityChange(task.id, 'Average')}>
                         Average
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handlePriorityChange(task.id, 'Basse')}>
-                        Basse
+                      <DropdownMenuItem onClick={() => handlePriorityChange(task.id, 'Low')}>
+                        Low
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -220,7 +220,7 @@ const TaskList = () => {
                       size="icon"
                       onClick={() => handleTaskComplete(task.id)}
                       className="h-8 w-8 text-green-600 hover:bg-green-50 hover:text-green-700"
-                      title="Marquer comme terminée"
+                      title="Mark as completed"
                     >
                       <Check className="h-4 w-4" />
                     </Button>
@@ -240,7 +240,7 @@ const TaskList = () => {
             {tasks.length === 0 && (
               <TableRow>
                 <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
-                  Aucune tâche à afficher
+                  No tasks to display
                 </TableCell>
               </TableRow>
             )}

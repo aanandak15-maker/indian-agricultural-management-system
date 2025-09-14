@@ -28,29 +28,29 @@ const monthlyData = [
 
 // Schema for transaction form
 const transactionSchema = z.object({
-  date: z.string().min(1, "La date est requise"),
-  description: z.string().min(3, "Description trop courte"),
+  date: z.string().min(1, "Date is required"),
+  description: z.string().min(3, "Description too short"),
   amount: z.string().refine(val => !isNaN(Number(val)) && Number(val) !== 0, {
-    message: "Amount invalide"
+    message: "Invalid amount"
   }),
-  category: z.string().min(1, "La catégorie est requise"),
+  category: z.string().min(1, "Category is required"),
   type: z.enum(["income", "expense"]),
 });
 
 const FinancialTracking = () => {
   // State for editable content
-  const [title, setTitle] = useState('Tracking Financier');
-  const [description, setDescription] = useState('Gérez vos revenus et dépenses pour optimiser la rentabilité of votre farm');
+  const [title, setTitle] = useState('Financial Tracking');
+  const [description, setDescription] = useState('Manage your income and expenses to optimize your farm profitability');
   
   // State for transactions
   const [transactions, setTransactions] = useState([
-    { id: 1, date: '2023-07-05', description: 'Sale of récolte', amount: 3200, category: 'Sales', type: 'income' },
-    { id: 2, date: '2023-07-10', description: 'Purchase d\'fertilizer', amount: 850, category: 'Fournitures', type: 'expense' },
-    { id: 3, date: '2023-07-12', description: 'Invoice d\'électricité', amount: 320, category: 'Utilities', type: 'expense' },
-    { id: 4, date: '2023-07-15', description: 'Sale of bananes', amount: 1500, category: 'Sales', type: 'income' },
-    { id: 5, date: '2023-07-20', description: 'Réparation tractor', amount: 750, category: 'Maintenance', type: 'expense' },
-    { id: 6, date: '2023-07-25', description: 'Subsidy agricultural', amount: 4200, category: 'Subsidies', type: 'income' },
-    { id: 7, date: '2023-07-28', description: 'Salaires employés', amount: 2800, category: 'Salaires', type: 'expense' },
+    { id: 1, date: '2023-07-05', description: 'Harvest sale', amount: 3200, category: 'Sales', type: 'income' },
+    { id: 2, date: '2023-07-10', description: 'Fertilizer purchase', amount: 850, category: 'Supplies', type: 'expense' },
+    { id: 3, date: '2023-07-12', description: 'Electricity bill', amount: 320, category: 'Utilities', type: 'expense' },
+    { id: 4, date: '2023-07-15', description: 'Cotton sale', amount: 1500, category: 'Sales', type: 'income' },
+    { id: 5, date: '2023-07-20', description: 'Tractor repair', amount: 750, category: 'Maintenance', type: 'expense' },
+    { id: 6, date: '2023-07-25', description: 'Agricultural subsidy', amount: 4200, category: 'Subsidies', type: 'income' },
+    { id: 7, date: '2023-07-28', description: 'Employee salaries', amount: 2800, category: 'Salaries', type: 'expense' },
   ]);
   
   // Filter and stats
@@ -121,13 +121,13 @@ const FinancialTracking = () => {
     setShowAddDialog(false);
     form.reset();
     
-    toast.success('Transaction ajoutée avec succès');
+    toast.success('Transaction added successfully');
   };
   
   // Handle delete transaction
   const handleDeleteTransaction = (id: number) => {
     setTransactions(transactions.filter(t => t.id !== id));
-    toast.success('Transaction supprimée');
+    toast.success('Transaction deleted');
   };
   
   // Handle edit transaction
@@ -135,7 +135,7 @@ const FinancialTracking = () => {
     setTransactions(transactions.map(t => 
       t.id === id ? { ...t, [field]: field === 'amount' ? parseFloat(value) : value } : t
     ));
-    toast.success('Transaction mise à jour');
+    toast.success('Transaction updated');
   };
   
   // Export to CSV
@@ -166,14 +166,14 @@ const FinancialTracking = () => {
     link.click();
     document.body.removeChild(link);
     
-    toast.success('Data exportées en CSV');
+    toast.success('Data exported to CSV');
   };
   
   // Print transactions
   const printTransactions = () => {
     const printWindow = window.open('', '_blank');
     if (!printWindow) {
-      toast.error('Impossible d\'ouvrir la fenêtre d\'impression');
+      toast.error('Unable to open print window');
       return;
     }
     
@@ -181,7 +181,7 @@ const FinancialTracking = () => {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Transactions Financières</title>
+          <title>Financial Transactions</title>
           <style>
             body { font-family: Arial, sans-serif; }
             table { width: 100%; border-collapse: collapse; }
@@ -194,11 +194,11 @@ const FinancialTracking = () => {
           </style>
         </head>
         <body>
-          <h1>Transactions Financières</h1>
+          <h1>Financial Transactions</h1>
           <div class="summary">
-            <p>Revenue totaux: <b>${totalIncome.toFixed(2)} €</b></p>
-            <p>Expenses totales: <b>${totalExpenses.toFixed(2)} €</b></p>
-            <p>Solde: <b class="${balance >= 0 ? 'income' : 'expense'}">${balance.toFixed(2)} €</b></p>
+            <p>Total Revenue: <b>${totalIncome.toFixed(2)} €</b></p>
+            <p>Total Expenses: <b>${totalExpenses.toFixed(2)} €</b></p>
+            <p>Balance: <b class="${balance >= 0 ? 'income' : 'expense'}">${balance.toFixed(2)} €</b></p>
           </div>
           <table>
             <thead>
@@ -233,7 +233,7 @@ const FinancialTracking = () => {
     printWindow.document.write(htmlContent);
     printWindow.document.close();
     
-    toast.success('Impression préparée');
+    toast.success('Print prepared');
   };
   
   return (
@@ -243,11 +243,11 @@ const FinancialTracking = () => {
         description={description}
         onTitleChange={(value) => {
           setTitle(String(value));
-          toast.success('Titre mis à jour');
+          toast.success('Title updated');
         }}
         onDescriptionChange={(value) => {
           setDescription(String(value));
-          toast.success('Description mise à jour');
+          toast.success('Description updated');
         }}
       />
       
@@ -255,7 +255,7 @@ const FinancialTracking = () => {
         <Card className="bg-white">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Revenue</CardTitle>
-            <CardDescription>Total des entrées</CardDescription>
+            <CardDescription>Total income</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold text-green-600">{totalIncome.toFixed(2)} €</p>
@@ -265,7 +265,7 @@ const FinancialTracking = () => {
         <Card className="bg-white">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Expenses</CardTitle>
-            <CardDescription>Total des sorties</CardDescription>
+            <CardDescription>Total expenses</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold text-red-600">{totalExpenses.toFixed(2)} €</p>
@@ -274,7 +274,7 @@ const FinancialTracking = () => {
         
         <Card className="bg-white">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Solde</CardTitle>
+            <CardTitle className="text-lg">Balance</CardTitle>
             <CardDescription>Revenue - Expenses</CardDescription>
           </CardHeader>
           <CardContent>
@@ -288,7 +288,7 @@ const FinancialTracking = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="bg-white">
           <CardHeader>
-            <CardTitle>Overview Mensuel</CardTitle>
+            <CardTitle>Monthly Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-80">
@@ -302,7 +302,7 @@ const FinancialTracking = () => {
                   <YAxis />
                   <Tooltip 
                     formatter={(value) => [`${value} €`, '']} 
-                    labelFormatter={(label) => `Mois: ${label}`}
+                    labelFormatter={(label) => `Month: ${label}`}
                   />
                   <Bar name="Revenue" dataKey="income" fill="#4ade80" radius={[4, 4, 0, 0]} />
                   <Bar name="Expenses" dataKey="expenses" fill="#f87171" radius={[4, 4, 0, 0]} />
@@ -314,7 +314,7 @@ const FinancialTracking = () => {
         
         <Card className="bg-white">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Transactions Récentes</CardTitle>
+            <CardTitle>Recent Transactions</CardTitle>
             <div className="flex gap-2">
               <Button 
                 variant="outline" 
@@ -330,7 +330,7 @@ const FinancialTracking = () => {
                 onClick={printTransactions}
               >
                 <Printer className="h-4 w-4 mr-1" />
-                Imprimer
+                Print
               </Button>
               <Button 
                 onClick={() => setShowAddDialog(true)}
@@ -348,7 +348,7 @@ const FinancialTracking = () => {
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
               >
-                <option value="all">Tous types</option>
+                <option value="all">All types</option>
                 <option value="income">Revenue</option>
                 <option value="expense">Expenses</option>
               </select>
@@ -360,7 +360,7 @@ const FinancialTracking = () => {
               >
                 {categories.map(cat => (
                   <option key={cat} value={cat}>
-                    {cat === 'all' ? 'Toutes catégories' : cat}
+                    {cat === 'all' ? 'All categories' : cat}
                   </option>
                 ))}
               </select>
@@ -374,10 +374,10 @@ const FinancialTracking = () => {
                   setSortOrder(order as 'asc' | 'desc');
                 }}
               >
-                <option value="date-desc">Date (récent)</option>
-                <option value="date-asc">Date (ancien)</option>
-                <option value="amount-desc">Amount (haut)</option>
-                <option value="amount-asc">Amount (bas)</option>
+                <option value="date-desc">Date (recent)</option>
+                <option value="date-asc">Date (oldest)</option>
+                <option value="amount-desc">Amount (high)</option>
+                <option value="amount-asc">Amount (low)</option>
               </select>
             </div>
             
@@ -438,7 +438,7 @@ const FinancialTracking = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-center text-muted-foreground py-8">Aucune transaction trouvée</p>
+                <p className="text-center text-muted-foreground py-8">No transactions found</p>
               )}
             </div>
           </CardContent>
@@ -449,7 +449,7 @@ const FinancialTracking = () => {
       <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
-            <DialogTitle>Add une transaction</DialogTitle>
+            <DialogTitle>Add Transaction</DialogTitle>
           </DialogHeader>
           
           <Form {...form}>
@@ -530,7 +530,7 @@ const FinancialTracking = () => {
                     <FormItem className="col-span-2">
                       <FormLabel>Category</FormLabel>
                       <FormControl>
-                        <Input placeholder="Exemple: Sales, Fournitures..." {...field} />
+                        <Input placeholder="Example: Sales, Supplies..." {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

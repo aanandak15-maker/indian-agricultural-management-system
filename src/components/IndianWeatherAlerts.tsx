@@ -29,24 +29,24 @@ import * as z from "zod";
 interface WeatherAlert {
   id: number;
   date: string;
-  type: 'Heavy rainfall' | 'Tempête tropicale' | 'Drought' | 'Chaleur excessive' | 'Inondation';
+  type: 'Heavy rainfall' | 'Tropical storm' | 'Drought' | 'Excessive heat' | 'Flooding';
   region: string;
-  severity: 'Basse' | 'Average' | 'High' | 'Extrême';
-  impactCrops: 'Low' | 'Modéré' | 'Sévère';
+  severity: 'Low' | 'Average' | 'High' | 'Extreme';
+  impactCrops: 'Low' | 'Moderate' | 'Severe';
   description: string;
   recommendation: string;
-  status: 'Active' | 'Completede' | 'Prévue';
+  status: 'Active' | 'Completed' | 'Planned';
 }
 
 const alertFormSchema = z.object({
-  date: z.string().min(1, { message: "La date est requise" }),
-  type: z.enum(['Heavy rainfall', 'Tempête tropicale', 'Drought', 'Chaleur excessive', 'Inondation']),
-  region: z.string().min(1, { message: "La région est requise" }),
-  severity: z.enum(['Basse', 'Average', 'High', 'Extrême']),
-  impactCrops: z.enum(['Low', 'Modéré', 'Sévère']),
-  description: z.string().min(5, { message: "Description trop courte" }),
-  recommendation: z.string().min(5, { message: "Recommandation trop courte" }),
-  status: z.enum(['Active', 'Completede', 'Prévue']),
+  date: z.string().min(1, { message: "Date is required" }),
+  type: z.enum(['Heavy rainfall', 'Tropical storm', 'Drought', 'Excessive heat', 'Flooding']),
+  region: z.string().min(1, { message: "Region is required" }),
+  severity: z.enum(['Low', 'Average', 'High', 'Extreme']),
+  impactCrops: z.enum(['Low', 'Moderate', 'Severe']),
+  description: z.string().min(5, { message: "Description too short" }),
+  recommendation: z.string().min(5, { message: "Recommendation too short" }),
+  status: z.enum(['Active', 'Completed', 'Planned']),
 });
 
 const IndianWeatherAlerts = () => {
@@ -66,7 +66,7 @@ const IndianWeatherAlerts = () => {
       type: 'Heavy rainfall',
       region: 'Maharashtra',
       severity: 'Average',
-      impactCrops: 'Modéré',
+      impactCrops: 'Moderate',
       description: '',
       recommendation: '',
       status: 'Active',
@@ -80,21 +80,21 @@ const IndianWeatherAlerts = () => {
       type: 'Heavy rainfall',
       region: 'Maharashtra',
       severity: 'High',
-      impactCrops: 'Modéré',
-      description: 'Heavy precipitation attendues durant 48 heures avec risque d\'inondation dans les zones of basse altitude.',
-      recommendation: 'Vérifier le drainage des parcelles et protéger les jeunes seedlings. Suspendre temporairement l\'irrigation.',
+      impactCrops: 'Moderate',
+      description: 'Heavy precipitation expected for 48 hours with risk of flooding in low-lying areas.',
+      recommendation: 'Check field drainage and protect young seedlings. Temporarily suspend irrigation.',
       status: 'Active'
     },
     {
       id: 2,
       date: '2024-06-20',
-      type: 'Tempête tropicale',
+      type: 'Tropical storm',
       region: 'Grande-Terre',
-      severity: 'Extrême',
-      impactCrops: 'Sévère',
-      description: 'Tempête tropicale Emily approchant avec des vents pouvant dépasser 120 km/h et fortes précipitations.',
+      severity: 'Extreme',
+      impactCrops: 'Severe',
+      description: 'Tropical storm Emily approaching with winds exceeding 120 km/h and heavy precipitation.',
       recommendation: 'Harvest mature crops preventively. Strengthen banana plant supports. Secure agricultural equipment.',
-      status: 'Prévue'
+      status: 'Planned'
     },
     {
       id: 3,
@@ -102,56 +102,56 @@ const IndianWeatherAlerts = () => {
       type: 'Drought',
       region: 'Grande-Terre',
       severity: 'Average',
-      impactCrops: 'Modéré',
-      description: 'Période prolongée sans précipitations significatives causant un stress hydrique pour certaines cultures.',
-      recommendation: 'Prioriser l\'irrigation des cultures sensibles. Utiliser du paillage pour conserver l\'humidité du sol.',
-      status: 'Completede'
+      impactCrops: 'Moderate',
+      description: 'Extended period without significant precipitation causing water stress for some crops.',
+      recommendation: 'Prioritize irrigation of sensitive crops. Use mulching to conserve soil moisture.',
+      status: 'Completed'
     },
     {
       id: 4,
       date: '2024-07-05',
-      type: 'Chaleur excessive',
-      region: 'Les Saintes',
+      type: 'Excessive heat',
+      region: 'Maharashtra',
       severity: 'Average',
-      impactCrops: 'Modéré',
-      description: 'Vague of chaleur avec températures dépassant 35°C pendant plusieurs jours consécutifs.',
-      recommendation: 'Ombrager les cultures sensibles. Augmenter la fréquence d\'irrigation, of préférence tôt le matin ou tard le soir.',
-      status: 'Prévue'
+      impactCrops: 'Moderate',
+      description: 'Heat wave with temperatures exceeding 35°C for several consecutive days.',
+      recommendation: 'Shade sensitive crops. Increase irrigation frequency, preferably early morning or late evening.',
+      status: 'Planned'
     },
     {
       id: 5,
       date: '2024-06-10',
-      type: 'Inondation',
+      type: 'Flooding',
       region: 'Maharashtra',
       severity: 'High',
-      impactCrops: 'Sévère',
-      description: 'Débordement des rivières suite aux pluies intenses des derniers jours affectant les parcelles en zone basse.',
-      recommendation: 'Évacuer les cultures pouvant être récoltées. Préparer les demandes d\'indemnisation. Surveiller les maladies fongiques.',
-      status: 'Completede'
+      impactCrops: 'Severe',
+      description: 'River overflow following intense rains in recent days affecting low-lying fields.',
+      recommendation: 'Evacuate harvestable crops. Prepare compensation claims. Monitor fungal diseases.',
+      status: 'Completed'
     }
   ]);
   
   const columns: Column[] = [
     { id: 'date', header: 'Date', accessorKey: 'date', isEditable: true },
-    { id: 'type', header: 'Type d\'alerte', accessorKey: 'type', isEditable: true },
-    { id: 'region', header: 'Région', accessorKey: 'region', isEditable: true },
-    { id: 'severity', header: 'Sévérité', accessorKey: 'severity', isEditable: true },
+    { id: 'type', header: 'Alert Type', accessorKey: 'type', isEditable: true },
+    { id: 'region', header: 'Region', accessorKey: 'region', isEditable: true },
+    { id: 'severity', header: 'Severity', accessorKey: 'severity', isEditable: true },
     { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true },
   ];
   
   const handleTitleChange = (value: string | number) => {
     setTitle(String(value));
     toast({
-      title: "Titre mis à jour",
-      description: "Le titre du module a été modifié avec succès"
+      title: "Title updated",
+      description: "Module title has been successfully modified"
     });
   };
   
   const handleDescriptionChange = (value: string | number) => {
     setDescription(String(value));
     toast({
-      title: "Description mise à jour",
-      description: "La description du module a été modifiée avec succès"
+      title: "Description updated",
+      description: "Module description has been successfully modified"
     });
   };
   
@@ -179,8 +179,8 @@ const IndianWeatherAlerts = () => {
       setWeatherAlerts(newData);
       
       toast({
-        title: "Alert mise à jour",
-        description: `Les informations of l'alerte ont été mises à jour`
+        title: "Alert updated",
+        description: `Alert information has been updated`
       });
     }
   };
@@ -191,8 +191,8 @@ const IndianWeatherAlerts = () => {
     setWeatherAlerts(newData);
     
     toast({
-      title: "Alert supprimée",
-      description: "L'alerte a été supprimée avec succès"
+      title: "Alert deleted",
+      description: "Alert has been successfully deleted"
     });
   };
   
@@ -216,8 +216,8 @@ const IndianWeatherAlerts = () => {
     form.reset();
     
     toast({
-      title: "Alert ajoutée",
-      description: `Nouvelle alerte météo ajoutée pour ${data.region}`
+      title: "Alert added",
+      description: `New weather alert added for ${data.region}`
     });
   };
   
@@ -229,28 +229,28 @@ const IndianWeatherAlerts = () => {
     switch (type) {
       case 'Heavy rainfall':
         return <CloudRain className="h-6 w-6 text-blue-500" />;
-      case 'Tempête tropicale':
+      case 'Tropical storm':
         return <Wind className="h-6 w-6 text-purple-500" />;
       case 'Drought':
         return <Sun className="h-6 w-6 text-orange-500" />;
-      case 'Chaleur excessive':
+      case 'Excessive heat':
         return <Thermometer className="h-6 w-6 text-red-500" />;
-      case 'Inondation':
+      case 'Flooding':
         return <CloudLightning className="h-6 w-6 text-indigo-500" />;
       default:
         return <AlertTriangle className="h-6 w-6 text-gray-500" />;
     }
   };
-  
+
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'Basse':
+      case 'Low':
         return 'bg-green-100 text-green-800';
       case 'Average':
         return 'bg-yellow-100 text-yellow-800';
       case 'High':
         return 'bg-orange-100 text-orange-800';
-      case 'Extrême':
+      case 'Extreme':
         return 'bg-red-100 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
@@ -261,9 +261,9 @@ const IndianWeatherAlerts = () => {
     switch (status) {
       case 'Active':
         return 'bg-blue-100 text-blue-800';
-      case 'Completede':
+      case 'Completed':
         return 'bg-gray-100 text-gray-800';
-      case 'Prévue':
+      case 'Planned':
         return 'bg-purple-100 text-purple-800';
       default:
         return 'bg-gray-100 text-gray-800';
@@ -296,7 +296,7 @@ const IndianWeatherAlerts = () => {
             <Input
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search une alerte..."
+              placeholder="Search an alert..."
               className="pl-10"
             />
             <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -305,14 +305,14 @@ const IndianWeatherAlerts = () => {
           <Select value={filterSeverity} onValueChange={setFilterSeverity}>
             <SelectTrigger className="w-[150px]">
               <AlertTriangle className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Sévérité" />
+              <SelectValue placeholder="Severity" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Toutes</SelectItem>
-              <SelectItem value="Basse">Basse</SelectItem>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="Low">Low</SelectItem>
               <SelectItem value="Average">Average</SelectItem>
               <SelectItem value="High">High</SelectItem>
-              <SelectItem value="Extrême">Extrême</SelectItem>
+              <SelectItem value="Extreme">Extreme</SelectItem>
             </SelectContent>
           </Select>
           
@@ -322,10 +322,10 @@ const IndianWeatherAlerts = () => {
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Tous</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               <SelectItem value="Active">Active</SelectItem>
-              <SelectItem value="Completede">Completede</SelectItem>
-              <SelectItem value="Prévue">Prévue</SelectItem>
+              <SelectItem value="Completed">Completed</SelectItem>
+              <SelectItem value="Planned">Planned</SelectItem>
             </SelectContent>
           </Select>
           
@@ -334,12 +334,12 @@ const IndianWeatherAlerts = () => {
               <DialogTrigger asChild>
                 <Button>
                   <PlusCircle className="h-4 w-4 mr-2" />
-                  Nouvelle alerte
+                  New Alert
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-lg">
                 <DialogHeader>
-                  <DialogTitle>Add une nouvelle alerte météo</DialogTitle>
+                  <DialogTitle>Add a new weather alert</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -363,19 +363,19 @@ const IndianWeatherAlerts = () => {
                         name="type"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Type d'alerte</FormLabel>
+                            <FormLabel>Alert Type</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner un type" />
+                                  <SelectValue placeholder="Select a type" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Heavy rainfall">Heavy rainfall</SelectItem>
-                                <SelectItem value="Tempête tropicale">Tempête tropicale</SelectItem>
+                                <SelectItem value="Tropical storm">Tropical storm</SelectItem>
                                 <SelectItem value="Drought">Drought</SelectItem>
-                                <SelectItem value="Chaleur excessive">Chaleur excessive</SelectItem>
-                                <SelectItem value="Inondation">Inondation</SelectItem>
+                                <SelectItem value="Excessive heat">Excessive heat</SelectItem>
+                                <SelectItem value="Flooding">Flooding</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -390,11 +390,11 @@ const IndianWeatherAlerts = () => {
                         name="region"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Région</FormLabel>
+                            <FormLabel>Region</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner une région" />
+                                  <SelectValue placeholder="Select a region" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
@@ -415,18 +415,18 @@ const IndianWeatherAlerts = () => {
                         name="severity"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Sévérité</FormLabel>
+                            <FormLabel>Severity</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner une sévérité" />
+                                  <SelectValue placeholder="Select a severity" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                <SelectItem value="Basse">Basse</SelectItem>
+                                <SelectItem value="Low">Low</SelectItem>
                                 <SelectItem value="Average">Average</SelectItem>
                                 <SelectItem value="High">High</SelectItem>
-                                <SelectItem value="Extrême">Extrême</SelectItem>
+                                <SelectItem value="Extreme">Extreme</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -441,17 +441,17 @@ const IndianWeatherAlerts = () => {
                         name="impactCrops"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Impact of les cultures</FormLabel>
+                            <FormLabel>Impact on crops</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner un impact" />
+                                  <SelectValue placeholder="Select an impact" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Low">Low</SelectItem>
-                                <SelectItem value="Modéré">Modéré</SelectItem>
-                                <SelectItem value="Sévère">Sévère</SelectItem>
+                                <SelectItem value="Moderate">Moderate</SelectItem>
+                                <SelectItem value="Severe">Severe</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -468,13 +468,13 @@ const IndianWeatherAlerts = () => {
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner un statut" />
+                                  <SelectValue placeholder="Select a status" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Active">Active</SelectItem>
-                                <SelectItem value="Completede">Completede</SelectItem>
-                                <SelectItem value="Prévue">Prévue</SelectItem>
+                                <SelectItem value="Completed">Completed</SelectItem>
+                                <SelectItem value="Planned">Planned</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -502,7 +502,7 @@ const IndianWeatherAlerts = () => {
                       name="recommendation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Recommandation</FormLabel>
+                          <FormLabel>Recommendation</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -528,7 +528,7 @@ const IndianWeatherAlerts = () => {
           {filteredAlerts.length === 0 ? (
             <div className="text-center py-8 border rounded-lg bg-muted/30">
               <AlertTriangle className="h-10 w-10 mx-auto text-muted-foreground mb-2" />
-              <p className="text-muted-foreground">Aucune alerte ne correspond aux critères of recherche</p>
+              <p className="text-muted-foreground">No alerts match your search criteria</p>
             </div>
           ) : (
             filteredAlerts.map(alert => (
@@ -570,19 +570,19 @@ const IndianWeatherAlerts = () => {
                         <p className="text-sm">{alert.description}</p>
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold mb-1">Recommandations</h4>
-                        <p className="text-sm">{alert.recommendation}</p>
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <h4 className="text-sm font-semibold mb-1">Impact of les cultures</h4>
-                      <Badge className={alert.impactCrops === 'Sévère' ? 'bg-red-100 text-red-800' : 
-                                      alert.impactCrops === 'Modéré' ? 'bg-yellow-100 text-yellow-800' : 
-                                      'bg-green-100 text-green-800'}>
-                        {alert.impactCrops}
-                      </Badge>
-                    </div>
-                  </div>
+        <h4 className="text-sm font-semibold mb-1">Recommendations</h4>
+        <p className="text-sm">{alert.recommendation}</p>
+      </div>
+    </div>
+    <div className="mt-4">
+      <h4 className="text-sm font-semibold mb-1">Impact on crops</h4>
+      <Badge className={alert.impactCrops === 'Severe' ? 'bg-red-100 text-red-800' :
+                      alert.impactCrops === 'Moderate' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-green-100 text-green-800'}>
+        {alert.impactCrops}
+      </Badge>
+    </div>
+  </div>
                 )}
               </div>
             ))
@@ -590,7 +590,7 @@ const IndianWeatherAlerts = () => {
         </div>
         
         <div className="border rounded-lg overflow-hidden">
-          <h3 className="text-lg font-semibold p-4 bg-muted/20 border-b">Manage les alertes</h3>
+          <h3 className="text-lg font-semibold p-4 bg-muted/20 border-b">Manage alerts</h3>
           <EditableTable
             data={filteredAlerts}
             columns={columns}

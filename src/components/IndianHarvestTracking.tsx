@@ -13,15 +13,15 @@ interface HarvestData {
   previousYield: number;
   unit: string;
   harvestArea: number;
-  quality: 'Excellente' | 'Bonne' | 'Average' | 'Low';
+  quality: 'Excellent' | 'Good' | 'Average' | 'Low';
 }
 
 const IndianHarvestTracking = () => {
   const { yieldData } = useStatistics();
-  const [title, setTitle] = useState('Tracking des Harvests en India');
-  const [description, setDescription] = useState('Suivez les rendements et la qualité des récoltes pour les principales cultures guadeloupéennes');
+  const [title, setTitle] = useState('Harvest Tracking in India');
+  const [description, setDescription] = useState('Track yields and harvest quality for major Indian crops');
   
-  // Convertir les données of yield pour les adapter au format attendu
+  // Convert yield data to adapt to expected format
   const [harvestData, setHarvestData] = useState<HarvestData[]>(
     yieldData.map(item => ({
       crop: item.name,
@@ -32,19 +32,19 @@ const IndianHarvestTracking = () => {
                    item.name === 'Cotton' ? 2300 :
                    item.name === 'Rice' ? 350 :
                    item.name === 'Wheat' ? 420 : 180,
-      quality: item.name === 'Cotton' ? 'Excellente' :
-               item.name === 'Rice' || item.name === 'Sugarcane' || item.name === 'Madère' ? 'Bonne' : 'Average'
+      quality: item.name === 'Cotton' ? 'Excellent' :
+               item.name === 'Rice' || item.name === 'Sugarcane' || item.name === 'Madère' ? 'Good' : 'Average'
     }))
   );
   
-  // Colonnes pour le tableau éditable
+  // Columns for editable table
   const columns: Column[] = [
     { id: 'crop', header: 'Crop', accessorKey: 'crop', isEditable: true },
-    { id: 'currentYield', header: 'Rendement actuel', accessorKey: 'currentYield', type: 'number', isEditable: true },
-    { id: 'previousYield', header: 'Rendement précédent', accessorKey: 'previousYield', type: 'number', isEditable: true },
-    { id: 'unit', header: 'Unité', accessorKey: 'unit', isEditable: true },
-    { id: 'harvestArea', header: 'Surface (ha)', accessorKey: 'harvestArea', type: 'number', isEditable: true },
-    { id: 'quality', header: 'Qualité', accessorKey: 'quality', isEditable: true }
+    { id: 'currentYield', header: 'Current Yield', accessorKey: 'currentYield', type: 'number', isEditable: true },
+    { id: 'previousYield', header: 'Previous Yield', accessorKey: 'previousYield', type: 'number', isEditable: true },
+    { id: 'unit', header: 'Unit', accessorKey: 'unit', isEditable: true },
+    { id: 'harvestArea', header: 'Area (ha)', accessorKey: 'harvestArea', type: 'number', isEditable: true },
+    { id: 'quality', header: 'Quality', accessorKey: 'quality', isEditable: true }
   ];
   
   // Handlers
@@ -68,14 +68,14 @@ const IndianHarvestTracking = () => {
     
     newData[rowIndex] = updatedRow as HarvestData;
     setHarvestData(newData);
-    console.log('Data of récolte mises à jour');
+    console.log('Harvest data updated');
   };
   
   const handleDeleteRow = (rowIndex: number) => {
     const newData = [...harvestData];
     newData.splice(rowIndex, 1);
     setHarvestData(newData);
-    console.log('Crop supprimée du suivi');
+    console.log('Crop removed from tracking');
   };
   
   const handleAddRow = (newRow: Record<string, any>) => {
@@ -88,36 +88,36 @@ const IndianHarvestTracking = () => {
       quality: (newRow.quality as HarvestData['quality']) || 'Average'
     };
     setHarvestData([...harvestData, typedRow]);
-    console.log('Nouvelle culture ajoutée au suivi');
+    console.log('New crop added to tracking');
   };
   
-  // Data pour le graphique comparatif
+  // Data for comparative chart
   const chartData = harvestData.map(item => ({
     name: item.crop,
-    actuel: item.currentYield,
-    précédent: item.previousYield,
-    différence: item.currentYield - item.previousYield,
-    unité: item.unit
+    current: item.currentYield,
+    previous: item.previousYield,
+    difference: item.currentYield - item.previousYield,
+    unit: item.unit
   }));
 
   // Prepare data for preview/print
   const printData = harvestData.map(item => ({
     culture: item.crop,
-    rendement_actuel: `${item.currentYield} ${item.unit}`,
-    rendement_precedent: `${item.previousYield} ${item.unit}`,
-    surface: `${item.harvestArea} ha`,
-    qualite: item.quality,
+    current_yield: `${item.currentYield} ${item.unit}`,
+    previous_yield: `${item.previousYield} ${item.unit}`,
+    area: `${item.harvestArea} ha`,
+    quality: item.quality,
     evolution: `${item.currentYield > item.previousYield ? '+' : ''}${(item.currentYield - item.previousYield)} ${item.unit}`
   }));
   
   // Columns for preview/print
   const printColumns = [
     { key: "culture", header: "Crop" },
-    { key: "rendement_actuel", header: "Rendement actuel" },
-    { key: "rendement_precedent", header: "Rendement précédent" },
-    { key: "surface", header: "Surface (ha)" },
-    { key: "qualite", header: "Qualité" },
-    { key: "evolution", header: "Évolution" }
+    { key: "current_yield", header: "Current Yield" },
+    { key: "previous_yield", header: "Previous Yield" },
+    { key: "area", header: "Area (ha)" },
+    { key: "quality", header: "Quality" },
+    { key: "evolution", header: "Evolution" }
   ];
   
   return (
@@ -162,15 +162,15 @@ const IndianHarvestTracking = () => {
               <YAxis />
               <Tooltip 
                 formatter={(value, name, props) => {
-                  if (name === 'différence') {
-                    return [`${Number(value) > 0 ? '+' : ''}${value} ${props.payload.unité}`, 'Évolution'];
+                  if (name === 'difference') {
+                    return [`${Number(value) > 0 ? '+' : ''}${value} ${props.payload.unit}`, 'Evolution'];
                   }
-                  return [`${value} ${props.payload.unité}`, name];
+                  return [`${value} ${props.payload.unit}`, name];
                 }}
               />
               <Legend />
-              <Bar name="Rendement actuel" dataKey="actuel" fill="#4CAF50" />
-              <Bar name="Rendement précédent" dataKey="précédent" fill="#8D6E63" />
+              <Bar name="Current Yield" dataKey="current" fill="#4CAF50" />
+              <Bar name="Previous Yield" dataKey="previous" fill="#8D6E63" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -197,7 +197,7 @@ const IndianHarvestTracking = () => {
                   <span>{isPositive ? '+' : ''}{change} {item.unit} ({isPositive ? '+' : ''}{changePercent}%)</span>
                 </div>
                 <div className="mt-2 text-xs text-muted-foreground">
-                  Qualité: <span className="font-medium">{item.quality}</span>
+                  Quality: <span className="font-medium">{item.quality}</span>
                 </div>
               </div>
             );

@@ -159,8 +159,8 @@ const StatsPage = () => {
                   />
                 </p>
                 <div className="flex items-center mt-1 text-xs text-muted-foreground">
-                  <span className="mr-2">Modules connectés: {connectedModules.join(', ')}</span>
-                  <span>Dernière synchro: {lastSyncDate.toLocaleString()}</span>
+                  <span className="mr-2">Connected modules: {connectedModules.join(', ')}</span>
+                  <span>Last sync: {lastSyncDate.toLocaleString()}</span>
                 </div>
               </div>
               
@@ -198,7 +198,7 @@ const StatsPage = () => {
                   }`}
                 >
                   <TrendingUp className="h-4 w-4 mr-1.5" />
-                  Détaillé
+                  Detailed
                 </button>
                 
                 <PreviewPrintButton

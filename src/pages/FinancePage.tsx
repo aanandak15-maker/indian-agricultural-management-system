@@ -112,18 +112,18 @@ const FinancePage = () => {
   
   const handleCardDetailClick = (cardType: string) => {
     toast.info(`Details ${cardType}`, {
-      description: `Affichage des détails of ${cardType.toLowerCase()}`
+      description: `Displaying details of ${cardType.toLowerCase()}`
     });
   };
   
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    toast.info("Changement d'onglet", {
-      description: `Vous consultez maintenant l'onglet ${value === 'overview' ? 'Overview' : 
+    toast.info("Tab change", {
+      description: `You are now viewing the ${value === 'overview' ? 'Overview' : 
                                                         value === 'income' ? 'Revenue' : 
                                                         value === 'expenses' ? 'Expenses' :
-                                                        value === 'forecast' ? 'Prévisions' :
-                                                        value === 'budget' ? 'Budget' : 'Reports'}`
+                                                        value === 'forecast' ? 'Forecasts' :
+                                                        value === 'budget' ? 'Budget' : 'Reports'} tab`
     });
   };
 
@@ -149,12 +149,12 @@ const FinancePage = () => {
             } else if (activeTab === 'expenses') {
               handleAddExpense();
             } else if (activeTab === 'forecast') {
-              toast.info("Simulation lancée", {
-                description: "La simulation financière est en cours d'exécution"
+              toast.info("Simulation launched", {
+                description: "Financial simulation is running"
               });
             } else if (activeTab === 'budget') {
-              toast.info("Budget enregistré", {
-                description: "Les modifications du budget ont été sauvegardées"
+              toast.info("Budget saved", {
+                description: "Budget modifications have been saved"
               });
             } else {
               handleGenerateReport();
@@ -164,32 +164,32 @@ const FinancePage = () => {
           {activeTab === 'overview' ? (
             <>
               <FileText className="mr-2 h-4 w-4" />
-              Générer un rapport
+              Generate Report
             </>
           ) : activeTab === 'income' ? (
             <>
               <Plus className="mr-2 h-4 w-4" />
-              Add un revenu
+              Add Income
             </>
           ) : activeTab === 'expenses' ? (
             <>
               <Plus className="mr-2 h-4 w-4" />
-              Add une dépense
+              Add Expense
             </>
           ) : activeTab === 'forecast' ? (
             <>
               <BarChart className="mr-2 h-4 w-4" />
-              Lancer une simulation
+              Launch Simulation
             </>
           ) : activeTab === 'budget' ? (
             <>
               <Plus className="mr-2 h-4 w-4" />
-              Add une catégorie
+              Add Category
             </>
           ) : (
             <>
               <FileText className="mr-2 h-4 w-4" />
-              Nouveau rapport
+              New Report
             </>
           )}
         </Button>
@@ -212,7 +212,7 @@ const FinancePage = () => {
                 </Button>
                 <Button variant="outline" className="justify-start" onClick={() => handleImportConfirm('factures')}>
                   <DollarSign className="h-4 w-4 mr-2" />
-                  Factures scannées (PDF)
+                  Scanned Invoices (PDF)
                 </Button>
               </div>
               <div className="flex justify-end">
@@ -284,7 +284,7 @@ const FinancePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586l3.293-3.293A1 1 0 0114 7h-2z" clipRule="evenodd" />
                   </svg>
-                  +12.5% comparée à l'an dernier
+                  +12.5% compared to last year
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
@@ -312,7 +312,7 @@ const FinancePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M1 10a5 5 0 015-5h8a5 5 0 015 5v8a1 1 0 01-2 0v-8z" clipRule="evenodd" />
                   </svg>
-                  Stable par rapport à l'an dernier
+                  Stable compared to last year
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
@@ -340,7 +340,7 @@ const FinancePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586l3.293-3.293A1 1 0 0114 7h-2z" clipRule="evenodd" />
                   </svg>
-                  +28.3% comparé à l'an dernier
+                  +28.3% compared to last year
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
@@ -356,18 +356,18 @@ const FinancePage = () => {
           </div>
           
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Sources of revenus récentes</h3>
+            <h3 className="text-lg font-semibold">Recent Income Sources</h3>
             <Button onClick={handleAddIncome}>
               <Plus className="h-4 w-4 mr-2" />
-              Add un revenu
+              Add Income
             </Button>
           </div>
           
           {showAddIncomeForm ? (
             <div className="animate-fade-in bg-muted/20 rounded-lg p-6 text-center border border-primary/20">
               <DollarSign className="h-12 w-12 mx-auto text-primary mb-2" />
-              <h3 className="text-lg font-semibold mb-2">Ajout d'un nouveau revenu</h3>
-              <p className="text-muted-foreground mb-4">Traitement en cours...</p>
+              <h3 className="text-lg font-semibold mb-2">Adding New Income</h3>
+              <p className="text-muted-foreground mb-4">Processing...</p>
               <div className="w-full bg-muted rounded-full h-2 mb-4">
                 <div className="bg-primary h-2 rounded-full animate-pulse" style={{width: '60%'}}></div>
               </div>
@@ -375,12 +375,12 @@ const FinancePage = () => {
           ) : (
             <div className="bg-muted/20 rounded-lg p-6 text-center">
               <DollarSign className="h-12 w-12 mx-auto text-muted-foreground mb-2" />
-              <h3 className="text-lg font-semibold mb-2">Module of gestion des revenus</h3>
+              <h3 className="text-lg font-semibold mb-2">Income Management Module</h3>
               <p className="text-muted-foreground mb-4">
-                Activez ce module pour suivre en détail toutes vos sources of revenus
-                et générer des rapports personnalisés.
+                Activate this module to track all your income sources in detail
+                and generate personalized reports.
               </p>
-              <Button onClick={() => handleActivateModule('gestion des revenus')}>Activer ce module</Button>
+              <Button onClick={() => handleActivateModule('gestion des revenus')}>Activate Module</Button>
             </div>
           )}
         </div>
@@ -430,7 +430,7 @@ const FinancePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 13a1 1 0 100-2H7.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L7.414 13H12z" clipRule="evenodd" />
                   </svg>
-                  +8.3% comparé à l'an dernier
+                  +8.3% compared to last year
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
@@ -444,13 +444,13 @@ const FinancePage = () => {
               </CardFooter>
             </Card>
             
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Matériel')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Equipment')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
-                  <Badge className="mr-2 bg-indigo-100 text-indigo-800 hover:bg-indigo-200">Équipement</Badge> 
-                  Matériel
+                  <Badge className="mr-2 bg-indigo-100 text-indigo-800 hover:bg-indigo-200">Equipment</Badge> 
+                  Equipment
                 </CardTitle>
-                <CardDescription>Machines et outils</CardDescription>
+                <CardDescription>Machines and tools</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">23 600 €</div>
@@ -458,13 +458,13 @@ const FinancePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M8 7a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H4a1 1 0 110-2h3V8a1 1 0 011-1z" clipRule="evenodd" />
                   </svg>
-                  -15.2% comparé à l'an dernier
+                  -15.2% compared to last year
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
                 <Button variant="outline" size="sm" className="w-full" onClick={(e) => {
                   e.stopPropagation();
-                  handleCardDetailClick('Matériel');
+                  handleCardDetailClick('Equipment');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
                   Details
@@ -476,7 +476,7 @@ const FinancePage = () => {
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
                   <Badge className="mr-2 bg-teal-100 text-teal-800 hover:bg-teal-200">Services</Badge> 
-                  Main d'oeuvre
+                  Labor
                 </CardTitle>
                 <CardDescription>Wages, contractors</CardDescription>
               </CardHeader>
@@ -486,7 +486,7 @@ const FinancePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 13a1 1 0 100-2H7.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L7.414 13H12z" clipRule="evenodd" />
                   </svg>
-                  +5.7% comparé à l'an dernier
+                  +5.7% compared to last year
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
@@ -502,16 +502,16 @@ const FinancePage = () => {
           </div>
           
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Expenses récentes</h3>
+            <h3 className="text-lg font-semibold">Recent Expenses</h3>
             <Select value={filterCategory} onValueChange={setFilterCategory}>
               <SelectTrigger className="w-[180px]">
                 <Filter className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Toutes les catégories</SelectItem>
-                <SelectItem value="intrants">Intrants</SelectItem>
-                <SelectItem value="equipement">Équipement</SelectItem>
+                <SelectItem value="all">All categories</SelectItem>
+                <SelectItem value="intrants">Inputs</SelectItem>
+                <SelectItem value="equipement">Equipment</SelectItem>
                 <SelectItem value="services">Services</SelectItem>
                 <SelectItem value="administrative">Administrative</SelectItem>
               </SelectContent>
@@ -521,8 +521,8 @@ const FinancePage = () => {
           {showAddExpenseForm ? (
             <div className="animate-fade-in bg-muted/20 rounded-lg p-6 text-center border border-primary/20">
               <CreditCard className="h-12 w-12 mx-auto text-primary mb-2" />
-              <h3 className="text-lg font-semibold mb-2">Ajout d'une nouvelle dépense</h3>
-              <p className="text-muted-foreground mb-4">Traitement en cours...</p>
+              <h3 className="text-lg font-semibold mb-2">Adding New Expense</h3>
+              <p className="text-muted-foreground mb-4">Processing...</p>
               <div className="w-full bg-muted rounded-full h-2 mb-4">
                 <div className="bg-primary h-2 rounded-full animate-pulse" style={{width: '60%'}}></div>
               </div>
@@ -530,12 +530,12 @@ const FinancePage = () => {
           ) : (
             <div className="bg-muted/20 rounded-lg p-6 text-center">
               <CreditCard className="h-12 w-12 mx-auto text-muted-foreground mb-2" />
-              <h3 className="text-lg font-semibold mb-2">Module of gestion des dépenses</h3>
+              <h3 className="text-lg font-semibold mb-2">Expense Management Module</h3>
               <p className="text-muted-foreground mb-4">
                 Activate this module to categorize, track and optimize 
                 all your expenses in detail.
               </p>
-              <Button onClick={() => handleActivateModule('gestion des dépenses')}>Activer ce module</Button>
+              <Button onClick={() => handleActivateModule('expense management')}>Activate Module</Button>
             </div>
           )}
         </div>
@@ -640,31 +640,31 @@ const FinancePage = () => {
           
           <div className="mb-6">
             <div className="p-4 bg-muted/30 rounded-lg mb-4">
-              <h3 className="font-medium mb-2">Période d'analyse</h3>
+              <h3 className="font-medium mb-2">Analysis Period</h3>
               <div className="tabs tabs-boxed inline-flex p-1 bg-muted rounded-md">
                 <button 
                   className={`py-1.5 px-3 rounded-sm ${timeFrame === 'month' ? 'bg-background shadow-sm' : 'hover:bg-muted/80'}`}
                   onClick={() => setTimeFrame('month')}
                 >
-                  Mois en cours
+                  Current Month
                 </button>
                 <button 
                   className={`py-1.5 px-3 rounded-sm ${timeFrame === 'quarter' ? 'bg-background shadow-sm' : 'hover:bg-muted/80'}`}
                   onClick={() => setTimeFrame('quarter')}
                 >
-                  Trimestre
+                  Quarter
                 </button>
                 <button 
                   className={`py-1.5 px-3 rounded-sm ${timeFrame === 'year' ? 'bg-background shadow-sm' : 'hover:bg-muted/80'}`}
                   onClick={() => setTimeFrame('year')}
                 >
-                  Année
+                  Year
                 </button>
                 <button 
                   className={`py-1.5 px-3 rounded-sm ${timeFrame === 'custom' ? 'bg-background shadow-sm' : 'hover:bg-muted/80'}`}
                   onClick={() => setTimeFrame('custom')}
                 >
-                  Personnalisé
+                  Custom
                 </button>
               </div>
             </div>
@@ -675,20 +675,20 @@ const FinancePage = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <PieChart className="h-4 w-4 mr-2 text-muted-foreground" />
-                  Reports disponibles
+                  Available Reports
                 </CardTitle>
                 <CardDescription>
-                  Sélectionnez un rapport à générer
+                  Select a report to generate
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <Button variant="outline" className="w-full justify-start" onClick={handleGenerateReport}>
                   <BarChart className="h-4 w-4 mr-2" />
-                  Rapport of rentabilité
+                  Profitability Report
                 </Button>
                 <Button variant="outline" className="w-full justify-start" onClick={handleGenerateReport}>
                   <CreditCard className="h-4 w-4 mr-2" />
-                  Analysis des dépenses
+                  Expense Analysis
                 </Button>
               </CardContent>
             </Card>
@@ -697,10 +697,10 @@ const FinancePage = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <FileText className="h-4 w-4 mr-2 text-muted-foreground" />
-                  Génération of rapports
+                  Report Generation
                 </CardTitle>
                 <CardDescription>
-                  État of la génération
+                  Generation Status
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -714,18 +714,18 @@ const FinancePage = () => {
                       <div className="bg-primary h-2 rounded-full animate-pulse" style={{width: '75%'}}></div>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Please wait pendant la compilation des données financières...
+                      Please wait while compiling financial data...
                     </p>
                   </div>
                 ) : (
                   <div className="text-center py-6">
                     <FileText className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <h4 className="text-lg font-medium mb-2">Aucun rapport en cours</h4>
+                    <h4 className="text-lg font-medium mb-2">No report in progress</h4>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Choisissez un type of rapport à gauche pour lancer la génération
+                      Choose a report type on the left to start generation
                     </p>
                     <Button variant="outline" onClick={handleGenerateReport}>
-                      Générer un rapport
+                      Generate Report
                     </Button>
                   </div>
                 )}

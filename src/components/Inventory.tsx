@@ -47,79 +47,79 @@ import {
 const initialInventoryData = [
   { 
     id: 1, 
-    name: 'Semences of blé', 
-    category: 'Semences', 
+    name: 'Wheat seeds', 
+    category: 'Seeds', 
     quantity: 500, 
     unit: 'kg', 
     minQuantity: 100, 
     price: 2.5,
-    location: 'Hangar principal',
+    location: 'Main warehouse',
     lastUpdated: '2023-08-01'
   },
   { 
     id: 2, 
-    name: 'Engrais NPK', 
-    category: 'Engrais', 
+    name: 'NPK Fertilizer', 
+    category: 'Fertilizers', 
     quantity: 800, 
     unit: 'kg', 
     minQuantity: 200, 
     price: 1.2,
-    location: 'Hangar principal',
+    location: 'Main warehouse',
     lastUpdated: '2023-07-15'
   },
   { 
     id: 3, 
     name: 'Herbicide RoundUp', 
-    category: 'Produits phytosanitaires', 
+    category: 'Plant protection products', 
     quantity: 50, 
     unit: 'L', 
     minQuantity: 20, 
     price: 15,
-    location: 'Local sécurisé',
+    location: 'Secure storage',
     lastUpdated: '2023-08-10'
   },
   { 
     id: 4, 
     name: 'Carburant Diesel', 
-    category: 'Carburants', 
+    category: 'Fuels', 
     quantity: 350, 
     unit: 'L', 
     minQuantity: 100, 
     price: 1.8,
-    location: 'Cuve extérieure',
+    location: 'External tank',
     lastUpdated: '2023-08-18'
   },
   { 
     id: 5, 
-    name: 'Semences of maïs', 
-    category: 'Semences', 
+    name: 'Maize seeds', 
+    category: 'Seeds', 
     quantity: 80, 
     unit: 'kg', 
     minQuantity: 100, 
     price: 4.5,
-    location: 'Hangar principal',
+    location: 'Main warehouse',
     lastUpdated: '2023-07-22'
   },
   { 
     id: 6, 
     name: 'Huile moteur', 
-    category: 'Lubrifiants', 
+    category: 'Lubricants', 
     quantity: 25, 
     unit: 'L', 
     minQuantity: 10, 
     price: 5.2,
-    location: 'Atelier',
+    location: 'Workshop',
     lastUpdated: '2023-06-30'
   },
   { 
     id: 7, 
-    name: 'Ficelle pour bottes', 
-    category: 'Consommables', 
+    name: 'Baling twine', 
+    category: 'Consumables', 
     quantity: 15, 
     unit: 'rouleaux', 
     minQuantity: 5, 
     price: 25,
-    location: 'Hangar matériel',
+    location: 'Equipment warehouse',
     lastUpdated: '2023-07-05'
   }
 ];
@@ -134,12 +134,12 @@ const initialTransactionHistory = [
 ];
 
 const initialCategoryStats = [
-  { name: 'Semences', value: 580, fill: '#4CAF50' },
-  { name: 'Engrais', value: 800, fill: '#8D6E63' },
-  { name: 'Phytosanitaires', value: 50, fill: '#F44336' },
-  { name: 'Carburants', value: 350, fill: '#2196F3' },
-  { name: 'Lubrifiants', value: 25, fill: '#FFC107' },
-  { name: 'Consommables', value: 15, fill: '#9C27B0' }
+  { name: 'Seeds', value: 580, fill: '#4CAF50' },
+  { name: 'Fertilizers', value: 800, fill: '#8D6E63' },
+  { name: 'Plant Protection', value: 50, fill: '#F44336' },
+  { name: 'Fuels', value: 350, fill: '#2196F3' },
+  { name: 'Lubricants', value: 25, fill: '#FFC107' },
+  { name: 'Consumables', value: 15, fill: '#9C27B0' }
 ];
 
 interface InventoryProps {
@@ -268,7 +268,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
     }, {
       onProgress: (progress) => {
         if (progress === 100) {
-          toast.success("Import terminé avec succès");
+          toast.success("Import completed successfully");
         }
       }
     });
@@ -328,7 +328,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       setSelectedItem(null);
     }
     
-    toast.success(`${itemToDeleteObj.name} a été supprimé of l'inventaire`);
+    toast.success(`${itemToDeleteObj.name} has been removed from inventory`);
     setItemToDelete(null);
     setDeleteConfirmOpen(false);
   };
@@ -357,14 +357,14 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       Math.max(0, selectedItem.quantity + quantityChange)
     );
     
-    toast.success("Transaction supprimée et stock ajusté");
+    toast.success("Transaction deleted and stock adjusted");
     setTransactionToDelete(null);
     setTransactionDeleteConfirmOpen(false);
   };
   
   const handleAddItem = () => {
     if (!newItem.name || !newItem.category || !newItem.unit) {
-      toast.error("Veuillez remplir tous les champs obligatoires");
+      toast.error("Please fill in all required fields");
       return;
     }
     
@@ -465,7 +465,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       type: showTransactionForm,
       quantity: newTransaction.quantity,
       date: newTransaction.date,
-      user: 'Utilisateur actuel',
+      user: 'Current user',
       notes: newTransaction.notes
     };
     
@@ -484,7 +484,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       date: new Date().toISOString().split('T')[0]
     });
     
-    toast.success(`${newTransaction.quantity} ${selectedItem.unit} ${showTransactionForm === 'in' ? 'ajoutés' : 'retirés'} of l'inventaire`);
+    toast.success(`${newTransaction.quantity} ${selectedItem.unit} ${showTransactionForm === 'in' ? 'added to' : 'removed from'} inventory`);
   };
   
   const itemTransactions = selectedItem 
@@ -494,11 +494,11 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
     : [];
 
   const inventoryColumns: Column[] = [
-    { id: 'name', header: 'Article', accessorKey: 'name', isEditable: true },
+    { id: 'name', header: 'Item', accessorKey: 'name', isEditable: true },
     { id: 'category', header: 'Category', accessorKey: 'category', isEditable: true },
-    { id: 'quantity', header: 'Quantité', accessorKey: 'quantity', type: 'number', isEditable: true },
-    { id: 'price', header: 'Price unitaire', accessorKey: 'price', type: 'number', isEditable: true },
-    { id: 'value', header: 'Value totale', accessorKey: 'value', type: 'text', isEditable: false },
+    { id: 'quantity', header: 'Quantity', accessorKey: 'quantity', type: 'number', isEditable: true },
+    { id: 'price', header: 'Unit Price', accessorKey: 'price', type: 'number', isEditable: true },
+    { id: 'value', header: 'Total Value', accessorKey: 'value', type: 'text', isEditable: false },
     { id: 'status', header: 'Status', accessorKey: 'status', type: 'text', isEditable: false },
   ];
 
@@ -528,8 +528,8 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
     <div className="animate-enter">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold mb-1">Management des Stocks</h1>
-          <p className="text-muted-foreground">Manage your inventory et suivez les niveaux of stock</p>
+          <h1 className="text-2xl font-bold mb-1">Stock Management</h1>
+          <p className="text-muted-foreground">Manage your inventory and track stock levels</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button 
@@ -537,7 +537,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             onClick={() => setView('list')}
             className="px-4 py-2"
           >
-            Liste
+            List
           </Button>
           <Button 
             variant={view === 'stats' ? 'default' : 'outline'}
@@ -577,7 +577,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             className="ml-2"
           >
             <Plus className="mr-2 h-4 w-4" />
-            Add un article
+            Add Item
           </Button>
         </div>
       </header>
@@ -595,7 +595,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                 <button 
                   onClick={() => setSelectedItem(null)}
                   className="mr-3 hover:bg-white/10 p-1 rounded"
-                  aria-label="Back à la liste"
+                  aria-label="Back to list"
                 >
                   <ChevronRight className="h-5 w-5 transform rotate-180" />
                 </button>
@@ -612,7 +612,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                   className="bg-white/10 hover:bg-white/20 text-white border-none"
                 >
                   <ArrowDown className="mr-1.5 h-4 w-4" />
-                  <span className="hidden sm:inline">Entrée</span>
+                  <span className="hidden sm:inline">Entry</span>
                 </Button>
                 <Button 
                   onClick={() => handleAddTransaction('out')}
@@ -620,7 +620,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                   className="bg-white/10 hover:bg-white/20 text-white border-none"
                 >
                   <ArrowUp className="mr-1.5 h-4 w-4" />
-                  <span className="hidden sm:inline">Sortie</span>
+                  <span className="hidden sm:inline">Exit</span>
                 </Button>
                 <Button 
                   onClick={() => confirmDeleteItem(selectedItem.id)}
@@ -636,7 +636,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div className="bg-white rounded-lg border p-4">
-                  <h3 className="font-medium mb-3">Details of l'article</h3>
+                  <h3 className="font-medium mb-3">Item Details</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Category:</span>
@@ -646,7 +646,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       />
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Quantité:</span>
+                      <span className="text-muted-foreground">Quantity:</span>
                       <div className="flex items-center">
                         <EditableField
                           value={selectedItem.quantity}
@@ -662,7 +662,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Seuil minimal:</span>
+                      <span className="text-muted-foreground">Minimum threshold:</span>
                       <div className="flex items-center">
                         <EditableField
                           value={selectedItem.minQuantity}
@@ -673,7 +673,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Price unitaire:</span>
+                      <span className="text-muted-foreground">Unit price:</span>
                       <div className="flex items-center">
                         <EditableField
                           value={selectedItem.price}
@@ -684,18 +684,18 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Value totale:</span>
+                      <span className="text-muted-foreground">Total value:</span>
                       <span className="font-medium">{(selectedItem.quantity * selectedItem.price).toFixed(2)} €</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Emplacement:</span>
+                      <span className="text-muted-foreground">Location:</span>
                       <EditableField
                         value={selectedItem.location}
                         onSave={(value) => handleUpdateItem(selectedItem.id, 'location', value)}
                       />
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Dernière mise à jour:</span>
+                      <span className="text-muted-foreground">Last updated:</span>
                       <span>{new Date(selectedItem.lastUpdated).toLocaleDateString()}</span>
                     </div>
                   </div>
@@ -707,8 +707,8 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart
                         data={[
-                          { name: 'Stock actuel', value: selectedItem.quantity },
-                          { name: 'Seuil minimal', value: selectedItem.minQuantity }
+                          { name: 'Current stock', value: selectedItem.quantity },
+                          { name: 'Minimum threshold', value: selectedItem.minQuantity }
                         ]}
                         margin={{ top: 10, right: 30, left: 20, bottom: 40 }}
                       >
@@ -732,7 +732,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                 <div className="mb-6 p-4 border rounded-lg bg-muted/10">
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="font-medium">
-                      {showTransactionForm === 'in' ? 'Nouvelle entrée' : 'Nouvelle sortie'}
+                      {showTransactionForm === 'in' ? 'New Entry' : 'New Exit'}
                     </h3>
                     <Button 
                       variant="ghost" 
@@ -744,7 +744,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="quantity">Quantité</Label>
+                      <Label htmlFor="quantity">Quantity</Label>
                       <div className="flex items-center mt-1">
                         <Input
                           id="quantity"
@@ -804,7 +804,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
               
               <div className="mt-6">
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-medium">Historique des transactions</h3>
+                  <h3 className="font-medium">Transaction History</h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -812,8 +812,8 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       <tr>
                         <th className="px-4 py-2 text-left">Date</th>
                         <th className="px-4 py-2 text-left">Type</th>
-                        <th className="px-4 py-2 text-left">Quantité</th>
-                        <th className="px-4 py-2 text-left">Utilisateur</th>
+                        <th className="px-4 py-2 text-left">Quantity</th>
+                        <th className="px-4 py-2 text-left">User</th>
                         <th className="px-4 py-2 text-left">Notes</th>
                         <th className="px-4 py-2 text-left">Actions</th>
                       </tr>
@@ -831,12 +831,12 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                               {transaction.type === 'in' ? (
                                 <>
                                   <ArrowDown className="h-3 w-3 mr-1" />
-                                  Entrée
+                                  Entry
                                 </>
                               ) : (
                                 <>
                                   <ArrowUp className="h-3 w-3 mr-1" />
-                                  Sortie
+                                  Exit
                                 </>
                               )}
                             </span>
@@ -863,7 +863,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                             <button
                               onClick={() => confirmDeleteTransaction(transaction.id)}
                               className="p-1.5 hover:bg-agri-danger/10 text-agri-danger rounded"
-                              title="Delete la transaction"
+                              title="Delete transaction"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
@@ -873,7 +873,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       {itemTransactions.length === 0 && (
                         <tr>
                           <td colSpan={6} className="px-4 py-4 text-center text-muted-foreground">
-                            Aucune transaction enregistrée
+                            No transactions recorded
                           </td>
                         </tr>
                       )}
@@ -907,7 +907,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
               actions={[
                 { 
                   icon: <ChevronRight className="h-4 w-4" />,
-                  label: "View détails",
+                  label: "View details",
                   onClick: (rowIndex) => setSelectedItem(filteredItems[rowIndex])
                 }
               ]}
@@ -918,7 +918,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
             {showAddForm && (
               <div className="border rounded-xl p-6 bg-muted/5 animate-enter">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-medium">Add un nouvel article</h3>
+                  <h3 className="text-lg font-medium">Add New Item</h3>
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -929,13 +929,13 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
-                    <Label htmlFor="name">Name of l'article*</Label>
+                    <Label htmlFor="name">Item Name*</Label>
                     <Input
                       id="name"
                       value={newItem.name}
                       onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
                       className="mt-1"
-                      placeholder="Ex: Semences of blé"
+                      placeholder="Ex: Wheat seeds"
                     />
                   </div>
                   <div>
@@ -946,7 +946,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
                       className="mt-1"
                       list="categories-list"
-                      placeholder="Ex: Semences"
+                      placeholder="Ex: Seeds"
                     />
                     <datalist id="categories-list">
                       {categories
@@ -957,7 +957,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     </datalist>
                   </div>
                   <div>
-                    <Label htmlFor="quantity">Quantité initiale*</Label>
+                    <Label htmlFor="quantity">Initial Quantity*</Label>
                     <div className="flex mt-1">
                       <Input
                         id="quantity"
@@ -968,14 +968,14 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       />
                       <Input
                         className="w-24 ml-2"
-                        placeholder="Unité"
+                        placeholder="Unit"
                         value={newItem.unit}
                         onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
                       />
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="minQuantity">Seuil minimal d'alerte</Label>
+                    <Label htmlFor="minQuantity">Alert threshold</Label>
                     <Input
                       id="minQuantity"
                       type="number"
@@ -986,7 +986,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     />
                   </div>
                   <div>
-                    <Label htmlFor="price">Price unitaire (€)</Label>
+                    <Label htmlFor="price">Unit Price (€)</Label>
                     <Input
                       id="price"
                       type="number"
@@ -998,23 +998,23 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     />
                   </div>
                   <div>
-                    <Label htmlFor="location">Emplacement</Label>
+                    <Label htmlFor="location">Location</Label>
                     <Input
                       id="location"
                       value={newItem.location}
                       onChange={(e) => setNewItem({ ...newItem, location: e.target.value })}
                       className="mt-1"
-                      placeholder="Ex: Hangar principal"
+                      placeholder="Ex: Main warehouse"
                     />
                   </div>
                   <div className="md:col-span-2 lg:col-span-3">
-                    <Label htmlFor="notes">Notes additionnelles</Label>
+                    <Label htmlFor="notes">Additional Notes</Label>
                     <Textarea
                       id="notes"
                       value={newItem.notes || ''}
                       onChange={(e) => setNewItem({ ...newItem, notes: e.target.value })}
                       className="mt-1"
-                      placeholder="Information complémentaires of l'article..."
+                      placeholder="Additional item information..."
                     />
                   </div>
                 </div>
@@ -1028,7 +1028,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                   </Button>
                   <Button onClick={handleAddItem}>
                     <Plus className="mr-2 h-4 w-4" />
-                    Add l'article
+                    Add Item
                   </Button>
                 </div>
               </div>
@@ -1044,8 +1044,8 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
 
       <ConfirmDialog 
         open={deleteConfirmOpen} 
-        title="Delete l'article" 
-        description="Êtes-vous sûr of vouloir supprimer cet article ? Cette action est irréversible."
+        title="Delete Item" 
+        description="Are you sure you want to delete this item? This action is irreversible."
         confirmText="Delete"
         cancelText="Cancel"
         onConfirm={handleDeleteItem}
@@ -1054,8 +1054,8 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
 
       <ConfirmDialog 
         open={transactionDeleteConfirmOpen} 
-        title="Delete la transaction" 
-        description="Êtes-vous sûr of vouloir supprimer cette transaction ? Le stock sera ajusté en conséquence."
+        title="Delete Transaction" 
+        description="Are you sure you want to delete this transaction? The stock will be adjusted accordingly."
         confirmText="Delete"
         cancelText="Cancel"
         onConfirm={handleDeleteTransaction}

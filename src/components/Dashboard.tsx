@@ -112,7 +112,7 @@ const Dashboard = () => {
     region: '',
     startDate: '',
     endDate: '',
-    severity: 'modérée',
+    severity: 'moderate',
     description: ''
   });
   
@@ -123,48 +123,48 @@ const Dashboard = () => {
   // Handle changes
   const handleTitleChange = (value: string | number) => {
     setTitle(String(value));
-    toast.success('Titre mis à jour');
+    toast.success('Title updated');
   };
   
   const handleDescriptionChange = (value: string | number) => {
     setDescription(String(value));
-    toast.success('Description mise à jour');
+    toast.success('Description updated');
   };
   
   const handleMonthChange = (value: string | number) => {
     setCurrentMonth(String(value));
-    toast.success('Mois mis à jour');
+    toast.success('Month updated');
   };
   
   // Stat card updates
   const handleRevenueChange = (value: string | number) => {
     setMonthlyRevenue(Number(value));
-    toast.success('Revenue mensuel mis à jour');
+    toast.success('Monthly revenue updated');
   };
   
   const handleRevenueGrowthChange = (value: string | number) => {
     setRevenueGrowth(Number(value));
-    toast.success('Growth du revenu mise à jour');
+    toast.success('Revenue growth updated');
   };
   
   const handleAreaChange = (value: string | number) => {
     setCultivatedArea(Number(value));
-    toast.success('Superficie cultivée mise à jour');
+    toast.success('Cultivated area updated');
   };
   
   const handleParcelsCountChange = (value: string | number) => {
     setParcelsCount(Number(value));
-    toast.success('Nombre of parcelles mis à jour');
+    toast.success('Number of fields updated');
   };
   
   const handleYieldChange = (value: string | number) => {
     setAverageYield(Number(value));
-    toast.success('Rendement moyen mis à jour');
+    toast.success('Average yield updated');
   };
   
   const handleYieldGrowthChange = (value: string | number) => {
     setYieldGrowth(Number(value));
-    toast.success('Growth du yield mise à jour');
+    toast.success('Yield growth updated');
   };
   
   // Task management
@@ -183,12 +183,12 @@ const Dashboard = () => {
       task.id === taskId ? { ...task, title: editedTaskTitle } : task
     ));
     setEditingTask(null);
-    toast.success('Tâche mise à jour');
+    toast.success('Task updated');
   };
   
   const handleDeleteTask = (taskId: number) => {
     setUpcomingTasks(upcomingTasks.filter(task => task.id !== taskId));
-    toast.success('Tâche supprimée');
+    toast.success('Task deleted');
   };
   
   // Alert management
@@ -196,25 +196,25 @@ const Dashboard = () => {
     setAlerts(alerts.map(alert => 
       alert.id === id ? { ...alert, message } : alert
     ));
-    toast.success('Alert mise à jour');
+    toast.success('Alert updated');
   };
   
   const handleDeleteAlert = (id: number) => {
     setAlerts(alerts.filter(alert => alert.id !== id));
     setAlertsCount(prev => prev - 1);
-    toast.success('Alert supprimée');
+    toast.success('Alert deleted');
   };
   
   // Weather alert management
   const handleDeleteWeatherAlert = (id: number) => {
     setWeatherAlerts(weatherAlerts.filter(alert => alert.id !== id));
-    toast.success('Alert météorologique supprimée');
+    toast.success('Weather alert deleted');
   };
   
   const handleAddWeatherAlert = () => {
     // Validation
     if (!newAlert.region || !newAlert.startDate || !newAlert.endDate || !newAlert.description) {
-      toast.error('Veuillez remplir tous les champs obligatoires');
+      toast.error('Please fill in all required fields');
       return;
     }
     
@@ -231,16 +231,16 @@ const Dashboard = () => {
       region: '',
       startDate: '',
       endDate: '',
-      severity: 'modérée',
+      severity: 'moderate',
       description: ''
     });
     
-    toast.success('Nouvelle alerte météorologique ajoutée');
+    toast.success('New weather alert added');
   };
   
   // Add transaction handler (placeholder for future implementation)
   const handleAddTransaction = () => {
-    toast.info('Redirection vers la page of finances');
+    toast.info('Redirecting to finance page');
     // In a real app, this would navigate to the finance page
   };
   
@@ -279,15 +279,15 @@ const Dashboard = () => {
             onClick={handleAddTransaction}
           >
             <Wallet className="h-4 w-4 inline mr-2" />
-            Add une transaction
+            Add Transaction
           </button>
         </div>
       </header>
 
-      {/* Quick Stats Row - Adapté à l'agriculture guadeloupéenne */}
+      {/* Quick Stats Row - Adapted for Indian agriculture */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="stat-card card-hover">
-          <p className="stat-label">Revenue mensuel</p>
+          <p className="stat-label">Monthly Revenue</p>
           <div className="flex items-baseline justify-between mt-2">
             <div className="stat-value">
               <EditableField
@@ -310,7 +310,7 @@ const Dashboard = () => {
         </div>
         
         <div className="stat-card card-hover">
-          <p className="stat-label">Superficie cultivée</p>
+          <p className="stat-label">Cultivated Area</p>
           <div className="flex items-baseline justify-between mt-2">
             <div className="stat-value">
               <EditableField
@@ -326,13 +326,13 @@ const Dashboard = () => {
                 type="number"
                 onSave={handleParcelsCountChange}
                 className="inline-block"
-              /> parcelles
+              /> fields
             </span>
           </div>
         </div>
         
         <div className="stat-card card-hover">
-          <p className="stat-label">Rendement moyen</p>
+          <p className="stat-label">Average Yield</p>
           <div className="flex items-baseline justify-between mt-2">
             <div className="stat-value">
               <EditableField
@@ -359,7 +359,7 @@ const Dashboard = () => {
           <div className="flex items-baseline justify-between mt-2">
             <p className="stat-value">{alertsCount}</p>
             <span className="text-agri-warning text-sm font-medium flex items-center">
-              <AlertTriangle className="h-4 w-4 mr-1" /> Récent
+              <AlertTriangle className="h-4 w-4 mr-1" /> Recent
             </span>
           </div>
         </div>
@@ -373,11 +373,11 @@ const Dashboard = () => {
             onClick={() => setShowAddAlertDialog(true)}
             className="bg-agri-primary hover:bg-agri-primary-dark"
           >
-            <Plus size={16} className="mr-2" /> Add une alerte
+            <Plus size={16} className="mr-2" /> Add Alert
           </Button>
         </div>
         <p className="text-muted-foreground mb-6">
-          Suivez les alertes météorologiques impactant l'agriculture en India
+          Track weather alerts impacting agriculture in India
         </p>
         
         <div className="overflow-x-auto">
@@ -385,9 +385,9 @@ const Dashboard = () => {
             <thead className="bg-muted text-xs uppercase">
               <tr>
                 <th className="px-4 py-3 text-left">Type</th>
-                <th className="px-4 py-3 text-left">Région</th>
-                <th className="px-4 py-3 text-left">Période</th>
-                <th className="px-4 py-3 text-left">Sévérité</th>
+                <th className="px-4 py-3 text-left">Region</th>
+                <th className="px-4 py-3 text-left">Period</th>
+                <th className="px-4 py-3 text-left">Severity</th>
                 <th className="px-4 py-3 text-left">Description</th>
                 <th className="px-4 py-3 text-left">Actions</th>
               </tr>
@@ -417,14 +417,14 @@ const Dashboard = () => {
                         setWeatherAlerts(weatherAlerts.map(a => 
                           a.id === alert.id ? { ...a, region: String(value) } : a
                         ));
-                        toast.success('Région mise à jour');
+                        toast.success('Region updated');
                       }}
                     />
                   </td>
                   <td className="px-4 py-3">
                     <div className="space-y-1">
                       <div>
-                        <span className="text-xs text-muted-foreground">Début:</span>
+                        <span className="text-xs text-muted-foreground">Start:</span>
                         <EditableField
                           value={alert.startDate}
                           type="date"
@@ -432,12 +432,12 @@ const Dashboard = () => {
                             setWeatherAlerts(weatherAlerts.map(a => 
                               a.id === alert.id ? { ...a, startDate: String(value) } : a
                             ));
-                            toast.success('Date of début mise à jour');
+                            toast.success('Start date updated');
                           }}
                         />
                       </div>
                       <div>
-                        <span className="text-xs text-muted-foreground">Fin:</span>
+                        <span className="text-xs text-muted-foreground">End:</span>
                         <EditableField
                           value={alert.endDate}
                           type="date"
@@ -445,7 +445,7 @@ const Dashboard = () => {
                             setWeatherAlerts(weatherAlerts.map(a => 
                               a.id === alert.id ? { ...a, endDate: String(value) } : a
                             ));
-                            toast.success('Date of fin mise à jour');
+                            toast.success('End date updated');
                           }}
                         />
                       </div>
@@ -455,7 +455,7 @@ const Dashboard = () => {
                     <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
                       alert.severity === 'critique' 
                         ? 'bg-red-100 text-red-800' 
-                        : alert.severity === 'modérée'
+                        : alert.severity === 'moderate'
                           ? 'bg-yellow-100 text-yellow-800'
                           : 'bg-green-100 text-green-800'
                     }`}>
@@ -465,7 +465,7 @@ const Dashboard = () => {
                           setWeatherAlerts(weatherAlerts.map(a => 
                             a.id === alert.id ? { ...a, severity: String(value) } : a
                           ));
-                          toast.success('Sévérité mise à jour');
+                          toast.success('Severity updated');
                         }}
                       />
                     </span>
@@ -477,7 +477,7 @@ const Dashboard = () => {
                         setWeatherAlerts(weatherAlerts.map(a => 
                           a.id === alert.id ? { ...a, description: String(value) } : a
                         ));
-                        toast.success('Description mise à jour');
+                        toast.success('Description updated');
                       }}
                     />
                   </td>
@@ -496,7 +496,7 @@ const Dashboard = () => {
               {weatherAlerts.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-4 text-center text-muted-foreground">
-                    Aucune alerte météorologique disponible
+                    No weather alerts available
                   </td>
                 </tr>
               )}
@@ -510,7 +510,7 @@ const Dashboard = () => {
         {/* Revenue Chart */}
         <div className="dashboard-card col-span-full lg:col-span-2 card-hover">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold">Revenue Mensuel</h3>
+            <h3 className="font-semibold">Monthly Revenue</h3>
             <div className="flex space-x-2">
               <button className="text-xs px-3 py-1.5 bg-muted rounded-md text-foreground">2023</button>
               <button className="text-xs px-3 py-1.5 text-muted-foreground hover:bg-muted rounded-md">2022</button>
@@ -545,9 +545,9 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Production Distribution - Adapté aux cultures guadeloupéennes */}
+        {/* Production Distribution - Adapted for Indian crops */}
         <div className="dashboard-card card-hover">
-          <h3 className="font-semibold mb-4">Répartition des Crops</h3>
+          <h3 className="font-semibold mb-4">Crop Distribution</h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -579,11 +579,11 @@ const Dashboard = () => {
 
       {/* Bottom Cards Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Upcoming Tasks - Adapté au contexte agricultural guadeloupéen */}
+        {/* Upcoming Tasks - Adapted for Indian agricultural context */}
         <div className="dashboard-card card-hover">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold">Tâches à venir</h3>
-            <button className="text-xs text-agri-primary hover:underline">View tout</button>
+            <h3 className="font-semibold">Upcoming Tasks</h3>
+            <button className="text-xs text-agri-primary hover:underline">View All</button>
           </div>
           
           <div className="space-y-3">
@@ -627,7 +627,7 @@ const Dashboard = () => {
                   ) : (
                     <>
                       <p className="text-sm font-medium">{task.title}</p>
-                      <p className="text-xs text-muted-foreground">Échéance: {task.due}</p>
+                      <p className="text-xs text-muted-foreground">Due: {task.due}</p>
                     </>
                   )}
                 </div>
@@ -652,16 +652,16 @@ const Dashboard = () => {
               </div>
             ))}
             {upcomingTasks.length === 0 && (
-              <p className="text-center text-muted-foreground py-4">Aucune tâche à venir</p>
+              <p className="text-center text-muted-foreground py-4">No upcoming tasks</p>
             )}
           </div>
         </div>
         
-        {/* Alerts - Adapté à l'agriculture en India */}
+        {/* Alerts - Adapted for Indian agriculture */}
         <div className="dashboard-card card-hover">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold">Alerts</h3>
-            <button className="text-xs text-agri-primary hover:underline">Manage les alertes</button>
+            <button className="text-xs text-agri-primary hover:underline">Manage Alerts</button>
           </div>
           
           <div className="space-y-3">
@@ -701,7 +701,7 @@ const Dashboard = () => {
               </div>
             ))}
             {alerts.length === 0 && (
-              <p className="text-center text-muted-foreground py-4">Aucune alerte active</p>
+              <p className="text-center text-muted-foreground py-4">No active alerts</p>
             )}
           </div>
         </div>
@@ -711,7 +711,7 @@ const Dashboard = () => {
       <Dialog open={showAddAlertDialog} onOpenChange={setShowAddAlertDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Add une alerte météorologique</DialogTitle>
+            <DialogTitle>Add Weather Alert</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
@@ -732,7 +732,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="region" className="text-right">
-                Région
+                Region
               </Label>
               <Input
                 id="region"
@@ -743,7 +743,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="startDate" className="text-right">
-                Date of début
+                Start Date
               </Label>
               <Input
                 id="startDate"
@@ -755,7 +755,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="endDate" className="text-right">
-                Date of fin
+                End Date
               </Label>
               <Input
                 id="endDate"
@@ -767,7 +767,7 @@ const Dashboard = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="severity" className="text-right">
-                Sévérité
+                Severity
               </Label>
               <select
                 id="severity"
@@ -776,7 +776,7 @@ const Dashboard = () => {
                 className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
                 <option value="faible">Low</option>
-                <option value="modérée">Modérée</option>
+                <option value="moderate">Moderate</option>
                 <option value="critique">Critical</option>
               </select>
             </div>
