@@ -87,43 +87,6 @@ A comprehensive farm management platform designed specifically for Indian farmer
 - npm or yarn
 - Supabase account
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/aanandak15-maker/indian-agricultural-management-system.git
-   cd indian-agricultural-management-system
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Environment Setup**
-   ```bash
-   cp env.example .env.local
-   ```
-   Add your Supabase credentials to `.env.local`:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-4. **Database Setup**
-   ```bash
-   # Run the complete database setup
-   psql -h your_db_host -U your_username -d your_database -f complete-setup.sql
-   ```
-
-5. **Start Development Server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Open in Browser**
-   Navigate to `http://localhost:5173`
-
 ## 📱 Usage
 
 ### **Getting Started**
@@ -247,7 +210,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For support, feature requests, or bug reports:
 
 - **GitHub Issues**: [Create an issue](https://github.com/aanandak15-maker/indian-agricultural-management-system/issues)
-- **Email**: [Contact us](mailto:support@agrisystem.com)
+- **Email**: plantsaathiai@gmail.com
 - **Documentation**: [Full documentation](https://agrisystem-git-main-aanandak15-makers-projects.vercel.app/docs)
 
 ## 🌟 Hackathon Submission
