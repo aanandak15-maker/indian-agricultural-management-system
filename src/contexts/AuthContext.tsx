@@ -115,7 +115,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signOut = async () => {
     try {
+      // Clear local state first
+      setUser(null)
+      setSession(null)
+      
+      // Sign out from Supabase
       const { error } = await supabase.auth.signOut()
+      
+      // Clear any local storage
+      localStorage.clear()
+      sessionStorage.clear()
+      
       return { error }
     } catch (error) {
       return { error: error as AuthError }
