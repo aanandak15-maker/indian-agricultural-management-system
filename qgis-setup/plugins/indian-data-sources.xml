@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QGIS Plugin Configuration for Indian Agricultural Data Sources -->
+<qgis_plugin_config>
+  
+  <!-- Bhuvan ISRO Data Sources -->
+  <bhuvan_sources>
+    <source id="bhuvan-satellite">
+      <name>Bhuvan Satellite Imagery</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>NRSC_LULC_50K</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ISRO/Bhuvan</attribution>
+      <description>High-resolution satellite imagery for Indian agricultural areas</description>
+    </source>
+    
+    <source id="bhuvan-topo">
+      <name>Bhuvan Topographic</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>NRSC_TOPO_50K</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ISRO/Bhuvan</attribution>
+      <description>Topographic maps with elevation and terrain data</description>
+    </source>
+    
+    <source id="bhuvan-dem">
+      <name>Bhuvan Digital Elevation Model</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>NRSC_DEM_30M</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ISRO/Bhuvan</attribution>
+      <description>30-meter resolution DEM for slope and elevation analysis</description>
+    </source>
+  </bhuvan_sources>
+
+  <!-- IMD Weather Data Sources -->
+  <imd_sources>
+    <source id="imd-rainfall">
+      <name>IMD Rainfall Data</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>IMD_RAINFALL</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© IMD/Bhuvan</attribution>
+      <description>Real-time rainfall data for agricultural planning</description>
+    </source>
+    
+    <source id="imd-temperature">
+      <name>IMD Temperature</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>IMD_TEMPERATURE</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© IMD/Bhuvan</attribution>
+      <description>Temperature data for crop growth monitoring</description>
+    </source>
+  </imd_sources>
+
+  <!-- Agricultural Data Sources -->
+  <agricultural_sources>
+    <source id="soil-map">
+      <name>Soil Map of India</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>SOIL_MAP_INDIA</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ICAR/Bhuvan</attribution>
+      <description>Soil type classification for agricultural planning</description>
+    </source>
+    
+    <source id="crop-calendar">
+      <name>Crop Calendar</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>CROP_CALENDAR</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ICAR/Bhuvan</attribution>
+      <description>Optimal planting and harvesting periods</description>
+    </source>
+    
+    <source id="irrigation-map">
+      <name>Irrigation Map</name>
+      <url>https://bhuvan-app1.nrsc.gov.in/bhuvan/wms</url>
+      <layers>IRRIGATION_MAP</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ICAR/Bhuvan</attribution>
+      <description>Irrigation infrastructure and water sources</description>
+    </source>
+  </agricultural_sources>
+
+  <!-- Sentinel Hub Data Sources -->
+  <sentinel_sources>
+    <source id="sentinel-ndvi">
+      <name>Sentinel-2 NDVI</name>
+      <url>https://services.sentinel-hub.com/ogc/wms/your-instance-id</url>
+      <layers>NDVI</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ESA/Sentinel Hub</attribution>
+      <description>Vegetation health index for crop monitoring</description>
+    </source>
+    
+    <source id="sentinel-rgb">
+      <name>Sentinel-2 RGB</name>
+      <url>https://services.sentinel-hub.com/ogc/wms/your-instance-id</url>
+      <layers>RGB</layers>
+      <format>image/png</format>
+      <version>1.1.1</version>
+      <srs>EPSG:3857</srs>
+      <attribution>© ESA/Sentinel Hub</attribution>
+      <description>High-resolution satellite imagery</description>
+    </source>
+  </sentinel_sources>
+
+</qgis_plugin_config>

@@ -21,8 +21,8 @@ export type InventoryItem = {
 
 export type ExportOptions = {
   fileName?: string;
-  includeFields?: string[];
-  excludeFields?: string[];
+  includesFields?: string[];
+  excludesFields?: string[];
   dateFormat?: string;
   addTimestamp?: boolean;
 };
@@ -36,21 +36,21 @@ export const exportInventoryToCSV = (
     let dataToExport = [...inventoryData];
     
     // Filter fields if specified
-    if (options.includeFields?.length) {
+    if (options.includesFields?.length) {
       dataToExport = dataToExport.map(item => {
         const filteredItem: Record<string, any> = {};
-        options.includeFields?.forEach(field => {
+        options.includesFields?.forEach(field => {
           if (field in item) {
             filteredItem[field] = item[field];
           }
         });
         return filteredItem as unknown as InventoryItem;
       });
-    } else if (options.excludeFields?.length) {
+    } else if (options.excludesFields?.length) {
       dataToExport = dataToExport.map(item => {
         const filteredItem: Record<string, any> = {};
         Object.keys(item).forEach(key => {
-          if (!options.excludeFields?.includes(key)) {
+          if (!options.excludesFields?.includes(key)) {
             filteredItem[key] = item[key];
           }
         });
@@ -76,13 +76,13 @@ export const exportInventoryToCSV = (
     link.click();
     document.body.removeChild(link);
     
-    toast.success("Data exportées avec succès", {
-      description: `Le fichier ${fileName} a été téléchargé`
+    toast.success("Data exportees successfully", {
+      description: `File ${fileName} has been downloaded`
     });
     return true;
   } catch (error) {
     console.error("Export error:", error);
-    toast.error("Error lors of l'exportation des données");
+    toast.error("Error during data export");
     return false;
   }
 };
@@ -110,7 +110,7 @@ export const importInventoryFromCSV = (
         
         // Check if there's data to process
         if (!parsedData || parsedData.length === 0 || !parsedData[0]) {
-          toast.error("Le fichier importé ne contient aucune donnée valide");
+          toast.error("Le fichier importe ne contient aucune donnee valid");
           return;
         }
 
@@ -146,7 +146,7 @@ export const importInventoryFromCSV = (
               name: item.name || '',
               category: item.category || '',
               quantity: Number(item.quantity) || 0,
-              unit: item.unit || 'unité',
+              unit: item.unit || 'unit',
               minQuantity: Number(item.minQuantity) || 0,
               price: Number(item.price) || 0,
               location: item.location || '',
@@ -159,35 +159,35 @@ export const importInventoryFromCSV = (
           });
         
         if (validData.length === 0) {
-          toast.error("No data valide n'a été trouvée dans le fichier");
+          toast.error("No data valid n'a ete trouvee dans le fichier");
           return;
         }
         
         onComplete(validData);
-        toast.success(`${validData.length} articles importés avec succès`, {
-          description: `Importation terminée depuis ${file.name}`
+        toast.success(`${validData.length} articles importes successfully`, {
+          description: `Importation terminee ofpuis ${file.name}`
         });
       },
       error: (error) => {
         console.error("Import error:", error);
-        toast.error("Error lors of l'importation des données");
+        toast.error("Error during data import");
       }
     });
     return true;
   } catch (error) {
     console.error("Import error:", error);
-    toast.error("Error lors of l'importation des données");
+    toast.error("Error during data import");
     return false;
   }
 };
 
 export const exportInventoryToPDF = (inventoryData: InventoryItem[], fileName?: string) => {
-  toast.info("Préparation du PDF en cours...");
+  toast.info("Preparation du PDF in progress...");
   // In a real app, you would use a library like jsPDF, pdfmake, or react-pdf
   // This is a placeholder for the actual PDF generation functionality
   setTimeout(() => {
-    toast.success("PDF généré avec succès", {
-      description: "Le fichier a été téléchargé"
+    toast.success("PDF generated successfully", {
+      description: "The file has been downloaded"
     });
   }, 1500);
   return true;
@@ -200,7 +200,7 @@ export const downloadInventoryTemplate = () => {
       name: "Name of l'article",
       category: "Category",
       quantity: "100",
-      unit: "unité",
+      unit: "unit",
       minQuantity: "10",
       price: "0.00",
       location: "Emplacement",
@@ -217,15 +217,15 @@ export const downloadInventoryTemplate = () => {
   const url = URL.createObjectURL(blob);
   
   link.setAttribute('href', url);
-  link.setAttribute('download', 'modele_inventaire.csv');
+  link.setAttribute('download', 'moofle_inventaire.csv');
   link.style.visibility = 'hidden';
   
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
   
-  toast.success("Modèle d'inventaire téléchargé", {
-    description: "Utilisez ce modèle pour préparer vos données d'importation"
+  toast.success("Inventory template downloaded", {
+    description: "Utilisez ce modele pour preparer vos donnees d'importation"
   });
   
   return true;

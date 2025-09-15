@@ -6,10 +6,10 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { useToast } from "@/hooks/use-toast";
-import { useCRM } from '../contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 import { toast } from 'sonner';
 
-const initialCultureData = [
+const initialCropData = [
   {
     id: 1,
     name: 'Wheat',
@@ -17,29 +17,29 @@ const initialCultureData = [
     family: 'Dioscoreaceae',
     origin: 'Asie du Sud-Est',
     growingSeason: 'May-December',
-    soilType: 'Argileux, bien drainé',
-    waterNeeds: 'Modérés',
+    soilType: 'Argileux, bien draine',
+    waterNeeds: 'Moderes',
     fertilization: 'NPK 10-10-20',
-    pests: 'Charançons, cochenilles',
+    pests: 'Charancons, cochenilles',
     diseases: 'Anthracnose',
-    notes: 'Crop importante en India, plusieurs variétés locales',
+    notes: 'Crop importante en India, plusieurs varietes locales',
     type: 'tubers',
     harvestPeriod: '7-9 month',
     yieldPerHectare: '15-25 tonnes'
   },
   {
     id: 2,
-    name: 'Madère',
+    name: 'Cotton',
     scientificName: 'Colocasia esculenta',
     family: 'Araceae',
     origin: 'Asie du Sud-Est',
-    growingSeason: 'Toute l\'year',
-    soilType: 'Humide, riche en matière organique',
-    waterNeeds: 'Élevés',
+    growingSeason: 'All year',
+    soilType: 'Humiof, riche en matiere organique',
+    waterNeeds: 'High',
     fertilization: 'NPK 14-14-14',
     pests: 'Pucerons',
-    diseases: 'Pourriture des racines',
-    notes: 'Cultivé dans les zones humides',
+    diseases: 'Pourriture of racines',
+    notes: 'Cultive dans les zones humiof',
     type: 'tubers',
     harvestPeriod: '9-12 month',
     yieldPerHectare: '10-15 tonnes'
@@ -49,10 +49,10 @@ const initialCultureData = [
     name: 'Christophine',
     scientificName: 'Sechium edule',
     family: 'Cucurbitaceae',
-    origin: 'Amérique centrale',
-    growingSeason: 'Toute l\'year',
-    soilType: 'Bien drainé, riche',
-    waterNeeds: 'Modérés à élevés',
+    origin: 'Amerique centrale',
+    growingSeason: 'All year',
+    soilType: 'Bien draine, riche',
+    waterNeeds: 'Moderes a eleves',
     fertilization: 'NPK 12-12-17',
     pests: 'Mouches blanches, acariens',
     diseases: 'Mildiou',
@@ -66,14 +66,14 @@ const initialCultureData = [
     name: 'Sugarcane',
     scientificName: 'Saccharum officinarum',
     family: 'Poaceae',
-    origin: 'Nouvelle-Guinée',
-    growingSeason: 'Toute l\'year',
-    soilType: 'Argileux, profond',
-    waterNeeds: 'Élevés',
+    origin: 'New Guinea',
+    growingSeason: 'All year',
+    soilType: 'Clay, deep',
+    waterNeeds: 'High',
     fertilization: 'NPK 16-4-16',
-    pests: 'Foreur des tiges, pucerons',
-    diseases: 'Charbon, rouille',
-    notes: 'Crop principale économique of India',
+    pests: 'Stem borer, aphids',
+    diseases: 'Smut, rust',
+    notes: 'Main economic crop of India',
     type: 'cash',
     harvestPeriod: '11-13 month',
     yieldPerHectare: '70-100 tonnes'
@@ -84,11 +84,11 @@ const initialCultureData = [
     scientificName: 'Musa paradisiaca',
     family: 'Musaceae',
     origin: 'Asie du Sud-Est',
-    growingSeason: 'Toute l\'year',
+    growingSeason: 'All year',
     soilType: 'Limoneux, profond',
-    waterNeeds: 'Élevés',
+    waterNeeds: 'High',
     fertilization: 'NPK 14-4-28',
-    pests: 'Charançon, thrips',
+    pests: 'Charancon, thrips',
     diseases: 'Cercosporiose, fusariose',
     notes: 'Principalement pour l\'exportation',
     type: 'fruits',
@@ -111,11 +111,12 @@ export const CultureDetailTable = ({
   filterType = 'all'
 }: CultureDetailTableProps) => {
   const { toast: shadowToast } = useToast();
-  const [cultureData, setCultureData] = useState(initialCultureData);
+  const [cultureData, setCropData] = useState(initialCropData);
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
-  const [selectedCulture, setSelectedCulture] = useState<null | any>(null);
-  const { exportModuleData } = useCRM();
-  const [newCulture, setNewCulture] = useState({
+  const [selectedCrop, setSelectedCrop] = useState<null | any>(null);
+  // Note: functions not yet implemented in Supabase context
+  // const { ... } = useSupabaseCRM();
+  const [newCrop, setNewCrop] = useState({
     name: '',
     scientificName: '',
     family: '',
@@ -135,7 +136,7 @@ export const CultureDetailTable = ({
   const localShowAddForm = showAddForm !== undefined ? showAddForm : isAddFormVisible;
   const localSetShowAddForm = setShowAddForm || setIsAddFormVisible;
 
-  const filteredCultures = cultureData.filter(culture => {
+  const filteredCrops = cultureData.filter(culture => {
     const matchesSearch = 
       culture.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       culture.scientificName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -145,25 +146,25 @@ export const CultureDetailTable = ({
     return matchesSearch && culture.type === filterType;
   });
 
-  const handleUpdateCulture = (rowIndex: number, columnId: string, value: any) => {
+  const handleUpdateCrop = (rowIndex: number, columnId: string, value: any) => {
     const updatedData = [...cultureData];
-    const targetIndex = cultureData.findIndex(c => c.id === filteredCultures[rowIndex].id);
+    const targetIndex = cultureData.findIndex(c => c.id === filteredCrops[rowIndex].id);
     
     if (targetIndex !== -1) {
       updatedData[targetIndex] = {
         ...updatedData[targetIndex],
         [columnId]: value
       };
-      setCultureData(updatedData);
+      setCropData(updatedData);
       
       shadowToast({
-        description: `Information mise à jour pour ${updatedData[targetIndex].name}`,
+        description: `Information mise a jour pour ${updatedData[targetIndex].name}`,
       });
     }
   };
 
-  const handleAddCulture = () => {
-    if (!newCulture.name) {
+  const handleAddCrop = () => {
+    if (!newCrop.name) {
       toast.error("Error", {
         description: "Le nom of la culture est obligatoire"
       });
@@ -171,10 +172,10 @@ export const CultureDetailTable = ({
     }
 
     const newId = Math.max(...cultureData.map(c => c.id), 0) + 1;
-    setCultureData([...cultureData, { ...newCulture, id: newId }]);
+    setCropData([...cultureData, { ...newCrop, id: newId }]);
     localSetShowAddForm(false);
     
-    setNewCulture({
+    setNewCrop({
       name: '',
       scientificName: '',
       family: '',
@@ -191,28 +192,28 @@ export const CultureDetailTable = ({
       yieldPerHectare: ''
     });
     
-    toast.success("Crop ajoutée", {
-      description: `${newCulture.name} a été ajoutée à la liste des cultures`
+    toast.success("Crop addede", {
+      description: `${newCrop.name} a ete addede a la liste of cultures`
     });
   };
 
-  const handleDeleteCulture = (rowIndex: number) => {
-    const cultureToDelete = filteredCultures[rowIndex];
+  const handleDeleteCrop = (rowIndex: number) => {
+    const cultureToDelete = filteredCrops[rowIndex];
     const updatedData = cultureData.filter(culture => culture.id !== cultureToDelete.id);
-    setCultureData(updatedData);
+    setCropData(updatedData);
     
-    toast.success("Crop supprimée", {
-      description: `${cultureToDelete.name} a été supprimée of la liste`
+    toast.success("Crop deletede", {
+      description: `${cultureToDelete.name} a ete deletede of la liste`
     });
   };
 
   const handleViewDetails = (rowIndex: number) => {
-    setSelectedCulture(filteredCultures[rowIndex]);
+    setSelectedCrop(filteredCrops[rowIndex]);
   };
 
   const downloadTechnicalSheet = async (culture: any) => {
-    toast.info("Génération of la fiche technique", {
-      description: `Préparation of la fiche pour ${culture.name}`
+    toast.info("Generation of la fiche technique", {
+      description: `Preparation of la fiche pour ${culture.name}`
     });
     
     const techSheetData = [{
@@ -220,7 +221,7 @@ export const CultureDetailTable = ({
       nomScientifique: culture.scientificName,
       famille: culture.family,
       origine: culture.origin,
-      saisonCulture: culture.growingSeason,
+      saisonCrop: culture.growingSeason,
       typeSol: culture.soilType,
       besoinEau: culture.waterNeeds,
       fertilisation: culture.fertilization,
@@ -228,39 +229,39 @@ export const CultureDetailTable = ({
       maladies: culture.diseases,
       notes: culture.notes,
       type: culture.type,
-      periodeRecolte: culture.harvestPeriod,
-      rendementHectare: culture.yieldPerHectare
+      periodRecolte: culture.harvestPeriod,
+      yieldHectare: culture.yieldPerHectare
     }];
     
     const success = await exportModuleData('fiche_technique', 'pdf', techSheetData);
     
     if (success) {
-      toast.success("Fiche technique générée", {
-        description: `La fiche technique pour ${culture.name} a été téléchargée`
+      toast.success("Fiche technique generee", {
+        description: `La fiche technique pour ${culture.name} a ete telechargee`
       });
     }
   };
 
   const columns: Column[] = [
     { id: 'name', header: 'Name', accessorKey: 'name', isEditable: true },
-    { id: 'scientificName', header: 'Name scientifique', accessorKey: 'scientificName', isEditable: true },
-    { id: 'growingSeason', header: 'Saison of culture', accessorKey: 'growingSeason', isEditable: true },
-    { id: 'soilType', header: 'Type of sol', accessorKey: 'soilType', isEditable: true },
-    { id: 'waterNeeds', header: 'Besoin en eau', accessorKey: 'waterNeeds', isEditable: true }
+    { id: 'scientificName', header: 'Scientific Name', accessorKey: 'scientificName', isEditable: true },
+    { id: 'growingSeason', header: 'Growing Season', accessorKey: 'growingSeason', isEditable: true },
+    { id: 'soilType', header: 'Soil Type', accessorKey: 'soilType', isEditable: true },
+    { id: 'waterNeeds', header: 'Water Needs', accessorKey: 'waterNeeds', isEditable: true }
   ];
 
   const renderDetailView = () => {
-    if (!selectedCulture) return null;
+    if (!selectedCrop) return null;
     
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
         <div className="bg-white rounded-xl p-6 max-w-3xl w-full">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Details of la culture: {selectedCulture.name}</h2>
+            <h2 className="text-xl font-semibold">Details of la culture: {selectedCrop.name}</h2>
             <Button 
               variant="ghost"
               size="sm"
-              onClick={() => setSelectedCulture(null)}
+              onClick={() => setSelectedCrop(null)}
             >
               <X className="h-5 w-5" />
             </Button>
@@ -270,16 +271,16 @@ export const CultureDetailTable = ({
             <div>
               <Label>Name</Label>
               <Input 
-                value={selectedCulture.name}
+                value={selectedCrop.name}
                 onChange={(e) => {
                   const newName = e.target.value;
-                  setSelectedCulture({...selectedCulture, name: newName});
+                  setSelectedCrop({...selectedCrop, name: newName});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].name = newName;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -287,18 +288,18 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Name scientifique</Label>
+              <Label>Scientific Name</Label>
               <Input 
-                value={selectedCulture.scientificName}
+                value={selectedCrop.scientificName}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, scientificName: newValue});
+                  setSelectedCrop({...selectedCrop, scientificName: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].scientificName = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -308,40 +309,40 @@ export const CultureDetailTable = ({
             <div>
               <Label>Type of culture</Label>
               <select 
-                value={selectedCulture.type}
+                value={selectedCrop.type}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, type: newValue});
+                  setSelectedCrop({...selectedCrop, type: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].type = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="w-full h-10 border border-input rounded-md px-3 mt-1"
               >
-                <option value="vegetables">Légumes</option>
+                <option value="vegetables">Vegetables</option>
                 <option value="fruits">Fruits</option>
                 <option value="tubers">Tubercules</option>
-                <option value="cash">Crops of rente</option>
+                <option value="cash">Cash crops</option>
               </select>
             </div>
             
             <div>
               <Label>Famille</Label>
               <Input 
-                value={selectedCulture.family}
+                value={selectedCrop.family}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, family: newValue});
+                  setSelectedCrop({...selectedCrop, family: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].family = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -351,16 +352,16 @@ export const CultureDetailTable = ({
             <div>
               <Label>Origine</Label>
               <Input 
-                value={selectedCulture.origin}
+                value={selectedCrop.origin}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, origin: newValue});
+                  setSelectedCrop({...selectedCrop, origin: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].origin = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -368,18 +369,18 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Saison of culture</Label>
+              <Label>Growing Season</Label>
               <Input 
-                value={selectedCulture.growingSeason}
+                value={selectedCrop.growingSeason}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, growingSeason: newValue});
+                  setSelectedCrop({...selectedCrop, growingSeason: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].growingSeason = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -387,18 +388,18 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Période of récolte</Label>
+              <Label>Period of harvest</Label>
               <Input 
-                value={selectedCulture.harvestPeriod}
+                value={selectedCrop.harvestPeriod}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, harvestPeriod: newValue});
+                  setSelectedCrop({...selectedCrop, harvestPeriod: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].harvestPeriod = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -406,18 +407,18 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Rendement par hectare</Label>
+              <Label>Yield par hectare</Label>
               <Input 
-                value={selectedCulture.yieldPerHectare}
+                value={selectedCrop.yieldPerHectare}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, yieldPerHectare: newValue});
+                  setSelectedCrop({...selectedCrop, yieldPerHectare: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].yieldPerHectare = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -425,18 +426,18 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Type of sol</Label>
+              <Label>Soil Type</Label>
               <Input 
-                value={selectedCulture.soilType}
+                value={selectedCrop.soilType}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, soilType: newValue});
+                  setSelectedCrop({...selectedCrop, soilType: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].soilType = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -444,18 +445,18 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Besoin en eau</Label>
+              <Label>Water Needs</Label>
               <Input 
-                value={selectedCulture.waterNeeds}
+                value={selectedCrop.waterNeeds}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, waterNeeds: newValue});
+                  setSelectedCrop({...selectedCrop, waterNeeds: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].waterNeeds = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -465,16 +466,16 @@ export const CultureDetailTable = ({
             <div>
               <Label>Fertilisation</Label>
               <Input 
-                value={selectedCulture.fertilization}
+                value={selectedCrop.fertilization}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, fertilization: newValue});
+                  setSelectedCrop({...selectedCrop, fertilization: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].fertilization = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -486,16 +487,16 @@ export const CultureDetailTable = ({
             <div>
               <Label>Ravageurs</Label>
               <Input 
-                value={selectedCulture.pests}
+                value={selectedCrop.pests}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, pests: newValue});
+                  setSelectedCrop({...selectedCrop, pests: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].pests = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -505,16 +506,16 @@ export const CultureDetailTable = ({
             <div>
               <Label>Maladies</Label>
               <Input 
-                value={selectedCulture.diseases}
+                value={selectedCrop.diseases}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setSelectedCulture({...selectedCulture, diseases: newValue});
+                  setSelectedCrop({...selectedCrop, diseases: newValue});
                   
                   const updatedData = [...cultureData];
-                  const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                  const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                   if (index !== -1) {
                     updatedData[index].diseases = newValue;
-                    setCultureData(updatedData);
+                    setCropData(updatedData);
                   }
                 }}
                 className="mt-1"
@@ -525,16 +526,16 @@ export const CultureDetailTable = ({
           <div>
             <Label>Notes</Label>
             <Textarea 
-              value={selectedCulture.notes}
+              value={selectedCrop.notes}
               onChange={(e) => {
                 const newValue = e.target.value;
-                setSelectedCulture({...selectedCulture, notes: newValue});
+                setSelectedCrop({...selectedCrop, notes: newValue});
                 
                 const updatedData = [...cultureData];
-                const index = updatedData.findIndex(c => c.id === selectedCulture.id);
+                const index = updatedData.findIndex(c => c.id === selectedCrop.id);
                 if (index !== -1) {
                   updatedData[index].notes = newValue;
-                  setCultureData(updatedData);
+                  setCropData(updatedData);
                 }
               }}
               className="mt-1"
@@ -545,11 +546,11 @@ export const CultureDetailTable = ({
           <div className="flex justify-end space-x-3 mt-5">
             <Button 
               variant="outline"
-              onClick={() => setSelectedCulture(null)}
+              onClick={() => setSelectedCrop(null)}
             >
               Close
             </Button>
-            <Button onClick={() => downloadTechnicalSheet(selectedCulture)}>
+            <Button onClick={() => downloadTechnicalSheet(selectedCrop)}>
               <FileText className="mr-2 h-4 w-4" />
               Download fiche technique
             </Button>
@@ -566,28 +567,28 @@ export const CultureDetailTable = ({
           variant="outline" 
           size="sm" 
           onClick={() => {
-            toast.info("Guide PDF disponible", {
-              description: "Téléchargement du guide des cultures tropicales démarré"
+            toast.info("Guide PDF available", {
+              description: "Download of tropical crops guide started"
             });
-            exportModuleData('guide_cultures', 'pdf');
+            exportModuleData('guiof_cultures', 'pdf');
           }}
         >
           <Download className="mr-2 h-4 w-4" />
-          Guide des cultures
+          Guiof of cultures
         </Button>
       </div>
       
       <EditableTable
-        data={filteredCultures}
+        data={filteredCrops}
         columns={columns}
-        onUpdate={handleUpdateCulture}
-        onDelete={handleDeleteCulture}
+        onUpdate={handleUpdateCrop}
+        onDelete={handleDeleteCrop}
         onAdd={localShowAddForm ? undefined : () => localSetShowAddForm(true)}
         sortable={true}
         actions={[
           {
             icon: <ExternalLink className="h-4 w-4" />,
-            label: "View détails",
+            label: "View details",
             onClick: handleViewDetails
           }
         ]}
@@ -597,7 +598,7 @@ export const CultureDetailTable = ({
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 max-w-3xl w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Add une nouvelle culture</h2>
+              <h2 className="text-xl font-semibold">Add New Crop</h2>
               <Button 
                 variant="ghost"
                 size="sm"
@@ -615,20 +616,20 @@ export const CultureDetailTable = ({
                     id="name"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.name}
-                    onChange={(e) => setNewCulture({...newCulture, name: e.target.value})}
+                    value={newCrop.name}
+                    onChange={(e) => setNewCrop({...newCrop, name: e.target.value})}
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="scientificName">Name scientifique</Label>
+                  <Label htmlFor="scientificName">Scientific Name</Label>
                   <Input 
                     id="scientificName"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.scientificName}
-                    onChange={(e) => setNewCulture({...newCulture, scientificName: e.target.value})}
+                    value={newCrop.scientificName}
+                    onChange={(e) => setNewCrop({...newCrop, scientificName: e.target.value})}
                   />
                 </div>
                 
@@ -637,13 +638,13 @@ export const CultureDetailTable = ({
                   <select 
                     id="type"
                     className="w-full h-10 border border-input rounded-md px-3 mt-1"
-                    value={newCulture.type}
-                    onChange={(e) => setNewCulture({...newCulture, type: e.target.value})}
+                    value={newCrop.type}
+                    onChange={(e) => setNewCrop({...newCrop, type: e.target.value})}
                   >
-                    <option value="vegetables">Légumes</option>
+                    <option value="vegetables">Vegetables</option>
                     <option value="fruits">Fruits</option>
                     <option value="tubers">Tubercules</option>
-                    <option value="cash">Crops of rente</option>
+                    <option value="cash">Cash crops</option>
                   </select>
                 </div>
                 
@@ -653,8 +654,8 @@ export const CultureDetailTable = ({
                     id="family"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.family}
-                    onChange={(e) => setNewCulture({...newCulture, family: e.target.value})}
+                    value={newCrop.family}
+                    onChange={(e) => setNewCrop({...newCrop, family: e.target.value})}
                   />
                 </div>
                 
@@ -664,63 +665,63 @@ export const CultureDetailTable = ({
                     id="origin"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.origin}
-                    onChange={(e) => setNewCulture({...newCulture, origin: e.target.value})}
+                    value={newCrop.origin}
+                    onChange={(e) => setNewCrop({...newCrop, origin: e.target.value})}
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="growingSeason">Saison of culture</Label>
+                  <Label htmlFor="growingSeason">Growing Season</Label>
                   <Input 
                     id="growingSeason"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.growingSeason}
-                    onChange={(e) => setNewCulture({...newCulture, growingSeason: e.target.value})}
+                    value={newCrop.growingSeason}
+                    onChange={(e) => setNewCrop({...newCrop, growingSeason: e.target.value})}
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="harvestPeriod">Période of récolte</Label>
+                  <Label htmlFor="harvestPeriod">Period of harvest</Label>
                   <Input 
                     id="harvestPeriod"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.harvestPeriod}
-                    onChange={(e) => setNewCulture({...newCulture, harvestPeriod: e.target.value})}
+                    value={newCrop.harvestPeriod}
+                    onChange={(e) => setNewCrop({...newCrop, harvestPeriod: e.target.value})}
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="yieldPerHectare">Rendement par hectare</Label>
+                  <Label htmlFor="yieldPerHectare">Yield par hectare</Label>
                   <Input 
                     id="yieldPerHectare"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.yieldPerHectare}
-                    onChange={(e) => setNewCulture({...newCulture, yieldPerHectare: e.target.value})}
+                    value={newCrop.yieldPerHectare}
+                    onChange={(e) => setNewCrop({...newCrop, yieldPerHectare: e.target.value})}
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="soilType">Type of sol</Label>
+                  <Label htmlFor="soilType">Soil Type</Label>
                   <Input 
                     id="soilType"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.soilType}
-                    onChange={(e) => setNewCulture({...newCulture, soilType: e.target.value})}
+                    value={newCrop.soilType}
+                    onChange={(e) => setNewCrop({...newCrop, soilType: e.target.value})}
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="waterNeeds">Besoin en eau</Label>
+                  <Label htmlFor="waterNeeds">Water Needs</Label>
                   <Input 
                     id="waterNeeds"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.waterNeeds}
-                    onChange={(e) => setNewCulture({...newCulture, waterNeeds: e.target.value})}
+                    value={newCrop.waterNeeds}
+                    onChange={(e) => setNewCrop({...newCrop, waterNeeds: e.target.value})}
                   />
                 </div>
                 
@@ -730,8 +731,8 @@ export const CultureDetailTable = ({
                     id="fertilization"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.fertilization}
-                    onChange={(e) => setNewCulture({...newCulture, fertilization: e.target.value})}
+                    value={newCrop.fertilization}
+                    onChange={(e) => setNewCrop({...newCrop, fertilization: e.target.value})}
                   />
                 </div>
                 
@@ -741,8 +742,8 @@ export const CultureDetailTable = ({
                     id="pests"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.pests}
-                    onChange={(e) => setNewCulture({...newCulture, pests: e.target.value})}
+                    value={newCrop.pests}
+                    onChange={(e) => setNewCrop({...newCrop, pests: e.target.value})}
                   />
                 </div>
                 
@@ -752,8 +753,8 @@ export const CultureDetailTable = ({
                     id="diseases"
                     type="text" 
                     className="mt-1"
-                    value={newCulture.diseases}
-                    onChange={(e) => setNewCulture({...newCulture, diseases: e.target.value})}
+                    value={newCrop.diseases}
+                    onChange={(e) => setNewCrop({...newCrop, diseases: e.target.value})}
                   />
                 </div>
               </div>
@@ -764,8 +765,8 @@ export const CultureDetailTable = ({
                   id="notes"
                   className="mt-1"
                   rows={3}
-                  value={newCulture.notes}
-                  onChange={(e) => setNewCulture({...newCulture, notes: e.target.value})}
+                  value={newCrop.notes}
+                  onChange={(e) => setNewCrop({...newCrop, notes: e.target.value})}
                 />
               </div>
               
@@ -779,7 +780,7 @@ export const CultureDetailTable = ({
                 </Button>
                 <Button 
                   type="button"
-                  onClick={handleAddCulture}
+                  onClick={handleAddCrop}
                 >
                   <Save className="mr-2" />
                   Save
@@ -790,7 +791,7 @@ export const CultureDetailTable = ({
         </div>
       )}
       
-      {selectedCulture && renderDetailView()}
+      {selectedCrop && renderDetailView()}
     </div>
   );
 };

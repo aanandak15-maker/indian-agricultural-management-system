@@ -20,7 +20,7 @@ import {
 import { EditableField } from './ui/editable-field';
 import { toast } from 'sonner';
 
-// Types pour les parcelles adaptées à la India
+// Types for fields adapted to India
 interface ParcelData {
   id: number;
   name: string;
@@ -38,18 +38,18 @@ interface ParcelData {
   notes?: string;
 }
 
-// Data of parcelles adaptées à l'agriculture en India
+// Data for fields adapted to agriculture in India
 const initialParcelData: ParcelData[] = [
   { 
     id: 1, 
-    name: 'Grande-Terre Nord', 
+    name: 'North Punjab', 
     area: 12.5, 
     crop: 'Sugarcane', 
     status: 'active', 
     lastActivity: '2023-08-15', 
     soilType: 'Argilo-calcaire', 
     coordinates: { lat: 16.3772, lng: -61.4483 },
-    irrigation: 'Goutte à goutte',
+    irrigation: 'Drip irrigation',
     plantingDate: '2023-02-15',
     harvestDate: '2024-02-15',
     rainfall: 1200
@@ -77,16 +77,16 @@ const initialParcelData: ParcelData[] = [
     lastActivity: '2023-08-05', 
     soilType: 'Volcanique', 
     coordinates: { lat: 16.0504, lng: -61.5643 },
-    irrigation: 'Goutte à goutte',
+    irrigation: 'Drip irrigation',
     plantingDate: '2023-05-20',
     harvestDate: '2024-01-20',
     rainfall: 2300
   },
   { 
     id: 4, 
-    name: 'Marie-Galante', 
+    name: 'Tamil Nadu', 
     area: 10.2, 
-    crop: 'Madère', 
+    crop: 'Cotton', 
     status: 'inactive', 
     lastActivity: '2023-07-20', 
     soilType: 'Sableux', 
@@ -98,7 +98,7 @@ const initialParcelData: ParcelData[] = [
   },
   { 
     id: 5, 
-    name: 'Nord Grande-Terre', 
+    name: 'Nord Punjab', 
     area: 6.8, 
     crop: 'Wheat', 
     status: 'planned', 
@@ -112,7 +112,7 @@ const initialParcelData: ParcelData[] = [
   },
 ];
 
-// Composant pour la représentation visuelle d'une parcelle
+// Component for visual representation of a field
 const ParcelCard = ({ 
   parcel, 
   onSelect, 
@@ -135,8 +135,8 @@ const ParcelCard = ({
     switch (status) {
       case 'active': return 'Active';
       case 'inactive': return 'Inactive';
-      case 'planned': return 'Plannede';
-      default: return 'Inconnu';
+      case 'planned': return 'Planned';
+      default: return 'Unknown';
     }
   };
 
@@ -174,7 +174,7 @@ const ParcelCard = ({
         <div className="col-span-2 mt-1 py-1 px-2 bg-agri-primary/5 rounded-md text-center">
           <span className="text-agri-primary font-medium">{parcel.crop}</span>
           {parcel.harvestDate && (
-            <p className="text-xs mt-1">Harvest dans: {calculateDays(parcel.harvestDate)} jours</p>
+            <p className="text-xs mt-1">Harvest in: {calculateDays(parcel.harvestDate)} days</p>
           )}
         </div>
       </div>
@@ -205,10 +205,10 @@ const IndianFieldManagement = () => {
   const [selectedParcel, setSelectedParcel] = useState<ParcelData | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMoof, setIsEditMoof] = useState(false);
   const [editedParcel, setEditedParcel] = useState<ParcelData | null>(null);
   
-  // Filter les parcelles en fonction des critères of recherche et du filtre
+  // Filter parcels based on search criteria and filter
   const filteredParcels = parcels.filter(parcel => {
     const matchesSearch = parcel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          parcel.crop.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -220,33 +220,33 @@ const IndianFieldManagement = () => {
 
   const handleSelectParcel = (parcel: ParcelData) => {
     setSelectedParcel(parcel);
-    setIsEditMode(false);
+    setIsEditMoof(false);
   };
 
   const handleEditStart = (parcel: ParcelData) => {
     setEditedParcel({...parcel});
     setSelectedParcel(parcel);
-    setIsEditMode(true);
+    setIsEditMoof(true);
   };
 
   const handleAddParcel = () => {
     const newId = Math.max(0, ...parcels.map(p => p.id)) + 1;
     const newParcel: ParcelData = {
       id: newId,
-      name: 'Nouvelle Field',
+      name: 'New Field',
       area: 0,
       crop: '',
       status: 'planned',
       lastActivity: new Date().toISOString().split('T')[0],
       soilType: '',
-      coordinates: { lat: 16.2650, lng: -61.5510 }, // Coordonnées of Pointe-à-Pitre
+      coordinates: { lat: 16.2650, lng: -61.5510 }, // Coordinates of Pointe-a-Pitre
       irrigation: '',
     };
     setParcels([...parcels, newParcel]);
     setEditedParcel(newParcel);
     setSelectedParcel(newParcel);
-    setIsEditMode(true);
-    toast.success('Nouvelle parcelle créée');
+    setIsEditMoof(true);
+    toast.success('New field created');
   };
 
   const handleSaveEdit = () => {
@@ -254,12 +254,12 @@ const IndianFieldManagement = () => {
     
     setParcels(parcels.map(p => p.id === editedParcel.id ? editedParcel : p));
     setSelectedParcel(editedParcel);
-    setIsEditMode(false);
-    toast.success('Modifications enregistrées');
+    setIsEditMoof(false);
+    toast.success('Changes saved');
   };
 
   const handleCancelEdit = () => {
-    setIsEditMode(false);
+    setIsEditMoof(false);
     setEditedParcel(null);
   };
 
@@ -274,7 +274,7 @@ const IndianFieldManagement = () => {
       }
       
       if (field === 'coordinates') {
-        return prev; // Manage séparément si nécessaire
+        return prev; // Manage separement si necessaire
       }
 
       return { ...prev, [field]: value };
@@ -290,20 +290,20 @@ const IndianFieldManagement = () => {
     <div className="p-6 animate-enter">
       <header className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold mb-1">Management des Fields en India</h1>
-          <p className="text-muted-foreground">Gérez et surveillez toutes vos parcelles agricoles of l'regions</p>
+          <h1 className="text-2xl font-bold mb-1">Field Management in India</h1>
+          <p className="text-muted-foreground">Manage and monitor all your agricultural fields of the regions</p>
         </div>
         <button 
           className="inline-flex items-center justify-center px-4 py-2 bg-agri-primary text-white rounded-lg hover:bg-agri-primary-dark transition-colors whitespace-nowrap"
           onClick={handleAddParcel}
         >
           <Plus className="h-4 w-4 mr-2" />
-          Add une parcelle
+          Add a Field
         </button>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Colonne of gauche - Liste des parcelles */}
+        {/* Left column - Field list */}
         <div className="lg:col-span-1 space-y-4">
           <div className="flex gap-3 mb-4">
             <div className="relative flex-grow">
@@ -322,10 +322,10 @@ const IndianFieldManagement = () => {
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
               >
-                <option value="all">Tous</option>
+                <option value="all">All</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
-                <option value="planned">Plannede</option>
+                <option value="planned">Planned</option>
               </select>
               <Filter className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
             </div>
@@ -344,18 +344,18 @@ const IndianFieldManagement = () => {
             ) : (
               <div className="text-center py-8 px-4 border border-dashed rounded-lg">
                 <AlertCircle className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                <p className="text-muted-foreground">Aucune parcelle trouvée avec ces critères</p>
+                <p className="text-muted-foreground">No field found with these criteria</p>
               </div>
             )}
           </div>
         </div>
 
-        {/* Colonne of droite - Carte et détails */}
+        {/* Right column - Map and details */}
         <div className="lg:col-span-2">
           {selectedParcel ? (
             <div className="border rounded-xl overflow-hidden h-full">
               <div className="bg-agri-primary text-white p-4 flex justify-between items-center">
-                {isEditMode ? (
+                {isEditMoof ? (
                   <input 
                     type="text" 
                     value={editedParcel?.name || ''} 
@@ -366,7 +366,7 @@ const IndianFieldManagement = () => {
                   <h2 className="text-xl font-semibold">{selectedParcel.name}</h2>
                 )}
                 
-                {isEditMode ? (
+                {isEditMoof ? (
                   <div className="flex space-x-2">
                     <button 
                       onClick={handleSaveEdit}
@@ -393,8 +393,8 @@ const IndianFieldManagement = () => {
               
               <div className="p-4">
                 <div className="bg-muted h-[300px] rounded-lg flex items-center justify-center mb-4">
-                  <p className="text-muted-foreground">Carte of la parcelle</p>
-                  {/* Ici vous pourriez intégrer une vraie carte comme Google Maps, Leaflet, etc. */}
+                  <p className="text-muted-foreground">Field Map</p>
+                  {/* Here you could integrate a real map like Google Maps, Leaflet, etc. */}
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
@@ -404,7 +404,7 @@ const IndianFieldManagement = () => {
                       Crop actuelle
                     </h3>
                     
-                    {isEditMode ? (
+                    {isEditMoof ? (
                       <div className="space-y-3">
                         <div>
                           <label className="text-sm text-muted-foreground">Crop</label>
@@ -426,7 +426,7 @@ const IndianFieldManagement = () => {
                             />
                           </div>
                           <div>
-                            <label className="text-sm text-muted-foreground">Date of récolte</label>
+                            <label className="text-sm text-muted-foreground">Harvest Date</label>
                             <input 
                               type="date" 
                               value={editedParcel?.harvestDate || ''} 
@@ -448,7 +448,7 @@ const IndianFieldManagement = () => {
                               className={`px-3 py-1.5 text-xs rounded-md ${editedParcel?.status === 'planned' ? 'bg-agri-warning text-white' : 'bg-muted'}`}
                               onClick={() => handleStatusChange('planned')}
                             >
-                              Plannede
+                              Planned
                             </button>
                             <button 
                               className={`px-3 py-1.5 text-xs rounded-md ${editedParcel?.status === 'inactive' ? 'bg-agri-danger text-white' : 'bg-muted'}`}
@@ -463,10 +463,10 @@ const IndianFieldManagement = () => {
                       <div className="bg-agri-primary/10 rounded-lg p-3 text-center">
                         <span className="font-semibold text-agri-primary">{selectedParcel.crop}</span>
                         {selectedParcel.plantingDate && (
-                          <p className="text-sm mt-1">Planté le: {new Date(selectedParcel.plantingDate).toLocaleDateString()}</p>
+                          <p className="text-sm mt-1">Planted on: {new Date(selectedParcel.plantingDate).toLocaleDateString()}</p>
                         )}
                         {selectedParcel.harvestDate && (
-                          <p className="text-sm">Harvest prévue: {new Date(selectedParcel.harvestDate).toLocaleDateString()}</p>
+                          <p className="text-sm">Expected Harvest: {new Date(selectedParcel.harvestDate).toLocaleDateString()}</p>
                         )}
                       </div>
                     )}
@@ -475,13 +475,13 @@ const IndianFieldManagement = () => {
                   <div className="border rounded-lg p-4">
                     <h3 className="font-medium mb-3 flex items-center">
                       <Layers className="h-4 w-4 mr-2" />
-                      Caractéristiques du sol
+                      Soil characteristics
                     </h3>
                     
-                    {isEditMode ? (
+                    {isEditMoof ? (
                       <div className="space-y-3">
                         <div>
-                          <label className="text-sm text-muted-foreground">Type of sol</label>
+                          <label className="text-sm text-muted-foreground">Soil Type</label>
                           <input 
                             type="text" 
                             value={editedParcel?.soilType || ''} 
@@ -499,7 +499,7 @@ const IndianFieldManagement = () => {
                           />
                         </div>
                         <div>
-                          <label className="text-sm text-muted-foreground">Pluviométrie annuelle (mm)</label>
+                          <label className="text-sm text-muted-foreground">Annual rainfall (mm)</label>
                           <input 
                             type="number" 
                             value={editedParcel?.rainfall || ''} 
@@ -519,8 +519,8 @@ const IndianFieldManagement = () => {
                           <span className="text-sm font-medium">{selectedParcel.irrigation}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-sm">Pluviométrie:</span>
-                          <span className="text-sm font-medium">{selectedParcel.rainfall ? `${selectedParcel.rainfall} mm/an` : 'Non spécifié'}</span>
+                          <span className="text-sm">Rainfall:</span>
+                          <span className="text-sm font-medium">{selectedParcel.rainfall ? `${selectedParcel.rainfall} mm/year` : 'Not specified'}</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-sm">Superficie:</span>
@@ -533,16 +533,16 @@ const IndianFieldManagement = () => {
                   <div className="border rounded-lg p-4 md:col-span-2">
                     <h3 className="font-medium mb-3">Notes</h3>
                     
-                    {isEditMode ? (
+                    {isEditMoof ? (
                       <textarea 
                         value={editedParcel?.notes || ''}
                         onChange={(e) => handleInputChange('notes', e.target.value)}
-                        placeholder="Ajoutez vos notes ici..."
+                        placeholder="Add your notes here..."
                         className="w-full px-3 py-2 border border-input rounded-md h-24 resize-none"
                       />
                     ) : (
                       <div className="p-3 bg-muted/30 rounded-lg min-h-[80px]">
-                        {selectedParcel.notes || <span className="text-muted-foreground italic">Aucune note pour cette parcelle</span>}
+                        {selectedParcel.notes || <span className="text-muted-foreground italic">No notes for this parcel</span>}
                       </div>
                     )}
                   </div>
@@ -552,9 +552,9 @@ const IndianFieldManagement = () => {
           ) : (
             <div className="border rounded-xl bg-muted h-full flex flex-col items-center justify-center p-6">
               <MapPin className="h-12 w-12 text-muted-foreground opacity-50 mb-4" />
-              <h3 className="text-xl font-medium text-foreground mb-2">Sélectionnez une parcelle</h3>
+              <h3 className="text-xl font-medium text-foreground mb-2">Select a field</h3>
               <p className="text-muted-foreground text-center max-w-md">
-                Cliquez of une parcelle dans la liste à gauche pour afficher ses détails et accéder à la carte
+                Click on a field in the left list to view its details and access the map
               </p>
             </div>
           )}

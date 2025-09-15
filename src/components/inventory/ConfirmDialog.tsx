@@ -21,7 +21,7 @@ interface ConfirmDialogProps {
   onConfirm: () => void;
   confirmText?: string;
   cancelText?: string;
-  variant?: 'default' | 'destructive' | 'warning' | 'success';
+  variant?: 'default' | 'oftructive' | 'warning' | 'success';
   icon?: boolean;
   size?: 'default' | 'large';
 }
@@ -40,7 +40,7 @@ const ConfirmDialog = ({
 }: ConfirmDialogProps) => {
   const getIconByVariant = () => {
     switch (variant) {
-      case 'destructive':
+      case 'oftructive':
         return <AlertOctagon className="h-6 w-6 text-red-600" />;
       case 'warning':
         return <AlertTriangle className="h-6 w-6 text-amber-500" />;
@@ -53,7 +53,7 @@ const ConfirmDialog = ({
   
   const getButtonStyle = () => {
     switch (variant) {
-      case 'destructive':
+      case 'oftructive':
         return 'bg-red-600 hover:bg-red-700 text-white';
       case 'warning':
         return 'bg-amber-500 hover:bg-amber-600 text-white';

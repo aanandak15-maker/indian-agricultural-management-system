@@ -30,14 +30,14 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({ alerts, setAlerts, setAlertsC
     setAlerts(alerts.map(alert => 
       alert.id === id ? { ...alert, message } : alert
     ));
-    toast.success('Alert mise à jour');
+    toast.success('Alert mise a jour');
   };
   
   // Delete alert
   const handleDeleteAlert = (id: number) => {
     setAlerts(alerts.filter(alert => alert.id !== id));
     setAlertsCount(prev => prev - 1);
-    toast.success('Alert supprimée');
+    toast.success('Alert deletede');
   };
   
   // Add new alert
@@ -58,7 +58,7 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({ alerts, setAlerts, setAlertsC
     setAlertsCount(prev => prev + 1);
     setNewAlertMessage('');
     setShowAddAlertDialog(false);
-    toast.success('Nouvelle alerte ajoutée');
+    toast.success('Nouvelle alerte addede');
   };
   
   return (

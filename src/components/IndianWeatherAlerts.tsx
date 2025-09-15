@@ -89,7 +89,7 @@ const IndianWeatherAlerts = () => {
       id: 2,
       date: '2024-06-20',
       type: 'Tropical storm',
-      region: 'Grande-Terre',
+      region: 'Punjab',
       severity: 'Extreme',
       impactCrops: 'Severe',
       description: 'Tropical storm Emily approaching with winds exceeding 120 km/h and heavy precipitation.',
@@ -100,7 +100,7 @@ const IndianWeatherAlerts = () => {
       id: 3,
       date: '2024-05-25',
       type: 'Drought',
-      region: 'Grande-Terre',
+      region: 'Punjab',
       severity: 'Average',
       impactCrops: 'Moderate',
       description: 'Extended period without significant precipitation causing water stress for some crops.',
@@ -282,13 +282,13 @@ const IndianWeatherAlerts = () => {
               className="inline-block"
             />
           </h2>
-          <p className="text-muted-foreground">
+          <div className="text-muted-foreground">
             <EditableField
               value={description}
               onSave={handleDescriptionChange}
-              className="inline-block"
+              className=""
             />
-          </p>
+          </div>
         </div>
         
         <div className="flex flex-wrap gap-4 mb-6 items-center">
@@ -399,10 +399,10 @@ const IndianWeatherAlerts = () => {
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Maharashtra">Maharashtra</SelectItem>
-                                <SelectItem value="Grande-Terre">Grande-Terre</SelectItem>
-                                <SelectItem value="Marie-Galante">Marie-Galante</SelectItem>
-                                <SelectItem value="Les Saintes">Les Saintes</SelectItem>
-                                <SelectItem value="La Désirade">La Désirade</SelectItem>
+                                <SelectItem value="Punjab">Punjab</SelectItem>
+                                <SelectItem value="Tamil Nadu">Tamil Nadu</SelectItem>
+                                <SelectItem value="Gujarat">Gujarat</SelectItem>
+                                <SelectItem value="Karnataka">Karnataka</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -570,19 +570,19 @@ const IndianWeatherAlerts = () => {
                         <p className="text-sm">{alert.description}</p>
                       </div>
                       <div>
-        <h4 className="text-sm font-semibold mb-1">Recommendations</h4>
-        <p className="text-sm">{alert.recommendation}</p>
-      </div>
-    </div>
-    <div className="mt-4">
-      <h4 className="text-sm font-semibold mb-1">Impact on crops</h4>
-      <Badge className={alert.impactCrops === 'Severe' ? 'bg-red-100 text-red-800' :
-                      alert.impactCrops === 'Moderate' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-green-100 text-green-800'}>
-        {alert.impactCrops}
-      </Badge>
-    </div>
-  </div>
+                        <h4 className="text-sm font-semibold mb-1">Recommendations</h4>
+                        <p className="text-sm">{alert.recommendation}</p>
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="text-sm font-semibold mb-1">Impact on crops</h4>
+                      <Badge className={alert.impactCrops === 'Severe' ? 'bg-red-100 text-red-800' :
+                                      alert.impactCrops === 'Moderate' ? 'bg-yellow-100 text-yellow-800' :
+                                      'bg-green-100 text-green-800'}>
+                        {alert.impactCrops}
+                      </Badge>
+                    </div>
+                  </div>
                 )}
               </div>
             ))

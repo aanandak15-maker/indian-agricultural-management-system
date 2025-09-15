@@ -33,7 +33,7 @@ const IndianHarvestTracking = () => {
                    item.name === 'Rice' ? 350 :
                    item.name === 'Wheat' ? 420 : 180,
       quality: item.name === 'Cotton' ? 'Excellent' :
-               item.name === 'Rice' || item.name === 'Sugarcane' || item.name === 'Madère' ? 'Good' : 'Average'
+               item.name === 'Rice' || item.name === 'Sugarcane' || item.name === 'Cotton' ? 'Good' : 'Average'
     }))
   );
   
@@ -88,7 +88,7 @@ const IndianHarvestTracking = () => {
       quality: (newRow.quality as HarvestData['quality']) || 'Average'
     };
     setHarvestData([...harvestData, typedRow]);
-    console.log('New crop added to tracking');
+    console.log('New crop adofd to tracking');
   };
   
   // Data for comparative chart
@@ -133,13 +133,13 @@ const IndianHarvestTracking = () => {
                 className="inline-block"
               />
             </h2>
-            <p className="text-muted-foreground">
+            <div className="text-muted-foreground">
               <EditableField
                 value={description}
                 onSave={handleDescriptionChange}
-                className="inline-block"
+                className=""
               />
-            </p>
+            </div>
           </div>
           
           <PreviewPrintButton 

@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Download, Printer, Share2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useCRM } from '../../contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 import ReportGenerationButton from '../common/ReportGenerationButton';
 import { useIsMobile } from '@/hooks/use-mobile';
 import PreviewPrintButton from '../common/PreviewPrintButton';
@@ -11,22 +10,22 @@ import { useStatistics } from '@/contexts/StatisticsContext';
 
 const StatisticsHeader = () => {
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
-  const { exportModuleData, printModuleData, getModuleData } = useCRM();
+  // Note: export/print/get functions not yet implemented in Supabase context
+  // const { exportModuleData, printModuleData, getModuleData } = useSupabaseCRM();
   const { yieldData, financialData, environmentalData } = useStatistics();
   const isMobile = useIsMobile();
   
   // Combine all statistics data for preview/print
   const statisticsData = [
     ...(yieldData || []).map(item => ({ ...item, type: 'yield' })),
-    ...(financialData.profitabilityByParcel || []).map(item => ({ ...item, type: 'financier' })),
-    ...(environmentalData.indicators || []).map(item => ({ ...item, type: 'environnement' }))
+    ...(financialData.profitabilityByParcel || []).map(item => ({ ...item, type: 'financial' })),
+    ...(environmentalData.indicators || []).map(item => ({ ...item, type: 'environmental' }))
   ];
 
   const handleExport = async () => {
     try {
-      console.log("Exportation des statistiques au format CSV...");
-      await exportModuleData('statistiques', 'csv');
-      console.log("Exportation réussie!");
+      console.log("Exporting statistics to CSV format - Coming soon with Supabase integration");
+      // TODO: Implement export functionality with Supabase data
     } catch (error) {
       console.error("Error exporting statistics:", error);
     }
@@ -34,9 +33,8 @@ const StatisticsHeader = () => {
 
   const handlePrint = async () => {
     try {
-      console.log("Préparation of l'impression des statistiques...");
-      await printModuleData('statistiques');
-      console.log("Document envoyé à l'impression");
+      console.log("Preparing statistics for printing - Coming soon with Supabase integration");
+      // TODO: Implement print functionality with Supabase data
     } catch (error) {
       console.error("Error printing statistics:", error);
     }
@@ -44,21 +42,20 @@ const StatisticsHeader = () => {
 
   const handleShare = () => {
     setShareDialogOpen(true);
-    console.log("Ouverture of la boîte of dialogue of partage");
+    console.log("Opening share dialog");
   };
   
   const handleShareByEmail = () => {
-    console.log("Préparation du partage par email...");
+    console.log("Preparing email share...");
     setShareDialogOpen(false);
-    console.log("Email of partage préparé");
+    console.log("Email share prepared");
   };
   
   const handleShareByPDF = async () => {
     try {
-      console.log("Génération du PDF pour partage...");
-      await exportModuleData('statistiques', 'pdf');
+      console.log("Generating PDF for sharing - Coming soon with Supabase integration");
+      // TODO: Implement export functionality with Supabase data
       setShareDialogOpen(false);
-      console.log("PDF généré avec succès pour partage");
     } catch (error) {
       console.error("Error generating PDF:", error);
       setShareDialogOpen(false);
@@ -68,12 +65,12 @@ const StatisticsHeader = () => {
   return (
     <header className="flex flex-col mb-6 gap-4">
       <div>
-        <h1 className="text-xl md:text-2xl font-bold mb-1 text-gray-800">Statistics et Analytics</h1>
-        <p className="text-sm md:text-base text-gray-500">Visualize and analyze the data of votre farm</p>
+        <h1 className="text-xl md:text-2xl font-bold mb-1 text-gray-800">Statistics and Analytics</h1>
+        <p className="text-sm md:text-base text-gray-500">Visualize and analyze the data of your farm</p>
       </div>
       <div className="flex flex-wrap gap-2 md:gap-3 justify-start md:justify-end">
         <ReportGenerationButton 
-          moduleName="statistiques" 
+          moduleName="statistics" 
           className="bg-green-600 hover:bg-green-700 text-white text-xs md:text-sm px-2 md:px-4 py-1.5 md:py-2"
           withAnimation={false}
         />
@@ -82,16 +79,16 @@ const StatisticsHeader = () => {
           <>
             <PreviewPrintButton 
               data={statisticsData}
-              moduleName="statistiques"
-              title="Statistics et Analytics"
+              moduleName="statistics"
+              title="Statistics and Analytics"
               className="bg-white border-gray-200 hover:bg-gray-50 text-xs md:text-sm h-auto py-1.5 md:py-2"
               variant="outline"
               columns={[
                 { key: "type", header: "Type" },
                 { key: "name", header: "Name" },
-                { key: "current", header: "Value actuelle" },
-                { key: "previous", header: "Value précédente" },
-                { key: "unit", header: "Unité" }
+                { key: "current", header: "Current Value" },
+                { key: "previous", header: "Previous Value" },
+                { key: "unit", header: "Unit" }
               ]}
             />
             
@@ -113,25 +110,25 @@ const StatisticsHeader = () => {
           size={isMobile ? "sm" : "default"}
         >
           <Share2 className="h-3.5 w-3.5 md:h-4 md:w-4 mr-1.5 md:mr-2 text-gray-600" />
-          {isMobile ? "Partager" : "Partager"}
+          {isMobile ? "Share" : "Share"}
         </Button>
       </div>
       
       <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
         <DialogContent className="sm:max-w-md max-w-[90%]">
           <DialogHeader>
-            <DialogTitle>Partager les statistiques</DialogTitle>
+            <DialogTitle>Share Statistics</DialogTitle>
             <DialogDescription>
-              Choisissez comment vous souhaitez partager ces statistiques
+              Choose how you want to share these statistics
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <Button onClick={handleShareByEmail} variant="outline">
-                Envoyer par email
+                Send by email
               </Button>
               <Button onClick={handleShareByPDF} className="bg-green-600 hover:bg-green-700">
-                Générer un PDF
+                Generate PDF
               </Button>
             </div>
           </div>

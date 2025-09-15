@@ -1,10 +1,9 @@
-
 import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Download, Upload, Printer } from 'lucide-react';
-import { useCRM } from '../../contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 
 interface ImportExportControlsProps {
   moduleName: string;
@@ -23,7 +22,8 @@ const ImportExportControls: React.FC<ImportExportControlsProps> = ({
   const [exportDialogOpen, setExportDialogOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const { exportModuleData, importModuleData, printModuleData } = useCRM();
+  // Note: export/import/print functions not yet implemented in Supabase context
+  // const { exportModuleData, importModuleData, printModuleData } = useSupabaseCRM();
   
   const handleImportClick = () => {
     setImportDialogOpen(true);
@@ -36,9 +36,10 @@ const ImportExportControls: React.FC<ImportExportControlsProps> = ({
     }
     
     try {
-      const success = await importModuleData(moduleName, selectedFile);
+      // TODO: Implement import functionality with Supabase data
+      console.log(`Importing ${selectedFile.name} for ${moduleName} - Coming soon with Supabase integration`);
       
-      if (success && onImportComplete) {
+      if (onImportComplete) {
         onImportComplete();
       }
     } catch (error) {
@@ -55,7 +56,8 @@ const ImportExportControls: React.FC<ImportExportControlsProps> = ({
   
   const handleExportConfirm = async () => {
     try {
-      await exportModuleData(moduleName, exportFormat);
+      // TODO: Implement export functionality with Supabase data
+      console.log(`Exporting ${moduleName} in ${exportFormat} format - Coming soon with Supabase integration`);
     } catch (error) {
       console.error(`Error exporting ${moduleName}:`, error);
     }
@@ -65,7 +67,8 @@ const ImportExportControls: React.FC<ImportExportControlsProps> = ({
   
   const handlePrintClick = async () => {
     try {
-      await printModuleData(moduleName);
+      // TODO: Implement print functionality with Supabase data
+      console.log(`Printing ${moduleName} - Coming soon with Supabase integration`);
     } catch (error) {
       console.error(`Error printing ${moduleName}:`, error);
     }
@@ -97,7 +100,7 @@ const ImportExportControls: React.FC<ImportExportControlsProps> = ({
         onClick={handlePrintClick}
       >
         <Printer className="h-4 w-4" />
-        Imprimer
+        Print
       </Button>
       
       {/* Import Dialog */}
@@ -137,7 +140,7 @@ const ImportExportControls: React.FC<ImportExportControlsProps> = ({
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label>Format d'export</Label>
+              <Label>Export Format</Label>
               <div className="flex gap-2">
                 <Button 
                   variant={exportFormat === 'csv' ? 'default' : 'outline'}

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FileText, Loader2, Download, Eye, Printer } from 'lucide-react';
-import { useCRM } from '../../contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 import { useAppSettings } from '@/contexts/AppSettingsContext';
 import {
   Tooltip,
@@ -28,7 +28,7 @@ import PreviewContainer from './PreviewContainer';
 interface TechnicalSheetButtonProps {
   data: any;
   className?: string;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  variant?: "default" | "oftructive" | "outline" | "secondary" | "ghost" | "link";
   children?: React.ReactNode;
   size?: "default" | "sm" | "lg" | "icon";
 }
@@ -40,7 +40,8 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
   children,
   size = "default"
 }) => {
-  const { exportModuleData } = useCRM();
+  // Note: functions not yet implemented in Supabase context
+  // const { ... } = useSupabaseCRM();
   const { settings } = useAppSettings();
   const [isGenerating, setIsGenerating] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -49,25 +50,25 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
   // Format data for the technical sheet
   const formatTechSheetData = () => {
     if (!data || Object.keys(data).length === 0) {
-      console.error("Data insuffisantes pour générer la fiche technique");
+      console.error("Data insuffisantes pour generer la fiche technique");
       return null;
     }
     
     return [{
-      nom: data.name || data.nom || "Non spécifié",
-      nomScientifique: data.scientificName || data.nomScientifique || "Non spécifié",
-      famille: data.family || data.famille || "Non spécifiée",
-      origine: data.origin || data.origine || "Non spécifiée",
-      saisonCulture: data.growingSeason || data.saisonCulture || "Non spécifiée",
-      typeSol: data.soilType || data.typeSol || "Non spécifié",
-      besoinEau: data.waterNeeds || data.besoinEau || "Non spécifié",
-      fertilisation: data.fertilization || data.fertilisation || "Non spécifiée",
-      ravageurs: data.pests || data.ravageurs || "Non spécifiés",
-      maladies: data.diseases || data.maladies || "Non spécifiées",
-      notes: data.notes || "Aucune note",
-      type: data.type || "Non spécifié",
-      periodeRecolte: data.harvestPeriod || data.periodeRecolte || "Non spécifiée",
-      rendementHectare: data.yieldPerHectare || data.rendementHectare || data.currentYield || "Non spécifié"
+      nom: data.name || data.nom || "Not specified",
+      nomScientifique: data.scientificName || data.nomScientifique || "Not specified",
+      famille: data.family || data.famille || "Not specified",
+      origine: data.origin || data.origine || "Not specified",
+      saisonCrop: data.growingSeason || data.saisonCrop || "Not specified",
+      typeSol: data.soilType || data.typeSol || "Not specified",
+      besoinEau: data.waterNeeds || data.besoinEau || "Not specified",
+      fertilisation: data.fertilization || data.fertilisation || "Not specified",
+      ravageurs: data.pests || data.ravageurs || "Not specified",
+      maladies: data.diseases || data.maladies || "Not specified",
+      notes: data.notes || "No notes",
+      type: data.type || "Not specified",
+      periodRecolte: data.harvestPeriod || data.periodRecolte || "Not specified",
+      yieldHectare: data.yieldPerHectare || data.yieldHectare || data.currentYield || "Not specified"
     }];
   };
   
@@ -78,8 +79,9 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
     setIsGenerating(true);
     
     try {
-      await exportModuleData('fiche_technique', 'pdf', techSheetData);
-      console.log("Fiche technique générée avec succès");
+      // TODO: Implement export functionality with Supabase data
+      console.log("Generating technical sheet - Coming soon with Supabase integration");
+      console.log("Tech sheet data:", techSheetData);
     } catch (error) {
       console.error("Error generating technical sheet:", error);
     } finally {
@@ -102,7 +104,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
         </div>
         
         <div class="section mb-6">
-          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Information générales</h2>
+          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Information generales</h2>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <span class="font-medium">Famille:</span>
@@ -117,8 +119,8 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               ${item.type}
             </div>
             <div>
-              <span class="font-medium">Saison of culture:</span>
-              ${item.saisonCulture}
+              <span class="font-medium">Growing Season:</span>
+              ${item.saisonCrop}
             </div>
           </div>
         </div>
@@ -127,11 +129,11 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
           <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Conditions of culture</h2>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <span class="font-medium">Type of sol:</span>
+              <span class="font-medium">Soil Type:</span>
               ${item.typeSol}
             </div>
             <div>
-              <span class="font-medium">Besoin en eau:</span>
+              <span class="font-medium">Water Needs:</span>
               ${item.besoinEau}
             </div>
             <div>
@@ -139,18 +141,18 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               ${item.fertilisation}
             </div>
             <div>
-              <span class="font-medium">Période of récolte:</span>
-              ${item.periodeRecolte}
+              <span class="font-medium">Period of harvest:</span>
+              ${item.periodRecolte}
             </div>
             <div>
-              <span class="font-medium">Rendement par hectare:</span>
-              ${item.rendementHectare}
+              <span class="font-medium">Yield par hectare:</span>
+              ${item.yieldHectare}
             </div>
           </div>
         </div>
         
         <div class="section mb-6">
-          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Problèmes phytosanitaires</h2>
+          <h2 class="text-lg font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-800'} border-b pb-2 mb-4">Problemes phytosanitaires</h2>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <span class="font-medium">Ravageurs:</span>
@@ -189,7 +191,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
           <head>
             <title>Fiche Technique - ${data.name || data.nom || 'Crop'}</title>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="viewport" content="width=ofvice-width, initial-scale=1.0">
             <style>
               :root {
                 --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -253,7 +255,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               ${generatePreviewHTML()}
               
               <div class="footer text-center text-sm text-muted-color mt-8">
-                <p>Fiche technique générée le ${new Date().toLocaleDateString(settings.locale)}</p>
+                <p>Fiche technique generee le ${new Date().toLocaleDateString(settings.locale)}</p>
               </div>
             </div>
           </body>
@@ -308,7 +310,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
             </DropdownMenu>
           </TooltipTrigger>
           <TooltipContent className="bg-white border shadow-lg">
-            <p>Générer une fiche technique détaillée</p>
+            <p>Generer une fiche technique detaillee</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -328,7 +330,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
                 <html>
                   <head>
                     <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta name="viewport" content="width=ofvice-width, initial-scale=1.0">
                     <style>
                       :root {
                         --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -416,7 +418,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
                       ${previewHTML}
                       
                       <div class="footer">
-                        <p>Fiche technique générée le ${new Date().toLocaleDateString(settings.locale)}</p>
+                        <p>Fiche technique generee le ${new Date().toLocaleDateString(settings.locale)}</p>
                       </div>
                     </div>
                   </body>

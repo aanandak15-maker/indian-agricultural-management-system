@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   LineChart, 
@@ -40,7 +39,7 @@ const forecastData = [
   { month: 'Sep', revenue: 40200, expenses: 24800, forecast: 15400, previous: 12400 },
   { month: 'Oct', revenue: 38200, expenses: 23100, forecast: 15100, previous: 11800 },
   { month: 'Nov', revenue: 36500, expenses: 22500, forecast: 14000, previous: 10900 },
-  { month: 'Déc', revenue: 41200, expenses: 25800, forecast: 15400, previous: 12200 }
+  { month: 'Dec', revenue: 41200, expenses: 25800, forecast: 15400, previous: 12200 }
 ];
 
 // Cash flow projection data
@@ -56,7 +55,7 @@ const cashFlowProjection = [
   { month: 'Sep', inflow: 40200, outflow: 24800, balance: 122400 },
   { month: 'Oct', inflow: 38200, outflow: 23100, balance: 137500 },
   { month: 'Nov', inflow: 36500, outflow: 22500, balance: 151500 },
-  { month: 'Déc', inflow: 41200, outflow: 25800, balance: 166900 }
+  { month: 'Dec', inflow: 41200, outflow: 25800, balance: 166900 }
 ];
 
 const FinancialForecast = () => {
@@ -67,16 +66,16 @@ const FinancialForecast = () => {
   const [forecastModel, setForecastModel] = useState<string>("basic");
   
   const handleRefreshForecast = () => {
-    toast.info("Mise à jour des prévisions financières");
+    toast.info("Updating financial forecasts");
     // In a real app, this would recalculate forecasts based on the selected factors
   };
   
   const handleShareForecast = () => {
-    toast.success("Prévisions partagées par e-mail");
+    toast.success("Forecasts shared by email");
   };
   
   const handleRunSimulation = () => {
-    toast.success("Simulation lancée avec succès");
+    toast.success("Simulation launched successfully");
     // In a real app, this would run a more sophisticated forecast model
   };
   
@@ -84,30 +83,30 @@ const FinancialForecast = () => {
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
         <div>
-          <h2 className="text-xl font-bold">Prévisions Financières</h2>
-          <p className="text-muted-foreground">Projections à {forecastDuration} month basées of les données historiques</p>
+          <h2 className="text-xl font-bold">Financial Forecasts</h2>
+          <p className="text-muted-foreground">Projections for {forecastDuration} months based on historical data</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Select value={forecastDuration} onValueChange={setForecastDuration}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Durée" />
+              <SelectValue placeholder="Duration" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="3">3 month</SelectItem>
-              <SelectItem value="6">6 month</SelectItem>
-              <SelectItem value="12">12 month</SelectItem>
-              <SelectItem value="24">24 month</SelectItem>
+              <SelectItem value="3">3 months</SelectItem>
+              <SelectItem value="6">6 months</SelectItem>
+              <SelectItem value="12">12 months</SelectItem>
+              <SelectItem value="24">24 months</SelectItem>
             </SelectContent>
           </Select>
           
           <Select value={forecastModel} onValueChange={setForecastModel}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Modèle" />
+              <SelectValue placeholder="Model" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="basic">Modèle basique</SelectItem>
-              <SelectItem value="seasonal">Modèle saisonnier</SelectItem>
-              <SelectItem value="advanced">Modèle avancé</SelectItem>
+              <SelectItem value="basic">Basic Model</SelectItem>
+              <SelectItem value="seasonal">Seasonal Model</SelectItem>
+              <SelectItem value="advanced">Advanced Model</SelectItem>
             </SelectContent>
           </Select>
           
@@ -118,7 +117,7 @@ const FinancialForecast = () => {
           
           <Button onClick={handleShareForecast} variant="outline">
             <Share2 className="h-4 w-4 mr-2" />
-            Partager
+            Share
           </Button>
         </div>
       </div>
@@ -126,8 +125,8 @@ const FinancialForecast = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Marge nette prévisionnelle</CardTitle>
-            <CardDescription>Comparaison avec l'year précédente</CardDescription>
+            <CardTitle>Projected Net Margin</CardTitle>
+            <CardDescription>Comparison with previous year</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -141,9 +140,9 @@ const FinancialForecast = () => {
                   <YAxis />
                   <Tooltip 
                     formatter={(value, name) => {
-                      if (name === "forecast") return [`${value.toLocaleString()} €`, "Prévision"];
-                      if (name === "previous") return [`${value.toLocaleString()} €`, "Année précédente"];
-                      return [`${value.toLocaleString()} €`, name];
+                      if (name === "forecast") return [`${value.toLocaleString()} ₹`, "Forecast"];
+                      if (name === "previous") return [`${value.toLocaleString()} ₹`, "Previous Year"];
+                      return [`${value.toLocaleString()} ₹`, name];
                     }}
                   />
                   <Legend />
@@ -152,7 +151,7 @@ const FinancialForecast = () => {
                     dataKey="forecast" 
                     stroke="#4CAF50" 
                     strokeWidth={2} 
-                    name="Prévision" 
+                    name="Forecast" 
                     activeDot={{ r: 8 }} 
                   />
                   <Line 
@@ -160,7 +159,7 @@ const FinancialForecast = () => {
                     dataKey="previous" 
                     stroke="#9E9E9E" 
                     strokeDasharray="5 5" 
-                    name="Année précédente" 
+                    name="Previous Year" 
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -170,8 +169,8 @@ const FinancialForecast = () => {
         
         <Card>
           <CardHeader>
-            <CardTitle>Prévision of flux of trésorerie</CardTitle>
-            <CardDescription>Évolution du solde of trésorerie</CardDescription>
+            <CardTitle>Cash Flow Forecast</CardTitle>
+            <CardDescription>Evolution of cash balance</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -184,7 +183,7 @@ const FinancialForecast = () => {
                   <XAxis dataKey="month" />
                   <YAxis />
                   <Tooltip 
-                    formatter={(value) => [`${value.toLocaleString()} €`, '']}
+                    formatter={(value) => [`${value.toLocaleString()} ₹`, '']}
                   />
                   <Legend />
                   <ReferenceLine y={0} stroke="#000" />
@@ -194,7 +193,7 @@ const FinancialForecast = () => {
                     stroke="#8884d8" 
                     fill="#8884d8" 
                     fillOpacity={0.3}
-                    name="Solde of trésorerie"
+                    name="Cash Balance"
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -205,8 +204,8 @@ const FinancialForecast = () => {
       
       <Card>
         <CardHeader>
-          <CardTitle>Settings of simulation</CardTitle>
-          <CardDescription>Ajustez les facteurs pour observer leur impact of les prévisions</CardDescription>
+          <CardTitle>Simulation Settings</CardTitle>
+          <CardDescription>Adjust factors to observe their impact on forecasts</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
@@ -214,7 +213,7 @@ const FinancialForecast = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <Label>Évolution des revenus</Label>
+                    <Label>Revenue Evolution</Label>
                     <span className="text-sm font-medium">{revenueFactor[0]}%</span>
                   </div>
                   <Slider 
@@ -233,7 +232,7 @@ const FinancialForecast = () => {
                 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <Label>Évolution des charges</Label>
+                    <Label>Expense Evolution</Label>
                     <span className="text-sm font-medium">{expenseFactor[0]}%</span>
                   </div>
                   <Slider 
@@ -253,16 +252,16 @@ const FinancialForecast = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label>Scénario of revenus</Label>
+                  <Label>Revenue Scenario</Label>
                   <Select value={revenueScenario} onValueChange={setRevenueScenario}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Scénario" />
+                      <SelectValue placeholder="Scenario" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="optimistic">Optimiste (+15%)</SelectItem>
+                      <SelectItem value="optimistic">Optimistic (+15%)</SelectItem>
                       <SelectItem value="stable">Stable (±0%)</SelectItem>
-                      <SelectItem value="pessimistic">Pessimiste (-15%)</SelectItem>
-                      <SelectItem value="seasonal">Saisonnier (variations)</SelectItem>
+                      <SelectItem value="pessimistic">Pessimistic (-15%)</SelectItem>
+                      <SelectItem value="seasonal">Seasonal (variations)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -270,7 +269,7 @@ const FinancialForecast = () => {
                 <div className="flex items-end">
                   <Button className="w-full" onClick={handleRunSimulation}>
                     <Calculator className="h-4 w-4 mr-2" />
-                    Lancer la simulation
+                    Run Simulation
                   </Button>
                 </div>
               </div>
@@ -278,29 +277,29 @@ const FinancialForecast = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               <div className="p-4 border rounded-lg">
-                <p className="text-muted-foreground text-sm font-medium mb-1">Result d'farm prévisionnel</p>
-                <p className="text-xl font-bold">98,600 €</p>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Projected Farm Result</p>
+                <p className="text-xl font-bold">98,600 ₹</p>
                 <div className="flex items-center space-x-1 text-green-600 text-xs">
                   <TrendingUp className="h-3 w-3" />
-                  <span>+12% vs year précédente</span>
+                  <span>+12% vs previous year</span>
                 </div>
               </div>
               
               <div className="p-4 border rounded-lg">
-                <p className="text-muted-foreground text-sm font-medium mb-1">Trésorerie prévisionnelle fin d'year</p>
-                <p className="text-xl font-bold">166,900 €</p>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Projected Year-End Cash</p>
+                <p className="text-xl font-bold">166,900 ₹</p>
                 <div className="flex items-center space-x-1 text-green-600 text-xs">
                   <TrendingUp className="h-3 w-3" />
-                  <span>+32% vs year précédente</span>
+                  <span>+32% vs previous year</span>
                 </div>
               </div>
               
               <div className="p-4 border rounded-lg">
-                <p className="text-muted-foreground text-sm font-medium mb-1">Rentabilité prévisionnelle</p>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Projected Profitability</p>
                 <p className="text-xl font-bold">21.3%</p>
                 <div className="flex items-center space-x-1 text-green-600 text-xs">
                   <TrendingUp className="h-3 w-3" />
-                  <span>+3.2pts vs year précédente</span>
+                  <span>+3.2pts vs previous year</span>
                 </div>
               </div>
             </div>

@@ -17,7 +17,7 @@ const NotificationCenter: React.FC = () => {
     unreadCount,
     markAsRead,
     markAllAsRead,
-    deleteNotification,
+    ofleteNotification,
     clearAllNotifications
   } = useNotifications();
 
@@ -30,7 +30,7 @@ const NotificationCenter: React.FC = () => {
   };
 
   const handleDelete = (id: number) => {
-    deleteNotification(id);
+    ofleteNotification(id);
   };
 
   const handleClearAll = () => {
@@ -73,7 +73,7 @@ const NotificationCenter: React.FC = () => {
               <Bell className="h-[1.2rem] w-[1.2rem]" />
               <Badge 
                 className="absolute -top-1 -right-1 px-1 min-w-[18px] h-[18px] flex items-center justify-center text-[10px]"
-                variant="destructive"
+                variant="oftructive"
               >
                 {unreadCount}
               </Badge>
@@ -107,7 +107,7 @@ const NotificationCenter: React.FC = () => {
               <p>Aucune notification</p>
             </div>
           ) : (
-            <div className="divide-y">
+            <div className="diviof-y">
               {notifications.map((notification) => (
                 <div 
                   key={notification.id} 

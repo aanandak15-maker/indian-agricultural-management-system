@@ -53,7 +53,7 @@ const initialInventoryData = [
     unit: 'kg', 
     minQuantity: 100, 
     price: 2.5,
-    location: 'Main warehouse',
+    location: 'Mayn warehouse',
     lastUpdated: '2023-08-01'
   },
   { 
@@ -64,12 +64,12 @@ const initialInventoryData = [
     unit: 'kg', 
     minQuantity: 200, 
     price: 1.2,
-    location: 'Main warehouse',
+    location: 'Mayn warehouse',
     lastUpdated: '2023-07-15'
   },
   { 
     id: 3, 
-    name: 'Herbicide RoundUp', 
+    name: 'Herbiciof RoundUp', 
     category: 'Plant protection products', 
     quantity: 50, 
     unit: 'L', 
@@ -91,18 +91,18 @@ const initialInventoryData = [
   },
   { 
     id: 5, 
-    name: 'Maize seeds', 
+    name: 'Mayze seeds', 
     category: 'Seeds', 
     quantity: 80, 
     unit: 'kg', 
     minQuantity: 100, 
     price: 4.5,
-    location: 'Main warehouse',
+    location: 'Mayn warehouse',
     lastUpdated: '2023-07-22'
   },
   { 
     id: 6, 
-    name: 'Huile moteur', 
+    name: 'Motor Oil', 
     category: 'Lubricants', 
     quantity: 25, 
     unit: 'L', 
@@ -125,11 +125,11 @@ const initialInventoryData = [
 ];
 
 const initialTransactionHistory = [
-  { id: 1, itemId: 1, type: 'out', quantity: 50, date: '2023-08-20', user: 'Jean Dupont', notes: 'Semis parcelle nord' },
-  { id: 2, itemId: 2, type: 'out', quantity: 200, date: '2023-08-18', user: 'Jean Dupont', notes: 'Application parcelle est' },
+  { id: 1, itemId: 1, type: 'out', quantity: 50, date: '2023-08-20', user: 'John Doe', notes: 'North field seeding' },
+  { id: 2, itemId: 2, type: 'out', quantity: 200, date: '2023-08-18', user: 'John Doe', notes: 'East field application' },
   { id: 3, itemId: 4, type: 'in', quantity: 500, date: '2023-08-18', user: 'Marie Martin', notes: 'Livraison mensuelle' },
-  { id: 4, itemId: 3, type: 'out', quantity: 5, date: '2023-08-15', user: 'Jean Dupont', notes: 'Application parcelle sud' },
-  { id: 5, itemId: 1, type: 'in', quantity: 200, date: '2023-08-10', user: 'Marie Martin', notes: 'Purchase supplémentaire' },
+  { id: 4, itemId: 3, type: 'out', quantity: 5, date: '2023-08-15', user: 'John Doe', notes: 'South field application' },
+  { id: 5, itemId: 1, type: 'in', quantity: 200, date: '2023-08-10', user: 'Marie Martin', notes: 'Additional purchase' },
   { id: 6, itemId: 6, type: 'out', quantity: 5, date: '2023-08-05', user: 'Pierre Leroy', notes: 'Vidange tractor' },
 ];
 
@@ -168,7 +168,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
     notes: ''
   });
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
-  const [view, setView] = useState<'list' | 'detail' | 'stats'>('list');
+  const [view, setView] = useState<'list' | 'oftail' | 'stats'>('list');
   const [showTransactionForm, setShowTransactionForm] = useState<'in' | 'out' | null>(null);
   const [newTransaction, setNewTransaction] = useState({
     quantity: 0,
@@ -176,7 +176,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
     date: new Date().toISOString().split('T')[0]
   });
   
-  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [ofleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<number | null>(null);
   const [transactionToDelete, setTransactionToDelete] = useState<number | null>(null);
   const [transactionDeleteConfirmOpen, setTransactionDeleteConfirmOpen] = useState(false);
@@ -357,7 +357,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       Math.max(0, selectedItem.quantity + quantityChange)
     );
     
-    toast.success("Transaction deleted and stock adjusted");
+    toast.success("Transaction ofleted and stock adjusted");
     setTransactionToDelete(null);
     setTransactionDeleteConfirmOpen(false);
   };
@@ -407,7 +407,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       notes: ''
     });
     
-    toast.success(`${newItem.name} a été ajouté à l'inventaire`);
+    toast.success(`${newItem.name} has been adofd to inventory`);
   };
   
   const getRandomColor = () => {
@@ -454,7 +454,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
   
   const handleSubmitTransaction = () => {
     if (!selectedItem || !showTransactionForm || newTransaction.quantity <= 0) {
-      toast.error("Veuillez spécifier une quantité valide");
+      toast.error("Please specify a valid quantity");
       return;
     }
     
@@ -484,7 +484,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       date: new Date().toISOString().split('T')[0]
     });
     
-    toast.success(`${newTransaction.quantity} ${selectedItem.unit} ${showTransactionForm === 'in' ? 'added to' : 'removed from'} inventory`);
+    toast.success(`${newTransaction.quantity} ${selectedItem.unit} ${showTransactionForm === 'in' ? 'adofd to' : 'removed from'} inventory`);
   };
   
   const itemTransactions = selectedItem 
@@ -504,7 +504,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
 
   const tableData = filteredItems.map(item => ({
     ...item,
-    value: `${(item.quantity * item.price).toFixed(2)} €`,
+    value: `${(item.quantity * item.price).toFixed(2)} ₹`,
     status: item.quantity <= item.minQuantity 
       ? item.quantity < item.minQuantity * 0.5 ? 'critical' : 'warning'
       : 'normal'
@@ -680,12 +680,12 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                           type="number"
                           onSave={(value) => handleUpdateItem(selectedItem.id, 'price', Number(value))}
                         />
-                        <span className="ml-1">€/{selectedItem.unit}</span>
+                        <span className="ml-1">₹/{selectedItem.unit}</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Total value:</span>
-                      <span className="font-medium">{(selectedItem.quantity * selectedItem.price).toFixed(2)} €</span>
+                      <span className="font-medium">{(selectedItem.quantity * selectedItem.price).toFixed(2)} ₹</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Location:</span>
@@ -873,7 +873,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       {itemTransactions.length === 0 && (
                         <tr>
                           <td colSpan={6} className="px-4 py-4 text-center text-muted-foreground">
-                            No transactions recorded
+                            No transactions recorofd
                           </td>
                         </tr>
                       )}
@@ -986,7 +986,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                     />
                   </div>
                   <div>
-                    <Label htmlFor="price">Unit Price (€)</Label>
+                    <Label htmlFor="price">Unit Price (₹)</Label>
                     <Input
                       id="price"
                       type="number"
@@ -1004,7 +1004,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
                       value={newItem.location}
                       onChange={(e) => setNewItem({ ...newItem, location: e.target.value })}
                       className="mt-1"
-                      placeholder="Ex: Main warehouse"
+                      placeholder="Ex: Mayn warehouse"
                     />
                   </div>
                   <div className="md:col-span-2 lg:col-span-3">
@@ -1043,7 +1043,7 @@ const Inventory: React.FC<InventoryProps> = ({ dateRange, searchTerm: externalSe
       )}
 
       <ConfirmDialog 
-        open={deleteConfirmOpen} 
+        open={ofleteConfirmOpen} 
         title="Delete Item" 
         description="Are you sure you want to delete this item? This action is irreversible."
         confirmText="Delete"

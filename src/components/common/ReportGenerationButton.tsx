@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FileText, ChevronDown, FileSpreadsheet, FileBarChart2 } from 'lucide-react';
-import { useCRM } from '../../contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
 interface ReportGenerationButtonProps {
   moduleName: string;
   className?: string;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  variant?: "default" | "oftructive" | "outline" | "secondary" | "ghost" | "link";
   children?: React.ReactNode;
   onlyFormats?: Array<'pdf' | 'excel' | 'csv'>;
   withAnimation?: boolean;
@@ -27,7 +27,8 @@ const ReportGenerationButton: React.FC<ReportGenerationButtonProps> = ({
   onlyFormats,
   withAnimation = true
 }) => {
-  const { exportModuleData } = useCRM();
+  // Note: exportModuleData not yet implemented in Supabase context
+  // const { exportModuleData } = useSupabaseCRM();
   const [isGenerating, setIsGenerating] = useState(false);
   const [lastGeneratedFormat, setLastGeneratedFormat] = useState<'pdf' | 'excel' | 'csv' | null>(null);
 
@@ -36,7 +37,11 @@ const ReportGenerationButton: React.FC<ReportGenerationButtonProps> = ({
     setLastGeneratedFormat(format);
     
     try {
-      await exportModuleData(moduleName, format);
+      // TODO: Implement export functionality with Supabase data
+      console.log(`Generating ${format} report for ${moduleName} - Coming soon with Supabase integration`);
+      
+      // Simulate async operation
+      await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (error) {
       console.error("Error generating report:", error);
     } finally {
@@ -44,7 +49,7 @@ const ReportGenerationButton: React.FC<ReportGenerationButtonProps> = ({
     }
   };
 
-  // Déterminer quels formats afficher
+  // Determiner quels formats afficher
   const formats = onlyFormats || ['pdf', 'excel', 'csv'];
 
   const formatIcons = {
@@ -78,12 +83,12 @@ const ReportGenerationButton: React.FC<ReportGenerationButtonProps> = ({
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Génération...
+              Generation...
             </>
           ) : children || (
             <>
               <FileText className="mr-2 h-4 w-4" />
-              Générer un rapport
+              Generate Report
               <ChevronDown className="ml-2 h-4 w-4" />
             </>
           )}
@@ -100,7 +105,7 @@ const ReportGenerationButton: React.FC<ReportGenerationButtonProps> = ({
             {React.createElement(formatIcons[format], { className: "mr-2 h-4 w-4" })}
             <span>{formatLabels[format]}</span>
             {lastGeneratedFormat === format && (
-              <span className="ml-2 text-xs text-muted-foreground">(Récent)</span>
+              <span className="ml-2 text-xs text-muted-foreground">(Recent)</span>
             )}
           </DropdownMenuItem>
         ))}

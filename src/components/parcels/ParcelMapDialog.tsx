@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import ParcelMap from '@/components/ParcelMap';
+import LeafletParcelMap from '@/components/LeafletParcelMap';
 import { Search, ZoomIn, ZoomOut, Maximize2, Download, Layers, Ruler, MapPin, Target } from 'lucide-react';
 import { toast } from 'sonner';
 import {
@@ -32,11 +31,11 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
   const [measureResult, setMeasureResult] = useState<string | null>(null);
   const [layersOpen, setLayersOpen] = useState(false);
   const [mapLayers, setMapLayers] = useState<Layer[]>([
-    { id: 'satellite', name: 'Vue satellite', enabled: false, type: 'base' },
+    { id: 'satellite', name: 'Satellite View', enabled: false, type: 'base' },
     { id: 'terrain', name: 'Terrain', enabled: true, type: 'base' },
-    { id: 'parcels', name: 'Limites parcellaires', enabled: true, type: 'overlay' },
-    { id: 'crops', name: 'Crops actuelles', enabled: true, type: 'overlay' },
-    { id: 'soil', name: 'Types of sol', enabled: false, type: 'overlay' },
+    { id: 'parcels', name: 'Parcel Boundaries', enabled: true, type: 'overlay' },
+    { id: 'crops', name: 'Current Crops', enabled: true, type: 'overlay' },
+    { id: 'soil', name: 'Soil Types', enabled: false, type: 'overlay' },
     { id: 'irrigation', name: 'Irrigation', enabled: false, type: 'overlay' },
   ]);
   
@@ -58,8 +57,8 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
   };
   
   const handleExportMap = () => {
-    toast.success("Export of la carte", {
-      description: "La carte des parcelles a été exportée au format PDF"
+    toast.success("Map Export", {
+      description: "Fields map has been exported to PDF format"
     });
   };
 
@@ -68,8 +67,8 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     setMeasureMode(newMode);
     
     if (newMode) {
-      toast.info("Mode mesure activé", {
-        description: "Cliquez of la carte pour placer des points et mesurer la distance"
+      toast.info("Measure mode active", {
+        description: "Click on the map to place points and measure distance"
       });
     } else {
       setMeasureResult(null);
@@ -81,7 +80,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
       layer.id === layerId ? { ...layer, enabled } : layer
     ));
     
-    // Si c'est une couche of base qui est activée, désactiver les autres couches of base
+    // If a base layer is activated, deactivate other base layers
     if (enabled) {
       const layer = mapLayers.find(l => l.id === layerId);
       if (layer?.type === 'base') {
@@ -96,17 +95,17 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
-    // Simuler une recherche of parcelle of la carte
-    toast.info("Recherche en cours", {
-      description: `Recherche of la parcelle: ${searchQuery}`
+    // Simulate a field search on the map
+    toast.info("Search in progress", {
+      description: `Field search: ${searchQuery}`
     });
 
-    // Simuler un résultat trouvé
+    // Simulate a found result
     setTimeout(() => {
       setCoordinates({ lat: 45.4831, lng: 4.3973 });
       setZoomLevel(2);
-      toast.success("Field trouvée", {
-        description: "La carte a été centrée of la parcelle recherchée"
+      toast.success("Field found", {
+        description: "Map has been centered on the searched field"
       });
     }, 1000);
   };
@@ -117,7 +116,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     }
   };
 
-  // Activer la mesure of la carte
+  // Activate measure mode on the map
   useEffect(() => {
     if (isOpen && measureMode) {
       const timer = setTimeout(simulateMeasurement, 3000);
@@ -129,7 +128,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl">
         <DialogHeader>
-          <DialogTitle>Carte des parcelles</DialogTitle>
+          <DialogTitle>Fields Map</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="flex justify-between items-center flex-wrap gap-2">
@@ -138,7 +137,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input 
                   type="text"
-                  placeholder="Search une parcelle..."
+                  placeholder="Search a field..."
                   className="pl-9 pr-4 py-2 w-full border rounded-md"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -163,7 +162,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                 </PopoverTrigger>
                 <PopoverContent className="w-56">
                   <div className="space-y-4">
-                    <h4 className="font-medium text-sm">Couches of base</h4>
+                    <h4 className="font-medium text-sm">Base Layers</h4>
                     <div className="space-y-2">
                       {mapLayers.filter(l => l.type === 'base').map(layer => (
                         <div key={layer.id} className="flex items-center space-x-2">
@@ -182,7 +181,7 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                       ))}
                     </div>
                     
-                    <h4 className="font-medium text-sm">Couches supplémentaires</h4>
+                    <h4 className="font-medium text-sm">Additional Layers</h4>
                     <div className="space-y-2">
                       {mapLayers.filter(l => l.type === 'overlay').map(layer => (
                         <div key={layer.id} className="flex items-center space-x-2">
@@ -217,20 +216,20 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
             </div>
           </div>
           
-          <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden relative" style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center center' }}>
-            <ParcelMap 
+          <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden relative">
+            <LeafletParcelMap 
               coordinates={coordinates}
-              parcelName="Vue d'ensemble"
+              parcelName="Overview"
               isEditing={false}
               onCoordinatesChange={setCoordinates}
             />
             
-            {/* Mode of mesure - indicateurs */}
+            {/* Measure mode - indicators */}
             {measureMode && (
               <div className="absolute top-2 left-2 bg-white/90 p-2 rounded-md shadow-md">
                 <div className="flex items-center text-sm">
                   <Ruler className="h-4 w-4 mr-1 text-agri-primary" />
-                  <span className="font-medium">Mode mesure activé</span>
+                  <span className="font-medium">Measure mode active</span>
                 </div>
                 {measureResult && (
                   <div className="text-sm mt-1 font-bold">{measureResult}</div>
@@ -238,9 +237,9 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
               </div>
             )}
             
-            {/* Couches actives - légende */}
+            {/* Active Layers - Legend */}
             <div className="absolute bottom-2 right-2 bg-white/90 p-2 rounded-md shadow-md max-w-xs">
-              <div className="text-xs font-medium mb-1">Couches actives:</div>
+              <div className="text-xs font-medium mb-1">Active Layers:</div>
               <div className="flex flex-wrap gap-1">
                 {mapLayers.filter(layer => layer.enabled).map(layer => (
                   <span 
@@ -255,8 +254,8 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
           </div>
           
           <p className="text-sm text-muted-foreground text-center">
-            Cette vue d'ensemble montre l'emplacement of toutes vos parcelles. 
-            Cliquez of une parcelle spécifique pour voir plus of détails.
+            This overview shows the location of all your fields. 
+            Click on a specific field to see more details.
           </p>
           <div className="flex justify-between">
             <Button 
@@ -266,19 +265,19 @@ const ParcelMapDialog = ({ isOpen, onOpenChange }: ParcelMapDialogProps) => {
                   const { latitude, longitude } = position.coords;
                   setCoordinates({ lat: latitude, lng: longitude });
                   setZoomLevel(2.5);
-                  toast.success("Localisation", {
-                    description: "Carte centrée of votre position"
+                  toast.success("Location", {
+                    description: "Map centered on your position"
                   });
                 }, () => {
-                  toast.error("Localisation", {
-                    description: "Impossible d'obtenir votre position"
+                  toast.error("Location", {
+                    description: "Unable to get your position"
                   });
                 });
               }}
               className="gap-2"
             >
               <Target className="h-4 w-4" />
-              Ma position
+              My position
             </Button>
             <Button onClick={() => onOpenChange(false)}>
               Close

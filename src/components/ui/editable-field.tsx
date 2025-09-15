@@ -13,6 +13,7 @@ interface EditableFieldProps {
   options?: { value: string; label: string }[];
   icon?: React.ReactNode;
   showEditIcon?: boolean;
+  inline?: boolean;
 }
 
 export const EditableField = ({
@@ -21,11 +22,12 @@ export const EditableField = ({
   type = 'text',
   className = '',
   inputClassName = '',
-  placeholder = 'Entrer une valeur...',
+  placeholder = 'Enter a value...',
   onClick,
   options = [],
   icon,
-  showEditIcon = false
+  showEditIcon = false,
+  inline = false
 }: EditableFieldProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value);
@@ -89,8 +91,9 @@ export const EditableField = ({
   };
 
   if (isEditing) {
+    const Container = inline ? 'span' : 'div';
     return (
-      <div className={`flex items-center gap-1 ${className}`}>
+      <Container className={`${inline ? 'inline-flex' : 'flex'} items-center gap-1 ${className}`}>
         {type === 'select' ? (
           <select
             ref={inputRef as React.RefObject<HTMLSelectElement>}
@@ -116,7 +119,7 @@ export const EditableField = ({
             placeholder={placeholder}
           />
         )}
-        <div className="flex items-center">
+        <span className="flex items-center">
           <button 
             onClick={handleSave} 
             className="p-1 text-agri-success hover:bg-agri-success/10 rounded-full"
@@ -131,27 +134,28 @@ export const EditableField = ({
           >
             <X className="h-4 w-4" />
           </button>
-        </div>
-      </div>
+        </span>
+      </Container>
     );
   }
 
+  const Container = inline ? 'span' : 'div';
   return (
-    <div 
-      className={`group cursor-pointer hover:bg-muted/30 px-2 py-1 rounded flex items-center justify-between ${className}`}
+    <Container 
+      className={`group cursor-pointer hover:bg-muted/30 px-2 py-1 rounded ${inline ? 'inline-flex' : 'flex'} items-center justify-between ${className}`}
       onClick={handleClick}
     >
-      <div className="flex items-center gap-2">
+      <span className="flex items-center gap-2">
         {icon && <span className="text-muted-foreground">{icon}</span>}
         <span>
           {value ? formatValue(value) : (
             <span className="text-muted-foreground italic">{placeholder}</span>
           )}
         </span>
-      </div>
+      </span>
       {showEditIcon && (
         <Pencil className="h-3.5 w-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
       )}
-    </div>
+    </Container>
   );
 };

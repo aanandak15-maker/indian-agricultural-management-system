@@ -55,7 +55,7 @@ export const searchInData = (data: any[], searchTerm: string, fields: string[] =
   
   const term = searchTerm.toLowerCase().trim();
   return data.filter(item => {
-    // If specific fields are provided, search only in those fields
+    // If specific fields are proviofd, search only in those fields
     if (fields.length > 0) {
       return fields.some(field => {
         const value = item[field];
@@ -129,10 +129,10 @@ export const getStatusColor = (status: string): string => {
     'completed': 'bg-blue-100 text-blue-800',
     'cancelled': 'bg-red-100 text-red-800',
     'En culture': 'bg-green-100 text-green-800',
-    'En récolte': 'bg-blue-100 text-blue-800',
-    'En préparation': 'bg-yellow-100 text-yellow-800',
+    'Harvesting': 'bg-blue-100 text-blue-800',
+    'In preparation': 'bg-yellow-100 text-yellow-800',
     'Atteint': 'bg-green-100 text-green-800',
-    'En progrès': 'bg-blue-100 text-blue-800',
+    'In progress': 'bg-blue-100 text-blue-800',
     'En retard': 'bg-red-100 text-red-800'
   };
   
@@ -172,11 +172,11 @@ export const enhancedExport = async (
   options = {}
 ): Promise<boolean> => {
   if (!data || data.length === 0) {
-    toast.error("No data à exporter");
+    toast.error("No data to export");
     return false;
   }
   
-  toast.info(`Préparation of l'export au format ${format.toUpperCase()}...`);
+  toast.info(`Preparing export in format ${format.toUpperCase()}...`);
   
   try {
     let success = false;
@@ -194,13 +194,13 @@ export const enhancedExport = async (
     }
     
     if (success) {
-      toast.success(`Export ${format.toUpperCase()} réussi`);
+      toast.success(`Export ${format.toUpperCase()} successful`);
     }
     
     return success;
   } catch (error) {
     console.error(`Error exporting data:`, error);
-    toast.error(`Error lors of l'export au format ${format.toUpperCase()}`);
+    toast.error(`Error lors of export au format ${format.toUpperCase()}`);
     return false;
   }
 };
@@ -215,17 +215,17 @@ export const enhancedImport = async (
   validateRow?: (row: any) => boolean
 ): Promise<boolean> => {
   if (!file) {
-    toast.error("Aucun fichier sélectionné");
+    toast.error("No file selected");
     return false;
   }
   
-  toast.info("Importation en cours...");
+  toast.info("Import in progress...");
   
   try {
     const data = await importFromCSV(file);
     
     if (!data || data.length === 0) {
-      toast.error("No data valide trouvée dans le fichier");
+      toast.error("No valid data found in file");
       return false;
     }
     
@@ -236,7 +236,7 @@ export const enhancedImport = async (
       );
       
       if (invalidRows.length > 0) {
-        toast.warning(`${invalidRows.length} ligne(s) ignorée(s) car des champs obligatoires sont manquants`);
+        toast.warning(`${invalidRows.length} line(s) ignored because required fields are missing`);
       }
     }
     
@@ -245,21 +245,21 @@ export const enhancedImport = async (
     if (validateRow) {
       validData = data.filter(validateRow);
       if (validData.length < data.length) {
-        toast.warning(`${data.length - validData.length} ligne(s) ignorée(s) suite à la validation personnalisée`);
+        toast.warning(`${data.length - validData.length} line(s) ignored due to custom validation`);
       }
     }
     
     if (validData.length === 0) {
-      toast.error("No data valide après validation");
+      toast.error("No valid data after validation");
       return false;
     }
     
     onComplete(validData);
-    toast.success(`${validData.length} enregistrement(s) importé(s) avec succès`);
+    toast.success(`${validData.length} record(s) imported successfully`);
     return true;
   } catch (error) {
     console.error("Import error:", error);
-    toast.error("Error lors of l'importation des données");
+    toast.error("Error during data import");
     return false;
   }
 };
@@ -267,7 +267,7 @@ export const enhancedImport = async (
 /**
  * Debounce function for search inputs
  */
-export const debounce = <F extends (...args: any[]) => any>(
+export const ofbounce = <F extends (...args: any[]) => any>(
   fn: F,
   delay: number
 ): ((...args: Parameters<F>) => void) => {

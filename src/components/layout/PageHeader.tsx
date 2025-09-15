@@ -71,6 +71,7 @@ const PageHeader = ({
                     onSave={onTitleChange}
                     className="inline-block"
                     showEditIcon
+                    inline
                   />
                   {badge && <span className="ml-2">{badge}</span>}
                 </motion.h1>
@@ -82,6 +83,7 @@ const PageHeader = ({
                       onSave={onDescriptionChange}
                       className="inline-block"
                       showEditIcon
+                      inline
                     />
                   </motion.p>
                 )}
@@ -97,6 +99,7 @@ const PageHeader = ({
                     onSave={onTitleChange}
                     className="inline-block"
                     showEditIcon
+                    inline
                   />
                   {badge && <span className="ml-2">{badge}</span>}
                 </h1>
@@ -108,6 +111,7 @@ const PageHeader = ({
                   onSave={onDescriptionChange}
                   className="inline-block"
                   showEditIcon
+                  inline
                 />
               </motion.p>
             </>

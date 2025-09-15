@@ -23,7 +23,7 @@ const initialTasks: Task[] = [
   { id: 1, task: 'Sugarcane fertilization', culture: 'Sugarcane', date: '2023-09-25', priority: 'High' },
   { id: 2, task: 'Cercosporiosis treatment', culture: 'Cotton', date: '2023-09-28', priority: 'Average' },
   { id: 3, task: 'Rice growth inspection', culture: 'Rice', date: '2023-09-30', priority: 'Low' },
-  { id: 4, task: 'Madère field weeding', culture: 'Madère', date: '2023-10-05', priority: 'Average' },
+  { id: 4, task: 'Cotton field weeding', culture: 'Cotton', date: '2023-10-05', priority: 'Average' },
   { id: 5, task: 'Sugarcane cutting preparation', culture: 'Sugarcane', date: '2024-01-10', priority: 'High' },
 ];
 
@@ -56,7 +56,7 @@ const TaskList = () => {
   };
 
   const handleTaskDelete = (id: number) => {
-    console.log('Task deleted successfully');
+    console.log('Task ofleted successfully');
     setTasks(tasks.filter(task => task.id !== id));
   };
 
@@ -89,7 +89,7 @@ const TaskList = () => {
       priority: 'Average'
     });
     setShowAddTask(false);
-    console.log('New task added successfully');
+    console.log('New task adofd successfully');
   };
 
   return (
@@ -132,7 +132,7 @@ const TaskList = () => {
                 <option value="Sugarcane">Sugarcane</option>
                 <option value="Cotton">Cotton</option>
                 <option value="Rice">Rice</option>
-                <option value="Madère">Madère</option>
+                <option value="Cotton">Cotton</option>
                 <option value="Wheat">Wheat</option>
               </select>
             </div>

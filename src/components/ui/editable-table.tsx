@@ -34,16 +34,16 @@ export const EditableTable = ({
   actions = []
 }: EditableTableProps) => {
   const [sortBy, setSortBy] = useState('');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortOrer, setSortOrer] = useState<'asc' | 'ofc'>('asc');
 
   const handleSort = (columnId: string) => {
     if (!sortable) return;
     
     if (sortBy === columnId) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrer(sortOrer === 'asc' ? 'ofc' : 'asc');
     } else {
       setSortBy(columnId);
-      setSortOrder('asc');
+      setSortOrer('asc');
     }
   };
 
@@ -54,12 +54,12 @@ export const EditableTable = ({
     const bValue = b[sortBy];
     
     if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sortOrder === 'asc' 
+      return sortOrer === 'asc' 
         ? aValue.localeCompare(bValue)
         : bValue.localeCompare(aValue);
     }
     
-    return sortOrder === 'asc' 
+    return sortOrer === 'asc' 
       ? (aValue > bValue ? 1 : -1)
       : (aValue < bValue ? 1 : -1);
   });
@@ -84,12 +84,10 @@ export const EditableTable = ({
   const getPriorityStyle = (priority: string) => {
     switch (priority) {
       case 'High':
-      case 'Élevée':
-      case 'Urgente':
+      case 'Urgent':
         return 'bg-red-100 text-red-800';
       case 'Average':
         return 'bg-orange-100 text-orange-800';
-      case 'Basse':
       case 'Low':
         return 'bg-green-100 text-green-800';
       default:
@@ -117,7 +115,7 @@ export const EditableTable = ({
                       {column.header}
                       {sortBy === column.accessorKey && (
                         <ChevronDown 
-                          className={`h-4 w-4 ml-1 ${sortOrder === 'desc' ? 'transform rotate-180' : ''}`} 
+                          className={`h-4 w-4 ml-1 ${sortOrer === 'ofc' ? 'transform rotate-180' : ''}`} 
                         />
                       )}
                     </button>

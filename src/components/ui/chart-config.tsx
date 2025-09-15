@@ -134,7 +134,7 @@ export const ChartConfig = ({
                       onChange={(e) => handleOptionChange('showLegend', e.target.checked)}
                       className="mr-2"
                     />
-                    Show la légende
+                    Show legend
                   </label>
                 </div>
                 

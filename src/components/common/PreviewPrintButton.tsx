@@ -22,7 +22,7 @@ interface PreviewPrintButtonProps {
   data: any[];
   moduleName: string;
   className?: string;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  variant?: "default" | "oftructive" | "outline" | "secondary" | "ghost" | "link";
   showPreview?: boolean;
   columns?: { key: string, header: string }[];
   title?: string;
@@ -66,7 +66,7 @@ const PreviewPrintButton: React.FC<PreviewPrintButtonProps> = ({
                   size="sm"
                   className={`transition-all ${className}`}
                   disabled={isActionInProgress}
-                  aria-label="Options d'aperçu et d'impression"
+                  aria-label="Options d'apercu et d'impression"
                 >
                   {isActionInProgress ? (
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
@@ -90,7 +90,7 @@ const PreviewPrintButton: React.FC<PreviewPrintButtonProps> = ({
               onKeyDown={(e) => handleKeyDown(e, handleShowPreview)}
             >
               <Eye className="mr-2 h-4 w-4" aria-hidden="true" />
-              <span>Overview à l'écran</span>
+              <span>Overview a l'ecran</span>
             </DropdownMenuItem>
           )}
           <DropdownMenuItem 

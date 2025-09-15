@@ -73,7 +73,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({
               Revenue
             </CardTitle>
             <CardDescription className="text-xs md:text-sm">
-              {period ? `Total pour ${period}` : 'Total des entrées'}
+              {period ? `Total pour ${period}` : 'Total of entrees'}
             </CardDescription>
           </CardHeader>
           <CardContent className="px-3 md:px-6 pb-3 md:pb-6">
@@ -94,7 +94,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({
                   <TrendingDown className="h-3 w-3 md:h-4 md:w-4 mr-1" />
                 ) : null}
                 {incomeChange > 0 ? '+' : ''}{incomeChange.toFixed(1)}%
-                {!isMobile && " par rapport à la période précédente"}
+                {!isMobile && " par rapport a la period preceofnte"}
               </p>
             )}
           </CardContent>
@@ -112,7 +112,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({
               Expenses
             </CardTitle>
             <CardDescription className="text-xs md:text-sm">
-              {period ? `Total pour ${period}` : 'Total des sorties'}
+              {period ? `Total pour ${period}` : 'Total of sorties'}
             </CardDescription>
           </CardHeader>
           <CardContent className="px-3 md:px-6 pb-3 md:pb-6">
@@ -133,7 +133,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({
                   <TrendingDown className="h-3 w-3 md:h-4 md:w-4 mr-1" />
                 ) : null}
                 {expensesChange > 0 ? '+' : ''}{expensesChange.toFixed(1)}%
-                {!isMobile && " par rapport à la période précédente"}
+                {!isMobile && " par rapport a la period preceofnte"}
               </p>
             )}
           </CardContent>
@@ -148,7 +148,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({
           <CardHeader className="pb-1 md:pb-2 px-3 md:px-6 pt-3 md:pt-6">
             <CardTitle className="text-base md:text-lg flex items-center">
               <DollarSign className="h-4 w-4 md:h-5 md:w-5 mr-1.5 md:mr-2 text-blue-500" />
-              Solde
+              Solof
             </CardTitle>
             <CardDescription className="text-xs md:text-sm">
               {period ? `Bilan pour ${period}` : 'Revenue - Expenses'}
@@ -174,7 +174,7 @@ const FinancialSummary: React.FC<FinancialSummaryProps> = ({
                   <TrendingDown className="h-3 w-3 md:h-4 md:w-4 mr-1" />
                 ) : null}
                 {balanceChange > 0 ? '+' : ''}{balanceChange.toFixed(1)}%
-                {!isMobile && " par rapport à la période précédente"}
+                {!isMobile && " par rapport a la period preceofnte"}
               </p>
             )}
           </CardContent>

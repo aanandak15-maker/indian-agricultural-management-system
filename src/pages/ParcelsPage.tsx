@@ -11,7 +11,7 @@ import ParcelActionButtons from '../components/parcels/ParcelActionButtons';
 import ParcelMapDialog from '../components/parcels/ParcelMapDialog';
 import ParcelImportDialog from '../components/parcels/ParcelImportDialog';
 import IndianFieldManagement from '../components/IndianFieldManagement';
-import { useCRM } from '../contexts/CRMContext';
+import { useSupabaseCRM } from '../contexts/SupabaseCRMContext';
 import { FileSpreadsheet, FileBarChart2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -36,7 +36,7 @@ const ParcelsPage = () => {
   const [weatherAlertsOpen, setWeatherAlertsOpen] = useState(false);
   const [showIndianView, setShowIndianView] = useState(true);
   const [lastSyncDate, setLastSyncDate] = useState<Date>(new Date());
-  const { syncDataAcrossCRM } = useCRM();
+  const { syncDataAcrossCRM } = useSupabaseCRM();
   const [areaRange, setAreaRange] = useState<[number, number]>([0, 50]);
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
     from: subDays(new Date(), 30),
@@ -171,7 +171,7 @@ const ParcelsPage = () => {
               className="inline-flex items-center px-4 py-2 border border-input bg-white rounded-lg hover:bg-muted/30 transition-colors"
               onClick={toggleView}
             >
-              {showGuadeloupeView ? 'Standard View' : 'Indian View'}
+              {showIndianView ? 'Standard View' : 'Indian View'}
             </button>
           </div>
         </div>

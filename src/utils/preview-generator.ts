@@ -12,7 +12,7 @@ export const generatePreviewHTML = (
   locale?: string
 ): string => {
   if (!data || data.length === 0) {
-    return '<div class="p-4 text-center">No data disponible pour l\'aperçu</div>';
+    return '<div class="p-4 text-center">No data available for preview</div>';
   }
 
   const tableHeaders = (columns || Object.keys(data[0]).map(key => ({ key, header: key }))).map(
@@ -34,9 +34,9 @@ export const generatePreviewHTML = (
           if (value.includes('@')) {
             return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="mailto:${value}" class="text-blue-600 dark:text-blue-400 hover:underline">${value}</a></td>`;
           } else if (value.startsWith('/')) {
-            return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" class="text-blue-600 dark:text-blue-400 hover:underline">View détails</a></td>`;
+            return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" class="text-blue-600 dark:text-blue-400 hover:underline">View details</a></td>`;
           } else {
-            return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Lien externe</a></td>`;
+            return `<td class="px-4 py-2 border-b dark:border-gray-600"><a href="${value}" target="_blank" rel="noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">External link</a></td>`;
           }
         }
         
@@ -73,7 +73,7 @@ export const generatePreviewHTML = (
         </table>
       </div>
       <div class="mt-6 text-sm text-gray-500 dark:text-gray-400 text-right">
-        <p>Date: ${new Date().toLocaleDateString(locale || 'fr-FR')}</p>
+        <p>Date: ${new Date().toLocaleDateString(locale || 'en-US')}</p>
       </div>
       ${navigationButtons}
     </div>

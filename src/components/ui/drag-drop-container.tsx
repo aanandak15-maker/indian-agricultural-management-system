@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 
 interface DragDropContainerProps {
   items: React.ReactNode[];
-  onReorder?: (startIndex: number, endIndex: number) => void;
+  onReorer?: (startIndex: number, endIndex: number) => void;
   className?: string;
   itemClassName?: string;
 }
 
 export const DragDropContainer = ({
   items,
-  onReorder,
+  onReorer,
   className = '',
   itemClassName = ''
 }: DragDropContainerProps) => {
@@ -30,8 +30,8 @@ export const DragDropContainer = ({
     e.preventDefault();
     
     if (draggedItem !== null && dragOverItem !== null && draggedItem !== dragOverItem) {
-      if (onReorder) {
-        onReorder(draggedItem, dragOverItem);
+      if (onReorer) {
+        onReorer(draggedItem, dragOverItem);
       }
     }
     

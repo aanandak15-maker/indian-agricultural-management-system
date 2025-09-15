@@ -37,9 +37,9 @@ const ChartFilters = ({
     setPeriod('year');
     setCropFilter('all');
     if (setSearchTerm) setSearchTerm('');
-    console.log("Filtres réinitialisés - Affichage of toutes les cultures of une période annuelle");
-    toast.info("Filtres réinitialisés", {
-      description: "Affichage of toutes les cultures of une période annuelle"
+    console.log("Filtres reinitialises - Affichage of toutes les cultures of une period annual");
+    toast.info("Filtres reinitialises", {
+      description: "Affichage of toutes les cultures of une period annual"
     });
   };
   
@@ -57,7 +57,7 @@ const ChartFilters = ({
       >
         <SelectTrigger className="w-[140px]">
           <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
-          <SelectValue placeholder="Période" />
+          <SelectValue placeholder="Period" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="year">Annuel</SelectItem>
@@ -81,7 +81,7 @@ const ChartFilters = ({
           <SelectItem value="Cotton">Cotton</SelectItem>
           <SelectItem value="Rice">Rice</SelectItem>
           <SelectItem value="Wheat">Wheat</SelectItem>
-          <SelectItem value="Madère">Madère</SelectItem>
+          <SelectItem value="Cotton">Cotton</SelectItem>
         </SelectContent>
       </Select>
 
@@ -123,7 +123,7 @@ const ChartFilters = ({
           className="flex items-center gap-1"
         >
           <RefreshCcw className="h-3.5 w-3.5" />
-          Réinitialiser
+          Reinitialiser
         </Button>
       </div>
     </div>

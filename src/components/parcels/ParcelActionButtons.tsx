@@ -67,11 +67,11 @@ const ParcelActionButtons = ({
               className="bg-white border-gray-200 hover:bg-gray-50"
             >
               <Map className="mr-2 h-4 w-4 text-gray-600" />
-              Carte
+              Map
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Show la carte des parcelles</p>
+            <p>Show fields map</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -94,10 +94,10 @@ const ParcelActionButtons = ({
             <div className="p-4 border-b">
               <h4 className="font-semibold flex items-center">
                 <AlertTriangle className="h-4 w-4 mr-2 text-orange-500" />
-                Alerts of parcelles
+                Field Alerts
               </h4>
             </div>
-            <div className="divide-y max-h-80 overflow-auto">
+            <div className="diviof-y max-h-80 overflow-auto">
               {activeParcelAlerts.map(alert => (
                 <div key={alert.id} className="p-3 hover:bg-muted/20">
                   <div className="flex justify-between items-center">
@@ -120,7 +120,7 @@ const ParcelActionButtons = ({
       )}
       
       <ReportGenerationButton 
-        moduleName="parcelles" 
+        moduleName="fields" 
         variant="outline" 
         className="bg-white border-gray-200 hover:bg-gray-50 text-gray-800"
       />
@@ -139,7 +139,7 @@ const ParcelActionButtons = ({
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Générer des statistiques of vos parcelles</p>
+              <p>Generate statistics for your fields</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -155,11 +155,11 @@ const ParcelActionButtons = ({
                 className="bg-white border-gray-200 hover:bg-gray-50"
               >
                 <Layers className="mr-2 h-4 w-4 text-gray-600" />
-                Couches
+                Layers
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Manage les couches of la carte</p>
+              <p>Manage map layers</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -192,11 +192,11 @@ const ParcelActionButtons = ({
                 onClick={onAddParcel}
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Add une parcelle
+                Add a Field
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Créer une nouvelle parcelle</p>
+              <p>Create a new field</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

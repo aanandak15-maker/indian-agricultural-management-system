@@ -65,10 +65,10 @@ const ParcelMap = ({ coordinates, parcelName, isEditing, onCoordinatesChange }: 
           </div>
         </div>
         
-        {/* Instruction for editing mode */}
+        {/* Instruction for editing moof */}
         {isEditing && (
           <div className="absolute bottom-2 left-0 right-0 text-center bg-white/80 py-1 text-xs">
-            Cliquez of la carte pour déplacer le marqueur
+            Cliquez of la carte pour deplacer le marqueur
           </div>
         )}
         

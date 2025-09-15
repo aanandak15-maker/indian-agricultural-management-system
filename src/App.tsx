@@ -9,11 +9,17 @@ import CropsPage from "./pages/CropsPage";
 import InventoryPage from "./pages/InventoryPage";
 import FinancePage from "./pages/FinancePage";
 import StatsPage from "./pages/StatsPage";
+import ReportsPage from "./pages/ReportsPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 import { CRMProvider } from "./contexts/CRMContext";
+import { SupabaseCRMProvider } from "./contexts/SupabaseCRMContext";
 import { StatisticsProvider } from "./contexts/StatisticsContext";
 import { AppSettingsProvider } from "./contexts/AppSettingsContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthPage } from "./components/auth/AuthPage";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { trackPageView } from "./utils/analytics";
 
 // Define routes configuration with redirects
@@ -25,6 +31,8 @@ const routes = [
   { path: "/inventory", element: <InventoryPage /> },
   { path: "/finance", element: <FinancePage /> },
   { path: "/statistics", element: <StatisticsProvider><StatsPage /></StatisticsProvider> },
+  { path: "/reports", element: <ReportsPage /> },
+  { path: "/settings", element: <SettingsPage /> },
   // Redirect old French routes to new English routes
   { path: "/parcelles", element: <Navigate to="/fields" replace /> },
   { path: "/parcelles/:id", element: <Navigate to="/fields/:id" replace /> },
@@ -32,8 +40,6 @@ const routes = [
   { path: "/inventaire", element: <Navigate to="/inventory" replace /> },
   { path: "/finances", element: <Navigate to="/finance" replace /> },
   { path: "/statistiques", element: <Navigate to="/statistics" replace /> },
-  { path: "/reports", element: <Navigate to="/statistics" replace /> },
-  { path: "/settings", element: <Navigate to="/" replace /> },
   { path: "/dashboard", element: <Navigate to="/" replace /> },
   { path: "*", element: <NotFound /> }
 ];
@@ -65,29 +71,54 @@ const RouterChangeHandler = () => {
   return null;
 };
 
+// Protected routes component
+const ProtectedRoutes = () => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-agri-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthPage />;
+  }
+
+  return (
+    <Routes>
+      {routes.map((route) => (
+        <Route 
+          key={route.path} 
+          path={route.path} 
+          element={route.element} 
+        />
+      ))}
+    </Routes>
+  );
+};
+
 // Application main component with properly nested providers
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppSettingsProvider>
-        <CRMProvider>
-          <BrowserRouter>
-            <TooltipProvider>
-              <RouterChangeHandler />
-              <Routes>
-                {routes.map((route) => (
-                  <Route 
-                    key={route.path} 
-                    path={route.path} 
-                    element={route.element} 
-                  />
-                ))}
-              </Routes>
-            </TooltipProvider>
-          </BrowserRouter>
-        </CRMProvider>
-      </AppSettingsProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppSettingsProvider>
+            <SupabaseCRMProvider>
+              <BrowserRouter>
+                <TooltipProvider>
+                  <RouterChangeHandler />
+                  <ProtectedRoutes />
+                </TooltipProvider>
+              </BrowserRouter>
+            </SupabaseCRMProvider>
+          </AppSettingsProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 

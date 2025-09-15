@@ -80,7 +80,7 @@ const Statistics = () => {
       case 'financial':
         return [
           { key: "name", header: "Field" },
-          { key: "profitability", header: "Profitability (€)" },
+          { key: "profitability", header: "Profitability (₹)" },
           { key: "size", header: "Area (ha)" },
           { key: "crop", header: "Crop" }
         ];

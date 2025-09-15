@@ -52,15 +52,15 @@ interface RainfallData {
 }
 
 const formSchema = z.object({
-  month: z.string().min(1, { message: "Le month est requis" }),
-  year: z.coerce.number().min(2000, { message: "Année invalide" }).max(2100),
-  amount: z.coerce.number().min(0, { message: "Value invalide" }),
-  location: z.string().min(1, { message: "La région est requise" }),
+  month: z.string().min(1, { message: "Month is required" }),
+  year: z.coerce.number().min(2000, { message: "Invalid year" }).max(2100),
+  amount: z.coerce.number().min(0, { message: "Invalid value" }),
+  location: z.string().min(1, { message: "Region is required" }),
   impact: z.enum(['Positive', 'Neutral', 'Negative']),
   notes: z.string().optional(),
 });
 
-const IndianRainfallTracking = () => {
+const IndiaRainfallTracking = () => {
   const { toast } = useToast();
   const [title, setTitle] = useState('Rainfall Tracking in India');
   const [description, setDescription] = useState('Visualization of rainfall data to optimize crop management');
@@ -83,11 +83,11 @@ const IndianRainfallTracking = () => {
   });
   
   const [rainfallData, setRainfallData] = useState<RainfallData[]>([
-    { id: 1, month: 'January', year: 2023, amount: 210, location: 'Maharashtra', impact: 'Positive', notes: 'Bon démarrage pour les cultures' },
+    { id: 1, month: 'January', year: 2023, amount: 210, location: 'Maharashtra', impact: 'Positive', notes: 'Good start for crops' },
     { id: 2, month: 'February', year: 2023, amount: 180, location: 'Maharashtra', impact: 'Positive' },
     { id: 3, month: 'March', year: 2023, amount: 150, location: 'Maharashtra', impact: 'Neutral' },
     { id: 4, month: 'April', year: 2023, amount: 120, location: 'Maharashtra', impact: 'Neutral' },
-    { id: 5, month: 'May', year: 2023, amount: 90, location: 'Maharashtra', impact: 'Negative', notes: 'Début of sécheresse' },
+    { id: 5, month: 'May', year: 2023, amount: 90, location: 'Maharashtra', impact: 'Negative', notes: 'Beginning of drought' },
     { id: 6, month: 'June', year: 2023, amount: 60, location: 'Maharashtra', impact: 'Negative' },
     { id: 7, month: 'July', year: 2023, amount: 45, location: 'Maharashtra', impact: 'Negative' },
     { id: 8, month: 'August', year: 2023, amount: 70, location: 'Maharashtra', impact: 'Neutral' },
@@ -95,32 +95,32 @@ const IndianRainfallTracking = () => {
     { id: 10, month: 'October', year: 2023, amount: 140, location: 'Maharashtra', impact: 'Positive' },
     { id: 11, month: 'November', year: 2023, amount: 190, location: 'Maharashtra', impact: 'Positive' },
     { id: 12, month: 'December', year: 2023, amount: 230, location: 'Maharashtra', impact: 'Positive' },
-    { id: 13, month: 'January', year: 2023, amount: 90, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 14, month: 'February', year: 2023, amount: 85, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 15, month: 'March', year: 2023, amount: 75, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 16, month: 'April', year: 2023, amount: 65, location: 'Grande-Terre', impact: 'Negative' },
-    { id: 17, month: 'May', year: 2023, amount: 50, location: 'Grande-Terre', impact: 'Negative' },
-    { id: 18, month: 'June', year: 2023, amount: 40, location: 'Grande-Terre', impact: 'Negative' },
-    { id: 19, month: 'July', year: 2023, amount: 30, location: 'Grande-Terre', impact: 'Negative', notes: 'Drought sévère' },
-    { id: 20, month: 'August', year: 2023, amount: 45, location: 'Grande-Terre', impact: 'Negative' },
-    { id: 21, month: 'September', year: 2023, amount: 60, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 22, month: 'October', year: 2023, amount: 80, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 23, month: 'November', year: 2023, amount: 95, location: 'Grande-Terre', impact: 'Positive' },
-    { id: 24, month: 'December', year: 2023, amount: 110, location: 'Grande-Terre', impact: 'Positive' },
+    { id: 13, month: 'January', year: 2023, amount: 90, location: 'Punjab', impact: 'Neutral' },
+    { id: 14, month: 'February', year: 2023, amount: 85, location: 'Punjab', impact: 'Neutral' },
+    { id: 15, month: 'March', year: 2023, amount: 75, location: 'Punjab', impact: 'Neutral' },
+    { id: 16, month: 'April', year: 2023, amount: 65, location: 'Punjab', impact: 'Negative' },
+    { id: 17, month: 'May', year: 2023, amount: 50, location: 'Punjab', impact: 'Negative' },
+    { id: 18, month: 'June', year: 2023, amount: 40, location: 'Punjab', impact: 'Negative' },
+    { id: 19, month: 'July', year: 2023, amount: 30, location: 'Punjab', impact: 'Negative', notes: 'Severe drought' },
+    { id: 20, month: 'August', year: 2023, amount: 45, location: 'Punjab', impact: 'Negative' },
+    { id: 21, month: 'September', year: 2023, amount: 60, location: 'Punjab', impact: 'Neutral' },
+    { id: 22, month: 'October', year: 2023, amount: 80, location: 'Punjab', impact: 'Neutral' },
+    { id: 23, month: 'November', year: 2023, amount: 95, location: 'Punjab', impact: 'Positive' },
+    { id: 24, month: 'December', year: 2023, amount: 110, location: 'Punjab', impact: 'Positive' },
     { id: 25, month: 'January', year: 2024, amount: 215, location: 'Maharashtra', impact: 'Positive' },
     { id: 26, month: 'February', year: 2024, amount: 185, location: 'Maharashtra', impact: 'Positive' },
     { id: 27, month: 'March', year: 2024, amount: 160, location: 'Maharashtra', impact: 'Positive' },
-    { id: 28, month: 'January', year: 2024, amount: 95, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 29, month: 'February', year: 2024, amount: 90, location: 'Grande-Terre', impact: 'Neutral' },
-    { id: 30, month: 'March', year: 2024, amount: 80, location: 'Grande-Terre', impact: 'Neutral' },
+    { id: 28, month: 'January', year: 2024, amount: 95, location: 'Punjab', impact: 'Neutral' },
+    { id: 29, month: 'February', year: 2024, amount: 90, location: 'Punjab', impact: 'Neutral' },
+    { id: 30, month: 'March', year: 2024, amount: 80, location: 'Punjab', impact: 'Neutral' },
   ]);
   
-  // Colonnes pour le tableau éditable
+  // Columns for editable table
   const columns: Column[] = [
     { id: 'month', header: 'Mois', accessorKey: 'month', isEditable: true },
-    { id: 'year', header: 'Année', accessorKey: 'year', type: 'number', isEditable: true },
-    { id: 'amount', header: 'Précipitations (mm)', accessorKey: 'amount', type: 'number', isEditable: true },
-    { id: 'location', header: 'Région', accessorKey: 'location', isEditable: true },
+    { id: 'year', header: 'Year', accessorKey: 'year', type: 'number', isEditable: true },
+    { id: 'amount', header: 'Precipitation (mm)', accessorKey: 'amount', type: 'number', isEditable: true },
+    { id: 'location', header: 'Region', accessorKey: 'location', isEditable: true },
     { id: 'impact', header: 'Impact', accessorKey: 'impact', isEditable: true, options: ['Positive', 'Neutral', 'Negative'] },
     { id: 'notes', header: 'Notes', accessorKey: 'notes', isEditable: true }
   ];
@@ -129,20 +129,20 @@ const IndianRainfallTracking = () => {
   const handleTitleChange = (value: string | number) => {
     setTitle(String(value));
     toast({
-      title: "Titre mis à jour",
-      description: "Le titre du module a été modifié avec succès"
+      title: "Title updated",
+      description: "The module title has been successfully modified"
     });
   };
   
   const handleDescriptionChange = (value: string | number) => {
     setDescription(String(value));
     toast({
-      title: "Description mise à jour",
-      description: "La description du module a été modifiée avec succès"
+      title: "Description updated",
+      description: "The module description has been successfully modified"
     });
   };
   
-  // Filter les données
+  // Filter data
   const filteredData = rainfallData.filter(item => {
     const matchesSearch = 
       item.month.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -155,11 +155,11 @@ const IndianRainfallTracking = () => {
     return matchesSearch && matchesYear && matchesLocation;
   });
   
-  // Préparer les données pour le graphique
+  // Prepare data for chart
   const uniqueMonths = Array.from(new Set(filteredData.map(item => item.month)));
   const uniqueLocations = Array.from(new Set(filteredData.map(item => item.location)));
   
-  // Créer les données agrégées par month pour le graphique
+  // Create aggregated data by month for chart
   const chartData = uniqueMonths.map(month => {
     const dataPoint: any = { month };
     
@@ -171,7 +171,7 @@ const IndianRainfallTracking = () => {
     return dataPoint;
   });
   
-  // Manage les mises à jour du tableau
+  // Manage table updates
   const handleTableUpdate = (rowIndex: number, columnId: string, value: any) => {
     const newData = [...rainfallData];
     const itemId = filteredData[rowIndex].id;
@@ -190,8 +190,8 @@ const IndianRainfallTracking = () => {
       setRainfallData(newData);
       
       toast({
-        title: "Data mises à jour",
-        description: `Enregistrement des précipitations pour ${updatedItem.month} ${updatedItem.year} mis à jour`
+        title: "Data updated",
+        description: `Precipitation record for ${updatedItem.month} ${updatedItem.year} updated`
       });
     }
   };
@@ -203,8 +203,8 @@ const IndianRainfallTracking = () => {
     setRainfallData(newData);
     
     toast({
-      title: "Data supprimées",
-      description: "Enregistrement supprimé avec succès"
+      title: "Data ofleted",
+      description: "Record ofleted successfully"
     });
   };
   
@@ -227,14 +227,14 @@ const IndianRainfallTracking = () => {
     form.reset();
     
     toast({
-      title: "Data ajoutées",
-      description: `Nouvel enregistrement ajouté pour ${newRow.month} ${newRow.year}`
+      title: "Data adofd",
+      description: `New record adofd for ${newRow.month} ${newRow.year}`
     });
   };
   
-  // Download les données
+  // Download data
   const handleDownloadData = () => {
-    // Créer un contenu CSV
+    // Create CSV content
     const headers = columns.map(col => col.header).join(',');
     const rows = rainfallData.map(item => {
       return `${item.month},${item.year},${item.amount},${item.location},${item.impact},${item.notes || ''}`;
@@ -244,31 +244,31 @@ const IndianRainfallTracking = () => {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     
-    // Créer un lien et cliquer dessus pour télécharger
+    // Create a link and click it to download
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `precipitations_guadeloupe_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `precipitations_guaofloupe_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     
     toast({
-      title: "Téléchargement terminé",
-      description: "Exportation des données of précipitations au format CSV réussie"
+      title: "Download completed",
+      description: "Export of precipitation data to CSV format successful"
     });
   };
   
-  // Import des données CSV
+  // Import CSV data
   const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
     
-    const reader = new FileReader();
-    reader.onload = (e) => {
+    const reaer = new FileReaer();
+    reaer.onload = (e) => {
       const contents = e.target?.result as string;
       const lines = contents.split('\n');
       
-      // Ignorer l'en-tête
+      // Ignore header
       const dataLines = lines.slice(1);
       
       const importedData: RainfallData[] = [];
@@ -295,19 +295,19 @@ const IndianRainfallTracking = () => {
       if (importedData.length > 0) {
         setRainfallData([...rainfallData, ...importedData]);
         toast({
-          title: "Import réussi",
-          description: `${importedData.length} enregistrements ont été importés avec succès`
+          title: "Import successful",
+          description: `${importedData.length} records have been imported successfully`
         });
       } else {
         toast({
-          title: "No data importée",
-          description: "Le fichier ne contient pas of données valides"
+          title: "No data imported",
+          description: "The file does not contain valid data"
         });
       }
     };
     
-    reader.readAsText(file);
-    event.target.value = ''; // Réinitialiser l'input
+    reaer.readAsText(file);
+    event.target.value = ''; // Reset input
   };
   
   // Calculer les statistiques
@@ -327,7 +327,7 @@ const IndianRainfallTracking = () => {
   
   const stats = calculateStatistics();
   
-  // Années uniques pour le filtre
+  // Unique years for filter
   const uniqueYears = Array.from(new Set(rainfallData.map(item => item.year))).sort((a, b) => b - a);
   
   // Obtenir la classe CSS pour l'impact
@@ -342,9 +342,9 @@ const IndianRainfallTracking = () => {
   // Couleurs pour le graphique
   const locationColors: {[key: string]: string} = {
     'Maharashtra': '#4CAF50',
-    'Grande-Terre': '#2196F3',
-    'Marie-Galante': '#FFC107',
-    'Les Saintes': '#9C27B0'
+    'Punjab': '#2196F3',
+    'Tamil Nadu': '#FFC107',
+    'Gujarat': '#9C27B0'
   };
   
   return (
@@ -415,10 +415,10 @@ const IndianRainfallTracking = () => {
           <Select value={filterYear} onValueChange={setFilterYear}>
             <SelectTrigger className="w-[150px]">
               <Calendar className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Année" />
+              <SelectValue placeholder="Year" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Toutes les années</SelectItem>
+              <SelectItem value="all">All years</SelectItem>
               {uniqueYears.map(year => (
                 <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
               ))}
@@ -428,10 +428,10 @@ const IndianRainfallTracking = () => {
           <Select value={filterLocation} onValueChange={setFilterLocation}>
             <SelectTrigger className="w-[180px]">
               <CloudRain className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Région" />
+              <SelectValue placeholder="Region" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Toutes les régions</SelectItem>
+              <SelectItem value="all">All regions</SelectItem>
               {uniqueLocations.map(location => (
                 <SelectItem key={location} value={location}>{location}</SelectItem>
               ))}
@@ -483,7 +483,7 @@ const IndianRainfallTracking = () => {
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner un month" />
+                                  <SelectValue placeholder="Select a month" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
@@ -503,7 +503,7 @@ const IndianRainfallTracking = () => {
                         name="year"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Année</FormLabel>
+                            <FormLabel>Year</FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -519,7 +519,7 @@ const IndianRainfallTracking = () => {
                         name="amount"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Précipitations (mm)</FormLabel>
+                            <FormLabel>Precipitation (mm)</FormLabel>
                             <FormControl>
                               <Input type="number" step="0.1" {...field} />
                             </FormControl>
@@ -533,19 +533,19 @@ const IndianRainfallTracking = () => {
                         name="location"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Région</FormLabel>
+                            <FormLabel>Region</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Sélectionner une région" />
+                                  <SelectValue placeholder="Select a region" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
                                 {uniqueLocations.map(location => (
                                   <SelectItem key={location} value={location}>{location}</SelectItem>
                                 ))}
-                                <SelectItem value="Marie-Galante">Marie-Galante</SelectItem>
-                                <SelectItem value="Les Saintes">Les Saintes</SelectItem>
+                                <SelectItem value="Tamil Nadu">Tamil Nadu</SelectItem>
+                                <SelectItem value="Gujarat">Gujarat</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -563,13 +563,13 @@ const IndianRainfallTracking = () => {
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Sélectionner un impact" />
+                                <SelectValue placeholder="Select an impact" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
                               <SelectItem value="Positive">Positif</SelectItem>
                               <SelectItem value="Neutral">Neutre</SelectItem>
-                              <SelectItem value="Negative">Négatif</SelectItem>
+                              <SelectItem value="Negative">Negative</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -683,7 +683,7 @@ const IndianRainfallTracking = () => {
           </ResponsiveContainer>
         </div>
         
-        {/* Tableau of données */}
+        {/* Data table */}
         <EditableTable
           data={filteredData}
           columns={columns}
@@ -696,4 +696,4 @@ const IndianRainfallTracking = () => {
   );
 };
 
-export default IndianRainfallTracking;
+export default IndiaRainfallTracking;

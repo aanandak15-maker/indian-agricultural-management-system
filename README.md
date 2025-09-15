@@ -4,21 +4,15 @@
 
 A comprehensive agricultural management platform designed specifically for Indian farmers to manage their farming operations efficiently.
 
-**URL**: https://lovable.dev/projects/721b7097-37cd-4dc4-8946-0910b3ea8bc7
+**Live Demo**: [Deploy your own instance](#deployment)
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/721b7097-37cd-4dc4-8946-0910b3ea8bc7) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -74,8 +68,8 @@ This project is built with modern web technologies:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/721b7097-37cd-4dc4-8946-0910b3ea8bc7) and click on Share -> Publish.
+Deploy using Vercel, Netlify, or any other hosting platform that supports React applications.
 
 ## I want to use a custom domain - is that possible?
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+Yes! You can deploy this project under your own domain using any hosting platform. We recommend using Netlify, Vercel, or GitHub Pages for easy deployment with custom domains.

@@ -69,7 +69,7 @@ const ParcelFilters = ({
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground pointer-events-none" />
           <Input
             type="search"
-            placeholder="Search une parcelle..."
+            placeholder="Search a field..."
             className="pl-9 w-full md:w-48"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -83,11 +83,11 @@ const ParcelFilters = ({
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Tous les statuts</SelectItem>
-          <SelectItem value="active">Fields actives</SelectItem>
-          <SelectItem value="fallow">En jachère</SelectItem>
-          <SelectItem value="planned">Plannedes</SelectItem>
-          <SelectItem value="rented">Louées</SelectItem>
+          <SelectItem value="all">All Status</SelectItem>
+          <SelectItem value="active">Active Fields</SelectItem>
+          <SelectItem value="fallow">Fallow</SelectItem>
+          <SelectItem value="planned">Planned</SelectItem>
+          <SelectItem value="rented">Rented</SelectItem>
         </SelectContent>
       </Select>
       
@@ -97,11 +97,11 @@ const ParcelFilters = ({
           <SelectValue placeholder="Type" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Tous les types</SelectItem>
-          <SelectItem value="field">Champs</SelectItem>
-          <SelectItem value="greenhouse">Serres</SelectItem>
-          <SelectItem value="orchard">Vergers</SelectItem>
-          <SelectItem value="experimental">Expérimentales</SelectItem>
+          <SelectItem value="all">All Types</SelectItem>
+          <SelectItem value="field">Fields</SelectItem>
+          <SelectItem value="greenhouse">Greenhouses</SelectItem>
+          <SelectItem value="orchard">Orchards</SelectItem>
+          <SelectItem value="experimental">Experimental</SelectItem>
         </SelectContent>
       </Select>
 
@@ -119,14 +119,14 @@ const ParcelFilters = ({
                   format(dateRange.from, 'dd/MM/yyyy')
                 )
               ) : (
-                "Sélectionner des dates"
+                "Select of dates"
               )}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <CalendarComponent
               initialFocus
-              mode="range"
+              moof="range"
               defaultMonth={dateRange?.from}
               selected={dateRange}
               onSelect={setDateRange}
@@ -142,7 +142,7 @@ const ParcelFilters = ({
         <PopoverTrigger asChild>
           <Button variant="outline">
             <SlidersHorizontal className="h-4 w-4 mr-2" />
-            Filtres avancés
+            Advanced Filters
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-80">
@@ -168,7 +168,7 @@ const ParcelFilters = ({
                 onClick={applyAdvancedFilters}
                 className="bg-agri-primary hover:bg-agri-primary-dark text-white"
               >
-                Appliquer les filtres
+                Apply Filters
               </Button>
             </div>
           </div>

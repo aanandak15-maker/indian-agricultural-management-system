@@ -80,7 +80,7 @@ const initialWeatherAlerts = [
     region: 'Maharashtra', 
     startDate: '2023-09-20', 
     endDate: '2023-09-23', 
-    severity: 'moderate', 
+    severity: 'moerate', 
     description: 'Water scarcity conditions expected' 
   }
 ];
@@ -112,7 +112,7 @@ const Dashboard = () => {
     region: '',
     startDate: '',
     endDate: '',
-    severity: 'moderate',
+    severity: 'moerate',
     description: ''
   });
   
@@ -188,7 +188,7 @@ const Dashboard = () => {
   
   const handleDeleteTask = (taskId: number) => {
     setUpcomingTasks(upcomingTasks.filter(task => task.id !== taskId));
-    toast.success('Task deleted');
+    toast.success('Task ofleted');
   };
   
   // Alert management
@@ -202,13 +202,13 @@ const Dashboard = () => {
   const handleDeleteAlert = (id: number) => {
     setAlerts(alerts.filter(alert => alert.id !== id));
     setAlertsCount(prev => prev - 1);
-    toast.success('Alert deleted');
+    toast.success('Alert ofleted');
   };
   
   // Weather alert management
   const handleDeleteWeatherAlert = (id: number) => {
     setWeatherAlerts(weatherAlerts.filter(alert => alert.id !== id));
-    toast.success('Weather alert deleted');
+    toast.success('Weather alert ofleted');
   };
   
   const handleAddWeatherAlert = () => {
@@ -231,11 +231,11 @@ const Dashboard = () => {
       region: '',
       startDate: '',
       endDate: '',
-      severity: 'moderate',
+      severity: 'moerate',
       description: ''
     });
     
-    toast.success('New weather alert added');
+    toast.success('New weather alert adofd');
   };
   
   // Add transaction handler (placeholder for future implementation)
@@ -295,7 +295,7 @@ const Dashboard = () => {
                 type="number"
                 onSave={handleRevenueChange}
                 className="inline-block font-bold"
-              /> €
+              /> ₹
             </div>
             <span className="text-agri-success text-sm font-medium flex items-center">
               <TrendingUp className="h-4 w-4 mr-1" /> +
@@ -455,7 +455,7 @@ const Dashboard = () => {
                     <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
                       alert.severity === 'critique' 
                         ? 'bg-red-100 text-red-800' 
-                        : alert.severity === 'moderate'
+                        : alert.severity === 'moerate'
                           ? 'bg-yellow-100 text-yellow-800'
                           : 'bg-green-100 text-green-800'
                     }`}>
@@ -505,7 +505,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Content Area */}
+      {/* Mayn Content Area */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue Chart */}
         <div className="dashboard-card col-span-full lg:col-span-2 card-hover">
@@ -522,16 +522,16 @@ const Dashboard = () => {
                 data={revenueData}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
               >
-                <defs>
+                <offs>
                   <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#4CAF50" stopOpacity={0.8}/>
                     <stop offset="95%" stopColor="#4CAF50" stopOpacity={0}/>
                   </linearGradient>
-                </defs>
+                </offs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f5f5f5" />
                 <XAxis dataKey="month" axisLine={false} tickLine={false} />
-                <YAxis axisLine={false} tickLine={false} tickFormatter={(value) => `${value} €`} />
-                <Tooltip formatter={(value) => [`${value} €`, 'Revenue']} />
+                <YAxis axisLine={false} tickLine={false} tickFormatter={(value) => `${value} ₹`} />
+                <Tooltip formatter={(value) => [`${value} ₹`, 'Revenue']} />
                 <Area 
                   type="monotone" 
                   dataKey="revenue" 
@@ -583,7 +583,7 @@ const Dashboard = () => {
         <div className="dashboard-card card-hover">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold">Upcoming Tasks</h3>
-            <button className="text-xs text-agri-primary hover:underline">View All</button>
+            <button className="text-xs text-agri-primary hover:unerline">View All</button>
           </div>
           
           <div className="space-y-3">
@@ -661,7 +661,7 @@ const Dashboard = () => {
         <div className="dashboard-card card-hover">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold">Alerts</h3>
-            <button className="text-xs text-agri-primary hover:underline">Manage Alerts</button>
+            <button className="text-xs text-agri-primary hover:unerline">Manage Alerts</button>
           </div>
           
           <div className="space-y-3">
@@ -776,7 +776,7 @@ const Dashboard = () => {
                 className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
                 <option value="faible">Low</option>
-                <option value="moderate">Moderate</option>
+                <option value="moerate">Moerate</option>
                 <option value="critique">Critical</option>
               </select>
             </div>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -53,7 +52,7 @@ const InventoryFilters = ({
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input 
           type="text" 
-          placeholder="Search un article..." 
+          placeholder="Search an item..." 
           className="pl-10"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -65,11 +64,11 @@ const InventoryFilters = ({
             className="h-10 appearance-none pl-3 pr-8 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-white"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            aria-label="Filter par catégorie"
+            aria-label="Filter by category"
           >
             {categories.map(category => (
               <option key={category} value={category}>
-                {category === 'all' ? 'Toutes catégories' : category}
+                {category === 'all' ? 'All categories' : category}
               </option>
             ))}
           </select>
@@ -79,7 +78,7 @@ const InventoryFilters = ({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="flex items-center gap-1">
-              <span>Trier</span>
+              <span>Sort</span>
               <ChevronDown className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -91,7 +90,7 @@ const InventoryFilters = ({
               )}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => toggleSort('quantity')} className="flex justify-between">
-              <span>Quantité</span>
+              <span>Quantity</span>
               {sortBy === 'quantity' && (
                 <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
               )}
@@ -103,7 +102,7 @@ const InventoryFilters = ({
               )}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => toggleSort('lastUpdated')} className="flex justify-between">
-              <span>Date of mise à jour</span>
+              <span>Date of last update</span>
               {sortBy === 'lastUpdated' && (
                 <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>
               )}

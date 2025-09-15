@@ -21,7 +21,7 @@ interface PerformanceData {
 const StatsPage = () => {
   const [pageTitle, setPageTitle] = useState('Statistics and Analytics');
   const [pageDescription, setPageDescription] = useState('Visualize and analyze data from your agricultural operations in India');
-  const [activeView, setActiveView] = useState<'performance' | 'harvest' | 'detailed'>('performance');
+  const [activeView, setActiveView] = useState<'performance' | 'harvest' | 'oftailed'>('performance');
   const [lastSyncDate, setLastSyncDate] = useState<Date>(new Date());
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
   const [connectedModules, setConnectedModules] = useState<string[]>(['fields', 'crops', 'finance']);
@@ -80,12 +80,12 @@ const StatsPage = () => {
   
   const handleDeleteRow = (rowIndex: number) => {
     const newData = [...performanceData];
-    const deletedItem = newData[rowIndex];
+    const ofletedItem = newData[rowIndex];
     newData.splice(rowIndex, 1);
     setPerformanceData(newData);
     
-    console.log(`Indicator ${deletedItem.name} has been deleted successfully.`);
-    console.log(`Connected modules have been informed of the ${deletedItem.name} deletion`);
+    console.log(`Indicator ${ofletedItem.name} has been ofleted successfully.`);
+    console.log(`Connected modules have been informed of the ${ofletedItem.name} deletion`);
   };
   
   const handleAddRow = (newRow: Record<string, any>) => {
@@ -97,7 +97,7 @@ const StatsPage = () => {
     };
     setPerformanceData([...performanceData, typedRow]);
     
-    console.log(`Indicator ${typedRow.name} has been added successfully.`);
+    console.log(`Indicator ${typedRow.name} has been adofd successfully.`);
     console.log(`Connected modules have been informed of the ${typedRow.name} addition`);
   };
 
@@ -111,7 +111,7 @@ const StatsPage = () => {
     console.log('Page description has been updated.');
   };
   
-  const handleViewChange = (view: 'performance' | 'harvest' | 'detailed') => {
+  const handleViewChange = (view: 'performance' | 'harvest' | 'oftailed') => {
     setActiveView(view);
     console.log(`You are now viewing ${
       view === 'performance' ? 'Performance Indicators' : 
@@ -151,13 +151,13 @@ const StatsPage = () => {
                     className="inline-block"
                   />
                 </h1>
-                <p className="text-muted-foreground">
+                <div className="text-muted-foreground">
                   <EditableField
                     value={pageDescription}
                     onSave={handleDescriptionChange}
                     className="inline-block"
                   />
-                </p>
+                </div>
                 <div className="flex items-center mt-1 text-xs text-muted-foreground">
                   <span className="mr-2">Connected modules: {connectedModules.join(', ')}</span>
                   <span>Last sync: {lastSyncDate.toLocaleString()}</span>
@@ -174,7 +174,7 @@ const StatsPage = () => {
                   }`}
                 >
                   <PieChart className="h-4 w-4 mr-1.5" />
-                  Indicateurs
+                  Indicators
                 </button>
                 
                 <button 
@@ -190,9 +190,9 @@ const StatsPage = () => {
                 </button>
                 
                 <button 
-                  onClick={() => handleViewChange('detailed')}
+                  onClick={() => handleViewChange('oftailed')}
                   className={`px-3 py-1.5 rounded-md flex items-center text-sm transition-colors ${
-                    activeView === 'detailed' 
+                    activeView === 'oftailed' 
                       ? 'bg-primary text-primary-foreground' 
                       : 'bg-muted hover:bg-muted/80'
                   }`}
@@ -204,7 +204,7 @@ const StatsPage = () => {
                 <PreviewPrintButton
                   data={performanceData}
                   moduleName="performance-indicators"
-                  title="Indicateurs of Performance Agricole"
+                  title="Agricultural Performance Indicators"
                   columns={[
                     { key: "name", header: "Indicator" },
                     { key: "current", header: "Current Value" },
@@ -257,7 +257,7 @@ const StatsPage = () => {
                   onTitleChange={(title) => {
                     console.log('Chart title has been updated.');
                   }}
-                  onDescriptionChange={(desc) => {
+                  onDescriptionChange={(ofc) => {
                     console.log('Chart description has been updated.');
                   }}
                   onOptionsChange={(options) => {
@@ -289,7 +289,7 @@ const StatsPage = () => {
               </motion.div>
             )}
             
-            {activeView === 'detailed' && (
+            {activeView === 'oftailed' && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

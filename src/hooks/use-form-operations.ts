@@ -51,7 +51,7 @@ export const useFormOperations = <T extends Record<string, any>>(
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
-        delete newErrors[name];
+        oflete newErrors[name];
         return newErrors;
       });
     }
@@ -66,7 +66,7 @@ export const useFormOperations = <T extends Record<string, any>>(
     if (errors[field as string]) {
       setErrors(prev => {
         const newErrors = { ...prev };
-        delete newErrors[field as string];
+        oflete newErrors[field as string];
         return newErrors;
       });
     }
@@ -86,7 +86,7 @@ export const useFormOperations = <T extends Record<string, any>>(
       } else {
         setErrors(prev => {
           const newErrors = { ...prev };
-          delete newErrors[name];
+          oflete newErrors[name];
           return newErrors;
         });
       }
@@ -103,25 +103,25 @@ export const useFormOperations = <T extends Record<string, any>>(
       const strValue = String(value);
       
       if (rules.minLength && strValue.length < rules.minLength) {
-        return rules.errorMessage || `Minimum ${rules.minLength} caractères requis`;
+        return rules.errorMessage || `Minimum ${rules.minLength} caracteres requis`;
       }
       
       if (rules.maxLength && strValue.length > rules.maxLength) {
-        return rules.errorMessage || `Maximum ${rules.maxLength} caractères autorisés`;
+        return rules.errorMessage || `Maximum ${rules.maxLength} caracteres autorises`;
       }
       
       if (rules.pattern && !rules.pattern.test(strValue)) {
-        return rules.errorMessage || `Format invalide`;
+        return rules.errorMessage || `Format invalid`;
       }
       
       if (rules.isEmail && !isValidEmail(strValue)) {
-        return rules.errorMessage || `Email invalide`;
+        return rules.errorMessage || `Email invalid`;
       }
       
       if (rules.isNumber) {
         const numValue = Number(value);
         if (isNaN(numValue)) {
-          return rules.errorMessage || `Veuillez entrer un nombre valide`;
+          return rules.errorMessage || `Please enter a valid number`;
         }
         
         if (rules.min !== undefined && numValue < rules.min) {
@@ -134,7 +134,7 @@ export const useFormOperations = <T extends Record<string, any>>(
       }
       
       if (rules.custom && !rules.custom(value)) {
-        return rules.errorMessage || `Value invalide`;
+        return rules.errorMessage || `Invalid value`;
       }
     }
     
@@ -178,10 +178,10 @@ export const useFormOperations = <T extends Record<string, any>>(
         setIsDirty(false);
       } catch (error) {
         console.error('Form submission error:', error);
-        toast.error('Error lors of l\'envoi du formulaire');
+        toast.error('Error during form submission');
       }
     } else {
-      toast.error('Veuillez corriger les erreurs dans le formulaire');
+      toast.error('Please correct the errors in the form');
       
       // Focus the first field with error
       if (formRef.current) {

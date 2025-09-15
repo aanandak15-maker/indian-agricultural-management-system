@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Download, Upload, Printer, FileText } from 'lucide-react';
-import { useCRM } from '../../contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import ReportGenerationButton from './ReportGenerationButton';
@@ -29,7 +29,8 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [exportFormat, setExportFormat] = useState<'csv' | 'excel' | 'pdf'>('csv');
   
-  const { exportModuleData, importModuleData, printModuleData } = useCRM();
+  // Note: functions not yet implemented in Supabase context
+  // const { ... } = useSupabaseCRM();
   
   const handleExportClick = () => {
     setExportDialogOpen(true);
@@ -51,7 +52,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
   
   const handleImportConfirm = async () => {
     if (!selectedFile) {
-      console.error("Aucun fichier sélectionné");
+      console.error("No file selected");
       return;
     }
     
@@ -79,9 +80,9 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
   
   const handleTechnicalSheetClick = async () => {
     try {
-      await exportModuleData('guide_cultures', 'pdf');
+      await exportModuleData('guiof_cultures', 'pdf');
     } catch (error) {
-      console.error("Error generating technical guide:", error);
+      console.error("Error generating technical guiof:", error);
     }
   };
   
@@ -130,7 +131,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
           onClick={handleTechnicalSheetClick}
         >
           <FileText className="h-4 w-4 mr-2" />
-          Guide technique
+          Guiof technique
         </Button>
       )}
       
@@ -138,7 +139,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
       <Dialog open={importDialogOpen} onOpenChange={setImportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Import des données</DialogTitle>
+            <DialogTitle>Import of donnees</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
@@ -152,8 +153,8 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
               />
             </div>
             <p className="text-sm text-muted-foreground">
-              Les données seront importées dans le module {moduleName}. 
-              Assurez-vous que le fichier est au format CSV.
+              Les donnees seront importees dans le module {moduleName}. 
+              Asofez-vous que le fichier est au format CSV.
             </p>
           </div>
           <DialogFooter>
@@ -167,7 +168,7 @@ const ImportExportButtons: React.FC<ImportExportButtonsProps> = ({
       <Dialog open={exportDialogOpen} onOpenChange={setExportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Export des données</DialogTitle>
+            <DialogTitle>Export of donnees</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">

@@ -14,7 +14,7 @@ const NotificationButton: React.FC = () => {
     
     addNotification(
       `Test ${randomType}`,
-      `Ceci est une notification of test of type ${randomType} créée le ${new Date().toLocaleTimeString()}`,
+      `Ceci est une notification of test of type ${randomType} creee le ${new Date().toLocaleTimeString()}`,
       randomType
     );
   };

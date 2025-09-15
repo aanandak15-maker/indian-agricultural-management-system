@@ -20,11 +20,11 @@ export const exportToCSV = (data: any[], fileName: string): boolean => {
     link.click();
     document.body.removeChild(link);
     
-    toast.success("Data exportées avec succès au format CSV");
+    toast.success("Data exported successfully in CSV format");
     return true;
   } catch (error) {
     console.error("Export error:", error);
-    toast.error("Error lors of l'exportation des données");
+    toast.error("Error during data export");
     return false;
   }
 };
@@ -39,7 +39,7 @@ export const exportToExcel = (data: any[], fileName: string): boolean => {
     return exportToCSV(data, fileName);
   } catch (error) {
     console.error("Export error:", error);
-    toast.error("Error lors of l'exportation des données");
+    toast.error("Error during data export");
     return false;
   }
 };
@@ -50,7 +50,7 @@ export const exportToExcel = (data: any[], fileName: string): boolean => {
 export const exportToPDF = async (data: any[], fileName: string, options: any = {}): Promise<boolean> => {
   try {
     // Show toast notification
-    toast.info("Génération du PDF en cours...");
+    toast.info("PDF generation in progress...");
     
     // Create HTML content based on template type
     let htmlContent = '';
@@ -64,14 +64,14 @@ export const exportToPDF = async (data: any[], fileName: string, options: any = 
       htmlContent = createReportHTML(data, options.title || fileName, options.columns || []);
     } else {
       // Create standard table-based layout
-      htmlContent = createTableBasedHTML(data, options.title || fileName, options.columns || []);
+      htmlContent = createTableLowedHTML(data, options.title || fileName, options.columns || []);
     }
     
     // Create and open print window
     const printWindow = window.open('', '_blank');
     
     if (!printWindow) {
-      toast.error("Impossible d'ouvrir la fenêtre d'impression");
+      toast.error("Impossible d'ouvrir la fenetre d'impression");
       return false;
     }
     
@@ -85,7 +85,7 @@ export const exportToPDF = async (data: any[], fileName: string, options: any = 
       try {
         printWindow.focus();
         printWindow.print();
-        toast.success("PDF généré avec succès");
+        toast.success("PDF genere successfully");
       } catch (printError) {
         console.error("Print error:", printError);
         toast.error("Error lors of l'impression du PDF");
@@ -95,7 +95,7 @@ export const exportToPDF = async (data: any[], fileName: string, options: any = 
     return true;
   } catch (error) {
     console.error("PDF export error:", error);
-    toast.error("Error lors of la génération du PDF");
+    toast.error("Error lors of la generation du PDF");
     return false;
   }
 };
@@ -133,7 +133,7 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
           </div>
           
           <div class="section">
-            <h2>Information générales</h2>
+            <h2>Information generales</h2>
             <div class="property-grid">
               <div class="property">
                 <span class="property-label">Famille:</span>
@@ -148,8 +148,8 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
                 ${item.type || ''}
               </div>
               <div class="property">
-                <span class="property-label">Saison of culture:</span>
-                ${item.saisonCulture || ''}
+                <span class="property-label">Growing Season:</span>
+                ${item.saisonCrop || ''}
               </div>
             </div>
           </div>
@@ -158,11 +158,11 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
             <h2>Conditions of culture</h2>
             <div class="property-grid">
               <div class="property">
-                <span class="property-label">Type of sol:</span>
+                <span class="property-label">Soil Type:</span>
                 ${item.typeSol || ''}
               </div>
               <div class="property">
-                <span class="property-label">Besoin en eau:</span>
+                <span class="property-label">Water Needs:</span>
                 ${item.besoinEau || ''}
               </div>
               <div class="property">
@@ -170,18 +170,18 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
                 ${item.fertilisation || ''}
               </div>
               <div class="property">
-                <span class="property-label">Période of récolte:</span>
-                ${item.periodeRecolte || ''}
+                <span class="property-label">Period of harvest:</span>
+                ${item.periodRecolte || ''}
               </div>
               <div class="property">
-                <span class="property-label">Rendement par hectare:</span>
-                ${item.rendementHectare || ''}
+                <span class="property-label">Yield par hectare:</span>
+                ${item.yieldHectare || ''}
               </div>
             </div>
           </div>
           
           <div class="section">
-            <h2>Problèmes phytosanitaires</h2>
+            <h2>Problemes phytosanitaires</h2>
             <div class="property-grid">
               <div class="property">
                 <span class="property-label">Ravageurs:</span>
@@ -275,7 +275,7 @@ const createReportHTML = (data: any[], title: string, columns: { key: string, he
           </table>
           
           <div class="footer">
-            <p>Agri Dom - Rapport généré le ${currentDate}</p>
+            <p>Agri Dom - Rapport genere le ${currentDate}</p>
           </div>
         </div>
       </body>
@@ -284,7 +284,7 @@ const createReportHTML = (data: any[], title: string, columns: { key: string, he
 };
 
 // Helper function to create table-based HTML
-const createTableBasedHTML = (data: any[], title: string, columns: { key: string, header: string }[]): string => {
+const createTableLowedHTML = (data: any[], title: string, columns: { key: string, header: string }[]): string => {
   // Generate table headers
   const tableHeaders = columns
     .map(col => `<th>${col.header}</th>`)
@@ -348,17 +348,17 @@ export const importFromCSV = (file: File): Promise<any[]> => {
         const parsedData = results.data as any[];
         
         if (parsedData.length === 0) {
-          toast.error("No data valide n'a été trouvée dans le fichier");
+          toast.error("No data valid n'a ete trouvee dans le fichier");
           reject("No valid data found");
           return;
         }
         
-        toast.success(`${parsedData.length} enregistrements importés avec succès`);
+        toast.success(`${parsedData.length} enregistrements importes successfully`);
         resolve(parsedData);
       },
       error: (error) => {
         console.error("Import error:", error);
-        toast.error("Error lors of l'importation des données");
+        toast.error("Error during data import");
         reject(error);
       }
     });
@@ -387,14 +387,14 @@ export const printData = (
         htmlContent = createReportHTML(data, title, columns);
       } else {
         // Default table-based print template
-        htmlContent = createTableBasedHTML(data, title, columns);
+        htmlContent = createTableLowedHTML(data, title, columns);
       }
       
       // Create print window
       const printWindow = window.open('', '_blank');
       
       if (!printWindow) {
-        toast.error("Impossible d'ouvrir la fenêtre d'impression");
+        toast.error("Impossible d'ouvrir la fenetre d'impression");
         resolve(false);
         return;
       }
@@ -409,7 +409,7 @@ export const printData = (
         try {
           printWindow.focus();
           printWindow.print();
-          toast.success("Document prêt pour impression");
+          toast.success("Document pret pour impression");
           resolve(true);
         } catch (printError) {
           console.error("Print error:", printError);
@@ -420,7 +420,7 @@ export const printData = (
       
     } catch (error) {
       console.error("Print error:", error);
-      toast.error("Error lors of la préparation of l'impression");
+      toast.error("Error lors of la preparation of l'impression");
       resolve(false);
     }
   });

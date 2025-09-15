@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Types pour les différentes données statistiques
+// Types pour les differentes donnees statistiques
 export interface YieldData {
   name: string;
   current: number;
@@ -27,7 +27,7 @@ export interface EnvironmentalData {
   current: number;
   target: number;
   trend: string;
-  status: 'Atteint' | 'En progrès' | 'En retard';
+  status: 'Atteint' | 'In progress' | 'En retard';
 }
 
 interface StatisticsContextType {
@@ -35,7 +35,7 @@ interface StatisticsContextType {
   yieldData: YieldData[];
   setYieldData: React.Dispatch<React.SetStateAction<YieldData[]>>;
   
-  // Data financières
+  // Data financieres
   financialData: {
     profitabilityByParcel: FinancialData[];
     costAnalysis: CostData[];
@@ -61,17 +61,17 @@ interface StatisticsContextType {
     biodiversity: number;
   }>>;
   
-  // Data of prévision
+  // Data of prevision
   forecastData: any[];
   setForecastData: React.Dispatch<React.SetStateAction<any[]>>;
   
-  // Période et filtres
+  // Period et filtres
   period: 'day' | 'week' | 'month' | 'year';
   setPeriod: React.Dispatch<React.SetStateAction<'day' | 'week' | 'month' | 'year'>>;
   cropFilter: string;
   setCropFilter: React.Dispatch<React.SetStateAction<string>>;
   
-  // Fonction pour mettre à jour les données en fonction des filtres
+  // Function to update data based on filters
   updateDataWithFilters: (period: string, crop: string) => void;
 }
 
@@ -91,7 +91,7 @@ const initialYieldData: YieldData[] = [
   { name: 'Cotton', current: 32, previous: 30, unit: 't/ha' },
   { name: 'Rice', current: 45, previous: 48, unit: 't/ha' },
   { name: 'Wheat', current: 18, previous: 15, unit: 't/ha' },
-  { name: 'Madère', current: 22, previous: 20, unit: 't/ha' }
+  { name: 'Maize', current: 22, previous: 20, unit: 't/ha' }
 ];
 
 const initialProfitabilityData: FinancialData[] = [
@@ -99,7 +99,7 @@ const initialProfitabilityData: FinancialData[] = [
   { name: 'Field Est', profitability: 980, size: 8.3, crop: 'Cotton' },
   { name: 'Field Sud', profitability: 1580, size: 15.7, crop: 'Rice' },
   { name: 'Field Ouest', profitability: 850, size: 10.2, crop: 'Wheat' },
-  { name: 'Field Centrale', profitability: 920, size: 6.8, crop: 'Madère' }
+  { name: 'Field Centrale', profitability: 920, size: 6.8, crop: 'Cotton' }
 ];
 
 const initialCostData: CostData[] = [
@@ -107,8 +107,8 @@ const initialCostData: CostData[] = [
   { name: 'Fertilisants', value: 2200, color: '#8D6E63' },
   { name: 'Phyto', value: 1500, color: '#FFC107' },
   { name: 'Carburant', value: 1200, color: '#2196F3' },
-  { name: 'Main d\'œuvre', value: 3500, color: '#673AB7' },
-  { name: 'Mécanisation', value: 2800, color: '#E91E63' },
+  { name: 'Mayn d\'œuvre', value: 3500, color: '#673AB7' },
+  { name: 'Mecanisation', value: 2800, color: '#E91E63' },
   { name: 'Divers', value: 900, color: '#9E9E9E' }
 ];
 
@@ -124,15 +124,15 @@ const initialRevenueData = [
   { month: 'Sep', revenue: 40200, expenses: 24800, profit: 15400 },
   { month: 'Oct', revenue: 38200, expenses: 23100, profit: 15100 },
   { month: 'Nov', revenue: 36500, expenses: 22500, profit: 14000 },
-  { month: 'Déc', revenue: 41200, expenses: 25800, profit: 15400 }
+  { month: 'Dec', revenue: 41200, expenses: 25800, profit: 15400 }
 ];
 
 const initialEnvironmentalIndicators: EnvironmentalData[] = [
-  { indicator: 'Émissions CO2 (t/ha)', current: 2.8, target: 2.5, trend: '-5%', status: 'En progrès' },
+  { indicator: 'Emissions CO2 (t/ha)', current: 2.8, target: 2.5, trend: '-5%', status: 'In progress' },
   { indicator: 'Consommation d\'eau (m³/ha)', current: 350, target: 320, trend: '-8%', status: 'Atteint' },
-  { indicator: 'Utilisation d\'intrants (kg/ha)', current: 180, target: 150, trend: '-12%', status: 'En progrès' },
-  { indicator: 'Surface en agriculture bio (%)', current: 15, target: 25, trend: '+5%', status: 'En progrès' },
-  { indicator: 'Biodiversité (espèces/ha)', current: 12, target: 15, trend: '+12%', status: 'Atteint' }
+  { indicator: 'Utilisation d\'intrants (kg/ha)', current: 180, target: 150, trend: '-12%', status: 'In progress' },
+  { indicator: 'Surface en agriculture bio (%)', current: 15, target: 25, trend: '+5%', status: 'In progress' },
+  { indicator: 'Biodiversite (especes/ha)', current: 12, target: 15, trend: '+12%', status: 'Atteint' }
 ];
 
 export const StatisticsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -152,14 +152,14 @@ export const StatisticsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [period, setPeriod] = useState<'day' | 'week' | 'month' | 'year'>('year');
   const [cropFilter, setCropFilter] = useState('all');
   
-  // Fonction pour mettre à jour les données en fonction des filtres
+  // Function to update data based on filters
   const updateDataWithFilters = (period: string, crop: string) => {
-    // Filter les données of yield par culture si nécessaire
+    // Filter yield data by crop if necessary
     if (crop !== 'all') {
       const filteredYieldData = initialYieldData.filter(item => item.name === crop);
       setYieldData(filteredYieldData);
       
-      // Filter également les données financières par culture
+      // Also filter financial data by crop
       const filteredProfitabilityData = initialProfitabilityData.filter(item => item.crop === crop);
       setFinancialData(prev => ({
         ...prev,
@@ -173,10 +173,10 @@ export const StatisticsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       }));
     }
     
-    // Vous pourriez également ajuster les autres données en fonction of la période
+    // You could also adjust other data based on the period
   };
   
-  // Mettre à jour les données lorsque les filtres changent
+  // Update data when filters change
   useEffect(() => {
     updateDataWithFilters(period, cropFilter);
   }, [period, cropFilter]);

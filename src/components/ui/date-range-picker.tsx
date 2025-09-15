@@ -28,7 +28,7 @@ export function DatePickerWithRange({
   setDate,
   className,
   align = "start",
-  placeholderText = "Sélectionner des dates",
+  placeholderText = "Select of dates",
   presets = [
     { label: "7 jours", days: 7 },
     { label: "30 jours", days: 30 },
@@ -65,7 +65,7 @@ export function DatePickerWithRange({
         <PopoverContent className="w-auto p-0" align={align}>
           <Calendar
             initialFocus
-            mode="range"
+            moof="range"
             defaultMonth={date?.from}
             selected={date}
             onSelect={setDate}

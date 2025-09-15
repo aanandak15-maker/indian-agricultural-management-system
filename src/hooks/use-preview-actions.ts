@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useCRM } from '@/contexts/CRMContext';
+import { useSupabaseCRM } from '../../contexts/SupabaseCRMContext';
 import { useAppSettings } from '@/contexts/AppSettingsContext';
 import { generatePreviewHTML } from '@/utils/preview-generator';
 import { toast } from 'sonner';
@@ -18,7 +18,8 @@ export const usePreviewActions = ({
   columns, 
   title 
 }: UsePreviewActionsProps) => {
-  const { printModuleData, exportModuleData } = useCRM();
+  // Note: functions not yet implemented in Supabase context
+  // const { ... } = useSupabaseCRM();
   const { settings } = useAppSettings();
   const [isActionInProgress, setIsActionInProgress] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -26,8 +27,8 @@ export const usePreviewActions = ({
 
   const handlePrint = async () => {
     if (!data || data.length === 0) {
-      toast.error("No data à imprimer", {
-        description: "Veuillez vérifier vos filtres ou sélectionner une autre période."
+      toast.error("No data to print", {
+        description: "Please check your filters or select another period."
       });
       return;
     }
@@ -39,13 +40,13 @@ export const usePreviewActions = ({
         columns: columns,
         title: title || `Overview - ${moduleName}`
       });
-      toast.success("Document envoyé à l'impression", {
-        description: "Votre document a été envoyé à l'imprimante."
+      toast.success("Document sent to printer", {
+        description: "Your document has been sent to the printer."
       });
     } catch (error) {
-      console.error("Error lors of l'impression:", error);
-      toast.error("Error d'impression", {
-        description: "Une erreur s'est produite lors of l'impression du document."
+      console.error("Error during printing:", error);
+      toast.error("Printing Error", {
+        description: "An error occurred during document printing."
       });
     } finally {
       setIsActionInProgress(false);
@@ -54,8 +55,8 @@ export const usePreviewActions = ({
 
   const handleShowPreview = () => {
     if (!data || data.length === 0) {
-      toast.error("No data à afficher", {
-        description: "Veuillez vérifier vos filtres ou sélectionner une autre période."
+      toast.error("No data to display", {
+        description: "Please check your filters or select another period."
       });
       return;
     }
@@ -67,8 +68,8 @@ export const usePreviewActions = ({
 
   const handleExportPDF = async () => {
     if (!data || data.length === 0) {
-      toast.error("No data à exporter", {
-        description: "Veuillez vérifier vos filtres ou sélectionner une autre période."
+      toast.error("No data to export", {
+        description: "Please check your filters or select another period."
       });
       return;
     }
@@ -77,16 +78,16 @@ export const usePreviewActions = ({
     
     try {
       await exportModuleData(moduleName, 'pdf', data, {
-        title: title || `Rapport - ${moduleName}`,
+        title: title || `Report - ${moduleName}`,
         columns: columns
       });
-      toast.success("PDF généré avec succès", {
-        description: "Le document a été téléchargé."
+      toast.success("PDF generated successfully", {
+        description: "The document has been downloaded."
       });
     } catch (error) {
-      console.error("Error lors of la génération du PDF:", error);
-      toast.error("Error d'exportation", {
-        description: "Une erreur s'est produite lors of la génération du PDF."
+      console.error("Error during PDF generation:", error);
+      toast.error("Export Error", {
+        description: "An error occurred during PDF generation."
       });
     } finally {
       setIsActionInProgress(false);

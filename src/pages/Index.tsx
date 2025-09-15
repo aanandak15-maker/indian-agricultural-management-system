@@ -9,7 +9,7 @@ import TaskList from '../components/cultures/TaskList';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, Download, Filter, RefreshCw, Upload, Printer } from 'lucide-react';
 import { StatisticsProvider } from '../contexts/StatisticsContext';
-import { useCRM } from '../contexts/CRMContext';
+import { useSupabaseCRM } from '../contexts/SupabaseCRMContext';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 
@@ -19,15 +19,12 @@ const Index = () => {
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   
-  // Utiliser le contexte CRM
+  // Use Supabase CRM context
   const { 
     lastSync,
     isRefreshing,
-    syncDataAcrossCRM,
-    exportModuleData,
-    importModuleData,
-    printModuleData
-  } = useCRM();
+    syncDataAcrossCRM
+  } = useSupabaseCRM();
 
   // Actions based on the active tab
   const getTabActions = () => {
@@ -149,22 +146,8 @@ const Index = () => {
 
   // Data manipulations
   const handleExportData = async (tab: string) => {
-    const moduleMapping: {[key: string]: string} = {
-      'dashboard': 'statistics',
-      'harvest': 'crops',
-      'weather': 'statistics',
-      'tasks': 'crops'
-    };
-    
-    const module = moduleMapping[tab] || 'statistics';
-    const format = tab === 'dashboard' ? 'excel' : 'csv';
-    
-    try {
-      await exportModuleData(module, format as 'csv' | 'excel' | 'pdf');
-      console.log(`Export of ${module} data in ${format} format started`);
-    } catch (error) {
-      console.error(`Error exporting ${module}:`, error);
-    }
+    console.log(`Export functionality for ${tab} - Coming soon with Supabase integration`);
+    // TODO: Implement export functionality with Supabase data
   };
 
   const handleImportData = () => {
@@ -177,42 +160,16 @@ const Index = () => {
       return;
     }
     
-    const moduleMapping = {
-      'dashboard': 'statistics',
-      'harvest': 'crops',
-      'weather': 'statistics',
-      'tasks': 'crops'
-    };
-    
-    const module = moduleMapping[activeTab] || 'statistics';
-    
-    try {
-      await importModuleData(module, selectedFile);
-      console.log(`Import of file ${selectedFile.name} successful`);
-    } catch (error) {
-      console.error(`Error importing ${module}:`, error);
-    }
+    console.log(`Import functionality - Coming soon with Supabase integration`);
+    // TODO: Implement import functionality with Supabase data
     
     setImportDialogOpen(false);
     setSelectedFile(null);
   };
 
   const handlePrintData = async (tab: string) => {
-    const moduleMapping = {
-      'dashboard': 'statistics',
-      'harvest': 'crops',
-      'weather': 'statistics',
-      'tasks': 'crops'
-    };
-    
-    const module = moduleMapping[tab] || 'statistics';
-    
-    try {
-      await printModuleData(module);
-      console.log(`Printing of ${module} data started`);
-    } catch (error) {
-      console.error(`Error printing ${module}:`, error);
-    }
+    console.log(`Print functionality for ${tab} - Coming soon with Supabase integration`);
+    // TODO: Implement print functionality with Supabase data
   };
 
   const tabs: TabItem[] = [

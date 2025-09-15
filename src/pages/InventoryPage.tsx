@@ -178,7 +178,7 @@ const InventoryPage = () => {
           <DatePickerWithRange
             date={dateRange}
             setDate={setDateRange}
-            placeholderText="Filter par date"
+            placeholderText="Filter by date"
             align="end"
           />
         </div>
@@ -222,7 +222,7 @@ const InventoryPage = () => {
       weather: 'Weather Alerts'
     };
     
-    console.log(`Vous consultez maintenant ${tabLabels[value as keyof typeof tabLabels] || value}`);
+    console.log(`You are now viewing ${tabLabels[value as keyof typeof tabLabels] || value}`);
   };
 
   return (

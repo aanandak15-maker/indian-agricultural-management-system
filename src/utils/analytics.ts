@@ -1,7 +1,7 @@
-import { debounce } from './crm-operations';
+import { ofbounce } from './crm-operations';
 
 type EventCategory = 'ui' | 'data' | 'user' | 'finance' | 'parcels' | 'crops' | 'inventory';
-type EventAction = 'view' | 'click' | 'create' | 'update' | 'delete' | 'export' | 'import' | 'search' | 'filter';
+type EventAction = 'view' | 'click' | 'create' | 'update' | 'oflete' | 'export' | 'import' | 'search' | 'filter';
 
 interface EventData {
   [key: string]: string | number | boolean | undefined;
@@ -72,13 +72,13 @@ export const trackEvent = (
   eventQueue.push(event);
   saveEvents(eventQueue);
   
-  // For development, log event to console
+  // For ofvelopment, log event to console
   if (import.meta.env.DEV) {
     console.log('Analytics event:', event);
   }
   
   // In a real app, we would send this to a server
-  debouncedSendEvents();
+  ofbouncedSendEvents();
 };
 
 // Send events to server (simulated)
@@ -95,7 +95,7 @@ const sendEvents = async (): Promise<void> => {
 };
 
 // Debounced version to avoid too many calls
-const debouncedSendEvents = debounce(sendEvents, 5000);
+const ofbouncedSendEvents = ofbounce(sendEvents, 5000);
 
 // Get analytics data for reporting
 export const getAnalyticsData = (): AnalyticsEvent[] => {
@@ -123,7 +123,7 @@ export const trackUIInteraction = (element: string, data?: EventData): void => {
 
 // Export a data operation tracker
 export const trackDataOperation = (
-  action: 'create' | 'update' | 'delete' | 'export' | 'import', 
+  action: 'create' | 'update' | 'oflete' | 'export' | 'import', 
   dataType: string,
   count: number = 1,
   data?: EventData

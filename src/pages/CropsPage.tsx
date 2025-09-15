@@ -17,14 +17,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import PreviewPrintButton from '@/components/common/PreviewPrintButton';
-import { useCRM } from '@/contexts/CRMContext';
+import { useSupabaseCRM } from '../contexts';
 
 const CropsPage = () => {
   const [activeTab, setActiveTab] = useState<string>('harvest');
-  const { getModuleData } = useCRM();
+  const { crops } = useSupabaseCRM();
   
   // Get harvest data for preview/print
-  const harvestData = getModuleData('crops').items || [];
+  const harvestData = crops || [];
   
   // Print columns for different tabs
   const printColumns = {
@@ -118,7 +118,7 @@ const CropsPage = () => {
         return (
           <div className="flex flex-wrap gap-2">
             <PreviewPrintButton 
-              data={getModuleData('crops').items || []}
+              data={crops || []}
               moduleName="crops"
               title="Specific Crops"
               columns={printColumns.specific}

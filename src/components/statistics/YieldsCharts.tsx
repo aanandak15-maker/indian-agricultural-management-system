@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { useStatistics } from '../../contexts/StatisticsContext';
@@ -12,45 +11,45 @@ const YieldsCharts = () => {
   const { yieldData, period } = useStatistics();
   const [chartType, setChartType] = useState<'bar' | 'line'>('bar');
 
-  // Formater les données pour le graphique comparatif
+  // Format data for comparative chart
   const comparativeData = yieldData.map(item => ({
     name: item.name,
-    actuel: item.current,
-    précédent: item.previous,
-    différence: item.current - item.previous,
-    unité: item.unit
+    current: item.current,
+    previous: item.previous,
+    difference: item.current - item.previous,
+    unit: item.unit
   }));
 
-  // Data historiques of plusieurs années (simulées)
+  // Historical data for several years (simulated)
   const historicalData = [
-    { year: '2018', 'Sugarcane': 70, 'Cotton': 28, 'Rice': 40, 'Wheat': 14, 'Madère': 18 },
-    { year: '2019', 'Sugarcane': 72, 'Cotton': 29, 'Rice': 42, 'Wheat': 15, 'Madère': 19 },
-    { year: '2020', 'Sugarcane': 75, 'Cotton': 30, 'Rice': 48, 'Wheat': 15, 'Madère': 20 },
-    { year: '2021', 'Sugarcane': 78, 'Cotton': 31, 'Rice': 47, 'Wheat': 16, 'Madère': 21 },
-    { year: '2022', 'Sugarcane': 82, 'Cotton': 31, 'Rice': 46, 'Wheat': 17, 'Madère': 21 },
-    { year: '2023', 'Sugarcane': 85, 'Cotton': 32, 'Rice': 45, 'Wheat': 18, 'Madère': 22 }
+    { year: '2018', 'Sugarcane': 70, 'Cotton': 28, 'Rice': 40, 'Wheat': 14, 'Maize': 18 },
+    { year: '2019', 'Sugarcane': 72, 'Cotton': 29, 'Rice': 42, 'Wheat': 15, 'Maize': 19 },
+    { year: '2020', 'Sugarcane': 75, 'Cotton': 30, 'Rice': 48, 'Wheat': 15, 'Maize': 20 },
+    { year: '2021', 'Sugarcane': 78, 'Cotton': 31, 'Rice': 47, 'Wheat': 16, 'Maize': 21 },
+    { year: '2022', 'Sugarcane': 82, 'Cotton': 31, 'Rice': 46, 'Wheat': 17, 'Maize': 21 },
+    { year: '2023', 'Sugarcane': 85, 'Cotton': 32, 'Rice': 45, 'Wheat': 18, 'Maize': 22 }
   ];
 
-  // Générer les couleurs pour chaque culture
+  // Generate colors for each crop
   const colors = {
     'Sugarcane': '#4CAF50',
     'Cotton': '#FFC107',
     'Rice': '#F44336',
     'Wheat': '#9C27B0',
-    'Madère': '#2196F3'
+    'Maize': '#2196F3'
   };
 
-  // Capture et export du graphique (simulation)
+  // Capture and export chart (simulation)
   const handleExportChart = (chartName: string) => {
-    toast.success(`Graphique exporté`, {
-      description: `Le graphique "${chartName}" a été téléchargé au format PNG`
+    toast.success(`Chart exported`, {
+      description: `The chart "${chartName}" has been downloaded in PNG format`
     });
   };
 
-  // Partage du graphique (simulation)
+  // Share chart (simulation)
   const handleShareChart = (chartName: string) => {
-    toast.success(`Graphique partagé`, {
-      description: `Le lien vers le graphique "${chartName}" a été copié dans le presse-papier`
+    toast.success(`Chart shared`, {
+      description: `The link to chart "${chartName}" has been copied to clipboard`
     });
   };
 
@@ -59,8 +58,8 @@ const YieldsCharts = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div>
-            <CardTitle>Rendements actuels vs précédents</CardTitle>
-            <CardDescription>Comparaison des rendements actuels avec la période précédente</CardDescription>
+            <CardTitle>Current vs Previous Yields</CardTitle>
+            <CardDescription>Comparison of current yields with previous period</CardDescription>
           </div>
           <div className="flex items-center space-x-2">
             <div className="flex rounded-md border overflow-hidden">
@@ -70,7 +69,7 @@ const YieldsCharts = () => {
                 onClick={() => setChartType('bar')}
                 className={chartType === 'bar' ? 'rounded-none' : 'rounded-none hover:bg-muted/50'}
               >
-                Barres
+                Bars
               </Button>
               <Button
                 variant={chartType === 'line' ? 'default' : 'ghost'}
@@ -78,13 +77,13 @@ const YieldsCharts = () => {
                 onClick={() => setChartType('line')}
                 className={chartType === 'line' ? 'rounded-none' : 'rounded-none hover:bg-muted/50'}
               >
-                Lignes
+                Lines
               </Button>
             </div>
-            <Button variant="outline" size="icon" onClick={() => handleExportChart('Rendements comparatifs')}>
+            <Button variant="outline" size="icon" onClick={() => handleExportChart('Comparative Yields')}>
               <Download className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="icon" onClick={() => handleShareChart('Rendements comparatifs')}>
+            <Button variant="outline" size="icon" onClick={() => handleShareChart('Comparative Yields')}>
               <Share2 className="h-4 w-4" />
             </Button>
           </div>
@@ -102,15 +101,15 @@ const YieldsCharts = () => {
                   <YAxis />
                   <Tooltip 
                     formatter={(value, name, props) => {
-                      if (name === 'différence') {
-                        return [`${Number(value) > 0 ? '+' : ''}${value} ${props.payload.unité}`, 'Évolution'];
+                      if (name === 'difference') {
+                        return [`${Number(value) > 0 ? '+' : ''}${value} ${props.payload.unit}`, 'Evolution'];
                       }
-                      return [`${value} ${props.payload.unité}`, name];
+                      return [`${value} ${props.payload.unit}`, name];
                     }}
                   />
                   <Legend />
-                  <Bar name="Rendement actuel" dataKey="actuel" fill="#4CAF50" />
-                  <Bar name="Rendement précédent" dataKey="précédent" fill="#8D6E63" />
+                  <Bar name="Current Yield" dataKey="current" fill="#4CAF50" />
+                  <Bar name="Previous Yield" dataKey="previous" fill="#8D6E63" />
                 </BarChart>
               ) : (
                 <LineChart
@@ -122,15 +121,15 @@ const YieldsCharts = () => {
                   <YAxis />
                   <Tooltip 
                     formatter={(value, name, props) => {
-                      if (name === 'différence') {
-                        return [`${Number(value) > 0 ? '+' : ''}${value} ${props.payload.unité}`, 'Évolution'];
+                      if (name === 'difference') {
+                        return [`${Number(value) > 0 ? '+' : ''}${value} ${props.payload.unit}`, 'Evolution'];
                       }
-                      return [`${value} ${props.payload.unité}`, name];
+                      return [`${value} ${props.payload.unit}`, name];
                     }}
                   />
                   <Legend />
-                  <Line type="monotone" name="Rendement actuel" dataKey="actuel" stroke="#4CAF50" strokeWidth={2} />
-                  <Line type="monotone" name="Rendement précédent" dataKey="précédent" stroke="#8D6E63" strokeWidth={2} />
+                  <Line type="monotone" name="Current Yield" dataKey="current" stroke="#4CAF50" strokeWidth={2} />
+                  <Line type="monotone" name="Previous Yield" dataKey="previous" stroke="#8D6E63" strokeWidth={2} />
                 </LineChart>
               )}
             </ResponsiveContainer>
@@ -141,14 +140,14 @@ const YieldsCharts = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div>
-            <CardTitle>Évolution historique des rendements ({period === 'year' ? 'annuelle' : 'mensuelle'})</CardTitle>
-            <CardDescription>Trend des rendements of plusieurs années</CardDescription>
+            <CardTitle>Historical Yield Evolution ({period === 'year' ? 'annual' : 'monthly'})</CardTitle>
+            <CardDescription>Trend of yields over several years</CardDescription>
           </div>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" onClick={() => handleExportChart('Évolution historique')}>
+            <Button variant="outline" size="icon" onClick={() => handleExportChart('Historical Evolution')}>
               <Download className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="icon" onClick={() => handleShareChart('Évolution historique')}>
+            <Button variant="outline" size="icon" onClick={() => handleShareChart('Historical Evolution')}>
               <Share2 className="h-4 w-4" />
             </Button>
           </div>

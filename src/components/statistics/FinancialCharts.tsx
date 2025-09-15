@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   ScatterChart,
@@ -26,7 +25,7 @@ const FinancialCharts = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Rentabilité par parcelle (€/ha)</CardTitle>
+          <CardTitle>Profitability per Field (₹/ha)</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="h-[400px]">
@@ -38,16 +37,16 @@ const FinancialCharts = () => {
                 <XAxis 
                   type="number" 
                   dataKey="size" 
-                  name="Taille" 
+                  name="Size" 
                   unit=" ha" 
-                  label={{ value: 'Taille (ha)', position: 'insideBottomRight', offset: -10 }} 
+                  label={{ value: 'Size (ha)', position: 'insideBottomRight', offset: -10 }} 
                 />
                 <YAxis 
                   type="number" 
                   dataKey="profitability" 
-                  name="Rentabilité" 
-                  unit=" €/ha" 
-                  label={{ value: 'Rentabilité (€/ha)', angle: -90, position: 'insideLeft' }} 
+                  name="Profitability" 
+                  unit=" ₹/ha" 
+                  label={{ value: 'Profitability (₹/ha)', angle: -90, position: 'insideLeft' }} 
                 />
                 <ZAxis 
                   type="category" 
@@ -58,8 +57,8 @@ const FinancialCharts = () => {
                 <Tooltip 
                   cursor={{ strokeDasharray: '3 3' }} 
                   formatter={(value, name, props) => {
-                    if (name === 'Rentabilité') return [`${value} €/ha`, name];
-                    if (name === 'Taille') return [`${value} ha`, name];
+                    if (name === 'Profitability') return [`${value} ₹/ha`, name];
+                    if (name === 'Size') return [`${value} ha`, name];
                     return [value, name];
                   }}
                   content={({ active, payload }) => {
@@ -68,8 +67,8 @@ const FinancialCharts = () => {
                         <div className="bg-white p-2 border rounded shadow-sm">
                           <p className="font-medium">{payload[2]?.payload.name}</p>
                           <p>Crop: {payload[2]?.value}</p>
-                          <p>Taille: {payload[0]?.value} ha</p>
-                          <p>Rentabilité: {payload[1]?.value} €/ha</p>
+                          <p>Size: {payload[0]?.value} ha</p>
+                          <p>Profitability: {payload[1]?.value} ₹/ha</p>
                         </div>
                       );
                     }
@@ -90,7 +89,7 @@ const FinancialCharts = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Analysis des coûts</CardTitle>
+            <CardTitle>Cost Analysis</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -108,7 +107,7 @@ const FinancialCharts = () => {
                     tick={{ fontSize: 12 }} 
                     width={80} 
                   />
-                  <Tooltip formatter={(value) => [`${value.toLocaleString()} €`, 'Amount']} />
+                  <Tooltip formatter={(value) => [`${value.toLocaleString()} ₹`, 'Amount']} />
                   <Bar 
                     dataKey="value" 
                     fill="#8D6E63" 
@@ -123,7 +122,7 @@ const FinancialCharts = () => {
         
         <Card>
           <CardHeader>
-            <CardTitle>Revenue et dépenses mensuels</CardTitle>
+            <CardTitle>Monthly Revenue and Expenses</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -135,7 +134,7 @@ const FinancialCharts = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis />
-                  <Tooltip formatter={(value) => [`${value.toLocaleString()} €`, '']} />
+                  <Tooltip formatter={(value) => [`${value.toLocaleString()} ₹`, '']} />
                   <Legend />
                   <Line type="monotone" dataKey="revenue" name="Revenue" stroke="#4CAF50" activeDot={{ r: 8 }} />
                   <Line type="monotone" dataKey="expenses" name="Expenses" stroke="#F44336" />
@@ -149,24 +148,24 @@ const FinancialCharts = () => {
       
       <Card>
         <CardHeader>
-          <CardTitle>Indicateurs financiers clés</CardTitle>
+          <CardTitle>Key Financial Indicators</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="border rounded-lg p-4">
-              <p className="text-sm text-muted-foreground mb-1">EBE (EBITDA)</p>
-              <p className="text-2xl font-semibold">42,500 €</p>
-              <p className="text-xs text-green-600">32% du chiffre d'affaires</p>
+              <p className="text-sm text-muted-foreground mb-1">EBITDA</p>
+              <p className="text-2xl font-semibold">42,500 ₹</p>
+              <p className="text-xs text-green-600">32% of turnover</p>
             </div>
             <div className="border rounded-lg p-4">
-              <p className="text-sm text-muted-foreground mb-1">Rentabilité</p>
+              <p className="text-sm text-muted-foreground mb-1">Profitability</p>
               <p className="text-2xl font-semibold">18%</p>
-              <p className="text-xs text-green-600">+2.5% vs year précédente</p>
+              <p className="text-xs text-green-600">+2.5% vs previous year</p>
             </div>
             <div className="border rounded-lg p-4">
               <p className="text-sm text-muted-foreground mb-1">ROI</p>
               <p className="text-2xl font-semibold">22%</p>
-              <p className="text-xs text-muted-foreground">Sur les investissements</p>
+              <p className="text-xs text-muted-foreground">On investments</p>
             </div>
           </div>
         </CardContent>

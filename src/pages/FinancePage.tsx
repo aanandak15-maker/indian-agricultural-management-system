@@ -44,7 +44,7 @@ const FinancePage = () => {
   const [expensesTitle, setExpensesTitle] = useState('Expense Management');
   const [expensesDescription, setExpensesDescription] = useState('Categorize and optimize all your farm-related expenses');
   const [reportsTitle, setReportsTitle] = useState('Financial Reports');
-  const [reportsDescription, setReportsDescription] = useState('Generate detailed reports to analyze your farm\'s financial performance');
+  const [reportsDescription, setReportsDescription] = useState('Generate oftailed reports to analyze your farm\'s financial performance');
   const [forecastTitle, setForecastTitle] = useState('Financial Forecasting');
   const [forecastDescription, setForecastDescription] = useState('Simulate different scenarios to anticipate your financial situation evolution');
   const [budgetTitle, setBudgetTitle] = useState('Budget Management');
@@ -87,8 +87,8 @@ const FinancePage = () => {
     
     setTimeout(() => {
       setShowAddIncomeForm(false);
-      toast.success("Income added", {
-        description: "New income has been added successfully"
+      toast.success("Income adofd", {
+        description: "New income has been adofd successfully"
       });
     }, 1000);
   };
@@ -98,8 +98,8 @@ const FinancePage = () => {
     
     setTimeout(() => {
       setShowAddExpenseForm(false);
-      toast.success("Expense added", {
-        description: "New expense has been added successfully"
+      toast.success("Expense adofd", {
+        description: "New expense has been adofd successfully"
       });
     }, 1000);
   };
@@ -279,7 +279,7 @@ const FinancePage = () => {
                 <CardDescription>Agricultural product sales</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">45 860 €</div>
+                <div className="text-2xl font-bold">45 860 ₹</div>
                 <p className="text-sm text-green-600 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586l3.293-3.293A1 1 0 0114 7h-2z" clipRule="evenodd" />
@@ -307,7 +307,7 @@ const FinancePage = () => {
                 <CardDescription>Agricultural aid and subsidies</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">18 500 €</div>
+                <div className="text-2xl font-bold">18 500 ₹</div>
                 <p className="text-sm text-blue-600 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M1 10a5 5 0 015-5h8a5 5 0 015 5v8a1 1 0 01-2 0v-8z" clipRule="evenodd" />
@@ -335,7 +335,7 @@ const FinancePage = () => {
                 <CardDescription>Locations, visites, services</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">7 250 €</div>
+                <div className="text-2xl font-bold">7 250 ₹</div>
                 <p className="text-sm text-purple-600 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586l3.293-3.293A1 1 0 0114 7h-2z" clipRule="evenodd" />
@@ -380,7 +380,7 @@ const FinancePage = () => {
                 Activate this module to track all your income sources in detail
                 and generate personalized reports.
               </p>
-              <Button onClick={() => handleActivateModule('gestion des revenus')}>Activate Module</Button>
+              <Button onClick={() => handleActivateModule('income management')}>Activate Module</Button>
             </div>
           )}
         </div>
@@ -425,7 +425,7 @@ const FinancePage = () => {
                 <CardDescription>Production purchases</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">12 750 €</div>
+                <div className="text-2xl font-bold">12 750 ₹</div>
                 <p className="text-sm text-red-600 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 13a1 1 0 100-2H7.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L7.414 13H12z" clipRule="evenodd" />
@@ -453,7 +453,7 @@ const FinancePage = () => {
                 <CardDescription>Machines and tools</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">23 600 €</div>
+                <div className="text-2xl font-bold">23 600 ₹</div>
                 <p className="text-sm text-green-600 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M8 7a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H4a1 1 0 110-2h3V8a1 1 0 011-1z" clipRule="evenodd" />
@@ -472,7 +472,7 @@ const FinancePage = () => {
               </CardFooter>
             </Card>
             
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Main d\'oeuvre')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Mayn d\'oeuvre')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
                   <Badge className="mr-2 bg-teal-100 text-teal-800 hover:bg-teal-200">Services</Badge> 
@@ -481,7 +481,7 @@ const FinancePage = () => {
                 <CardDescription>Wages, contractors</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">15 320 €</div>
+                <div className="text-2xl font-bold">15 320 ₹</div>
                 <p className="text-sm text-red-600 flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1">
                     <path fillRule="evenodd" d="M12 13a1 1 0 100-2H7.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L7.414 13H12z" clipRule="evenodd" />
@@ -492,7 +492,7 @@ const FinancePage = () => {
               <CardFooter className="pt-0">
                 <Button variant="outline" size="sm" className="w-full" onClick={(e) => {
                   e.stopPropagation();
-                  handleCardDetailClick('Main d\'oeuvre');
+                  handleCardDetailClick('Mayn d\'oeuvre');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
                   Details
@@ -533,7 +533,7 @@ const FinancePage = () => {
               <h3 className="text-lg font-semibold mb-2">Expense Management Module</h3>
               <p className="text-muted-foreground mb-4">
                 Activate this module to categorize, track and optimize 
-                all your expenses in detail.
+                all your expenses in oftail.
               </p>
               <Button onClick={() => handleActivateModule('expense management')}>Activate Module</Button>
             </div>

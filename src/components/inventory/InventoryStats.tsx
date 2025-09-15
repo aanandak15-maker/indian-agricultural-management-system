@@ -41,7 +41,7 @@ const InventoryStats: React.FC<InventoryStatsProps> = ({
             <CardTitle className="text-lg">Total Value</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">{getTotalInventoryValue()} €</p>
+            <p className="text-3xl font-bold">{getTotalInventoryValue()} ₹</p>
           </CardContent>
         </Card>
         

@@ -88,17 +88,17 @@ const FinancialDataFilter: React.FC<FinancialDataFilterProps> = ({
       
       <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
         <div className="space-y-1">
-          <label className="text-xs font-medium">Période</label>
+          <label className="text-xs font-medium">Period</label>
           <Select value={timeFrame} onValueChange={setTimeFrame}>
             <SelectTrigger className="h-8 md:h-10 text-xs md:text-sm">
-              <SelectValue placeholder="Période" />
+              <SelectValue placeholder="Period" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Toutes les périodes</SelectItem>
-              <SelectItem value="month">Mois en cours</SelectItem>
-              <SelectItem value="quarter">Trimestre en cours</SelectItem>
-              <SelectItem value="year">Année en cours</SelectItem>
-              <SelectItem value="custom">Période personnalisée</SelectItem>
+              <SelectItem value="all">Toutes les period</SelectItem>
+              <SelectItem value="month">Mois in progress</SelectItem>
+              <SelectItem value="quarter">Trimestre in progress</SelectItem>
+              <SelectItem value="year">Year in progress</SelectItem>
+              <SelectItem value="custom">Period personnalisee</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -113,7 +113,7 @@ const FinancialDataFilter: React.FC<FinancialDataFilterProps> = ({
               <SelectContent>
                 {categories.map((cat) => (
                   <SelectItem key={cat} value={cat}>
-                    {cat === 'all' ? 'Toutes catégories' : cat}
+                    {cat === 'all' ? 'Toutes categories' : cat}
                   </SelectItem>
                 ))}
               </SelectContent>

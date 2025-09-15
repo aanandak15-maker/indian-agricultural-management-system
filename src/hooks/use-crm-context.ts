@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { exportToCSV, exportToExcel, exportToPDF, importFromCSV, printData } from '../utils/crm-data-operations';
 
-// Types pour le contexte CRM global
+// Types for global CRM context
 interface CRMContextState {
   lastSync: Date;
   isRefreshing: boolean;
@@ -15,106 +15,106 @@ interface CRMContextState {
   printModuleData: (moduleName: string, options?: any) => Promise<boolean>;
 }
 
-// Hook personnalisé pour gérer le contexte global du CRM
+// Custom hook to manage global CRM context
 export const useCRMContext = (): CRMContextState => {
   const [lastSync, setLastSync] = useState<Date>(new Date());
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [moduleData, setModuleData] = useState<Record<string, any>>({
-    parcelles: {
+    fields: {
       items: [
-        { id: 1, nom: "Field Nord", surface: 12.5, culture: "Sugarcane", statut: "En culture" },
-        { id: 2, nom: "Field Sud", surface: 8.3, culture: "Cotton", statut: "En récolte" },
-        { id: 3, nom: "Field Est", surface: 5.2, culture: "Rice", statut: "En préparation" }
+        { id: 1, name: "North Field", area: 12.5, crop: "Sugarcane", status: "Growing" },
+        { id: 2, name: "South Field", area: 8.3, crop: "Cotton", status: "Harvesting" },
+        { id: 3, name: "East Field", area: 5.2, crop: "Rice", status: "In preparation" }
       ],
       columns: [
         { key: "id", header: "ID" },
-        { key: "nom", header: "Name" },
-        { key: "surface", header: "Surface (ha)" },
-        { key: "culture", header: "Crop" },
-        { key: "statut", header: "Status" }
+        { key: "name", header: "Name" },
+        { key: "area", header: "Area (ha)" },
+        { key: "crop", header: "Crop" },
+        { key: "status", header: "Status" }
       ]
     },
-    cultures: {
+    crops: {
       items: [
-        { id: 1, nom: "Sugarcane", variete: "R579", dateDebut: "2023-03-15", dateFin: "2024-03-15" },
-        { id: 2, nom: "Cotton", variete: "Grande Naine", dateDebut: "2023-02-10", dateFin: "2023-12-10" },
-        { id: 3, nom: "Rice", variete: "MD-2", dateDebut: "2023-05-05", dateFin: "2024-06-01" }
+        { id: 1, name: "Sugarcane", variety: "R579", startDate: "2023-03-15", endDate: "2024-03-15" },
+        { id: 2, name: "Cotton", variety: "Dwarf Granof", startDate: "2023-02-10", endDate: "2023-12-10" },
+        { id: 3, name: "Rice", variety: "MD-2", startDate: "2023-05-05", endDate: "2024-06-01" }
       ],
       columns: [
         { key: "id", header: "ID" },
-        { key: "nom", header: "Crop" },
-        { key: "variete", header: "Variété" },
-        { key: "dateDebut", header: "Date of début" },
-        { key: "dateFin", header: "Date of fin" }
+        { key: "name", header: "Crop" },
+        { key: "variety", header: "Variety" },
+        { key: "startDate", header: "Start Date" },
+        { key: "endDate", header: "End Date" }
       ]
     },
-    finances: {
+    finance: {
       items: [
-        { id: 1, type: "revenu", montant: 15000, description: "Sale récolte canne", date: "2023-06-15" },
-        { id: 2, type: "depense", montant: 5000, description: "Purchase fertilisants", date: "2023-05-10" },
-        { id: 3, type: "revenu", montant: 8500, description: "Sale bananes", date: "2023-07-20" }
+        { id: 1, type: "revenue", amount: 15000, description: "Sugarcane harvest sale", date: "2023-06-15" },
+        { id: 2, type: "expense", amount: 5000, description: "Purchase fertilizers", date: "2023-05-10" },
+        { id: 3, type: "revenue", amount: 8500, description: "Banana sale", date: "2023-07-20" }
       ],
       columns: [
         { key: "id", header: "ID" },
         { key: "date", header: "Date" },
         { key: "type", header: "Type" },
         { key: "description", header: "Description" },
-        { key: "montant", header: "Amount (€)" }
+        { key: "amount", header: "Amount (₹)" }
       ]
     },
-    statistiques: {
+    statistics: {
       items: [
-        { periode: "2023-T1", cultureId: 1, yield: 8.2, revenus: 12500, couts: 4200 },
-        { periode: "2023-T2", cultureId: 1, yield: 8.5, revenus: 13000, couts: 4100 },
-        { periode: "2023-T1", cultureId: 2, yield: 15.3, revenus: 7800, couts: 2100 }
+        { period: "2023-T1", cultureId: 1, yield: 8.2, revenue: 12500, costs: 4200 },
+        { period: "2023-T2", cultureId: 1, yield: 8.5, revenue: 13000, costs: 4100 },
+        { period: "2023-T1", cultureId: 2, yield: 15.3, revenue: 7800, costs: 2100 }
       ],
       columns: [
-        { key: "periode", header: "Période" },
+        { key: "period", header: "Period" },
         { key: "cultureId", header: "Crop ID" },
-        { key: "yield", header: "Rendement (t/ha)" },
-        { key: "revenus", header: "Revenue (€)" },
-        { key: "couts", header: "Coûts (€)" }
+        { key: "yield", header: "Yield (t/ha)" },
+        { key: "revenue", header: "Revenue (₹)" },
+        { key: "costs", header: "Costs (₹)" }
       ]
     },
-    inventaire: {
+    inventory: {
       items: [
-        { id: 1, nom: "Engrais NPK", categorie: "Intrants", quantite: 500, unite: "kg", prix: 2.5 },
-        { id: 2, nom: "Pesticide Bio", categorie: "Intrants", quantite: 50, unite: "L", prix: 18.75 },
-        { id: 3, nom: "Tracteur", categorie: "Matériel", quantite: 2, unite: "unités", prix: 25000 }
+        { id: 1, name: "NPK Fertilizer", category: "Inputs", quantity: 500, unit: "kg", price: 2.5 },
+        { id: 2, name: "Bio Pesticide", category: "Inputs", quantity: 50, unit: "L", price: 18.75 },
+        { id: 3, name: "Tractor", category: "Equipment", quantity: 2, unit: "units", price: 25000 }
       ],
       columns: [
         { key: "id", header: "ID" },
-        { key: "nom", header: "Name" },
-        { key: "categorie", header: "Category" },
-        { key: "quantite", header: "Quantité" },
-        { key: "unite", header: "Unité" },
-        { key: "prix", header: "Price unitaire (€)" }
+        { key: "name", header: "Name" },
+        { key: "category", header: "Category" },
+        { key: "quantity", header: "Quantity" },
+        { key: "unit", header: "Unit" },
+        { key: "price", header: "Unit Price (₹)" }
       ]
     }
   });
   const [activeModules, setActiveModules] = useState<string[]>([
-    'parcelles',
-    'cultures',
-    'finances',
-    'statistiques',
-    'inventaire'
+    'fields',
+    'crops',
+    'finance',
+    'statistics',
+    'inventory'
   ]);
   
-  // Name of l'entreprise
+  // Company name
   const companyName = 'Agri Dom';
 
-  // Synchronisation des données à travers tous les modules du CRM
+  // Data synchronization across all CRM modules
   const syncDataAcrossCRM = useCallback(() => {
     setIsRefreshing(true);
     
-    // Simuler un temps of synchronisation
+    // Simulate synchronization time
     setTimeout(() => {
       setLastSync(new Date());
       setIsRefreshing(false);
     }, 1500);
   }, []);
 
-  // Mettre à jour les données d'un module spécifique
+  // Update data for a specific module
   const updateModuleData = useCallback((moduleName: string, data: any) => {
     setModuleData(prevData => ({
       ...prevData,
@@ -124,11 +124,11 @@ export const useCRMContext = (): CRMContextState => {
       }
     }));
     
-    // Mettre à jour la date of dernière synchronisation
+    // Update last synchronization date
     setLastSync(new Date());
   }, []);
 
-  // Récupérer les données d'un module spécifique
+  // Get data from a specific module
   const getModuleData = useCallback((moduleName: string) => {
     return moduleData[moduleName] || {};
   }, [moduleData]);
@@ -149,14 +149,14 @@ export const useCRMContext = (): CRMContextState => {
     try {
       let success = false;
       
-      // Handle special cases like technical sheets and guides
-      if (moduleName === 'fiche_technique') {
-        return await exportToPDF(data, `${companyName}_fiche_technique`, {
-          title: `${companyName} - Fiche Technique`,
+      // Handle special cases like technical sheets and guiof
+      if (moduleName === 'technical_sheet') {
+        return await exportToPDF(data, `${companyName}_technical_sheet`, {
+          title: `${companyName} - Technical Sheet`,
           landscape: false,
           template: 'technical_sheet'
         });
-      } else if (moduleName === 'guide_cultures') {
+      } else if (moduleName === 'crops_guide') {
         return true;
       }
       
@@ -211,12 +211,12 @@ export const useCRMContext = (): CRMContextState => {
     }
     
     const moduleNames: Record<string, string> = {
-      parcelles: "Fields",
-      cultures: "Crops",
-      finances: "Finance",
-      statistiques: "Statistics",
-      inventaire: "Inventory",
-      fiche_technique: "Fiche Technique"
+      fields: "Fields",
+      crops: "Crops",
+      finance: "Finance",
+      statistics: "Statistics",
+      inventory: "Inventory",
+      technical_sheet: "Technical Sheet"
     };
     
     const title = `${companyName} - ${moduleNames[moduleName] || moduleName}`;

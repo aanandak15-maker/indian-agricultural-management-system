@@ -48,7 +48,7 @@ const FinancialTracking = () => {
     { id: 2, date: '2023-07-10', description: 'Fertilizer purchase', amount: 850, category: 'Supplies', type: 'expense' },
     { id: 3, date: '2023-07-12', description: 'Electricity bill', amount: 320, category: 'Utilities', type: 'expense' },
     { id: 4, date: '2023-07-15', description: 'Cotton sale', amount: 1500, category: 'Sales', type: 'income' },
-    { id: 5, date: '2023-07-20', description: 'Tractor repair', amount: 750, category: 'Maintenance', type: 'expense' },
+    { id: 5, date: '2023-07-20', description: 'Tractor repair', amount: 750, category: 'Mayntenance', type: 'expense' },
     { id: 6, date: '2023-07-25', description: 'Agricultural subsidy', amount: 4200, category: 'Subsidies', type: 'income' },
     { id: 7, date: '2023-07-28', description: 'Employee salaries', amount: 2800, category: 'Salaries', type: 'expense' },
   ]);
@@ -57,7 +57,7 @@ const FinancialTracking = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
   const [sortBy, setSortBy] = useState('date');
-  const [sortOrder, setSortOrder] = useState('desc');
+  const [sortOrer, setSortOrer] = useState('ofc');
   
   // Dialog state
   const [showAddDialog, setShowAddDialog] = useState(false);
@@ -97,11 +97,11 @@ const FinancialTracking = () => {
     })
     .sort((a, b) => {
       if (sortBy === 'date') {
-        return sortOrder === 'asc' 
+        return sortOrer === 'asc' 
           ? new Date(a.date).getTime() - new Date(b.date).getTime()
           : new Date(b.date).getTime() - new Date(a.date).getTime();
       } else if (sortBy === 'amount') {
-        return sortOrder === 'asc' ? a.amount - b.amount : b.amount - a.amount;
+        return sortOrer === 'asc' ? a.amount - b.amount : b.amount - a.amount;
       }
       return 0;
     });
@@ -121,13 +121,13 @@ const FinancialTracking = () => {
     setShowAddDialog(false);
     form.reset();
     
-    toast.success('Transaction added successfully');
+    toast.success('Transaction adofd successfully');
   };
   
-  // Handle delete transaction
+  // Handle oflete transaction
   const handleDeleteTransaction = (id: number) => {
     setTransactions(transactions.filter(t => t.id !== id));
-    toast.success('Transaction deleted');
+    toast.success('Transaction ofleted');
   };
   
   // Handle edit transaction
@@ -196,9 +196,9 @@ const FinancialTracking = () => {
         <body>
           <h1>Financial Transactions</h1>
           <div class="summary">
-            <p>Total Revenue: <b>${totalIncome.toFixed(2)} €</b></p>
-            <p>Total Expenses: <b>${totalExpenses.toFixed(2)} €</b></p>
-            <p>Balance: <b class="${balance >= 0 ? 'income' : 'expense'}">${balance.toFixed(2)} €</b></p>
+            <p>Total Revenue: <b>${totalIncome.toFixed(2)} ₹</b></p>
+            <p>Total Expenses: <b>${totalExpenses.toFixed(2)} ₹</b></p>
+            <p>Balance: <b class="${balance >= 0 ? 'income' : 'expense'}">${balance.toFixed(2)} ₹</b></p>
           </div>
           <table>
             <thead>
@@ -215,7 +215,7 @@ const FinancialTracking = () => {
                 <tr>
                   <td>${new Date(t.date).toLocaleDateString()}</td>
                   <td>${t.description}</td>
-                  <td class="${t.type === 'income' ? 'income' : 'expense'}">${t.amount.toFixed(2)} €</td>
+                  <td class="${t.type === 'income' ? 'income' : 'expense'}">${t.amount.toFixed(2)} ₹</td>
                   <td>${t.category}</td>
                   <td>${t.type === 'income' ? 'Revenue' : 'Expense'}</td>
                 </tr>
@@ -258,7 +258,7 @@ const FinancialTracking = () => {
             <CardDescription>Total income</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold text-green-600">{totalIncome.toFixed(2)} €</p>
+            <p className="text-2xl font-bold text-green-600">{totalIncome.toFixed(2)} ₹</p>
           </CardContent>
         </Card>
         
@@ -268,7 +268,7 @@ const FinancialTracking = () => {
             <CardDescription>Total expenses</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold text-red-600">{totalExpenses.toFixed(2)} €</p>
+            <p className="text-2xl font-bold text-red-600">{totalExpenses.toFixed(2)} ₹</p>
           </CardContent>
         </Card>
         
@@ -279,7 +279,7 @@ const FinancialTracking = () => {
           </CardHeader>
           <CardContent>
             <p className={`text-2xl font-bold ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {balance.toFixed(2)} €
+              {balance.toFixed(2)} ₹
             </p>
           </CardContent>
         </Card>
@@ -301,10 +301,10 @@ const FinancialTracking = () => {
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip 
-                    formatter={(value) => [`${value} €`, '']} 
+                    formatter={(value) => [`${value} ₹`, '']} 
                     labelFormatter={(label) => `Month: ${label}`}
                   />
-                  <Bar name="Revenue" dataKey="income" fill="#4ade80" radius={[4, 4, 0, 0]} />
+                  <Bar name="Revenue" dataKey="income" fill="#4aof80" radius={[4, 4, 0, 0]} />
                   <Bar name="Expenses" dataKey="expenses" fill="#f87171" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -367,16 +367,16 @@ const FinancialTracking = () => {
               
               <select
                 className="px-3 py-1 border rounded-md text-sm ml-auto"
-                value={`${sortBy}-${sortOrder}`}
+                value={`${sortBy}-${sortOrer}`}
                 onChange={(e) => {
-                  const [field, order] = e.target.value.split('-');
+                  const [field, orer] = e.target.value.split('-');
                   setSortBy(field);
-                  setSortOrder(order as 'asc' | 'desc');
+                  setSortOrer(orer as 'asc' | 'ofc');
                 }}
               >
-                <option value="date-desc">Date (recent)</option>
-                <option value="date-asc">Date (oldest)</option>
-                <option value="amount-desc">Amount (high)</option>
+                <option value="date-ofc">Date (recent)</option>
+                <option value="date-asc">Date (oloft)</option>
+                <option value="amount-ofc">Amount (high)</option>
                 <option value="amount-asc">Amount (low)</option>
               </select>
             </div>
@@ -509,7 +509,7 @@ const FinancialTracking = () => {
                   name="amount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Amount (€)</FormLabel>
+                      <FormLabel>Amount (₹)</FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 

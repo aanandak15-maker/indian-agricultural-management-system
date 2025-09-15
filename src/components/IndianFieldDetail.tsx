@@ -43,14 +43,14 @@ interface TaskData {
   task: string;
   dueDate: string;
   assignedTo: string;
-  priority: 'Basse' | 'Average' | 'Élevée' | 'Urgente';
-  status: 'À faire' | 'In Progress' | 'Completede';
+  priority: 'Low' | 'Average' | 'High' | 'Urgent';
+  status: 'To Do' | 'In Progress' | 'Completed';
 }
 
 const parcelData: ParcelDetail = {
   id: '1',
-  name: 'Field des Hauts Palmiers',
-  location: 'Grande-Terre - Morne-à-l\'Eau',
+  name: 'Field of Hauts Palmiers',
+  location: 'Punjab - Morne-a-l\'Eau',
   surface: 8.5,
   soilType: 'Argilo-calcaire',
   crops: [
@@ -59,27 +59,27 @@ const parcelData: ParcelDetail = {
       variety: 'R579', 
       plantingDate: '2023-02-10', 
       harvestDate: '2024-02-15',
-      status: 'En croissance'
+      status: 'Growing'
     },
     { 
       crop: 'Wheat', 
       variety: 'Pacala', 
       plantingDate: '2023-05-20', 
       harvestDate: '2023-12-10',
-      status: 'Récolté'
+      status: 'Harvested'
     }
   ],
-  irrigationSystem: 'Goutte-à-goutte avec captation d\'eau of pluie',
-  notes: 'Field en conversion bio depuis 2022. Exposition Sud-Est favorable.',
-  owner: 'Coopérative Agricole of Grande-Terre',
+  irrigationSystem: 'Drip irrigation with rainwater harvesting',
+  notes: 'Field in organic conversion since 2022. Southeast exposure favorable.',
+  owner: 'Agricultural Cooperative of Punjab',
   lastInspection: '2023-11-15',
   coordinates: {
     latitude: 16.3312,
     longitude: -61.3844
   },
   images: [
-    'parcelle1_vue1.jpg',
-    'parcelle1_irrigation.jpg'
+    'field1_view1.jpg',
+    'field1_irrigation.jpg'
   ]
 };
 
@@ -88,9 +88,9 @@ const initialTasks: TaskData[] = [
     id: 1, 
     task: 'Fertilisation of la canne', 
     dueDate: '2023-09-25', 
-    assignedTo: 'Jean Dupont', 
-    priority: 'Élevée',
-    status: 'À faire'
+    assignedTo: 'John Doe', 
+    priority: 'High',
+    status: 'To Do'
   },
   { 
     id: 2, 
@@ -105,40 +105,40 @@ const initialTasks: TaskData[] = [
     task: 'Inspection croissance ananas', 
     dueDate: '2023-09-30', 
     assignedTo: 'Pierre Lafortune', 
-    priority: 'Basse',
-    status: 'À faire'
+    priority: 'Low',
+    status: 'To Do'
   },
   {
     id: 4,
-    task: 'Désherbage parcelle madère',
+    task: 'Cotton field weeding',
     dueDate: '2023-10-05',
     assignedTo: 'Sophie Martin',
     priority: 'Average',
-    status: 'À faire'
+    status: 'To Do'
   },
   {
     id: 5,
-    task: 'Préparation coupe canne',
+    task: 'Sugarcane cutting preparation',
     dueDate: '2024-01-10',
-    assignedTo: 'Jean Dupont',
-    priority: 'Élevée',
-    status: 'À faire'
+    assignedTo: 'John Doe',
+    priority: 'High',
+    status: 'To Do'
   }
 ];
 
 const taskColumns: Column[] = [
-  { id: 'task', header: 'Tâche', accessorKey: 'task', isEditable: true },
-  { id: 'assignedTo', header: 'Assigné à', accessorKey: 'assignedTo', isEditable: true },
+  { id: 'task', header: 'Task', accessorKey: 'task', isEditable: true },
+  { id: 'assignedTo', header: 'Assigned to', accessorKey: 'assignedTo', isEditable: true },
   { id: 'dueDate', header: 'Date', accessorKey: 'dueDate', isEditable: true, width: '120px' },
-  { id: 'priority', header: 'Priorité', accessorKey: 'priority', isEditable: true, width: '120px' },
+  { id: 'priority', header: 'Priority', accessorKey: 'priority', isEditable: true, width: '120px' },
   { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true, width: '100px' }
 ];
 
 const cropColumns: Column[] = [
   { id: 'crop', header: 'Crop', accessorKey: 'crop', isEditable: true },
-  { id: 'variety', header: 'Variété', accessorKey: 'variety', isEditable: true },
+  { id: 'variety', header: 'Variety', accessorKey: 'variety', isEditable: true },
   { id: 'plantingDate', header: 'Date field', accessorKey: 'plantingDate', isEditable: true },
-  { id: 'harvestDate', header: 'Date récolte prévue', accessorKey: 'harvestDate', isEditable: true },
+  { id: 'harvestDate', header: 'Expected Harvest Date', accessorKey: 'harvestDate', isEditable: true },
   { id: 'status', header: 'Status', accessorKey: 'status', isEditable: true },
 ];
 
@@ -154,7 +154,7 @@ const IndianFieldDetail = () => {
       ...parcel,
       [field]: value
     });
-    toast.success(`${field} mis à jour`);
+    toast.success(`${field} updated`);
   };
 
   const handleTaskUpdate = (rowIndex: number, columnId: string, value: any) => {
@@ -165,7 +165,7 @@ const IndianFieldDetail = () => {
     updatedTasks[rowIndex] = updatedTask;
     
     setTasks(updatedTasks);
-    toast.success('Tâche mise à jour');
+    toast.success('Task mise a jour');
   };
 
   const handleCropUpdate = (rowIndex: number, columnId: string, value: any) => {
@@ -178,7 +178,7 @@ const IndianFieldDetail = () => {
     
     updatedParcel.crops = updatedCrops;
     setParcel(updatedParcel);
-    toast.success('Crop mise à jour');
+    toast.success('Crop mise a jour');
   };
 
   const handleAddTask = (newRow: Record<string, any>) => {
@@ -190,11 +190,11 @@ const IndianFieldDetail = () => {
       dueDate: String(newRow.dueDate || new Date().toISOString().split('T')[0]),
       assignedTo: String(newRow.assignedTo || ''),
       priority: (newRow.priority as TaskData['priority']) || 'Average',
-      status: (newRow.status as TaskData['status']) || 'À faire'
+      status: (newRow.status as TaskData['status']) || 'To Do'
     };
     
     setTasks([...tasks, newTask]);
-    toast.success('Nouvelle tâche ajoutée');
+    toast.success('New task added');
   };
 
   const handleAddCrop = (newRow: Record<string, any>) => {
@@ -205,19 +205,19 @@ const IndianFieldDetail = () => {
       variety: String(newRow.variety || ''),
       plantingDate: String(newRow.plantingDate || new Date().toISOString().split('T')[0]),
       harvestDate: String(newRow.harvestDate || ''),
-      status: String(newRow.status || 'Planifié')
+      status: String(newRow.status || 'Planned')
     };
     
     updatedParcel.crops = [...updatedParcel.crops, newCrop];
     setParcel(updatedParcel);
-    toast.success('Nouvelle culture ajoutée');
+    toast.success('New crop added');
   };
 
   const handleDeleteTask = (rowIndex: number) => {
     const updatedTasks = [...tasks];
     updatedTasks.splice(rowIndex, 1);
     setTasks(updatedTasks);
-    toast.success('Tâche supprimée');
+    toast.success('Task deletede');
   };
 
   const handleDeleteCrop = (rowIndex: number) => {
@@ -226,7 +226,7 @@ const IndianFieldDetail = () => {
     updatedCrops.splice(rowIndex, 1);
     updatedParcel.crops = updatedCrops;
     setParcel(updatedParcel);
-    toast.success('Crop supprimée');
+    toast.success('Crop deleted');
   };
 
   return (
@@ -269,7 +269,7 @@ const IndianFieldDetail = () => {
               className={`px-4 py-2 rounded-lg ${activeTab === 'tasks' ? 'bg-agri-primary text-white' : 'bg-muted'}`}
               onClick={() => setActiveTab('tasks')}
             >
-              Tâches
+              Tasks
             </button>
           </div>
         </div>
@@ -291,7 +291,7 @@ const IndianFieldDetail = () => {
               </div>
               
               <div className="bg-muted/30 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">Type of sol</h3>
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Soil Type</h3>
                 <EditableField
                   value={parcel.soilType}
                   onSave={(value) => handleParcelUpdate('soilType', value)}
@@ -300,7 +300,7 @@ const IndianFieldDetail = () => {
               </div>
               
               <div className="bg-muted/30 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">Dernière inspection</h3>
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Last inspection</h3>
                 <EditableField
                   value={parcel.lastInspection}
                   onSave={(value) => handleParcelUpdate('lastInspection', value)}
@@ -310,7 +310,7 @@ const IndianFieldDetail = () => {
             </div>
             
             <div className="bg-muted/30 p-4 rounded-lg">
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Système d'irrigation</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Irrigation system</h3>
               <EditableField
                 value={parcel.irrigationSystem}
                 onSave={(value) => handleParcelUpdate('irrigationSystem', value)}
@@ -328,7 +328,7 @@ const IndianFieldDetail = () => {
             </div>
             
             <div className="bg-muted/30 p-4 rounded-lg">
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Propriétaire</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Owner</h3>
               <EditableField
                 value={parcel.owner}
                 onSave={(value) => handleParcelUpdate('owner', value)}
@@ -338,7 +338,7 @@ const IndianFieldDetail = () => {
             
             <div className="bg-muted/30 p-4 rounded-lg">
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-sm font-medium text-muted-foreground">Photos of la parcelle</h3>
+                <h3 className="text-sm font-medium text-muted-foreground">Field Photos</h3>
                 <button 
                   className="text-sm flex items-center text-agri-primary hover:text-agri-primary-dark"
                   onClick={() => setShowImageUpload(!showImageUpload)}
@@ -385,7 +385,7 @@ const IndianFieldDetail = () => {
         
         {activeTab === 'crops' && (
           <div className="space-y-6">
-            <h3 className="text-lg font-medium">Crops of cette parcelle</h3>
+            <h3 className="text-lg font-medium">Field Crops</h3>
             <EditableTable
               data={parcel.crops}
               columns={cropColumns}
@@ -400,13 +400,13 @@ const IndianFieldDetail = () => {
         {activeTab === 'tasks' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium">Tâches à venir</h3>
+              <h3 className="text-lg font-medium">Upcoming Tasks</h3>
               <Button 
-                onClick={() => toast.success('Redirection vers la page des tâches')}
+                onClick={() => toast.success('Redirect to tasks page')}
                 variant="outline"
                 className="text-sm"
               >
-                View toutes les tâches
+                View all tasks
               </Button>
             </div>
             
@@ -420,11 +420,11 @@ const IndianFieldDetail = () => {
               actions={[
                 {
                   icon: <Check className="h-4 w-4 text-green-600" />,
-                  label: "Marquer comme terminée",
+                  label: "Mark as completed",
                   onClick: (rowIndex) => {
-                    toast.success(`Tâche "${tasks[rowIndex].task}" marquée comme terminée`);
+                    toast.success(`Task "${tasks[rowIndex].task}" marked as completed`);
                     const updatedTasks = [...tasks];
-                    updatedTasks[rowIndex].status = 'Completede';
+                    updatedTasks[rowIndex].status = 'Completed';
                     setTasks(updatedTasks);
                   }
                 }

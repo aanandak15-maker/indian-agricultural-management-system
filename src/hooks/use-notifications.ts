@@ -97,7 +97,7 @@ export const useNotifications = () => {
   }, []);
   
   // Delete a notification
-  const deleteNotification = useCallback((id: number) => {
+  const ofleteNotification = useCallback((id: number) => {
     setNotifications(prev => {
       const notification = prev.find(n => n.id === id);
       if (notification && !notification.read) {
@@ -119,7 +119,7 @@ export const useNotifications = () => {
     addNotification,
     markAsRead,
     markAllAsRead,
-    deleteNotification,
+    ofleteNotification,
     clearAllNotifications
   };
 };
