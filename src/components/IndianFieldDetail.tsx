@@ -49,10 +49,10 @@ interface TaskData {
 
 const parcelData: ParcelDetail = {
   id: '1',
-  name: 'Field of Hauts Palmiers',
-  location: 'Punjab - Morne-a-l\'Eau',
+  name: 'North Field',
+  location: 'Punjab - Chandigarh',
   surface: 8.5,
-  soilType: 'Argilo-calcaire',
+  soilType: 'Clay-limestone',
   crops: [
     { 
       crop: 'Sugarcane', 
@@ -71,7 +71,7 @@ const parcelData: ParcelDetail = {
   ],
   irrigationSystem: 'Drip irrigation with rainwater harvesting',
   notes: 'Field in organic conversion since 2022. Southeast exposure favorable.',
-  owner: 'Agricultural Cooperative of Punjab',
+  owner: 'Punjab Agricultural Cooperative',
   lastInspection: '2023-11-15',
   coordinates: {
     latitude: 16.3312,
@@ -86,7 +86,7 @@ const parcelData: ParcelDetail = {
 const initialTasks: TaskData[] = [
   { 
     id: 1, 
-    task: 'Fertilisation of la canne', 
+    task: 'Sugarcane fertilization', 
     dueDate: '2023-09-25', 
     assignedTo: 'John Doe', 
     priority: 'High',
@@ -94,7 +94,7 @@ const initialTasks: TaskData[] = [
   },
   { 
     id: 2, 
-    task: 'Traitement contre la cercosporiose', 
+    task: 'Treatment against leaf spot disease', 
     dueDate: '2023-09-28', 
     assignedTo: 'Marie Lambert', 
     priority: 'Average',
@@ -102,7 +102,7 @@ const initialTasks: TaskData[] = [
   },
   { 
     id: 3, 
-    task: 'Inspection croissance ananas', 
+    task: 'Pineapple growth inspection', 
     dueDate: '2023-09-30', 
     assignedTo: 'Pierre Lafortune', 
     priority: 'Low',
@@ -165,7 +165,7 @@ const IndianFieldDetail = () => {
     updatedTasks[rowIndex] = updatedTask;
     
     setTasks(updatedTasks);
-    toast.success('Task mise a jour');
+    toast.success('Task updated');
   };
 
   const handleCropUpdate = (rowIndex: number, columnId: string, value: any) => {
@@ -178,7 +178,7 @@ const IndianFieldDetail = () => {
     
     updatedParcel.crops = updatedCrops;
     setParcel(updatedParcel);
-    toast.success('Crop mise a jour');
+    toast.success('Crop updated');
   };
 
   const handleAddTask = (newRow: Record<string, any>) => {
@@ -217,7 +217,7 @@ const IndianFieldDetail = () => {
     const updatedTasks = [...tasks];
     updatedTasks.splice(rowIndex, 1);
     setTasks(updatedTasks);
-    toast.success('Task deletede');
+    toast.success('Task deleted');
   };
 
   const handleDeleteCrop = (rowIndex: number) => {
@@ -278,7 +278,7 @@ const IndianFieldDetail = () => {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-muted/30 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">Superficie</h3>
+                <h3 className="text-sm font-medium text-muted-foreground mb-2">Surface Area</h3>
                 <div className="flex items-center">
                   <EditableField
                     value={parcel.surface}
@@ -344,7 +344,7 @@ const IndianFieldDetail = () => {
                   onClick={() => setShowImageUpload(!showImageUpload)}
                 >
                   <Plus className="h-4 w-4 mr-1" />
-                  Add une photo
+                  Add Photo
                 </button>
               </div>
               
@@ -352,7 +352,7 @@ const IndianFieldDetail = () => {
                 <div className="mb-4 p-3 border border-dashed rounded-lg">
                   <div className="flex flex-col items-center justify-center">
                     <Camera className="h-8 w-8 text-muted-foreground mb-2" />
-                    <p className="text-sm text-muted-foreground mb-2">Glissez une image ou cliquez pour parcourir</p>
+                    <p className="text-sm text-muted-foreground mb-2">Drag an image or click to browse</p>
                     <Input type="file" className="max-w-xs" />
                     <div className="flex space-x-2 mt-2">
                       <button className="px-3 py-1 text-sm bg-agri-primary text-white rounded">Download</button>

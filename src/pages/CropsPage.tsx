@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import PreviewPrintButton from '@/components/common/PreviewPrintButton';
-import { useSupabaseCRM } from '../contexts';
+import { useSupabaseCRM } from '../contexts/SupabaseCRMContext';
 
 const CropsPage = () => {
   const [activeTab, setActiveTab] = useState<string>('harvest');

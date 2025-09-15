@@ -62,7 +62,7 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
       saisonCrop: data.growingSeason || data.saisonCrop || "Not specified",
       typeSol: data.soilType || data.typeSol || "Not specified",
       besoinEau: data.waterNeeds || data.besoinEau || "Not specified",
-      fertilisation: data.fertilization || data.fertilisation || "Not specified",
+      fertilization: data.fertilization || "Not specified",
       ravageurs: data.pests || data.ravageurs || "Not specified",
       maladies: data.diseases || data.maladies || "Not specified",
       notes: data.notes || "No notes",
@@ -137,8 +137,8 @@ const TechnicalSheetButton: React.FC<TechnicalSheetButtonProps> = ({
               ${item.besoinEau}
             </div>
             <div>
-              <span class="font-medium">Fertilisation:</span>
-              ${item.fertilisation}
+              <span class="font-medium">Fertilization:</span>
+              ${item.fertilization}
             </div>
             <div>
               <span class="font-medium">Period of harvest:</span>

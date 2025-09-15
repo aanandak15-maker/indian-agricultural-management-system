@@ -85,12 +85,12 @@ const initialCropData = [
     family: 'Musaceae',
     origin: 'Asie du Sud-Est',
     growingSeason: 'All year',
-    soilType: 'Limoneux, profond',
+    soilType: 'Silty, deep',
     waterNeeds: 'High',
     fertilization: 'NPK 14-4-28',
-    pests: 'Charancon, thrips',
-    diseases: 'Cercosporiose, fusariose',
-    notes: 'Principalement pour l\'exportation',
+    pests: 'Weevil, thrips',
+    diseases: 'Leaf spot disease, fusarium wilt',
+    notes: 'Mainly for export',
     type: 'fruits',
     harvestPeriod: '10-14 month',
     yieldPerHectare: '30-60 tonnes'
@@ -224,7 +224,7 @@ export const CultureDetailTable = ({
       saisonCrop: culture.growingSeason,
       typeSol: culture.soilType,
       besoinEau: culture.waterNeeds,
-      fertilisation: culture.fertilization,
+      fertilization: culture.fertilization,
       ravageurs: culture.pests,
       maladies: culture.diseases,
       notes: culture.notes,
@@ -464,7 +464,7 @@ export const CultureDetailTable = ({
             </div>
             
             <div>
-              <Label>Fertilisation</Label>
+              <Label>Fertilization</Label>
               <Input 
                 value={selectedCrop.fertilization}
                 onChange={(e) => {
@@ -726,7 +726,7 @@ export const CultureDetailTable = ({
                 </div>
                 
                 <div>
-                  <Label htmlFor="fertilization">Fertilisation</Label>
+                  <Label htmlFor="fertilization">Fertilization</Label>
                   <Input 
                     id="fertilization"
                     type="text" 

@@ -326,10 +326,10 @@ const FinancePage = () => {
               </CardFooter>
             </Card>
             
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Autres revenues')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Other Revenues')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
-                  <Badge className="mr-2 bg-purple-100 text-purple-800 hover:bg-purple-200">Autres</Badge> 
+                  <Badge className="mr-2 bg-purple-100 text-purple-800 hover:bg-purple-200">Other</Badge> 
                   Revenues
                 </CardTitle>
                 <CardDescription>Locations, visites, services</CardDescription>
@@ -346,7 +346,7 @@ const FinancePage = () => {
               <CardFooter className="pt-0">
                 <Button variant="outline" size="sm" className="w-full" onClick={(e) => {
                   e.stopPropagation();
-                  handleCardDetailClick('Autres revenues');
+                  handleCardDetailClick('Other Revenues');
                 }}>
                   <FileText className="h-4 w-4 mr-2" />
                   Details
@@ -472,7 +472,7 @@ const FinancePage = () => {
               </CardFooter>
             </Card>
             
-            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Mayn d\'oeuvre')}>
+            <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleCardDetailClick('Labor')}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
                   <Badge className="mr-2 bg-teal-100 text-teal-800 hover:bg-teal-200">Services</Badge> 

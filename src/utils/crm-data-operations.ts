@@ -166,8 +166,8 @@ const createTechnicalSheetHTML = (item: any, title: string): string => {
                 ${item.besoinEau || ''}
               </div>
               <div class="property">
-                <span class="property-label">Fertilisation:</span>
-                ${item.fertilisation || ''}
+                <span class="property-label">Fertilization:</span>
+                ${item.fertilization || ''}
               </div>
               <div class="property">
                 <span class="property-label">Period of harvest:</span>

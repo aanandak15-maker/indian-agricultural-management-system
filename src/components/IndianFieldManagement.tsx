@@ -47,7 +47,7 @@ const initialParcelData: ParcelData[] = [
     crop: 'Sugarcane', 
     status: 'active', 
     lastActivity: '2023-08-15', 
-    soilType: 'Argilo-calcaire', 
+    soilType: 'Clay-limestone', 
     coordinates: { lat: 16.3772, lng: -61.4483 },
     irrigation: 'Drip irrigation',
     plantingDate: '2023-02-15',
@@ -239,7 +239,7 @@ const IndianFieldManagement = () => {
       status: 'planned',
       lastActivity: new Date().toISOString().split('T')[0],
       soilType: '',
-      coordinates: { lat: 16.2650, lng: -61.5510 }, // Coordinates of Pointe-a-Pitre
+      coordinates: { lat: 28.6139, lng: 77.2090 }, // Coordinates of New Delhi
       irrigation: '',
     };
     setParcels([...parcels, newParcel]);
@@ -523,7 +523,7 @@ const IndianFieldManagement = () => {
                           <span className="text-sm font-medium">{selectedParcel.rainfall ? `${selectedParcel.rainfall} mm/year` : 'Not specified'}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-sm">Superficie:</span>
+                          <span className="text-sm">Surface Area:</span>
                           <span className="text-sm font-medium">{selectedParcel.area} ha</span>
                         </div>
                       </div>

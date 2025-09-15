@@ -4,7 +4,7 @@ import { CultureDetailTable } from './CultureDetailTable';
 import { Button } from './ui/button';
 import { Plus, Download, Upload, Filter, Search, FileUp, Eye, Printer } from 'lucide-react';
 import { Input } from './ui/input';
-import { useSupabaseCRM } from '../contexts';
+import { useSupabaseCRM } from '../contexts/SupabaseCRMContext';
 import { cn } from '@/lib/utils';
 import {
   DropdownMenu,

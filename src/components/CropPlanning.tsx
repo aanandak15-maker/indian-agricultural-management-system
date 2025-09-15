@@ -78,24 +78,24 @@ const initialCropsData = [
 
 // Tasks related to crops - Adapte au contexte guaofloupeen
 const initialCropTasks = [
-  { id: 1, cropId: 1, title: 'Fertilisation of la canne', date: '2023-09-25', completed: false, priority: 'high' as TaskPriority },
-  { id: 2, cropId: 2, title: 'Traitement contre la cercosporiose', date: '2023-09-28', completed: false, priority: 'medium' as TaskPriority },
-  { id: 3, cropId: 3, title: 'Inspection croissance ananas', date: '2023-09-30', completed: false, priority: 'low' as TaskPriority },
+  { id: 1, cropId: 1, title: 'Sugarcane fertilization', date: '2023-09-25', completed: false, priority: 'high' as TaskPriority },
+  { id: 2, cropId: 2, title: 'Treatment against leaf spot disease', date: '2023-09-28', completed: false, priority: 'medium' as TaskPriority },
+  { id: 3, cropId: 3, title: 'Pineapple growth inspection', date: '2023-09-30', completed: false, priority: 'low' as TaskPriority },
   { id: 4, cropId: 5, title: 'Cotton field weeding', date: '2023-10-05', completed: false, priority: 'medium' as TaskPriority },
   { id: 5, cropId: 1, title: 'Sugarcane cutting preparation', date: '2024-01-10', completed: false, priority: 'high' as TaskPriority }
 ];
 
 // Monthly calendar view mock data - Adapte a l'agriculture guaofloupeenne
 const monthlyEvents = [
-  { date: '2023-09-25', events: [{ id: 1, title: 'Fertilisation of la canne', crop: 'Sugarcane', priority: 'high' }] },
-  { date: '2023-09-28', events: [{ id: 2, title: 'Traitement contre la cercosporiose', crop: 'Cotton', priority: 'medium' }] },
-  { date: '2023-09-30', events: [{ id: 3, title: 'Inspection croissance ananas', crop: 'Rice', priority: 'low' }] },
+  { date: '2023-09-25', events: [{ id: 1, title: 'Sugarcane fertilization', crop: 'Sugarcane', priority: 'high' }] },
+  { date: '2023-09-28', events: [{ id: 2, title: 'Treatment against leaf spot disease', crop: 'Cotton', priority: 'medium' }] },
+  { date: '2023-09-30', events: [{ id: 3, title: 'Pineapple growth inspection', crop: 'Rice', priority: 'low' }] },
   { date: '2023-10-05', events: [{ id: 4, title: 'Cotton field weeding', crop: 'Cotton', priority: 'medium' }] },
   { date: '2024-01-10', events: [{ id: 5, title: 'Sugarcane cutting preparation', crop: 'Sugarcane', priority: 'high' }] },
   { date: '2023-12-10', events: [{ id: 6, title: 'Harvest', crop: 'Cotton', priority: 'high' }] },
   { date: '2024-01-20', events: [{ id: 7, title: 'Harvest', crop: 'Rice', priority: 'high' }] },
   { date: '2023-11-01', events: [{ id: 8, title: 'Harvest', crop: 'Cotton', priority: 'medium' }] },
-  { date: '2024-02-15', events: [{ id: 9, title: 'Coupe canne', crop: 'Sugarcane', priority: 'high' }] }
+  { date: '2024-02-15', events: [{ id: 9, title: 'Sugarcane cutting', crop: 'Sugarcane', priority: 'high' }] }
 ];
 
 interface CropData {
@@ -172,7 +172,7 @@ const CropCard = ({
           <span className="font-medium">{crop.parcel}</span>
         </div>
         <div className="flex justify-between text-sm mb-1">
-          <span>Superficie:</span>
+          <span>Surface Area:</span>
           <span className="font-medium">{crop.area} ha</span>
         </div>
         <div className="flex justify-between text-sm">
@@ -805,7 +805,7 @@ const CropPlanning = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Superficie (ha)</label>
+                <label className="block text-sm font-medium mb-1">Surface Area (ha)</label>
                 <input 
                   type="number" 
                   className="w-full px-3 py-2 border border-input rounded-md"
